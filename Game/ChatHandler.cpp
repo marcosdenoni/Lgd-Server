@@ -9,11 +9,11 @@
 static size_t GetCommandTableSize(const ChatCommand* commands)
 {
 	if (!commands)
-        return 0;
-    size_t count = 0;
-    while (commands[count].name != nullptr)
-        count++;
-    return count;
+		return 0;
+	size_t count = 0;
+	while (commands[count].name != nullptr)
+		count++;
+	return count;
 }
 
 namespace CommandNormal
@@ -70,7 +70,7 @@ namespace CommandAdmin
 		{	nullptr,		nullptr,		0,	ADMIN_FLAG_NONE,		"",				nullptr}
 	};
 
-	static ChatCommand item_command[] = 
+	static ChatCommand item_command[] =
 	{
 		{	"normal",		&ChatHandler::CommandItemNormal,			AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_ITEM,		".item normal #count #type #index #lvl #dur #skill #luck #opt #exe #anc",			nullptr},
 		{	"add",			&ChatHandler::CommandItemAdd,				AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_ITEM,		".item add #count #type #index #lvl #dur #skill #luck #opt #exe #anc",				nullptr},
@@ -83,7 +83,7 @@ namespace CommandAdmin
 		{	nullptr,		nullptr,		0,	ADMIN_FLAG_NONE,		"",				nullptr}
 	};
 
-	static ChatCommand buff_command[] = 
+	static ChatCommand buff_command[] =
 	{
 		{	"up",			&ChatHandler::CommandGMBuff,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_BUFF,		".buff up #id #duration(min) #value",	nullptr},
 		{	"all",			&ChatHandler::CommandGMBuffAll,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_BUFF,		".buff all #id #duration(min) #value",	nullptr},
@@ -91,35 +91,35 @@ namespace CommandAdmin
 		{	nullptr,		nullptr,								0,							ADMIN_FLAG_NONE,		"",				nullptr}
 	};
 
-	static ChatCommand monster_command[] = 
+	static ChatCommand monster_command[] =
 	{
 		{	"temp",			&ChatHandler::CommandMonsterAddTemp,AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_MONSTER,		".monster temp #monster #move_distance #despawn_time #despawn_die",	nullptr},
 		{	"alter",		&ChatHandler::CommandMonsterAlter,	AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_MONSTER,		".monster alter #type #data",	nullptr},
 		{	nullptr,		nullptr,								0,						ADMIN_FLAG_NONE,		"",				nullptr}
 	};
 
-	static ChatCommand ban_command[] = 
+	static ChatCommand ban_command[] =
 	{
 		{	"char",			&ChatHandler::CommandBanChar,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_BAN,			".ban char <name>",					nullptr},
 		{	"acc",			&ChatHandler::CommandBanAcc,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_BAN,			".ban acc <account>"},
 		{	nullptr,		nullptr,								0,						ADMIN_FLAG_NONE,		"",				nullptr}
 	};
 
-	static ChatCommand talk_command[] = 
+	static ChatCommand talk_command[] =
 	{
 		{	"guild",	&ChatHandler::CommandGuildTalk,			AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_GUILD_TALK,		".talk guild <guild>",	nullptr},
 		{	"alliance",	&ChatHandler::CommandAllianceTalk,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_GUILD_TALK, 		".talk alliance <guild>",	nullptr},
 		{	nullptr,			nullptr,								0,						ADMIN_FLAG_NONE,			"",				nullptr}
 	};
 
-	static ChatCommand zen_command[] = 
+	static ChatCommand zen_command[] =
 	{
 		{	"add",			&ChatHandler::CommandZenAdd,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_ZEN,				".zen add #ammount #type",	nullptr},
 		{	"set",			&ChatHandler::CommandZenSet,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_ZEN,				".zen set #ammount #type",	nullptr},
 		{	nullptr,			nullptr,								0,						ADMIN_FLAG_NONE,			"", nullptr}
 	};
 
-	static ChatCommand misc_command[] = 
+	static ChatCommand misc_command[] =
 	{
 		{	"kill",			&ChatHandler::CommandMiscKill,		AUTHORITY_CODE_ADMINISTRATOR,	ADMIN_FLAG_EVENTS,			".misc kill <name>",	nullptr},
 		{	nullptr,			nullptr,								0,						ADMIN_FLAG_NONE,			"", nullptr}
@@ -241,7 +241,7 @@ namespace CommandAdmin
 	};
 }
 
-ChatHandler::ChatHandler(Player * pPlayer, const char * whisper_name)
+ChatHandler::ChatHandler(Player* pPlayer, const char* whisper_name)
 {
 	this->SetPlayer(pPlayer);
 	this->ResetWhisperName();
@@ -255,20 +255,20 @@ ChatHandler::~ChatHandler()
 
 bool ChatHandler::IsAvailable(ChatCommand const& table)
 {
-	if ( table.Authority == AUTHORITY_CODE_ADMINISTRATOR )
+	if (table.Authority == AUTHORITY_CODE_ADMINISTRATOR)
 	{
-		if ( !this->GetPlayer()->IsAdministrator() )
+		if (!this->GetPlayer()->IsAdministrator())
 		{
 			return false;
 		}
 
-		if ( !this->GetPlayer()->IsAuthorizationEnabled() )
+		if (!this->GetPlayer()->IsAuthorizationEnabled())
 		{
 			return false;
 		}
 	}
 
-	if ( table.flag != ADMIN_FLAG_NONE && !this->GetPlayer()->IsAdministratorFlag(table.flag) )
+	if (table.flag != ADMIN_FLAG_NONE && !this->GetPlayer()->IsAdministratorFlag(table.flag))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "You don't have permission to use this command");
 		return false;
@@ -277,7 +277,7 @@ bool ChatHandler::IsAvailable(ChatCommand const& table)
 	return true;
 }
 
-void ChatHandler::ExecuteCommand(const char * text)
+void ChatHandler::ExecuteCommand(const char* text)
 {
 	SafeAssert(text, "text == nullptr");
 	SafeAssert(*text, "*text == nullptr");
@@ -288,20 +288,20 @@ void ChatHandler::ExecuteCommand(const char * text)
 	std::string fullcmd = text;
 	std::string const_cmd = text;
 
-	if ( (text[0] == '/' && text[1] == '/') )
+	if ((text[0] == '/' && text[1] == '/'))
 		return;
 
-    if ( text[0] == '/' )
-        ++text;
+	if (text[0] == '/')
+		++text;
 
-	if ( this->ExecuteCommandInTable(CommandNormal::chat_command, text, fullcmd) )
+	if (this->ExecuteCommandInTable(CommandNormal::chat_command, text, fullcmd))
 	{
 		sLog->outInfo(LOG_CHAT, "[ COMMAND ] %s Used Command: %s",
 			this->GetPlayer()->BuildLog().c_str(), const_cmd.c_str());
 	}
 }
 
-void ChatHandler::ExecuteCommandAdmin(const char * text)
+void ChatHandler::ExecuteCommandAdmin(const char* text)
 {
 	SafeAssert(text, "text == nullptr");
 	SafeAssert(*text, "*text == nullptr");
@@ -312,13 +312,13 @@ void ChatHandler::ExecuteCommandAdmin(const char * text)
 	std::string fullcmd = text;
 	std::string const_cmd = text;
 
-	if ( (text[0] == '.' && text[1] == '.') )
+	if ((text[0] == '.' && text[1] == '.'))
 		return;
 
-    if ( text[0] == '.' )
-        ++text;
+	if (text[0] == '.')
+		++text;
 
-	if ( this->ExecuteCommandInTable(CommandAdmin::chat_command_admin, text, fullcmd) )
+	if (this->ExecuteCommandInTable(CommandAdmin::chat_command_admin, text, fullcmd))
 	{
 		sLog->outInfo(LOG_CHAT, "[ COMMAND ADMIN ] %s Used Command: %s",
 			this->GetPlayer()->BuildLog().c_str(), const_cmd.c_str());
@@ -329,27 +329,27 @@ void ChatHandler::ExecuteCommandAdmin(const char * text)
 	}
 }
 
-bool ChatHandler::ExecuteCommandInTable(ChatCommand * table, const char * text, std::string & fullcmd)
+bool ChatHandler::ExecuteCommandInTable(ChatCommand* table, const char* text, std::string& fullcmd)
 {
 	char const* oldtext = text;
 	std::string cmd = "";
-	
+
 	while (*text != ' ' && *text != '\0')
-    {
-        cmd += *text;
-        ++text;
-    }
+	{
+		cmd += *text;
+		++text;
+	}
 
 	while (*text == ' ') ++text;
 
 	size_t table_size = GetCommandTableSize(table);
 
-	for ( size_t i = 0; i < table_size; ++i )
-    {
-		if ( strlen(table[i].name) != cmd.length() )
+	for (size_t i = 0; i < table_size; ++i)
+	{
+		if (strlen(table[i].name) != cmd.length())
 			continue;
 
-		if ( memcmp(table[i].name, cmd.c_str(), strlen(table[i].name)) )
+		if (memcmp(table[i].name, cmd.c_str(), strlen(table[i].name)))
 			continue;
 
 		// select subcommand from child commands list
@@ -369,7 +369,7 @@ bool ChatHandler::ExecuteCommandInTable(ChatCommand * table, const char * text, 
 
 		std::string newtext = table[i].name[0] != '\0' ? text : oldtext;
 
-		if ( !table[i].sintax.empty() && !strlen(newtext.c_str()) )
+		if (!table[i].sintax.empty() && !strlen(newtext.c_str()))
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Syntax");
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, " %s", table[i].sintax.c_str());
@@ -377,124 +377,124 @@ bool ChatHandler::ExecuteCommandInTable(ChatCommand * table, const char * text, 
 		}
 
 		(this->*table[i].handler)(newtext.c_str());
-        return true;
+		return true;
 	}
 
-    return false;
+	return false;
 }
 
 bool ChatHandler::ShowHelpForCommand(ChatCommand* table, const char* cmd)
 {
 	if (*cmd)
-    {
-        for (uint32 i = 0; table[i].name != nullptr; ++i)
-        {
-            // must be available (ignore handler existence for show command with possible available subcommands)
-            if (!this->IsAvailable(table[i]))
-                continue;
+	{
+		for (uint32 i = 0; table[i].name != nullptr; ++i)
+		{
+			// must be available (ignore handler existence for show command with possible available subcommands)
+			if (!this->IsAvailable(table[i]))
+				continue;
 
-            if (!hasStringAbbr(table[i].name, cmd))
-                continue;
+			if (!hasStringAbbr(table[i].name, cmd))
+				continue;
 
-            // have subcommand
-            char const* subcmd = (*cmd) ? strtok(nullptr, " ") : "";
+			// have subcommand
+			char const* subcmd = (*cmd) ? strtok(nullptr, " ") : "";
 
-            if (table[i].SubTable && subcmd && *subcmd)
-            {
-                if (ShowHelpForCommand(table[i].SubTable, subcmd))
-                    return true;
-            }
+			if (table[i].SubTable && subcmd && *subcmd)
+			{
+				if (ShowHelpForCommand(table[i].SubTable, subcmd))
+					return true;
+			}
 
-            if (!table[i].sintax.empty())
+			if (!table[i].sintax.empty())
 				this->GetPlayer()->SendNotice(NOTICE_NORMAL_BLUE, table[i].sintax.c_str());
 
-            if (table[i].SubTable)
-                if (ShowHelpForSubCommands(table[i].SubTable, table[i].name, subcmd ? subcmd : ""))
-                    return true;
+			if (table[i].SubTable)
+				if (ShowHelpForSubCommands(table[i].SubTable, table[i].name, subcmd ? subcmd : ""))
+					return true;
 
-            return !table[i].sintax.empty();
-        }
-    }
-    else
-    {
-        for (uint32 i = 0; table[i].name != nullptr; ++i)
-        {
-            // must be available (ignore handler existence for show command with possible available subcommands)
-            if (!this->IsAvailable(table[i]))
-                continue;
+			return !table[i].sintax.empty();
+		}
+	}
+	else
+	{
+		for (uint32 i = 0; table[i].name != nullptr; ++i)
+		{
+			// must be available (ignore handler existence for show command with possible available subcommands)
+			if (!this->IsAvailable(table[i]))
+				continue;
 
-            if (strlen(table[i].name))
-                continue;
+			if (strlen(table[i].name))
+				continue;
 
-            if (!table[i].sintax.empty())
+			if (!table[i].sintax.empty())
 				this->GetPlayer()->SendNotice(NOTICE_NORMAL_BLUE, table[i].sintax.c_str());
 
-            if (table[i].SubTable)
-                if (this->ShowHelpForSubCommands(table[i].SubTable, "", ""))
-                    return true;
+			if (table[i].SubTable)
+				if (this->ShowHelpForSubCommands(table[i].SubTable, "", ""))
+					return true;
 
-            return !table[i].sintax.empty();
-        }
-    }
+			return !table[i].sintax.empty();
+		}
+	}
 
-    return this->ShowHelpForSubCommands(table, "", cmd);
+	return this->ShowHelpForSubCommands(table, "", cmd);
 }
 
 bool ChatHandler::ShowHelpForSubCommands(ChatCommand* table, char const* cmd, char const* subcmd)
 {
-    std::string list;
-    for (uint32 i = 0; table[i].name != nullptr; ++i)
-    {
-        // must be available (ignore handler existence for show command with possible available subcommands)
-        if (!this->IsAvailable(table[i]))
-            continue;
+	std::string list;
+	for (uint32 i = 0; table[i].name != nullptr; ++i)
+	{
+		// must be available (ignore handler existence for show command with possible available subcommands)
+		if (!this->IsAvailable(table[i]))
+			continue;
 
-        // for empty subcmd show all available
-        if (*subcmd && !hasStringAbbr(table[i].name, subcmd))
-            continue;
+		// for empty subcmd show all available
+		if (*subcmd && !hasStringAbbr(table[i].name, subcmd))
+			continue;
 
 		this->GetPlayer()->SendNotice(NOTICE_NORMAL_BLUE, table[i].name);
 		list += "\n    ";
-        list += table[i].name;
+		list += table[i].name;
 
-        if (table[i].SubTable)
-            list += " ...";
-    }
+		if (table[i].SubTable)
+			list += " ...";
+	}
 
-    if (list.empty())
-        return false;
+	if (list.empty())
+		return false;
 
-    return true;
+	return true;
 }
 
 bool ChatHandler::CommandAddValid()
 {
-	if ( !sGameServer->IsCommandAddStatEnabled() )
+	if (!sGameServer->IsCommandAddStatEnabled())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Add Stat command disabled.");
 		return false;
 	}
 
-	if ( this->GetPlayer()->GetTotalLevel() < sGameServer->GetCommandAddStatMinLevel() )
+	if (this->GetPlayer()->GetTotalLevel() < sGameServer->GetCommandAddStatMinLevel())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required level %d to use add stat command.", sGameServer->GetCommandAddStatMinLevel());
 		return false;
 	}
 
-	if ( !this->GetPlayer()->MoneyHave(sGameServer->GetCommandAddStatCost()) )
+	if (!this->GetPlayer()->MoneyHave(sGameServer->GetCommandAddStatCost()))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required %u zen to use add stat command.", sGameServer->GetCommandAddStatCost());
 		return false;
 	}
 
 	this->GetPlayer()->MoneyReduce(sGameServer->GetCommandAddStatCost());
-	
+
 	return true;
 }
 
-void ChatHandler::CommandAddStrength(const char * msg)
+void ChatHandler::CommandAddStrength(const char* msg)
 {
-	if ( !this->CommandAddValid() )
+	if (!this->CommandAddValid())
 		return;
 
 	std::stringstream conversor(msg);
@@ -503,10 +503,10 @@ void ChatHandler::CommandAddStrength(const char * msg)
 
 	this->GetPlayer()->AddNormalPoints(points, STRENGTH);
 }
-	
-void ChatHandler::CommandAddAgility(const char * msg)
+
+void ChatHandler::CommandAddAgility(const char* msg)
 {
-	if ( !this->CommandAddValid() )
+	if (!this->CommandAddValid())
 		return;
 
 	std::stringstream conversor(msg);
@@ -515,10 +515,10 @@ void ChatHandler::CommandAddAgility(const char * msg)
 
 	this->GetPlayer()->AddNormalPoints(points, AGILITY);
 }
-	
-void ChatHandler::CommandAddVitality(const char * msg)
+
+void ChatHandler::CommandAddVitality(const char* msg)
 {
-	if ( !this->CommandAddValid() )
+	if (!this->CommandAddValid())
 		return;
 
 	std::stringstream conversor(msg);
@@ -527,10 +527,10 @@ void ChatHandler::CommandAddVitality(const char * msg)
 
 	this->GetPlayer()->AddNormalPoints(points, VITALITY);
 }
-	
-void ChatHandler::CommandAddEnergy(const char * msg)
+
+void ChatHandler::CommandAddEnergy(const char* msg)
 {
-	if ( !this->CommandAddValid() )
+	if (!this->CommandAddValid())
 		return;
 
 	std::stringstream conversor(msg);
@@ -540,9 +540,9 @@ void ChatHandler::CommandAddEnergy(const char * msg)
 	this->GetPlayer()->AddNormalPoints(points, ENERGY);
 }
 
-void ChatHandler::CommandAddLeadership(const char * msg)
+void ChatHandler::CommandAddLeadership(const char* msg)
 {
-	if ( !this->CommandAddValid() )
+	if (!this->CommandAddValid())
 		return;
 
 	std::stringstream conversor(msg);
@@ -552,71 +552,71 @@ void ChatHandler::CommandAddLeadership(const char * msg)
 	this->GetPlayer()->AddNormalPoints(points, LEADERSHIP);
 }
 
-void ChatHandler::CommandHostilCancel(const char * msg)
+void ChatHandler::CommandHostilCancel(const char* msg)
 {
-	if ( !sGameServer->IsHostilCancelCommand() )
+	if (!sGameServer->IsHostilCancelCommand())
 		return;
 
 	Guild* pGuild = this->GetPlayer()->GuildGet();
 
-	if ( !pGuild )
+	if (!pGuild)
 		return;
 
-	if ( this->GetPlayer()->GuildGetRanking() != GUILD_RANK_MASTER )
+	if (this->GetPlayer()->GuildGetRanking() != GUILD_RANK_MASTER)
 		return;
 
-	if ( !pGuild->GetHostil() )
+	if (!pGuild->GetHostil())
 		return;
 
 	sServerLink->GuildRelationshipRequest(pGuild->GetID(), pGuild->GetHostil(), GUILD_RELATIONSHIP_RIVAL, false);
 }
 
-void ChatHandler::CommandRequest(const char * msg)
+void ChatHandler::CommandRequest(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string status;
 	conversor >> status;
 	strToLower(status);
 
-	if ( status == "on" )
+	if (status == "on")
 	{
 		this->GetPlayer()->AddFlag(CHARACTER_FLAG_REQUEST);
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Request ON");
 	}
-	else if ( status == "off" )
+	else if (status == "off")
 	{
 		this->GetPlayer()->RemoveFlag(CHARACTER_FLAG_REQUEST);
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Request OFF");
 	}
 }
 
-void ChatHandler::CommandPostRequest(const char * msg)
+void ChatHandler::CommandPostRequest(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 status = 0;
 	conversor >> status;
-	
-	if ( status == 1 )
+
+	if (status == 1)
 	{
 		this->GetPlayer()->AddFlag(CHARACTER_FLAG_POST);
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Post ON");
 	}
-	else if ( status == 0 )
+	else if (status == 0)
 	{
 		this->GetPlayer()->RemoveFlag(CHARACTER_FLAG_POST);
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Post OFF");
 	}
 }
 
-void ChatHandler::CommandRefresh(const char * msg)
+void ChatHandler::CommandRefresh(const char* msg)
 {
-	if ( this->GetPlayer()->IsBusy() )
+	if (this->GetPlayer()->IsBusy())
 		return;
 
-	if ( !sGameServer->IsRefreshEnabled() )
+	if (!sGameServer->IsRefreshEnabled())
 		return;
 
-	if ( !this->GetPlayer()->GetTimer(PLAYER_TIMER_REFRESH)->Elapsed(sGameServer->GetRefreshTime()) )
+	if (!this->GetPlayer()->GetTimer(PLAYER_TIMER_REFRESH)->Elapsed(sGameServer->GetRefreshTime()))
 	{
 		return;
 	}
@@ -624,7 +624,7 @@ void ChatHandler::CommandRefresh(const char * msg)
 	this->GetPlayer()->TeleportToLocation(this->GetPlayer()->GetWorldId(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), this->GetPlayer()->GetDirection(), this->GetPlayer()->GetInstance());
 }
 
-bool ChatHandler::CommandFriendKickVerify(const char * name)
+bool ChatHandler::CommandFriendKickVerify(const char* name)
 {
 	PreparedStatement* stmt = MuDatabase.GetPreparedStatement(QUERY_MUDATABASE_CHARACTER_KICK_VERIFY);
 	stmt->setUInt32(0, this->GetPlayer()->GetGUID());
@@ -632,28 +632,28 @@ bool ChatHandler::CommandFriendKickVerify(const char * name)
 
 	PreparedQueryResult result = MuDatabase.Query(stmt);
 
-	if ( !result )
+	if (!result)
 		return false;
 
 	return true;
 }
 
-void ChatHandler::CommandFriendAddKick(const char * msg)
+void ChatHandler::CommandFriendAddKick(const char* msg)
 {
-	if ( !sGameServer->IsKickEnabled() )
+	if (!sGameServer->IsKickEnabled())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Kick system is disabled.");
 		return;
 	}
 
-	if ( sGameServer->GetKickType() != 1 )
+	if (sGameServer->GetKickType() != 1)
 		return;
 
 	std::stringstream conversor(msg);
 	std::string name_safe;
 	conversor >> name_safe;
 
-	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH: name_safe.size());
+	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH : name_safe.size());
 
 	std::string lower_name = name;
 	std::string lower_my_name = this->GetPlayer()->GetName();
@@ -661,10 +661,10 @@ void ChatHandler::CommandFriendAddKick(const char * msg)
 	strToLower(lower_name);
 	strToLower(lower_my_name);
 
-	if ( lower_name == lower_my_name )
+	if (lower_name == lower_my_name)
 		return;
 
-	if ( this->CommandFriendKickVerify(name) )
+	if (this->CommandFriendKickVerify(name))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Character %s is already in kick list.", name);
 		return;
@@ -676,28 +676,28 @@ void ChatHandler::CommandFriendAddKick(const char * msg)
 	stmt->setUInt32(0, this->GetPlayer()->GetGUID());
 	stmt->setString(1, name);
 	trans->Append(stmt);
-	
+
 	MuDatabase.CommitTransaction(trans);
 
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Character %s added to kick list.", name);
 }
-	
-void ChatHandler::CommandFriendRemoveKick(const char * msg)
+
+void ChatHandler::CommandFriendRemoveKick(const char* msg)
 {
-	if ( !sGameServer->IsKickEnabled() )
+	if (!sGameServer->IsKickEnabled())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Kick system is disabled.");
 		return;
 	}
 
-	if ( sGameServer->GetKickType() != 1 )
+	if (sGameServer->GetKickType() != 1)
 		return;
 
 	std::stringstream conversor(msg);
 	std::string name_safe;
 	conversor >> name_safe;
 
-	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH: name_safe.size());
+	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH : name_safe.size());
 
 	std::string lower_name = name;
 	std::string lower_my_name = this->GetPlayer()->GetName();
@@ -705,10 +705,10 @@ void ChatHandler::CommandFriendRemoveKick(const char * msg)
 	strToLower(lower_name);
 	strToLower(lower_my_name);
 
-	if ( lower_name == lower_my_name )
+	if (lower_name == lower_my_name)
 		return;
 
-	if ( !this->CommandFriendKickVerify(name) )
+	if (!this->CommandFriendKickVerify(name))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Character %s is not in kick list.", name);
 		return;
@@ -720,15 +720,15 @@ void ChatHandler::CommandFriendRemoveKick(const char * msg)
 	stmt->setUInt32(0, this->GetPlayer()->GetGUID());
 	stmt->setString(1, name);
 	trans->Append(stmt);
-	
+
 	MuDatabase.CommitTransaction(trans);
 
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Character %s removed from kick list.", name);
 }
 
-void ChatHandler::CommandFriendKick(const char * msg)
+void ChatHandler::CommandFriendKick(const char* msg)
 {
-	if ( !sGameServer->IsKickEnabled() )
+	if (!sGameServer->IsKickEnabled())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Kick system is disabled.");
 		return;
@@ -738,7 +738,7 @@ void ChatHandler::CommandFriendKick(const char * msg)
 	std::string name_safe;
 	conversor >> name_safe;
 
-	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH: name_safe.size());
+	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH : name_safe.size());
 
 	std::string lower_name = name;
 	std::string lower_my_name = this->GetPlayer()->GetName();
@@ -746,12 +746,12 @@ void ChatHandler::CommandFriendKick(const char * msg)
 	strToLower(lower_name);
 	strToLower(lower_my_name);
 
-	if ( lower_name == lower_my_name )
+	if (lower_name == lower_my_name)
 	{
 		return;
 	}
 
-	if ( sGameServer->GetKickType() == 1 )
+	if (sGameServer->GetKickType() == 1)
 	{
 		PreparedStatement* stmt = MuDatabase.GetPreparedStatement(QUERY_MUDATABASE_CHARACTER_KICK_SELECT);
 		stmt->setString(0, name);
@@ -759,7 +759,7 @@ void ChatHandler::CommandFriendKick(const char * msg)
 
 		PreparedQueryResult result = MuDatabase.Query(stmt);
 
-		if ( !result )
+		if (!result)
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not in %s kick list.", name);
 			return;
@@ -767,7 +767,7 @@ void ChatHandler::CommandFriendKick(const char * msg)
 
 		Player* pPlayer = sObjectMgr->FindPlayerByName(name);
 
-		if ( !pPlayer )
+		if (!pPlayer)
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s is offline.", name);
 			return;
@@ -778,59 +778,59 @@ void ChatHandler::CommandFriendKick(const char * msg)
 	}
 }
 
-void ChatHandler::CommandGuildWar(const char * msg)
+void ChatHandler::CommandGuildWar(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
 	conversor >> guild_name;
-	
-	STRING_SAFE_COPY(guild, (MAX_GUILD_NAME_LENGTH + 1), guild_name.c_str(), guild_name.size() > MAX_GUILD_NAME_LENGTH ? MAX_GUILD_NAME_LENGTH: guild_name.size());
+
+	STRING_SAFE_COPY(guild, (MAX_GUILD_NAME_LENGTH + 1), guild_name.c_str(), guild_name.size() > MAX_GUILD_NAME_LENGTH ? MAX_GUILD_NAME_LENGTH : guild_name.size());
 
 	sGuildWarMgr->StartWarRequest(this->GetPlayer(), guild);
 }
-	
-void ChatHandler::CommandBattleSoccer(const char * msg)
+
+void ChatHandler::CommandBattleSoccer(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
 	conversor >> guild_name;
 
-	STRING_SAFE_COPY(guild, (MAX_GUILD_NAME_LENGTH + 1), guild_name.c_str(), guild_name.size() > MAX_GUILD_NAME_LENGTH ? MAX_GUILD_NAME_LENGTH: guild_name.size());
+	STRING_SAFE_COPY(guild, (MAX_GUILD_NAME_LENGTH + 1), guild_name.c_str(), guild_name.size() > MAX_GUILD_NAME_LENGTH ? MAX_GUILD_NAME_LENGTH : guild_name.size());
 
 	sBattleSoccerMgr->ProcessRequest(this->GetPlayer(), guild);
 }
 
-void ChatHandler::CommandNormalPost(const char * msg)
+void ChatHandler::CommandNormalPost(const char* msg)
 {
 	char new_message[MAX_CHAT_LENGTH];
 	memset(new_message, 0, MAX_CHAT_LENGTH);
 	std::string converted_string = TrimBlankSpaces(msg);
 
 	sprintf_s(new_message, ";%s", converted_string.c_str());
-	
+
 	this->GetPlayer()->ChatProcess(CHAT_POST, new_message, this->GetWhisperName(), false);
 }
 
-void ChatHandler::CommandOffTrade(const char * msg)
+void ChatHandler::CommandOffTrade(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 credits = 0;
 
 	conversor >> credits;
 
-	if ( !sGameServer->IsPersonalStoreOff() )
+	if (!sGameServer->IsPersonalStoreOff())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Personal Store", "Off option is disabled.");
 		return;
 	}
 
-	if ( !this->GetPlayer()->IsInSafeZone() )
+	if (!this->GetPlayer()->IsInSafeZone())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Personal Store", "Off option can be used only in safe zone.");
 		return;
 	}
 
-	if ( !this->GetPlayer()->IsWorldFlag(WORLD_FLAG_ALLOW_OFFLINE_TRADE) )
+	if (!this->GetPlayer()->IsWorldFlag(WORLD_FLAG_ALLOW_OFFLINE_TRADE))
 	{
 		this->GetPlayer()->SendMessageBox(1, "Personal Store", "Off option can't be used on this map.");
 		return;
@@ -838,80 +838,80 @@ void ChatHandler::CommandOffTrade(const char * msg)
 
 	World* pWorld = this->GetPlayer()->GetWorld();
 
-	if ( !pWorld )
+	if (!pWorld)
 	{
 		this->GetPlayer()->SendMessageBox(1, "Personal Store", "ERROR. Contact Administrators");
 		return;
 	}
 
-	if ( pWorld->IsAreaRestriction(this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), WORLD_AREA_FLAG_OFF_STORE) )
+	if (pWorld->IsAreaRestriction(this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), WORLD_AREA_FLAG_OFF_STORE))
 	{
 		this->GetPlayer()->SendMessageBox(1, "Personal Store", "You can't use off store on this map location.");
 		return;
 	}
 
-	if ( !this->GetPlayer()->GetPersonalStore()->IsOpen() )
+	if (!this->GetPlayer()->GetPersonalStore()->IsOpen())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Personal Store", "Need to open Personal Store.");
 		return;
 	}
 
-	if ( sGameServer->GetPersonalStoreOffCount() > 0 )
+	if (sGameServer->GetPersonalStoreOffCount() > 0)
 	{
 		int32 count = 0;
 		PlayerSessionMap const& player_map = sObjectMgr->GetAllCharacters();
-		for ( PlayerSessionMap::const_iterator it = player_map.begin(); it != player_map.end(); ++it )
+		for (PlayerSessionMap::const_iterator it = player_map.begin(); it != player_map.end(); ++it)
 		{
 			Player* pPlayer = it->second;
 
-			if ( !pPlayer )
+			if (!pPlayer)
 			{
 				continue;
 			}
 
-			if ( !pPlayer->GetPersonalStore()->IsOpen() )
+			if (!pPlayer->GetPersonalStore()->IsOpen())
 			{
 				continue;
 			}
 
-			if ( !pPlayer->GetPersonalStore()->IsOff() )
+			if (!pPlayer->GetPersonalStore()->IsOff())
 			{
 				continue;
 			}
 
-			if ( !memcmp(pPlayer->GetAccountData()->GetMac(), this->GetPlayer()->GetAccountData()->GetMac(), MAX_ACCOUNT_MAC_LENGTH) &&
-				 pPlayer->GetAccountData()->GetDiskSerial() == this->GetPlayer()->GetAccountData()->GetDiskSerial() )
+			if (!memcmp(pPlayer->GetAccountData()->GetMac(), this->GetPlayer()->GetAccountData()->GetMac(), MAX_ACCOUNT_MAC_LENGTH) &&
+				pPlayer->GetAccountData()->GetDiskSerial() == this->GetPlayer()->GetAccountData()->GetDiskSerial())
 			{
 				++count;
 			}
 		}
 
-		if ( count >= sGameServer->GetPersonalStoreOffCount() )
+		if (count >= sGameServer->GetPersonalStoreOffCount())
 		{
 			this->GetPlayer()->SendMessageBox(1, "Personal Store", "You have exceeded the maximum offstore ammount.");
 			return;
 		}
 	}
 
-	if ( sGameServer->GetPersonalStoreOffTotalCount() > 0 )
+	if (sGameServer->GetPersonalStoreOffTotalCount() > 0)
 	{
 		int32 count = 0;
 		PlayerSessionMap const& player_map = sObjectMgr->GetAllCharacters();
-		for ( PlayerSessionMap::const_iterator it = player_map.begin(); it != player_map.end(); ++it )
+		for (PlayerSessionMap::const_iterator it = player_map.begin(); it != player_map.end(); ++it)
 		{
 			Player* pPlayer = it->second;
 
-			if ( !pPlayer )
+			if (!pPlayer)
 			{
 				continue;
 			}
 
-			if ( !pPlayer->GetPersonalStore()->IsOpen() )
+			if (!pPlayer->GetPersonalStore()->IsOpen())
 			{
 				continue;
 			}
 
-			if ( !pPlayer->GetPersonalStore()->IsOff() )
+			if (!pPlayer->GetPersonalStore()->IsOff())
 			{
 				continue;
 			}
@@ -919,7 +919,7 @@ void ChatHandler::CommandOffTrade(const char * msg)
 			++count;
 		}
 
-		if ( count >= sGameServer->GetPersonalStoreOffTotalCount() )
+		if (count >= sGameServer->GetPersonalStoreOffTotalCount())
 		{
 			this->GetPlayer()->SendMessageBox(1, "Personal Store", "Can't open more offstores on this server.");
 			return;
@@ -935,9 +935,9 @@ void ChatHandler::CommandOffTrade(const char * msg)
 	this->GetPlayer()->SetAutoLoginInfo(credits);
 }
 
-void ChatHandler::CommandAuthorize(const char * msg)
+void ChatHandler::CommandAuthorize(const char* msg)
 {
-	if ( this->GetPlayer()->IsAuthorizationEnabled() )
+	if (this->GetPlayer()->IsAuthorizationEnabled())
 	{
 		return;
 	}
@@ -946,25 +946,25 @@ void ChatHandler::CommandAuthorize(const char * msg)
 	{
 		return;
 	}*/
-	
+
 	std::stringstream conversor(msg);
 	std::string security_code;
 
 	conversor >> security_code;
 
-	if ( security_code.size() > MAX_SECURE_CODE_LENGTH )
+	if (security_code.size() > MAX_SECURE_CODE_LENGTH)
 	{
 		return;
 	}
 
 	STRING_SAFE_COPY(code, (MAX_SECURE_CODE_LENGTH + 1), security_code.c_str(), security_code.size());
 
-	if ( !memcmp(code, this->GetPlayer()->GetAccountData()->secure_code, MAX_SECURE_CODE_LENGTH) )
+	if (!memcmp(code, this->GetPlayer()->GetAccountData()->secure_code, MAX_SECURE_CODE_LENGTH))
 	{
 		this->GetPlayer()->SetAuthorizationEnabled(true);
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Account Authorized.");
 
-		if ( !this->GetPlayer()->IsAdministrator() )
+		if (!this->GetPlayer()->IsAdministrator())
 		{
 			sAuthServer->AccountAuthorization(this->GetPlayer()->GetAccountData()->GetGUID(), false);
 		}
@@ -977,26 +977,26 @@ void ChatHandler::CommandAuthorize(const char * msg)
 	}
 }
 
-void ChatHandler::CommandOffAttack(const char * msg)
+void ChatHandler::CommandOffAttack(const char* msg)
 {
-	if ( !sGameServer->IsOfflineAttack() )
+	if (!sGameServer->IsOfflineAttack())
 	{
 		return;
 	}
 
-	if ( sGameServer->GetOfflineAttackMinLevel() > 0 && this->GetPlayer()->GetTotalLevel() < sGameServer->GetOfflineAttackMinLevel() )
+	if (sGameServer->GetOfflineAttackMinLevel() > 0 && this->GetPlayer()->GetTotalLevel() < sGameServer->GetOfflineAttackMinLevel())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Offline Attack", "Min level required %d.", sGameServer->GetOfflineAttackMinLevel());
 		return;
 	}
 
-	if ( sGameServer->GetOfflineAttackMaxLevel() > 0 && this->GetPlayer()->GetTotalLevel() > sGameServer->GetOfflineAttackMaxLevel() )
+	if (sGameServer->GetOfflineAttackMaxLevel() > 0 && this->GetPlayer()->GetTotalLevel() > sGameServer->GetOfflineAttackMaxLevel())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Offline Attack", "Max level allowed %d.", sGameServer->GetOfflineAttackMaxLevel());
 		return;
 	}
 
-	if ( !sGameServer->IsOfflineAttackWorld(this->GetPlayer(), this->GetPlayer()->GetWorldId()) )
+	if (!sGameServer->IsOfflineAttackWorld(this->GetPlayer(), this->GetPlayer()->GetWorldId()))
 	{
 		return;
 	}
@@ -1007,20 +1007,20 @@ void ChatHandler::CommandOffAttack(const char * msg)
 		return;
 	}
 
-	if ( sGameServer->GetOfflineAttackCount() > 0 )
+	if (sGameServer->GetOfflineAttackCount() > 0)
 	{
 		int32 count = 0;
 		PlayerSessionMap const& player_map = sObjectMgr->GetAllCharacters();
-		for ( PlayerSessionMap::const_iterator it = player_map.begin(); it != player_map.end(); ++it )
+		for (PlayerSessionMap::const_iterator it = player_map.begin(); it != player_map.end(); ++it)
 		{
 			Player* pPlayer = it->second;
 
-			if ( !pPlayer )
+			if (!pPlayer)
 			{
 				continue;
 			}
 
-			if ( !pPlayer->GetHelper()->IsOffline() )
+			if (!pPlayer->GetHelper()->IsOffline())
 			{
 				continue;
 			}
@@ -1049,7 +1049,7 @@ void ChatHandler::CommandOffAttack(const char * msg)
 			}
 		}
 
-		if ( count >= sGameServer->GetOfflineAttackCount() )
+		if (count >= sGameServer->GetOfflineAttackCount())
 		{
 			this->GetPlayer()->SendMessageBox(1, "Offline Attack", "You have exceeded the maximum count.");
 			return;
@@ -1087,13 +1087,13 @@ void ChatHandler::CommandOffAttack(const char * msg)
 		}
 	}
 
-	if ( !this->GetPlayer()->GetHelper()->IsStarted() )
+	if (!this->GetPlayer()->GetHelper()->IsStarted())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Offline Attack", "Helper must be active.");
 		return;
 	}
 
-	if ( this->GetPlayer()->GetPersonalStore()->IsBusy() )
+	if (this->GetPlayer()->GetPersonalStore()->IsBusy())
 	{
 		this->GetPlayer()->SendMessageBox(1, "Offline Attack", "Close Personal Store before start.");
 		return;
@@ -1105,7 +1105,7 @@ void ChatHandler::CommandOffAttack(const char * msg)
 		return;
 	}
 
-	if ( !this->GetPlayer()->IsWorldFlag(WORLD_FLAG_ALLOW_OFFLINE_ATTACK) )
+	if (!this->GetPlayer()->IsWorldFlag(WORLD_FLAG_ALLOW_OFFLINE_ATTACK))
 	{
 		this->GetPlayer()->SendMessageBox(1, "Offline Attack", "Not allowed to use on this map.");
 		return;
@@ -1113,7 +1113,7 @@ void ChatHandler::CommandOffAttack(const char * msg)
 
 	this->GetPlayer()->UpdateAccountStatusType(2);
 
-	this->GetPlayer()->RemoveFlag(CHARACTER_FLAG_REQUEST);	
+	this->GetPlayer()->RemoveFlag(CHARACTER_FLAG_REQUEST);
 	this->GetPlayer()->GetHelper()->SetStartedTime(MyGetTickCount());
 	this->GetPlayer()->GetHelper()->SetOffline(true);
 	this->GetPlayer()->SaveCharacter();
@@ -1122,9 +1122,9 @@ void ChatHandler::CommandOffAttack(const char * msg)
 	this->GetPlayer()->SetAutoLoginInfo(3);
 }
 
-void ChatHandler::CommandPKPoints(const char * msg)
+void ChatHandler::CommandPKPoints(const char* msg)
 {
-	if ( this->GetPlayer()->GetPKLevel() <= PK_STATUS_COMMONER )
+	if (this->GetPlayer()->GetPKLevel() <= PK_STATUS_COMMONER)
 	{
 		return;
 	}
@@ -1132,9 +1132,9 @@ void ChatHandler::CommandPKPoints(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "You have to earn %d points to get out of Outlaw status..", this->GetPlayer()->GetPKPoints());
 }
 
-void ChatHandler::CommandGold(const char * msg)
+void ChatHandler::CommandGold(const char* msg)
 {
-	if ( !sGameServer->IsCommandGoldEnabled() )
+	if (!sGameServer->IsCommandGoldEnabled())
 	{
 		return;
 	}
@@ -1144,7 +1144,7 @@ void ChatHandler::CommandGold(const char * msg)
 
 	PreparedQueryResult result = LoginDatabase.Query(stmt);
 
-	if ( !result )
+	if (!result)
 	{
 		return;
 	}
@@ -1157,19 +1157,19 @@ void ChatHandler::CommandGold(const char * msg)
 
 	conversor >> days;
 
-	if ( days < 0 )
+	if (days < 0)
 	{
 		days = 0;
 	}
 
-	if ( days > sGameServer->GetCommandGoldMaxDays() )
+	if (days > sGameServer->GetCommandGoldMaxDays())
 	{
 		days = sGameServer->GetCommandGoldMaxDays();
 	}
 
 	int32 price = days * sGameServer->GetCommandGoldPrice();
 
-	if ( days == 0 )
+	if (days == 0)
 	{
 		this->GetPlayer()->SendMessageBox(0, "Golden Channel", "You need to set how many days you are going to purchase. \n "
 			"Each day costs %d wcoin. \n "
@@ -1177,7 +1177,7 @@ void ChatHandler::CommandGold(const char * msg)
 	}
 	else
 	{
-		if ( this->GetPlayer()->GetCredits() < price )
+		if (this->GetPlayer()->GetCredits() < price)
 		{
 			this->GetPlayer()->SendMessageBox(0, "Golden Channel", "You need %d wcoin to buy %d days.", price, days);
 			return;
@@ -1188,7 +1188,7 @@ void ChatHandler::CommandGold(const char * msg)
 		time_t purchase_days = days * DAY;
 		time_t current_time = time(nullptr);
 
-		if ( !golden_channel || golden_channel < current_time )
+		if (!golden_channel || golden_channel < current_time)
 		{
 			golden_channel = time(nullptr);
 		}
@@ -1216,7 +1216,7 @@ void ChatHandler::CommandGold(const char * msg)
 	}
 }
 
-void ChatHandler::CommandErrtel(const char * msg)
+void ChatHandler::CommandErrtel(const char* msg)
 {
 	if (!sGameServer->IsTestEnabled())
 	{
@@ -1240,29 +1240,29 @@ void ChatHandler::CommandErrtel(const char * msg)
 	switch (type)
 	{
 	case 0:
-		{
-			errtel_item = ITEMGET(12, 221);
-		} break;
+	{
+		errtel_item = ITEMGET(12, 221);
+	} break;
 
 	case 1:
-		{
-			errtel_item = ITEMGET(12, 231);
-		} break;
+	{
+		errtel_item = ITEMGET(12, 231);
+	} break;
 
 	case 2:
-		{
-			errtel_item = ITEMGET(12, 241);
-		} break;
+	{
+		errtel_item = ITEMGET(12, 241);
+	} break;
 
 	case 3:
-		{
-			errtel_item = ITEMGET(12, 251);
-		} break;
+	{
+		errtel_item = ITEMGET(12, 251);
+	} break;
 
 	case 4:
-		{
-			errtel_item = ITEMGET(12, 261);
-		} break;
+	{
+		errtel_item = ITEMGET(12, 261);
+	} break;
 	}
 
 	if (errtel_item <= 0)
@@ -1347,18 +1347,18 @@ void ChatHandler::CommandErrtel(const char * msg)
 	}
 
 	item.SetSocketBonus(element | rank_level * 16);
-	
+
 	sItemMgr->ItemSerialCreateItem(this->GetPlayer(), serial_create_inventory, item);
 }
 
-void ChatHandler::CommandSiegeRefresh(const char * msg)
+void ChatHandler::CommandSiegeRefresh(const char* msg)
 {
 	this->GetPlayer()->ViewportCreate(VIEWPORT_CREATE_FLAG_SIEGE);
 }
 
-void ChatHandler::CommandTestPacket(const char * msg)
+void ChatHandler::CommandTestPacket(const char* msg)
 {
-	if ( !this->GetPlayer()->IsAdministrator() )
+	if (!this->GetPlayer()->IsAdministrator())
 		return;
 
 	std::stringstream conversor(msg);
@@ -1381,12 +1381,12 @@ void ChatHandler::CommandTestPacket(const char * msg)
 
 	conversor >> result >> data1 >> data2 >> data3 >> data4 >> data5 >> data6 >> data7 >> data8 >> data9 >> data10 >> data11;
 
-	if ( result < 0 )
+	if (result < 0)
 	{
 		result = 0;
 	}
 
-	if ( result > 255 )
+	if (result > 255)
 	{
 		result = 255;
 	}
@@ -1402,232 +1402,261 @@ void ChatHandler::CommandTestPacket(const char * msg)
 	switch (result)
 	{
 	case 0:
-		{
-			 /* MU_HELPER_PLUS_81 pMsg;
-			  pMsg.result = data1;
-			  pMsg.data1 = data2;
-			  pMsg.data2 = data3;
-			  pMsg.data3 = data4;
+	{
+		/* MU_HELPER_PLUS_81 pMsg;
+		 pMsg.result = data1;
+		 pMsg.data1 = data2;
+		 pMsg.data2 = data3;
+		 pMsg.data3 = data4;
 
-			  this->GetPlayer()->SendPacket(&pMsg);*/
+		 this->GetPlayer()->SendPacket(&pMsg);*/
 
-			  this->GetPlayer()->StateInfoSend(data1, data2);
+		this->GetPlayer()->StateInfoSend(data1, data2);
 
-			  /*this->GetPlayer()->SetIntData(UNIT_INT_ATTACK_SPEED, data1);
-			  this->GetPlayer()->SetIntData(UNIT_INT_MAGIC_SPEED, data1);
+		/*this->GetPlayer()->SetIntData(UNIT_INT_ATTACK_SPEED, data1);
+		this->GetPlayer()->SetIntData(UNIT_INT_MAGIC_SPEED, data1);
 
-			  CHARACTER_ATTACK_SPEED_SEND pMsg(this->GetPlayer()->GetIntData(UNIT_INT_ATTACK_SPEED), this->GetPlayer()->GetIntData(UNIT_INT_MAGIC_SPEED));
-			  this->GetPlayer()->sendPacket(MAKE_PCT(pMsg));
+		CHARACTER_ATTACK_SPEED_SEND pMsg(this->GetPlayer()->GetIntData(UNIT_INT_ATTACK_SPEED), this->GetPlayer()->GetIntData(UNIT_INT_MAGIC_SPEED));
+		this->GetPlayer()->sendPacket(MAKE_PCT(pMsg));
 
-			  this->GetPlayer()->AttackSpeedSend();*/
-			  /*ITEM_ENHANCEMENT_RESULT pMsg;
-			  pMsg.result = data1;
+		this->GetPlayer()->AttackSpeedSend();*/
+		/*ITEM_ENHANCEMENT_RESULT pMsg;
+		pMsg.result = data1;
 
-			  this->GetPlayer()->sendPacket(&pMsg);*/
+		this->GetPlayer()->sendPacket(&pMsg);*/
 
-			  //sPentagramSystem->DelAllPentagramJewelInfo(this->GetPlayer(), this->GetPlayer()->GetInventory()->GetItem(PENTAGRAM_SLOT), 0);
+		//sPentagramSystem->DelAllPentagramJewelInfo(this->GetPlayer(), this->GetPlayer()->GetInventory()->GetItem(PENTAGRAM_SLOT), 0);
 
-			  /*TEST_PACKET_94 pMsg;
-			  pMsg.result = data1;
-			  pMsg.index = this->GetPlayer()->GetEntry();
+		/*TEST_PACKET_94 pMsg;
+		pMsg.result = data1;
+		pMsg.index = this->GetPlayer()->GetEntry();
 
-			  this->GetPlayer()->sendPacket(&pMsg);*/
-		} break;
+		this->GetPlayer()->sendPacket(&pMsg);*/
+	} break;
 
 	case 1:
+	{
+		/*MU_HELPER_PLUS_82 pMsg;
+		pMsg.result = data1;
+		pMsg.data1 = data2;
+		pMsg.data2 = data3;
+		pMsg.data3 = data4;
+
+		this->GetPlayer()->SendPacket(&pMsg);*/
+
+
+		//this->GetPlayer()->StateInfoSend(data1, data2);
+
+		/*TEST_PACKET_95 pMsg;
+		pMsg.result = data1;
+		pMsg.index = this->GetPlayer()->GetEntry();
+
+		this->GetPlayer()->sendPacket(&pMsg);*/
+		/*uint8 buffer[8192];
+		int32 write_size = 0;
+
+		MONSTER_SOUL_QUEST_HEAD* head = (MONSTER_SOUL_QUEST_HEAD*)&buffer[write_size];
+		head->junk = 0;
+		head->count = data1;
+
+		write_size += sizeof(MONSTER_SOUL_QUEST_HEAD);
+
+		for (int32 i = 0; i < data1; ++i)
 		{
-			  /*MU_HELPER_PLUS_82 pMsg;
-			  pMsg.result = data1;
-			  pMsg.data1 = data2;
-			  pMsg.data2 = data3;
-			  pMsg.data3 = data4;
+			MONSTER_SOUL_QUEST_BODY_1* body = (MONSTER_SOUL_QUEST_BODY_1*)&buffer[write_size];
+			body->type = data2;
+			body->data[0] = data3;
+			body->data[1] = data4;
+			body->expire_date = data5;
+			body->junk1 = data6;
+			body->amount = data7;
+			body->status = data8;
+			body->junk2 = data9;
 
-			  this->GetPlayer()->SendPacket(&pMsg);*/
+			write_size += sizeof(MONSTER_SOUL_QUEST_BODY_1);
 
+			for (int32 n = 0; n < body->amount; ++n)
+			{
+				MONSTER_SOUL_QUEST_BODY_2* data = (MONSTER_SOUL_QUEST_BODY_2*)&buffer[write_size];
+				data->id = n;
+				data->amount = data10;
 
-			  //this->GetPlayer()->StateInfoSend(data1, data2);
+				write_size += sizeof(MONSTER_SOUL_QUEST_BODY_2);
+			}
+		}
 
-			  /*TEST_PACKET_95 pMsg;
-			  pMsg.result = data1;
-			  pMsg.index = this->GetPlayer()->GetEntry();
+		head->Set(0x4D, 0x41, write_size);
 
-			  this->GetPlayer()->sendPacket(&pMsg);*/
-			  /*uint8 buffer[8192];
-			  int32 write_size = 0;
-
-			  MONSTER_SOUL_QUEST_HEAD* head = (MONSTER_SOUL_QUEST_HEAD*)&buffer[write_size];
-			  head->junk = 0;
-			  head->count = data1;
-
-			  write_size += sizeof(MONSTER_SOUL_QUEST_HEAD);
-
-			  for (int32 i = 0; i < data1; ++i)
-			  {
-				  MONSTER_SOUL_QUEST_BODY_1* body = (MONSTER_SOUL_QUEST_BODY_1*)&buffer[write_size];
-				  body->type = data2;
-				  body->data[0] = data3;
-				  body->data[1] = data4;
-				  body->expire_date = data5;
-				  body->junk1 = data6;
-				  body->amount = data7;
-				  body->status = data8;
-				  body->junk2 = data9;
-
-				  write_size += sizeof(MONSTER_SOUL_QUEST_BODY_1);
-
-				  for (int32 n = 0; n < body->amount; ++n)
-				  {
-					  MONSTER_SOUL_QUEST_BODY_2* data = (MONSTER_SOUL_QUEST_BODY_2*)&buffer[write_size];
-					  data->id = n;
-					  data->amount = data10;
-
-					  write_size += sizeof(MONSTER_SOUL_QUEST_BODY_2);
-				  }
-			  }
-
-			  head->Set(0x4D, 0x41, write_size);
-
-			  this->GetPlayer()->sendPacket(buffer);*/
-		} break;
+		this->GetPlayer()->sendPacket(buffer);*/
+	} break;
 
 	case 2:
-		{
-			  MU_HELPER_PLUS_83 pMsg;
-			  pMsg.result = data1;
+	{
+		MU_HELPER_PLUS_83 pMsg;
+		pMsg.result = data1;
 
-			  this->GetPlayer()->SendPacket(&pMsg);
-		} break;
+		this->GetPlayer()->SendPacket(&pMsg);
+	} break;
 
 	case 3:
-		{
-			  MU_HELPER_PLUS_RUN_SEND pMsg;
-			  pMsg.result = data1;
+	{
+		MU_HELPER_PLUS_RUN_SEND pMsg;
+		pMsg.result = data1;
 
-			  this->GetPlayer()->SendPacket(&pMsg);
-		} break;
+		this->GetPlayer()->SendPacket(&pMsg);
+	} break;
 
 	case 4:
-		{
-			  MU_HELPER_PLUS_86 pMsg;
+	{
+		MU_HELPER_PLUS_86 pMsg;
 
-			  this->GetPlayer()->SendPacket(&pMsg);
-		} break;
+		this->GetPlayer()->SendPacket(&pMsg);
+	} break;
 
 	case 5:
-		{
-			  MU_HELPER_PLUS_88 pMsg;
-			  pMsg.result = data1;
+	{
+		MU_HELPER_PLUS_88 pMsg;
+		pMsg.result = data1;
 
-			  this->GetPlayer()->SendPacket(&pMsg);
-		} break;
+		this->GetPlayer()->SendPacket(&pMsg);
+	} break;
 
 	case 6:
-		{
-			  MU_HELPER_PLUS_90 pMsg;
-			  pMsg.result = data1;
+	{
+		MU_HELPER_PLUS_90 pMsg;
+		pMsg.result = data1;
 
-			  this->GetPlayer()->SendPacket(&pMsg);
-		} break;
+		this->GetPlayer()->SendPacket(&pMsg);
+	} break;
 
 	case 7:
+	{
+		if (!inventory_range(data1))
 		{
-			  if (!inventory_range(data1))
-			  {
-				  full_inventory_loop(i)
-				  {
-					  this->GetPlayer()->PrintItemData(this->GetPlayer()->GetInventory()->GetItem(i));
-				  }
-			  }
-			  else
-			  {
-				  this->GetPlayer()->PrintItemData(this->GetPlayer()->GetInventory()->GetItem(data1));
-			  }
-		} break;
+			full_inventory_loop(i)
+			{
+				this->GetPlayer()->PrintItemData(this->GetPlayer()->GetInventory()->GetItem(i));
+			}
+		}
+		else
+		{
+			this->GetPlayer()->PrintItemData(this->GetPlayer()->GetInventory()->GetItem(data1));
+		}
+	} break;
 
 	case 8:
+	{
+		INIT_SOCKET_DATA(socket);
+		for (int32 i = 0; i < data3; ++i)
 		{
-			  INIT_SOCKET_DATA(socket);
-			  for (int32 i = 0; i < data3; ++i)
-			  {
-				  socket[i] = sItemMgr->GenerateWingGradedOption(socket);
-			  }
+			socket[i] = sItemMgr->GenerateWingGradedOption(socket);
+		}
 
-			  sItemMgr->ItemSerialCreateItem(this->GetPlayer(), serial_create_inventory, Item(ITEMGET(data1, data2), 0, 0, 0, 0, 0, 0, 0, socket));
-		} break;
+		sItemMgr->ItemSerialCreateItem(this->GetPlayer(), serial_create_inventory, Item(ITEMGET(data1, data2), 0, 0, 0, 0, 0, 0, 0, socket));
+	} break;
 
 	case 9:
-		{
+	{
 
-		} break;
+	} break;
 
 	case 10:
-		{
-			/*PACKET_0xEC_0x60 pMsg;
-			pMsg.data = data1;
+	{
+		/*PACKET_0xEC_0x60 pMsg;
+		pMsg.data = data1;
 
-			this->GetPlayer()->SEND_PCT(pMsg);*/
-		} break;
+		this->GetPlayer()->SEND_PCT(pMsg);*/
+	} break;
 
 	case 11:
-		{
-			/*uint8 buffer[2048];
-			POINTER_PCT(PACKET_CHANNEL_HEAD, head, buffer, 0);
-			POINTER_PCT(PACKET_CHANNEL_BODY, body, buffer, sizeof(PACKET_CHANNEL_HEAD));
+	{
+		uint8 buffer[2048];
+		POINTER_PCT(PACKET_CHANNEL_HEAD, head, buffer, 0);
+		POINTER_PCT(PACKET_CHANNEL_BODY, body, buffer, sizeof(PACKET_CHANNEL_HEAD));
 
-			body[0].server = data1;
-			body[0].data1 = data2;
-			body[0].data2 = data3;
-			body[0].type = data4;
-			body[0].gold = data5;
+		body[0].server = data1;
+		body[0].data1 = data2;
+		body[0].data2 = data3;
+		body[0].type = data4;
+		body[0].gold = data5;
 
-			body[1].server = data6;
-			body[1].data1 = data7;
-			body[1].data2 = data8;
-			body[1].type = data9;
-			body[1].gold = data10;
+		body[1].server = data6;
+		body[1].data1 = data7;
+		body[1].data2 = data8;
+		body[1].type = data9;
+		body[1].gold = data10;
 
-			head->count = 2;
-			head->data = data11;
-			
-			head->Set(0xEC, 0x57, sizeof(PACKET_CHANNEL_HEAD) + (head->count * sizeof(PACKET_CHANNEL_BODY)));
+		head->count = 2;
+		head->data = data11;
 
-			this->GetPlayer()->sendPacket(buffer, head->GetSize());*/
-		} break;
+		head->Set(0xEC, 0x57, sizeof(PACKET_CHANNEL_HEAD) + (head->count * sizeof(PACKET_CHANNEL_BODY)));
+
+		this->GetPlayer()->sendPacket(buffer, head->GetSize());
+
+		//this->GetPlayer()->SendServerList();
+
+		//uint8 buffer[4096];
+		//POINTER_PCT(PACKET_CHANNEL_HEAD, head, buffer, 0);
+		//POINTER_PCT(PACKET_CHANNEL_BODY, body, buffer, sizeof(PACKET_CHANNEL_HEAD));
+
+		//head->count = 0;
+		//head->data = 0;
+		//for (ChannelDataMap::const_iterator itr = sConnectServer->m_ChannelDataMap.begin(); itr != sConnectServer->m_ChannelDataMap.end(); ++itr)
+		//{
+		//	ChannelData const* pData = itr->second;
+
+		//	if (!pData)
+		//	{
+		//		continue;
+		//	}
+
+		//	body[head->count].server = pData->GetServer();//pData->GetServer() + MAX_SERVER_PER_GROUP;
+		//	body[head->count].data1 = pData->GetData1();//sGameServer->GetServerType() == SERVER_TYPE_NORMAL && sGameServer->IsFlag(SERVER_FLAG_DISPLAY) ? 32 : 0;
+		//	body[head->count].data2 = pData->GetData2();// 0;
+		//	body[head->count].type = pData->GetType();
+		//	body[head->count].gold = pData->GetGold();
+		//	++head->count;
+		//}
+
+		//head->Set(0xEC, 0x57, sizeof(PACKET_CHANNEL_HEAD) + (head->count * sizeof(PACKET_CHANNEL_BODY)));
+		//this->GetPlayer()->sendPacket(buffer, head->GetSize());
+
+	} break;
 
 	case 12:
-		{
-			/*PACKET_0x59_0x03 pMsg;
-			pMsg.data = data1;
+	{
+		/*PACKET_0x59_0x03 pMsg;
+		pMsg.data = data1;
 
-			this->GetPlayer()->SEND_PCT(pMsg);*/
-		} break;
+		this->GetPlayer()->SEND_PCT(pMsg);*/
+	} break;
 
 	case 13:
-		{
-			/*LABYRINTH_OF_DIMENSIONS_ENTRANCE_HEAD pMsg;
-			pMsg.rank = data1;
-			pMsg.position = data2;
-			pMsg.max_floor = data3;
-			pMsg.top_position = data4;
-			pMsg.remain_time = data5;
-			
-			this->GetPlayer()->SEND_PCT(pMsg);*/
-		} break;
+	{
+		/*LABYRINTH_OF_DIMENSIONS_ENTRANCE_HEAD pMsg;
+		pMsg.rank = data1;
+		pMsg.position = data2;
+		pMsg.max_floor = data3;
+		pMsg.top_position = data4;
+		pMsg.remain_time = data5;
+
+		this->GetPlayer()->SEND_PCT(pMsg);*/
+	} break;
 
 	case 14:
-		{
+	{
 
-		} break;
+	} break;
 
 	case 15:
-		{
+	{
 
-		} break;
+	} break;
 
 	case 16:
-		{
+	{
 
-		} break;
+	} break;
 	}
 
 	/*switch (result)
@@ -1706,7 +1735,7 @@ void ChatHandler::CommandTestPacket(const char * msg)
 
 			if ( !mMonster )
 				break;
-	
+
 			mMonster->SetWorldId(world_list[world_id]);
 			mMonster->SetInstance(-1);
 			mMonster->SetBasicLocation(0, 0, 255, 255);
@@ -1726,7 +1755,7 @@ void ChatHandler::CommandTestPacket(const char * msg)
 			mMonster->SetIntData(UNIT_INT_ELEMENTAL_DEFENSE, 2000);
 			mMonster->SetIntData(UNIT_INT_ELEMENTAL_DEFENSE_SUCCESS_RATE, 1000);
 			mMonster->SetSendType(MAIN_OBJECT_PLAYER);
-	
+
 			if ( !mMonster->GetWorld() )
 			{
 				mMonster->SetConnectStatus(CONNECT_STATUS_NONE);
@@ -1739,7 +1768,7 @@ void ChatHandler::CommandTestPacket(const char * msg)
 	}
 
 	sLog->outInfo("root", "Added %d Monster Kill BOT in %u ms", added_count, GetMSTimeDiffToNow(oldMStime));*/
-	
+
 	/*std::stringstream conversor(msg);
 	int32 day = -1;
 
@@ -1747,7 +1776,7 @@ void ChatHandler::CommandTestPacket(const char * msg)
 	sQuestMgr->SetTestingDay(day);*/
 }
 
-void ChatHandler::CommandKick(const char * msg)
+void ChatHandler::CommandKick(const char* msg)
 {
 	std::stringstream conversor(msg);
 
@@ -1762,7 +1791,7 @@ void ChatHandler::CommandKick(const char * msg)
 	sServerLink->AdminCommandRequest(this->GetPlayer(), 0, 0, name, nullptr, time);
 }
 
-void ChatHandler::CommandEvents(const char * msg)
+void ChatHandler::CommandEvents(const char* msg)
 {
 	std::stringstream conversor(msg);
 
@@ -1772,144 +1801,144 @@ void ChatHandler::CommandEvents(const char * msg)
 	int32 notify_time = 0;
 	conversor >> event_id >> invasion >> event_time >> notify_time;
 
-	if ( event_time <= 0 )
+	if (event_time <= 0)
 		event_time = 1;
 
-	if ( notify_time < 0 )
+	if (notify_time < 0)
 		notify_time = 0;
 
-	switch ( event_id )
+	switch (event_id)
 	{
 	case EVENT_BLOOD_CASTLE:
-		{
-			sBloodCastleMgr->Start(event_time, notify_time);
-		} break;
+	{
+		sBloodCastleMgr->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_DEVIL_SQUARE:
-		{
-			sDevilSquareMgr->Start(event_time, notify_time);
-		} break;
+	{
+		sDevilSquareMgr->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_CHAOS_CASTLE:
-		{
-			sChaosCastleMgr->Start(event_time, notify_time);
-		} break;
+	{
+		sChaosCastleMgr->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_ILLUSION_TEMPLE:
-		{
-			sIllusionTempleMgr->Start(event_time, notify_time);
-		} break;
+	{
+		sIllusionTempleMgr->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_CRYWOLF:
-		{
-			if ( sCrywolf->GetState() == CRYWOLF_STATE_NONE )
-				sCrywolf->SetState_Notify_1();
-		} break;
+	{
+		if (sCrywolf->GetState() == CRYWOLF_STATE_NONE)
+			sCrywolf->SetState_Notify_1();
+	} break;
 
 	case EVENT_RAKLION:
-		{
-			if ( sRaklion->GetState() == RAKLION_STATE_CLOSED )
-				sRaklion->ChangeState(RAKLION_STATE_OPEN);
-		} break;
+	{
+		if (sRaklion->GetState() == RAKLION_STATE_CLOSED)
+			sRaklion->ChangeState(RAKLION_STATE_OPEN);
+	} break;
 
 	case EVENT_INVASION:
-		{
-			sInvasionMgr->LaunchInvasion(invasion, event_time, notify_time);
-		} break;
+	{
+		sInvasionMgr->LaunchInvasion(invasion, event_time, notify_time);
+	} break;
 
 	case EVENT_HAPPY_HOUR:
-		{
-			sHappyHour->Start(event_time, notify_time);
-		} break;
+	{
+		sHappyHour->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_CASTLE_SIEGE:
-		{
-			sCastleSiege->ChangeState(invasion, event_time == 1 ? true: false, notify_time);
-		} break;
+	{
+		sCastleSiege->ChangeState(invasion, event_time == 1 ? true : false, notify_time);
+	} break;
 
 	case EVENT_SCRAMBLE:
-		{
-			sScramble->Start(event_time, notify_time);
-		} break;
+	{
+		sScramble->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_DUNGEON_RACE:
-		{
-			sDungeonRace->Start(event_time, notify_time);
-		} break;
+	{
+		sDungeonRace->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_LOSTTOWER_RACE:
-		{
-			sLosttowerRace->Start(event_time, notify_time);
-		} break;
+	{
+		sLosttowerRace->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_CHAOS_CASTLE_SURVIVAL:
-		{
-			sChaosCastleSurvivalMgr->Start(event_time, notify_time);
-		} break;
+	{
+		sChaosCastleSurvivalMgr->Start(event_time, notify_time);
+	} break;
 
 	case EVENT_PROTECTOR_OF_ACHERON:
-		{
-			sProtectorOfAcheron->Start();
-		} break;
+	{
+		sProtectorOfAcheron->Start();
+	} break;
 
 	case EVENT_TORMENTED_SQUARE:
-		{
-			sTormentedSquare->Start(notify_time);
-		} break;
+	{
+		sTormentedSquare->Start(notify_time);
+	} break;
 
 	case EVENT_ARKA_WAR:
-		{
-			sArkaWar->ChangeState(invasion, !sGameServer->IsArkaWarEnabled());
-		} break;
+	{
+		sArkaWar->ChangeState(invasion, !sGameServer->IsArkaWarEnabled());
+	} break;
 
 	case EVENT_DOPPELGANGER:
-		{
-			sDoppelganger->Start();
-		} break;
+	{
+		sDoppelganger->Start();
+	} break;
 
 	case EVENT_LAST_MAN_STANDING:
-		{
-			sLastManStanding->Start(notify_time);
-		} break;
+	{
+		sLastManStanding->Start(notify_time);
+	} break;
 
 	case EVENT_NIXIES_LAKE:
+	{
+		if (sNixiesLake->GetState() == NIXIES_LAKE_STATE_NONE)
 		{
-			if ( sNixiesLake->GetState() == NIXIES_LAKE_STATE_NONE )
-			{
-				sNixiesLake->ChangeState(NIXIES_LAKE_STATE_OPEN);
-			}
-		} break;
+			sNixiesLake->ChangeState(NIXIES_LAKE_STATE_OPEN);
+		}
+	} break;
 
 	case EVENT_LABYRINTH_OF_DIMENSIONS:
-		{
-		} break;
+	{
+	} break;
 
 	case EVENT_TORMENTED_SQUARE_SURVIVAL:
-		{
-			sTormentedSquareSurvival->Start(notify_time);
-		} break;
+	{
+		sTormentedSquareSurvival->Start(notify_time);
+	} break;
 
 	case EVENT_CASTLE_DEEP:
-		{
-			sCastleDeep->Start(notify_time);
-		} break;
+	{
+		sCastleDeep->Start(notify_time);
+	} break;
 
 	case EVENT_WORLD_BOSS:
-		{
-			sWorldBoss->Start();
-		} break;
+	{
+		sWorldBoss->Start();
+	} break;
 
 	case EVENT_SWAMP_OF_DARKNESS:
+	{
+		if (sSwampOfDarkness->GetState() == SWAMP_OF_DARKNESS_STATE_NONE)
 		{
-			if (sSwampOfDarkness->GetState() == SWAMP_OF_DARKNESS_STATE_NONE)
-			{
-				sSwampOfDarkness->ChangeState(SWAMP_OF_DARKNESS_STATE_OPEN);
-			}
-		} break;
+			sSwampOfDarkness->ChangeState(SWAMP_OF_DARKNESS_STATE_OPEN);
+		}
+	} break;
 	}
 }
 
-void ChatHandler::CommandStopEvents(const char * msg)
+void ChatHandler::CommandStopEvents(const char* msg)
 {
 	std::stringstream conversor(msg);
 
@@ -1917,187 +1946,187 @@ void ChatHandler::CommandStopEvents(const char * msg)
 	int32 invasion = 0;
 	conversor >> event_id >> invasion;
 
-	switch ( event_id )
+	switch (event_id)
 	{
 	case EVENT_BLOOD_CASTLE:
+	{
+		if (sBloodCastleMgr->GetState() == EVENT_MGR_STATE_PLAYING)
 		{
-			if ( sBloodCastleMgr->GetState() == EVENT_MGR_STATE_PLAYING )
+			for (int32 i = 0; i < MAX_BLOOD_CASTLE_GROUND; ++i)
 			{
-				for ( int32 i = 0; i < MAX_BLOOD_CASTLE_GROUND; ++i )
-				{
-					sBloodCastleMgr->GetGround(i)->SetState_Playend();
-				}
+				sBloodCastleMgr->GetGround(i)->SetState_Playend();
 			}
-		} break;
+		}
+	} break;
 
 	case EVENT_DEVIL_SQUARE:
+	{
+		if (sDevilSquareMgr->GetState() == EVENT_MGR_STATE_PLAYING)
 		{
-			if ( sDevilSquareMgr->GetState() == EVENT_MGR_STATE_PLAYING )
+			for (int32 i = 0; i < MAX_DEVIL_SQUARE_GROUND; ++i)
 			{
-				for ( int32 i = 0; i < MAX_DEVIL_SQUARE_GROUND; ++i )
-				{
-					sDevilSquareMgr->GetGround(i)->SetState_Playend();
-				}
+				sDevilSquareMgr->GetGround(i)->SetState_Playend();
 			}
-		} break;
+		}
+	} break;
 
 	case EVENT_CHAOS_CASTLE:
+	{
+		if (sChaosCastleMgr->GetState() == EVENT_MGR_STATE_PLAYING)
 		{
-			if ( sChaosCastleMgr->GetState() == EVENT_MGR_STATE_PLAYING )
+			for (int32 i = 0; i < MAX_CHAOS_CASTLE_GROUND; ++i)
 			{
-				for ( int32 i = 0; i < MAX_CHAOS_CASTLE_GROUND; ++i )
-				{
-					sChaosCastleMgr->GetGround(i)->SetState_Playend();
-				}
+				sChaosCastleMgr->GetGround(i)->SetState_Playend();
 			}
-		} break;
+		}
+	} break;
 
 	case EVENT_ILLUSION_TEMPLE:
+	{
+		if (sIllusionTempleMgr->GetState() == EVENT_MGR_STATE_PLAYING)
 		{
-			if ( sIllusionTempleMgr->GetState() == EVENT_MGR_STATE_PLAYING )
+			for (int32 i = 0; i < MAX_ILLUSION_TEMPLE_GROUND; ++i)
 			{
-				for ( int32 i = 0; i < MAX_ILLUSION_TEMPLE_GROUND; ++i )
-				{
-					sIllusionTempleMgr->GetGround(i)->SetState_Playend();
-				}
+				sIllusionTempleMgr->GetGround(i)->SetState_Playend();
 			}
-		} break;
+		}
+	} break;
 
 	case EVENT_CRYWOLF:
-		{
-			sCrywolf->SetState_None();
-		} break;
+	{
+		sCrywolf->SetState_None();
+	} break;
 
 	case EVENT_IMPERIAL_FORTRESS:
-		{
-			sImperialFortressMgr->Stop();
-		} break;
+	{
+		sImperialFortressMgr->Stop();
+	} break;
 
 	case EVENT_RAKLION:
-		{
-			sRaklion->ChangeState(RAKLION_STATE_END);
-		} break;
+	{
+		sRaklion->ChangeState(RAKLION_STATE_END);
+	} break;
 
 	case EVENT_KANTURU:
-		{
-			sKanturuMgr->ChangeState(KANTURU_STATE_NONE);
-		} break;
+	{
+		sKanturuMgr->ChangeState(KANTURU_STATE_NONE);
+	} break;
 
 	case EVENT_INVASION:
-		{
-			sInvasionMgr->StopInvasion(invasion);
-		} break;
+	{
+		sInvasionMgr->StopInvasion(invasion);
+	} break;
 
 	case EVENT_HAPPY_HOUR:
-		{
-			sHappyHour->SetState_None();
-		} break;
+	{
+		sHappyHour->SetState_None();
+	} break;
 
 	case EVENT_CASTLE_SIEGE:
-		{
-			sCastleSiege->ChangeState(invasion, true);
-		} break;
+	{
+		sCastleSiege->ChangeState(invasion, true);
+	} break;
 
 	case EVENT_SCRAMBLE:
-		{
-			sScramble->SetState_None();
-		} break;
+	{
+		sScramble->SetState_None();
+	} break;
 
 	case EVENT_DUNGEON_RACE:
-		{
-			sDungeonRace->SetState_None();
-		} break;
+	{
+		sDungeonRace->SetState_None();
+	} break;
 
 	case EVENT_LOSTTOWER_RACE:
-		{
-			sLosttowerRace->SetState_None();
-		} break;
+	{
+		sLosttowerRace->SetState_None();
+	} break;
 
 	case EVENT_DOPPELGANGER:
+	{
+		if (sDoppelganger->GetState() == DOPPELGANGER_STATE_PLAYING)
 		{
-			if ( sDoppelganger->GetState() == DOPPELGANGER_STATE_PLAYING )
+			for (int32 i = 0; i < MAX_DOPPELGANGER_GROUND; ++i)
 			{
-				for ( int32 i = 0; i < MAX_DOPPELGANGER_GROUND; ++i )
-				{
-					sDoppelganger->GetGround(i)->SetState_End();
-				}
+				sDoppelganger->GetGround(i)->SetState_End();
 			}
-		} break;
+		}
+	} break;
 
 	case EVENT_CHAOS_CASTLE_SURVIVAL:
+	{
+		if (sChaosCastleSurvivalMgr->GetState() == EVENT_MGR_STATE_PLAYING)
 		{
-			if ( sChaosCastleSurvivalMgr->GetState() == EVENT_MGR_STATE_PLAYING )
-			{
-				sChaosCastleSurvivalMgr->GetGround()->SetState_Playend();
-			}
+			sChaosCastleSurvivalMgr->GetGround()->SetState_Playend();
+		}
 
-		} break;
+	} break;
 
 	case EVENT_PROTECTOR_OF_ACHERON:
+	{
+		if (sProtectorOfAcheron->GetState() == PROTECTOR_OF_ACHERON_STATE_PLAYING)
 		{
-			if ( sProtectorOfAcheron->GetState() == PROTECTOR_OF_ACHERON_STATE_PLAYING )
-			{
-				sProtectorOfAcheron->SetState_End();
-			}
-		} break;
+			sProtectorOfAcheron->SetState_End();
+		}
+	} break;
 
-	case EVENT_TORMENTED_SQUARE: 
+	case EVENT_TORMENTED_SQUARE:
+	{
+		if (sTormentedSquare->GetState() == TORMENTED_SQUARE_STATE_PLAYING)
 		{
-			if ( sTormentedSquare->GetState() == TORMENTED_SQUARE_STATE_PLAYING )
+			for (int32 i = 0; i < MAX_TORMENTED_SQUARE_GROUND; ++i)
 			{
-				for ( int32 i = 0; i < MAX_TORMENTED_SQUARE_GROUND; ++i )
-				{
-					sTormentedSquare->GetGround(i)->SetState_End();
-				}
+				sTormentedSquare->GetGround(i)->SetState_End();
 			}
-		} break;
+		}
+	} break;
 
 	case EVENT_LAST_MAN_STANDING:
-		{
-			sLastManStanding->SetState_End();
-		} break;
+	{
+		sLastManStanding->SetState_End();
+	} break;
 
 	case EVENT_NIXIES_LAKE:
-		{
-			sNixiesLake->ChangeState(NIXIES_LAKE_STATE_NONE);
-		} break;
+	{
+		sNixiesLake->ChangeState(NIXIES_LAKE_STATE_NONE);
+	} break;
 
 	case EVENT_LABYRINTH_OF_DIMENSIONS:
-		{
-		} break;
+	{
+	} break;
 
 	case EVENT_TORMENTED_SQUARE_SURVIVAL:
+	{
+		if (sTormentedSquareSurvival->GetState() == TORMENTED_SQUARE_STATE_PLAYING)
 		{
-			if ( sTormentedSquareSurvival->GetState() == TORMENTED_SQUARE_STATE_PLAYING )
-			{
-				sTormentedSquareSurvival->GetGround()->SetState_End();
-			}
-		} break;
+			sTormentedSquareSurvival->GetGround()->SetState_End();
+		}
+	} break;
 
 	case EVENT_CASTLE_DEEP:
+	{
+		if (sCastleDeep->GetState() == CASTLE_DEEP_STATE_PLAYING || sCastleDeep->GetState() == CASTLE_DEEP_STATE_NOTIFY)
 		{
-			if ( sCastleDeep->GetState() == CASTLE_DEEP_STATE_PLAYING || sCastleDeep->GetState() == CASTLE_DEEP_STATE_NOTIFY )
-			{
-				sCastleDeep->SetState_None();
-			}
-		} break;
+			sCastleDeep->SetState_None();
+		}
+	} break;
 
 	case EVENT_WORLD_BOSS:
+	{
+		if (sWorldBoss->GetState() == WORLD_BOSS_STATE_PLAYING)
 		{
-			if ( sWorldBoss->GetState() == WORLD_BOSS_STATE_PLAYING )
-			{
-				sWorldBoss->SetState_None();
-			}
-		} break;
+			sWorldBoss->SetState_None();
+		}
+	} break;
 
 	case EVENT_SWAMP_OF_DARKNESS:
-		{
-			sSwampOfDarkness->ChangeState(SWAMP_OF_DARKNESS_STATE_NONE);
-		} break;
+	{
+		sSwampOfDarkness->ChangeState(SWAMP_OF_DARKNESS_STATE_NONE);
+	} break;
 	}
 }
 
-void ChatHandler::CommandMute(const char * msg)
+void ChatHandler::CommandMute(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -2105,15 +2134,15 @@ void ChatHandler::CommandMute(const char * msg)
 
 	conversor >> safe_name >> mute_time;
 
-	if ( safe_name.size() >= (MAX_CHARACTER_LENGTH + 1) || mute_time <= 0 )
+	if (safe_name.size() >= (MAX_CHARACTER_LENGTH + 1) || mute_time <= 0)
 		return;
 
-	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH: safe_name.size());
+	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH : safe_name.size());
 
 	sServerLink->AdminCommandRequest(this->GetPlayer(), 2, 0, name, nullptr, mute_time);
 }
 
-void ChatHandler::CommandItemNormal(const char * msg)
+void ChatHandler::CommandItemNormal(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 count = 1;
@@ -2134,15 +2163,15 @@ void ChatHandler::CommandItemNormal(const char * msg)
 
 	item_template const* item = sItemMgr->GetItem(ITEMGET(type, index));
 
-	if ( !item )
+	if (!item)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Item");
 		return;
 	}
 
-	for ( int32 i = 0; i < count; i++ )
+	for (int32 i = 0; i < count; i++)
 	{
-		Item item_new(ITEMGET(type,index), level, durability, skill, luck, option, exe, ancient, nullptr, 0xFF, duration);
+		Item item_new(ITEMGET(type, index), level, durability, skill, luck, option, exe, ancient, nullptr, 0xFF, duration);
 		item_new.SetHarmony(harmony);
 		item_new.Set380(opt380);
 
@@ -2150,8 +2179,8 @@ void ChatHandler::CommandItemNormal(const char * msg)
 			this->GetPlayer()->GetWorldId(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), item_new, false);
 	}
 }
-	
-void ChatHandler::CommandItemAdd(const char * msg)
+
+void ChatHandler::CommandItemAdd(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 count = 1;
@@ -2172,29 +2201,29 @@ void ChatHandler::CommandItemAdd(const char * msg)
 
 	Player* pOwner = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !pOwner )
+	if (!pOwner)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
 	}
 
-	if ( pOwner->GetInterfaceState()->GetID() != InterfaceData::None || pOwner->GetPersonalStore()->IsBusy() )
+	if (pOwner->GetInterfaceState()->GetID() != InterfaceData::None || pOwner->GetPersonalStore()->IsBusy())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s is busy", this->GetWhisperName());
 		return;
 	}
-	
+
 	item_template const* item = sItemMgr->GetItem(ITEMGET(type, index));
 
-	if ( !item )
+	if (!item)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Item");
 		return;
 	}
 
-	for ( int32 i = 0; i < count; ++i )
+	for (int32 i = 0; i < count; ++i)
 	{
-		if ( !pOwner->GetInventory()->IsEmptySpace(item->GetX(), item->GetY()) )
+		if (!pOwner->GetInventory()->IsEmptySpace(item->GetX(), item->GetY()))
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s has full inventory", pOwner->GetName());
 			return;
@@ -2203,10 +2232,10 @@ void ChatHandler::CommandItemAdd(const char * msg)
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Created item %s on %s", item->GetName(level), pOwner->GetName());
 		pOwner->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "%s created item %s", this->GetPlayer()->GetName(), item->GetName(level));
 
-		Item item_new(ITEMGET(type,index), level, durability, skill, luck, option, exe, ancient);
+		Item item_new(ITEMGET(type, index), level, durability, skill, luck, option, exe, ancient);
 		item_new.SetHarmony(harmony);
 		item_new.Set380(opt380);
-		if ( duration > 0 )
+		if (duration > 0)
 		{
 			item_new.SetExpireDate(duration + time(nullptr));
 		}
@@ -2214,13 +2243,13 @@ void ChatHandler::CommandItemAdd(const char * msg)
 		sItemMgr->ItemSerialCreateItem(pOwner, serial_create_inventory, item_new);
 	}
 }
-	
-void ChatHandler::CommandItemShow(const char * msg)
+
+void ChatHandler::CommandItemShow(const char* msg)
 {
 	sWorldMgr->MakeItemVisible(this->GetPlayer());
 }
-	
-void ChatHandler::CommandItemHide(const char * msg)
+
+void ChatHandler::CommandItemHide(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 count = 1;
@@ -2238,30 +2267,30 @@ void ChatHandler::CommandItemHide(const char * msg)
 
 	item_template const* item = sItemMgr->GetItem(ITEMGET(type, index));
 
-	if ( !item )
+	if (!item)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Item");
 		return;
 	}
 
-	Item add_item(ITEMGET(type,index), level, durability, skill, luck, option);
+	Item add_item(ITEMGET(type, index), level, durability, skill, luck, option);
 	add_item.SetDurationTime(duration * IN_MILLISECONDS);
 	add_item.SetLootingTime(looting * IN_MILLISECONDS);
-	
-	for ( int32 i = 0; i < count; i++ )
+
+	for (int32 i = 0; i < count; i++)
 	{
 		sItemMgr->ItemSerialCreate(this->GetPlayer(),
-			this->GetPlayer()->GetWorldId(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), 
+			this->GetPlayer()->GetWorldId(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY(),
 			add_item, false, false);
 	}
 }
 
-void ChatHandler::CommandItemRemove(const char * msg)
+void ChatHandler::CommandItemRemove(const char* msg)
 {
 
 }
 
-void ChatHandler::CommandAdminItemPentagram(const char * msg)
+void ChatHandler::CommandAdminItemPentagram(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 type = 0;
@@ -2276,56 +2305,56 @@ void ChatHandler::CommandAdminItemPentagram(const char * msg)
 
 	conversor >> type >> index >> level >> socket_1 >> socket_2 >> socket_3 >> socket_4 >> socket_5 >> socket_bonus;
 
-	if ( socket_1 < 0 ) { socket_1 = 0; }
-	if ( socket_2 < 0 ) { socket_2 = 0; }
-	if ( socket_3 < 0 ) { socket_3 = 0; }
-	if ( socket_4 < 0 ) { socket_4 = 0; }
-	if ( socket_5 < 0 ) { socket_5 = 0; }
-	if ( socket_bonus < 0 ) { socket_bonus = 0; }
+	if (socket_1 < 0) { socket_1 = 0; }
+	if (socket_2 < 0) { socket_2 = 0; }
+	if (socket_3 < 0) { socket_3 = 0; }
+	if (socket_4 < 0) { socket_4 = 0; }
+	if (socket_5 < 0) { socket_5 = 0; }
+	if (socket_bonus < 0) { socket_bonus = 0; }
 
-	if ( socket_1 > SOCKET_SLOT_NONE ) { socket_1 = SOCKET_SLOT_NONE; }
-	if ( socket_2 > SOCKET_SLOT_NONE ) { socket_2 = SOCKET_SLOT_NONE; }
-	if ( socket_3 > SOCKET_SLOT_NONE ) { socket_3 = SOCKET_SLOT_NONE; }
-	if ( socket_4 > SOCKET_SLOT_NONE ) { socket_4 = SOCKET_SLOT_NONE; }
-	if ( socket_5 > SOCKET_SLOT_NONE ) { socket_5 = SOCKET_SLOT_NONE; }
-	if ( socket_bonus > 255 ) { socket_bonus = 255; }
+	if (socket_1 > SOCKET_SLOT_NONE) { socket_1 = SOCKET_SLOT_NONE; }
+	if (socket_2 > SOCKET_SLOT_NONE) { socket_2 = SOCKET_SLOT_NONE; }
+	if (socket_3 > SOCKET_SLOT_NONE) { socket_3 = SOCKET_SLOT_NONE; }
+	if (socket_4 > SOCKET_SLOT_NONE) { socket_4 = SOCKET_SLOT_NONE; }
+	if (socket_5 > SOCKET_SLOT_NONE) { socket_5 = SOCKET_SLOT_NONE; }
+	if (socket_bonus > 255) { socket_bonus = 255; }
 
-	if ( socket_1 == 0xFF ) { socket_1 = SOCKET_SLOT_NONE; }
-	if ( socket_2 == 0xFF ) { socket_2 = SOCKET_SLOT_NONE; }
-	if ( socket_3 == 0xFF ) { socket_3 = SOCKET_SLOT_NONE; }
-	if ( socket_4 == 0xFF ) { socket_4 = SOCKET_SLOT_NONE; }
-	if ( socket_5 == 0xFF ) { socket_5 = SOCKET_SLOT_NONE; }
-	if ( socket_1 == 0xFE ) { socket_1 = SOCKET_SLOT_EMPTY; }
-	if ( socket_2 == 0xFE ) { socket_2 = SOCKET_SLOT_EMPTY; }
-	if ( socket_3 == 0xFE ) { socket_3 = SOCKET_SLOT_EMPTY; }
-	if ( socket_4 == 0xFE ) { socket_4 = SOCKET_SLOT_EMPTY; }
-	if ( socket_5 == 0xFE ) { socket_5 = SOCKET_SLOT_EMPTY; }
+	if (socket_1 == 0xFF) { socket_1 = SOCKET_SLOT_NONE; }
+	if (socket_2 == 0xFF) { socket_2 = SOCKET_SLOT_NONE; }
+	if (socket_3 == 0xFF) { socket_3 = SOCKET_SLOT_NONE; }
+	if (socket_4 == 0xFF) { socket_4 = SOCKET_SLOT_NONE; }
+	if (socket_5 == 0xFF) { socket_5 = SOCKET_SLOT_NONE; }
+	if (socket_1 == 0xFE) { socket_1 = SOCKET_SLOT_EMPTY; }
+	if (socket_2 == 0xFE) { socket_2 = SOCKET_SLOT_EMPTY; }
+	if (socket_3 == 0xFE) { socket_3 = SOCKET_SLOT_EMPTY; }
+	if (socket_4 == 0xFE) { socket_4 = SOCKET_SLOT_EMPTY; }
+	if (socket_5 == 0xFE) { socket_5 = SOCKET_SLOT_EMPTY; }
 
-	SocketDataType socket[MAX_SOCKET_SLOT] = { socket_1, socket_2, socket_3, socket_4, socket_5 };
-	
+	SocketDataType socket[MAX_SOCKET_SLOT] = { (SocketDataType)socket_1, (SocketDataType)socket_2, (SocketDataType)socket_3, (SocketDataType)socket_4, (SocketDataType)socket_5 };
+
 	Player* pOwner = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !pOwner )
+	if (!pOwner)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
 	}
 
-	if ( pOwner->GetInterfaceState()->GetID() != InterfaceData::None || pOwner->GetPersonalStore()->IsBusy() )
+	if (pOwner->GetInterfaceState()->GetID() != InterfaceData::None || pOwner->GetPersonalStore()->IsBusy())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s is busy", this->GetWhisperName());
 		return;
 	}
-	
+
 	item_template const* item = sItemMgr->GetItem(ITEMGET(type, index));
 
-	if ( !item )
+	if (!item)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Item");
 		return;
 	}
 
-	if ( !pOwner->GetInventory()->IsEmptySpace(item->GetX(), item->GetY()) )
+	if (!pOwner->GetInventory()->IsEmptySpace(item->GetX(), item->GetY()))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s has full inventory", pOwner->GetName());
 		return;
@@ -2339,7 +2368,7 @@ void ChatHandler::CommandAdminItemPentagram(const char * msg)
 	sItemMgr->ItemSerialCreateItem(pOwner, serial_create_inventory, item_new);
 }
 
-void ChatHandler::CommandItemGremory(const char * msg)
+void ChatHandler::CommandItemGremory(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 inventory = 1;
@@ -2358,37 +2387,37 @@ void ChatHandler::CommandItemGremory(const char * msg)
 
 	Player* pOwner = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !pOwner )
+	if (!pOwner)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
 	}
 
-	if ( pOwner->GetInterfaceState()->GetID() != InterfaceData::None || pOwner->GetPersonalStore()->IsBusy() )
+	if (pOwner->GetInterfaceState()->GetID() != InterfaceData::None || pOwner->GetPersonalStore()->IsBusy())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s is busy", this->GetWhisperName());
 		return;
 	}
-	
+
 	item_template const* item = sItemMgr->GetItem(ITEMGET(type, index));
 
-	if ( !item )
+	if (!item)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Item");
 		return;
 	}
 
-	if ( inventory < 0 )
+	if (inventory < 0)
 	{
 		inventory = 0;
 	}
 
-	if ( inventory >= 1 )
+	if (inventory >= 1)
 	{
 		inventory = 1;
 	}
 
-	if ( !pOwner->GetInventory()->IsEmptySpace(item->GetX(), item->GetY()) )
+	if (!pOwner->GetInventory()->IsEmptySpace(item->GetX(), item->GetY()))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Player %s has full inventory", pOwner->GetName());
 		return;
@@ -2397,8 +2426,8 @@ void ChatHandler::CommandItemGremory(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Created item %s on %s", item->GetName(level), pOwner->GetName());
 	pOwner->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "%s created item %s", this->GetPlayer()->GetName(), item->GetName(level));
 
-	Item item_new(ITEMGET(type,index), level, durability, skill, luck, option, exe, ancient);
-	if ( duration > 0 )
+	Item item_new(ITEMGET(type, index), level, durability, skill, luck, option, exe, ancient);
+	if (duration > 0)
 	{
 		item_new.SetExpireDate(duration + time(nullptr));
 	}
@@ -2406,7 +2435,7 @@ void ChatHandler::CommandItemGremory(const char * msg)
 	sItemMgr->ItemSerialCreateGremoryCase(pOwner, item_new, inventory, GremoryCaseReward::GM_REWARD);
 }
 
-void ChatHandler::CommandItemWing(const char * msg)
+void ChatHandler::CommandItemWing(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 type = 12;
@@ -2463,23 +2492,23 @@ void ChatHandler::CommandItemWing(const char * msg)
 	sItemMgr->ItemSerialCreateItem(pOwner, serial_create_inventory, item_new);
 }
 
-void ChatHandler::CommandBanChar(const char * msg)
+void ChatHandler::CommandBanChar(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string name_safe;
 	conversor >> name_safe;
 
-	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH: name_safe.size());
+	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), name_safe.c_str(), name_safe.size() > MAX_CHARACTER_LENGTH ? MAX_CHARACTER_LENGTH : name_safe.size());
 
 	sServerLink->AdminCommandRequest(this->GetPlayer(), 3, 0, name, nullptr, 0);
 }
 
-void ChatHandler::CommandBanAcc(const char * msg)
+void ChatHandler::CommandBanAcc(const char* msg)
 {
-	
+
 }
 
-void ChatHandler::CommandZenAdd(const char * msg)
+void ChatHandler::CommandZenAdd(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint32 zen = 0;
@@ -2487,29 +2516,29 @@ void ChatHandler::CommandZenAdd(const char * msg)
 	conversor >> zen >> type;
 
 	limitmax(zen, sGameServer->GetMaxCharacterZen());
-	
+
 	Player* mTarget = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !mTarget )
+	if (!mTarget)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
 	}
 
-	if ( type == 0 )
+	if (type == 0)
 	{
 		mTarget->MoneyAdd(zen);
-		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added %u zen",zen);
+		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added %u zen", zen);
 	}
 	else
 	{
 		mTarget->IncreaseRuudMoney(zen);
 		mTarget->SendRuudMoney(zen);
-		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added %u ruud",zen);
+		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added %u ruud", zen);
 	}
 }
 
-void ChatHandler::CommandZenSet(const char * msg)
+void ChatHandler::CommandZenSet(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint32 zen = 0;
@@ -2520,13 +2549,13 @@ void ChatHandler::CommandZenSet(const char * msg)
 
 	Player* mTarget = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !mTarget )
+	if (!mTarget)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
 	}
 
-	if ( type == 0 )
+	if (type == 0)
 	{
 		mTarget->MoneySet(zen, true);
 		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Set %u zen", zen);
@@ -2535,60 +2564,60 @@ void ChatHandler::CommandZenSet(const char * msg)
 	{
 		mTarget->SetRuudMoney(zen);
 		mTarget->SendRuudMoney();
-		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Set %u ruud",zen);
+		mTarget->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Set %u ruud", zen);
 	}
 }
 
-void ChatHandler::CommandGuildTalk(const char * msg)
+void ChatHandler::CommandGuildTalk(const char* msg)
 {
 	std::stringstream conversor(msg);
 
-	if ( strlen(msg) > MAX_GUILD_NAME_LENGTH )
+	if (strlen(msg) > MAX_GUILD_NAME_LENGTH)
 		return;
 
 	STRING_SAFE(guild, (MAX_GUILD_NAME_LENGTH + 1));
 	conversor >> guild;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild);
+	Guild* pGuild = sGuildMgr->GetGuild(guild);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->TalkingGuild.set(0);
-		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist",guild);
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist", guild);
 		return;
 	}
 
 	this->GetPlayer()->TalkingGuild.set(pGuild->GetID());
 }
-	
-void ChatHandler::CommandAllianceTalk(const char * msg)
+
+void ChatHandler::CommandAllianceTalk(const char* msg)
 {
 	std::stringstream conversor(msg);
 
-	if ( strlen(msg) > MAX_GUILD_NAME_LENGTH )
+	if (strlen(msg) > MAX_GUILD_NAME_LENGTH)
 		return;
 
 	STRING_SAFE(guild, (MAX_GUILD_NAME_LENGTH + 1));
 	conversor >> guild;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild);
+	Guild* pGuild = sGuildMgr->GetGuild(guild);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->TalkingAlliance.set(0);
-		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist",guild);
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist", guild);
 		return;
 	}
 
 	this->GetPlayer()->TalkingAlliance.set(pGuild->GetID());
 }
 
-void ChatHandler::CommandFirework(const char * msg)
+void ChatHandler::CommandFirework(const char* msg)
 {
 	this->GetPlayer()->FireworksSend();
 }
 
-void ChatHandler::CommandMonsterAddTemp(const char * msg)
+void ChatHandler::CommandMonsterAddTemp(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 monster = 0;
@@ -2598,21 +2627,21 @@ void ChatHandler::CommandMonsterAddTemp(const char * msg)
 	int32 count = 0;
 	conversor >> monster >> move_distance >> despawn_time >> level >> count;
 
-	if ( count <= 0 )
+	if (count <= 0)
 	{
 		count = 1;
 	}
 
-	for ( int32 i = 0; i < count; ++i )
+	for (int32 i = 0; i < count; ++i)
 	{
-		Monster * mMonster = sObjectMgr->MonsterTryAdd(monster, this->GetPlayer()->GetWorldId());
+		Monster* mMonster = sObjectMgr->MonsterTryAdd(monster, this->GetPlayer()->GetWorldId());
 
-		if ( !mMonster )
+		if (!mMonster)
 			continue;
-	
+
 		mMonster->SetWorldId(this->GetPlayer()->GetWorldId());
 		mMonster->SetInstance(this->GetPlayer()->GetInstance());
-		mMonster->SetBasicLocation(this->GetPlayer()->GetX(),this->GetPlayer()->GetY(),this->GetPlayer()->GetX(),this->GetPlayer()->GetY());
+		mMonster->SetBasicLocation(this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY());
 		mMonster->SetDirection(this->GetPlayer()->GetDirection());
 		mMonster->SetDespawnTime(despawn_time * IN_MILLISECONDS);
 		mMonster->SetDespawnTick(MyGetTickCount());
@@ -2621,12 +2650,12 @@ void ChatHandler::CommandMonsterAddTemp(const char * msg)
 		mMonster->SetDespawnType(MONSTER_DESPAWN_TIME);
 		mMonster->SetMoveDistance(move_distance);
 
-		if ( level > 0 )
+		if (level > 0)
 		{
 			mMonster->SetLevel(level);
 		}
-	
-		if ( !mMonster->GetWorld() )
+
+		if (!mMonster->GetWorld())
 		{
 			mMonster->SetConnectStatus(CONNECT_STATUS_NONE);
 			continue;
@@ -2647,7 +2676,7 @@ enum
 	COMMAND_GM_BUFF_GROUP_MAX
 };
 
-void ChatHandler::CommandGMBuff(const char * msg)
+void ChatHandler::CommandGMBuff(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
@@ -2656,22 +2685,22 @@ void ChatHandler::CommandGMBuff(const char * msg)
 	conversor >> id >> duration >> value;
 
 	duration *= MINUTE;
-	
-	if ( id >= COMMAND_GM_BUFF_GROUP_MAX )
+
+	if (id >= COMMAND_GM_BUFF_GROUP_MAX)
 		return;
 
 	Object* pUnit = nullptr;
 
 	VIEWPORT_LOOP_OBJECT(this->GetPlayer(), pUnit)
 
-		if ( !pUnit->IsPlayer() || !pUnit->IsPlaying() || !pUnit->ToUnit()->IsLive() )
+		if (!pUnit->IsPlayer() || !pUnit->IsPlaying() || !pUnit->ToUnit()->IsLive())
 			continue;
 
-		this->CommandGMBuffApply(pUnit->ToUnit(), id, duration, value);
-	}
+	this->CommandGMBuffApply(pUnit->ToUnit(), id, duration, value);
+}
 }
 
-void ChatHandler::CommandGMBuffAll(const char * msg)
+void ChatHandler::CommandGMBuffAll(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
@@ -2680,28 +2709,28 @@ void ChatHandler::CommandGMBuffAll(const char * msg)
 	conversor >> id >> duration >> value;
 
 	duration *= MINUTE;
-	
-	if ( id >= COMMAND_GM_BUFF_GROUP_MAX )
+
+	if (id >= COMMAND_GM_BUFF_GROUP_MAX)
 		return;
 
 	Player* pPlayer = nullptr;
 
 	PlayerSessionMap const& characters = sObjectMgr->GetAllCharacters();
-	for ( PlayerSessionMap::const_iterator it = characters.begin(); it != characters.end(); ++it )
+	for (PlayerSessionMap::const_iterator it = characters.begin(); it != characters.end(); ++it)
 	{
 		pPlayer = it->second;
 
-		if ( !pPlayer )
+		if (!pPlayer)
 			continue;
 
-		if ( !pPlayer->IsLive() )
+		if (!pPlayer->IsLive())
 			continue;
 
 		this->CommandGMBuffApply(pPlayer, id, duration, value);
 	}
 }
 
-void ChatHandler::CommandGMBuffTo(const char * msg)
+void ChatHandler::CommandGMBuffTo(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
@@ -2733,69 +2762,69 @@ void ChatHandler::CommandGMBuffTo(const char * msg)
 
 void ChatHandler::CommandGMBuffApply(Unit* pUnit, int32 id, int32 duration, int32 value)
 {
-	switch ( id )
+	switch (id)
 	{
 	case COMMAND_GM_BUFF_GROUP_GM:
-		{
-			pUnit->AddBuff(BUFF_GM_BUFF_STAT, 
-				BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_LIFE, 300),
-				BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_MANA, 300),
-				duration, BUFF_FLAG_COMBAT | BUFF_FLAG_DB_STORE, this->GetPlayer(), false);
+	{
+		pUnit->AddBuff(BUFF_GM_BUFF_STAT,
+			BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_LIFE, 300),
+			BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_MANA, 300),
+			duration, BUFF_FLAG_COMBAT | BUFF_FLAG_DB_STORE, this->GetPlayer(), false);
 
-			pUnit->AddBuff(BUFF_GM_BUFF_DEFENSE_ATTACK, 
-				BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, 50),
-				BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, 50),
-				BuffEffect(BUFF_OPTION_INCREASE_DEFENSE_SUCCESS_RATE, 100),
-				duration, BUFF_FLAG_COMBAT | BUFF_FLAG_DB_STORE, this->GetPlayer(), false);
+		pUnit->AddBuff(BUFF_GM_BUFF_DEFENSE_ATTACK,
+			BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, 50),
+			BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, 50),
+			BuffEffect(BUFF_OPTION_INCREASE_DEFENSE_SUCCESS_RATE, 100),
+			duration, BUFF_FLAG_COMBAT | BUFF_FLAG_DB_STORE, this->GetPlayer(), false);
 
-			pUnit->AddBuff(BUFF_GM_BUFF_EXPERIENCE,
-				BuffEffect(BUFF_OPTION_INCREASE_EXPERIENCE, 5),
-				duration, BUFF_FLAG_COMBAT | BUFF_FLAG_DB_STORE, this->GetPlayer(), false);
-		} break;
+		pUnit->AddBuff(BUFF_GM_BUFF_EXPERIENCE,
+			BuffEffect(BUFF_OPTION_INCREASE_EXPERIENCE, 5),
+			duration, BUFF_FLAG_COMBAT | BUFF_FLAG_DB_STORE, this->GetPlayer(), false);
+	} break;
 
 	case COMMAND_GM_BUFF_GROUP_JACK:
+	{
+		for (uint8 h = 0; h < 3; h++)
 		{
-			for ( uint8 h = 0; h < 3; h++ )
-			{
-				pUnit->AddItemBuff(ITEMGET(14, 46) + h, duration, BUFF_FLAG_DB_STORE, pUnit, false);
-			}
-		} break;
+			pUnit->AddItemBuff(ITEMGET(14, 46) + h, duration, BUFF_FLAG_DB_STORE, pUnit, false);
+		}
+	} break;
 
 	case COMMAND_GM_BUFF_GROUP_BLOSSOM:
+	{
+		for (uint8 h = 0; h < 3; h++)
 		{
-			for ( uint8 h = 0; h < 3; h++ )
-			{
-				pUnit->AddItemBuff(ITEMGET(14, 85) + h, duration, BUFF_FLAG_DB_STORE, pUnit, false);
-			}
-		} break;
+			pUnit->AddItemBuff(ITEMGET(14, 85) + h, duration, BUFF_FLAG_DB_STORE, pUnit, false);
+		}
+	} break;
 
 	case COMMAND_GM_BUFF_GROUP_SANTA:
-		{
-			pUnit->AddBuff(BUFF_SANTA_BLESSING_CHRISTMAS, BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, 100), BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, 100), duration, 0, GetPlayer(), false);
-			pUnit->AddBuff(BUFF_SANTA_HEALING, BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_LIFE, 500), duration, 0, GetPlayer(), false);
-			pUnit->AddBuff(BUFF_SANTA_PROTECTION, BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_MANA, 500), duration, 0, GetPlayer(), false);
-			pUnit->AddBuff(BUFF_SANTA_STRENGTHENER, BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, 30), duration, 0, GetPlayer(), false);
-			pUnit->AddBuff(BUFF_SANTA_DEFENSE, BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, 100), duration, 0, GetPlayer(), false);
-			pUnit->AddBuff(BUFF_SANTA_QUICKNESS, BuffEffect(BUFF_OPTION_INCREASE_ATTACK_SPEED, 15), duration, 0, GetPlayer(), false);
-			pUnit->AddBuff(BUFF_SANTA_FORTUNE, BuffEffect(BUFF_OPTION_INCREASE_AG_RECOVERY_ADD, 10), duration, 0, GetPlayer(), false);
-		} break;
+	{
+		pUnit->AddBuff(BUFF_SANTA_BLESSING_CHRISTMAS, BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, 100), BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, 100), duration, 0, GetPlayer(), false);
+		pUnit->AddBuff(BUFF_SANTA_HEALING, BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_LIFE, 500), duration, 0, GetPlayer(), false);
+		pUnit->AddBuff(BUFF_SANTA_PROTECTION, BuffEffect(BUFF_OPTION_INCREASE_MAXIMUM_MANA, 500), duration, 0, GetPlayer(), false);
+		pUnit->AddBuff(BUFF_SANTA_STRENGTHENER, BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, 30), duration, 0, GetPlayer(), false);
+		pUnit->AddBuff(BUFF_SANTA_DEFENSE, BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, 100), duration, 0, GetPlayer(), false);
+		pUnit->AddBuff(BUFF_SANTA_QUICKNESS, BuffEffect(BUFF_OPTION_INCREASE_ATTACK_SPEED, 15), duration, 0, GetPlayer(), false);
+		pUnit->AddBuff(BUFF_SANTA_FORTUNE, BuffEffect(BUFF_OPTION_INCREASE_AG_RECOVERY_ADD, 10), duration, 0, GetPlayer(), false);
+	} break;
 
 	case COMMAND_GM_BUFF_GROUP_SOLDIER:
-		{
-			pUnit->AddBuff(BUFF_ELF_SOLDIER, 
-				BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, pUnit->ToPlayer()->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() / 3 + 45),
-				BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, pUnit->ToPlayer()->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() / 5 + 50), 
-				60 * ((pUnit->ToPlayer()->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() / 6) + 30), 0, this->GetPlayer(), false);
-		} break;
+	{
+		pUnit->AddBuff(BUFF_ELF_SOLDIER,
+			BuffEffect(BUFF_OPTION_INCREASE_ATTACK_DAMAGE, pUnit->ToPlayer()->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() / 3 + 45),
+			BuffEffect(BUFF_OPTION_INCREASE_DEFENSE, pUnit->ToPlayer()->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() / 5 + 50),
+			60 * ((pUnit->ToPlayer()->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() / 6) + 30), 0, this->GetPlayer(), false);
+	} break;
 
 	case COMMAND_GM_BUFF_GROUP_MISC:
-		{
-			pUnit->AddBuff(duration / MINUTE, value, 0, GetPlayer());
-		} break;
+	{
+		pUnit->AddBuff(duration / MINUTE, value, 0, GetPlayer());
+	} break;
 	}
 }
 
-void ChatHandler::CommandRestriction(const char * msg)
+void ChatHandler::CommandRestriction(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -2804,33 +2833,33 @@ void ChatHandler::CommandRestriction(const char * msg)
 
 	conversor >> safe_name >> restriction >> duration;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
 
-	if ( restriction < 0 || restriction >= PlayerAction::PLAYER_ACTION_MAX )
+	if (restriction < 0 || restriction >= PlayerAction::PLAYER_ACTION_MAX)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Restriction ID.");
 		return;
 	}
 
-	if ( duration <= 0 )
+	if (duration <= 0)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong Restriction Time.");
 		return;
 	}
-	
+
 	sServerLink->AdminCommandRequest(this->GetPlayer(), 1, restriction, name, nullptr, duration);
 }
 
-void ChatHandler::CommandOnline(const char * msg)
+void ChatHandler::CommandOnline(const char* msg)
 {
 	std::string safe_name;
 	std::stringstream conversor(msg);
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
@@ -2840,17 +2869,17 @@ void ChatHandler::CommandOnline(const char * msg)
 	Player* pPlayer = nullptr;
 
 	PlayerSessionMap const& characters = sObjectMgr->GetAllCharacters();
-	for ( PlayerSessionMap::const_iterator it = characters.begin(); it != characters.end(); ++it )
+	for (PlayerSessionMap::const_iterator it = characters.begin(); it != characters.end(); ++it)
 	{
 		pPlayer = it->second;
 
-		if ( !pPlayer )
+		if (!pPlayer)
 			continue;
 
 		STRING_SAFE_COPY(name_tmp, (MAX_CHARACTER_LENGTH + 1), pPlayer->GetName(), (MAX_CHARACTER_LENGTH + 1));
 		StringToLower(name_tmp);
 
-		if ( strlen(name) <= 0 || !memcmp(name_tmp, name, strlen(name)) )
+		if (strlen(name) <= 0 || !memcmp(name_tmp, name, strlen(name)))
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Player %s is in %s at %d / %d",
 				pPlayer->GetName(), pPlayer->GetWorldName(), pPlayer->GetX(), pPlayer->GetY());
@@ -2858,19 +2887,19 @@ void ChatHandler::CommandOnline(const char * msg)
 	}
 }
 
-void ChatHandler::CommandShutdown(const char * msg)
+void ChatHandler::CommandShutdown(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 time = 0;
 	conversor >> time;
 
-	if ( time < 0 )
+	if (time < 0)
 		return;
 
 	sGameServer->SetShutdownTime(time);
 	sGameServer->SetShutdown(!sGameServer->IsShutdown());
 
-	if ( !sGameServer->IsShutdown() )
+	if (!sGameServer->IsShutdown())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Server Shutdown aborted.");
 	}
@@ -2880,93 +2909,93 @@ void ChatHandler::CommandShutdown(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAction(const char * msg)
+void ChatHandler::CommandAction(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
 	int32 monster = 0;
 	conversor >> id >> monster;
 
-	if ( id < 0 )
+	if (id < 0)
 		return;
 
 	Object* pUnit = nullptr;
 
 	VIEWPORT_LOOP_OBJECT(this->GetPlayer(), pUnit)
 
-		if ( !pUnit->IsUnit() || !pUnit->IsPlaying() )
+		if (!pUnit->IsUnit() || !pUnit->IsPlaying())
 			continue;
 
-		if ( pUnit->IsPlayer() )
-		{
-			if ( pUnit->ToPlayer()->IsBusy() )
-				continue;
-		}
-		else if ( monster != 1 )
-		{
+	if (pUnit->IsPlayer())
+	{
+		if (pUnit->ToPlayer()->IsBusy())
 			continue;
-		}
-		
-		pUnit->ToUnit()->ActionSend(ENTRY(pUnit), id, pUnit->GetDirection(), true);
+	}
+	else if (monster != 1)
+	{
+		continue;
+	}
+
+	pUnit->ToUnit()->ActionSend(ENTRY(pUnit), id, pUnit->GetDirection(), true);
 
 	VIEWPORT_CLOSE
 }
 
-void ChatHandler::CommandMonsterAlter(const char * msg)
+void ChatHandler::CommandMonsterAlter(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
 	int32 data = 0;
 	conversor >> id >> data;
 
-	if ( id != 0 && !this->GetPlayer()->GetCurrentTarget() )
+	if (id != 0 && !this->GetPlayer()->GetCurrentTarget())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "You don't have a target.");
 		return;
 	}
 
-	switch ( id )
+	switch (id)
 	{
 	case 0:
-		{
-			Unit* pUnit = sObjectMgr->FindMonster(data);
+	{
+		Unit* pUnit = sObjectMgr->FindMonster(data);
 
-			if ( !pUnit )
-			{
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Invalid Monster ID.");
-			}
-			else
-			{
-				this->GetPlayer()->SetCurrentTarget(pUnit->ToCreature());
-			}
-		} break;
+		if (!pUnit)
+		{
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Invalid Monster ID.");
+		}
+		else
+		{
+			this->GetPlayer()->SetCurrentTarget(pUnit->ToCreature());
+		}
+	} break;
 
 	case 1:
-		{
-			this->GetPlayer()->GetCurrentTarget()->SetLastUpdate(0);
-		} break;
+	{
+		this->GetPlayer()->GetCurrentTarget()->SetLastUpdate(0);
+	} break;
 
 	case 2:
-		{
-			this->GetPlayer()->GetCurrentTarget()->SetLastUpdate(0);
-			this->GetPlayer()->GetCurrentTarget()->Kill();
-		} break;
+	{
+		this->GetPlayer()->GetCurrentTarget()->SetLastUpdate(0);
+		this->GetPlayer()->GetCurrentTarget()->Kill();
+	} break;
 
 	case 3:
+	{
+		if (!this->GetPlayer()->GetCurrentTarget()->SetTemplateInfo())
 		{
-			if ( !this->GetPlayer()->GetCurrentTarget()->SetTemplateInfo() )
-			{
-				this->GetPlayer()->GetCurrentTarget()->Remove();
-			}
-			else
-			{
-				this->GetPlayer()->GetCurrentTarget()->SetDBData();
-			}
-		} break;
+			this->GetPlayer()->GetCurrentTarget()->Remove();
+		}
+		else
+		{
+			this->GetPlayer()->GetCurrentTarget()->SetDBData();
+		}
+	} break;
 	}
 }
 
-void ChatHandler::CommandMiscSiege(const char * msg)
+void ChatHandler::CommandMiscSiege(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -2974,20 +3003,20 @@ void ChatHandler::CommandMiscSiege(const char * msg)
 
 	conversor >> safe_name >> count;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
-	
+
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s.", name);
 		return;
 	}
 
-	if ( count < 0 || count > 255 )
+	if (count < 0 || count > 255)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Invalid Count.");
 		return;
@@ -2997,21 +3026,21 @@ void ChatHandler::CommandMiscSiege(const char * msg)
 	pPlayer->KillCountSend();
 }
 
-void ChatHandler::CommandMiscKill(const char * msg)
+void ChatHandler::CommandMiscKill(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
 
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
-	
+
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s.", name);
 		return;
@@ -3021,7 +3050,7 @@ void ChatHandler::CommandMiscKill(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "%s killed.", name);
 }
 
-void ChatHandler::CommandChangeGuild(const char * msg)
+void ChatHandler::CommandChangeGuild(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint32 guild = 0;
@@ -3030,8 +3059,8 @@ void ChatHandler::CommandChangeGuild(const char * msg)
 
 	sServerLink->GuildDeleteRequest(guild);
 }
-	
-void ChatHandler::CommandChangeAlliance(const char * msg)
+
+void ChatHandler::CommandChangeAlliance(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint32 guild01 = 0;
@@ -3044,13 +3073,13 @@ void ChatHandler::CommandChangeAlliance(const char * msg)
 
 	//35200 40598 1
 }
-	
-void ChatHandler::CommandChangeHostil(const char * msg)
+
+void ChatHandler::CommandChangeHostil(const char* msg)
 {
 
 }
-	
-void ChatHandler::CommandChangeCSOwner(const char * msg)
+
+void ChatHandler::CommandChangeCSOwner(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint32 guild = 0;
@@ -3059,11 +3088,11 @@ void ChatHandler::CommandChangeCSOwner(const char * msg)
 	conversor >> guild >> occupied;
 
 	sCastleSiege->SetCastleOwner(guild);
-	sCastleSiege->SetOccupied(guild == 0 ? false: occupied == 1);
+	sCastleSiege->SetOccupied(guild == 0 ? false : occupied == 1);
 	sCastleSiege->SaveDBCastleOwner();
 }
 
-void ChatHandler::CommandSkillAdd(const char * msg)
+void ChatHandler::CommandSkillAdd(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint16 skill_id = 0;
@@ -3072,7 +3101,7 @@ void ChatHandler::CommandSkillAdd(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
@@ -3080,14 +3109,14 @@ void ChatHandler::CommandSkillAdd(const char * msg)
 
 	int32 result = pPlayer->MagicAdd(skill_id, 0);
 
-	if ( result != -1 )
+	if (result != -1)
 	{
 		pPlayer->SendSkill(result, pPlayer->GetSkill(result)->GetSkill(), pPlayer->GetSkill(result)->GetLevel());
 		pPlayer->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added Skill %d", skill_id);
 	}
 }
-	
-void ChatHandler::CommandSkillRemove(const char * msg)
+
+void ChatHandler::CommandSkillRemove(const char* msg)
 {
 	std::stringstream conversor(msg);
 	uint16 skill_id = 0;
@@ -3096,7 +3125,7 @@ void ChatHandler::CommandSkillRemove(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(this->GetWhisperName());
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", this->GetWhisperName());
 		return;
@@ -3104,38 +3133,38 @@ void ChatHandler::CommandSkillRemove(const char * msg)
 
 	int32 result = pPlayer->MagicRemove(skill_id);
 
-	if ( result != -1 )
+	if (result != -1)
 	{
 		pPlayer->SendSkill(result, skill_id, 0, false);
 		pPlayer->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Removed Skill %d", skill_id);
 	}
 }
 
-void ChatHandler::CommandCastleSiegeRegister(const char * msg)
+void ChatHandler::CommandCastleSiegeRegister(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
 
 	conversor >> guild_name;
 
-	if ( guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH )
+	if (guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH)
 		return;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild_name);
+	Guild* pGuild = sGuildMgr->GetGuild(guild_name);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist.", guild_name.c_str());
 		return;
 	}
 
-	if ( !pGuild->IsAllianceMaster() )
+	if (!pGuild->IsAllianceMaster())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s is not in alliance or is not alliance master.", guild_name.c_str());
 		return;
 	}
 
-	if ( pGuild->IsRegisteredInCaslteSiege() )
+	if (pGuild->IsRegisteredInCaslteSiege())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s is already registered in siege.", guild_name.c_str());
 		return;
@@ -3144,31 +3173,31 @@ void ChatHandler::CommandCastleSiegeRegister(const char * msg)
 	SL_CASTLE_SIEGE_INSERT_REGISTERED_GUILD pMsg;
 	pMsg.guild = pGuild->GetID();
 	sServerLink->SendPacket(MAKE_PCT(pMsg));
-	
+
 	sServerLink->CastleSiegeRegisterGuild(pGuild->GetID(), true, 0);
 	pGuild->SetRegisteredInCaslteSiege(true);
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Guild %s registered successfully.", guild_name.c_str());
 }
-	
-void ChatHandler::CommandCastleSiegeUnRegister(const char * msg)
+
+void ChatHandler::CommandCastleSiegeUnRegister(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
 
 	conversor >> guild_name;
 
-	if ( guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH )
+	if (guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH)
 		return;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild_name);
+	Guild* pGuild = sGuildMgr->GetGuild(guild_name);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist.", guild_name.c_str());
 		return;
 	}
 
-	if ( !pGuild->IsRegisteredInCaslteSiege() )
+	if (!pGuild->IsRegisteredInCaslteSiege())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s is not registered in siege.", guild_name.c_str());
 		return;
@@ -3182,8 +3211,8 @@ void ChatHandler::CommandCastleSiegeUnRegister(const char * msg)
 	pGuild->SetRegisteredInCaslteSiege(false);
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Guild %s unregistered successfully.", guild_name.c_str());
 }
-	
-void ChatHandler::CommandCastleSiegeIncreaseMarks(const char * msg)
+
+void ChatHandler::CommandCastleSiegeIncreaseMarks(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
@@ -3191,21 +3220,21 @@ void ChatHandler::CommandCastleSiegeIncreaseMarks(const char * msg)
 
 	conversor >> guild_name >> count;
 
-	if ( guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH )
+	if (guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH)
 		return;
 
-	if ( count <= 0 )
+	if (count <= 0)
 		count = 1;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild_name);
+	Guild* pGuild = sGuildMgr->GetGuild(guild_name);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist.", guild_name.c_str());
 		return;
 	}
 
-	if ( !pGuild->IsRegisteredInCaslteSiege() )
+	if (!pGuild->IsRegisteredInCaslteSiege())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s is not registered in siege.", guild_name.c_str());
 		return;
@@ -3217,11 +3246,11 @@ void ChatHandler::CommandCastleSiegeIncreaseMarks(const char * msg)
 	sServerLink->SendPacket(MAKE_PCT(pMsg));
 
 	sServerLink->CastleSiegeRegisterGuild(pGuild->GetID(), true, pGuild->GetCastleSiegeMarks());
-	
+
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Guild %s registered mark successfully. Count %u.", guild_name.c_str(), pGuild->GetCastleSiegeMarks());
 }
-	
-void ChatHandler::CommandCastleSiegeReduceMarks(const char * msg)
+
+void ChatHandler::CommandCastleSiegeReduceMarks(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
@@ -3229,27 +3258,27 @@ void ChatHandler::CommandCastleSiegeReduceMarks(const char * msg)
 
 	conversor >> guild_name >> count;
 
-	if ( guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH )
+	if (guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH)
 		return;
 
-	if ( count <= 0 )
+	if (count <= 0)
 		count = 1;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild_name);
+	Guild* pGuild = sGuildMgr->GetGuild(guild_name);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist.", guild_name.c_str());
 		return;
 	}
 
-	if ( !pGuild->IsRegisteredInCaslteSiege() )
+	if (!pGuild->IsRegisteredInCaslteSiege())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s is not registered in siege.", guild_name.c_str());
 		return;
 	}
 
-	if ( pGuild->GetCastleSiegeMarks() < uint32(count) )
+	if (pGuild->GetCastleSiegeMarks() < uint32(count))
 	{
 		pGuild->SetCastleSiegeMarks(0);
 	}
@@ -3262,35 +3291,35 @@ void ChatHandler::CommandCastleSiegeReduceMarks(const char * msg)
 	sServerLink->SendPacket(MAKE_PCT(pMsg));
 
 	sServerLink->CastleSiegeRegisterGuild(pGuild->GetID(), true, pGuild->GetCastleSiegeMarks());
-	
+
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Guild %s unregistered mark successfully. Count %u.", guild_name.c_str(), pGuild->GetCastleSiegeMarks());
 }
 
-void ChatHandler::CommandCastleSiegeNPCLoad(const char * msg)
+void ChatHandler::CommandCastleSiegeNPCLoad(const char* msg)
 {
 	sServerLink->CastleSiegeLoadNpcRequest();
 }
 
-void ChatHandler::CommandCastleSiegeFix(const char * msg)
+void ChatHandler::CommandCastleSiegeFix(const char* msg)
 {
 	sCastleSiege->CalculateCurrentState();
 }
 
-void ChatHandler::CommandCastleSiegeFixGate(const char * msg)
+void ChatHandler::CommandCastleSiegeFixGate(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
 
 	conversor >> id;
 
-	CastleSiegeNpcData * pNpcData = sCastleSiege->GetNpcData(277, id);
+	CastleSiegeNpcData* pNpcData = sCastleSiege->GetNpcData(277, id);
 
-	if ( !pNpcData )
+	if (!pNpcData)
 		return;
 
 	World* pWorld = sWorldMgr->GetWorld(WORLD_CASTLE_SIEGE);
 
-	if ( !pWorld )
+	if (!pWorld)
 	{
 		return;
 	}
@@ -3302,19 +3331,19 @@ void ChatHandler::CommandCastleSiegeFixGate(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Gate %d unlocked", id);
 }
 
-void ChatHandler::CommandArcaWarRegisterMaster(const char * msg)
+void ChatHandler::CommandArcaWarRegisterMaster(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
 
 	conversor >> guild_name;
 
-	if ( guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH )
+	if (guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH)
 		return;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild_name);
+	Guild* pGuild = sGuildMgr->GetGuild(guild_name);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist.", guild_name.c_str());
 		return;
@@ -3330,22 +3359,22 @@ void ChatHandler::CommandArcaWarRegisterMaster(const char * msg)
 
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Guild %s registered.", pGuild->GetName());
 }
-	
-void ChatHandler::CommandArcaWarRegisterMember(const char * msg)
+
+void ChatHandler::CommandArcaWarRegisterMember(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
 
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -3361,19 +3390,19 @@ void ChatHandler::CommandArcaWarRegisterMember(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Player %s registered.", pPlayer->GetName());
 }
 
-void ChatHandler::CommandArcaWarIncreaseMarks(const char * msg)
+void ChatHandler::CommandArcaWarIncreaseMarks(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string guild_name;
 
 	conversor >> guild_name;
 
-	if ( guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH )
+	if (guild_name.empty() || guild_name.size() > MAX_GUILD_NAME_LENGTH)
 		return;
 
-	Guild * pGuild = sGuildMgr->GetGuild(guild_name);
+	Guild* pGuild = sGuildMgr->GetGuild(guild_name);
 
-	if ( !pGuild )
+	if (!pGuild)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Guild %s doesn't exist.", guild_name.c_str());
 		return;
@@ -3389,14 +3418,14 @@ void ChatHandler::CommandArcaWarIncreaseMarks(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Guild %s sign registered.", pGuild->GetName());
 }
 
-void ChatHandler::CommandArcaWarReload(const char * msg)
+void ChatHandler::CommandArcaWarReload(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 command = 0;
 
 	conversor >> command;
 
-	if ( command == 0 )
+	if (command == 0)
 	{
 		sServerLink->ArkaWarGuildRequest();
 	}
@@ -3406,7 +3435,7 @@ void ChatHandler::CommandArcaWarReload(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAdminStatAdd(const char * msg)
+void ChatHandler::CommandAdminStatAdd(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -3415,14 +3444,14 @@ void ChatHandler::CommandAdminStatAdd(const char * msg)
 
 	conversor >> safe_name >> stat_id >> points;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -3430,8 +3459,8 @@ void ChatHandler::CommandAdminStatAdd(const char * msg)
 
 	this->CommandAdminStatModify(pPlayer, stat_id, points, 0);
 }
-	
-void ChatHandler::CommandAdminStatSet(const char * msg)
+
+void ChatHandler::CommandAdminStatSet(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -3440,14 +3469,14 @@ void ChatHandler::CommandAdminStatSet(const char * msg)
 
 	conversor >> safe_name >> stat_id >> points;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -3455,8 +3484,8 @@ void ChatHandler::CommandAdminStatSet(const char * msg)
 
 	this->CommandAdminStatModify(pPlayer, stat_id, points, 1);
 }
-	
-void ChatHandler::CommandAdminStatRemove(const char * msg)
+
+void ChatHandler::CommandAdminStatRemove(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -3465,14 +3494,14 @@ void ChatHandler::CommandAdminStatRemove(const char * msg)
 
 	conversor >> safe_name >> stat_id >> points;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, (MAX_CHARACTER_LENGTH + 1), safe_name.c_str(), safe_name.size());
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -3485,157 +3514,157 @@ void ChatHandler::CommandAdminStatModify(Player* pPlayer, int32 stat_id, int32 p
 {
 	CharacterBaseData* pCharacterData = sCharacterBase->GetCharacterBase(pPlayer->GetClass());
 
-	if ( !pCharacterData )
+	if (!pCharacterData)
 		return;
 
-	switch ( stat_id )
+	switch (stat_id)
 	{
 	case STRENGTH:
 	case AGILITY:
 	case VITALITY:
 	case ENERGY:
 	case LEADERSHIP:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetStat(stat_id) + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetStat(stat_id) - points;
-			}
+			points = pPlayer->GetStat(stat_id) + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetStat(stat_id) - points;
+		}
 
-			if ( points < pCharacterData->GetStat(stat_id) )
-				points = pCharacterData->GetStat(stat_id);
+		if (points < pCharacterData->GetStat(stat_id))
+			points = pCharacterData->GetStat(stat_id);
 
-			if ( points > sGameServer->GetMaxStat(stat_id) )
-				points = sGameServer->GetMaxStat(stat_id);
+		if (points > sGameServer->GetMaxStat(stat_id))
+			points = sGameServer->GetMaxStat(stat_id);
 
-			pPlayer->SetStat(stat_id, points);
-			pPlayer->SendStats();
-			pPlayer->CalculateCharacter();
-		} break;
+		pPlayer->SetStat(stat_id, points);
+		pPlayer->SendStats();
+		pPlayer->CalculateCharacter();
+	} break;
 
 	case 5:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints() + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints() - points;
-			}
+			points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints() + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints() - points;
+		}
 
-			if ( points < 0 )
-				points = 0;
+		if (points < 0)
+			points = 0;
 
-			pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->SetPoints(points);
-			pPlayer->SendStats();
-		} break;
+		pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->SetPoints(points);
+		pPlayer->SendStats();
+	} break;
 
 	case 6:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetPoints() + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetPoints() - points;
-			}
+			points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetPoints() + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetPoints() - points;
+		}
 
-			if ( points < 0 )
-				points = 0;
+		if (points < 0)
+			points = 0;
 
-			pPlayer->GetLevelData(LEVEL_DATA_MASTER)->SetPoints(points);
-			pPlayer->MasterSendStatus();
-		} break;
+		pPlayer->GetLevelData(LEVEL_DATA_MASTER)->SetPoints(points);
+		pPlayer->MasterSendStatus();
+	} break;
 
 	case 7:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() - points;
-			}
+			points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() - points;
+		}
 
-			if ( points < 1 )
-				points = 1;
+		if (points < 1)
+			points = 1;
 
-			if ( points > sGameServer->GetMaxLevel(LEVEL_DATA_NORMAL) )
-				points = sGameServer->GetMaxLevel(LEVEL_DATA_NORMAL);
+		if (points > sGameServer->GetMaxLevel(LEVEL_DATA_NORMAL))
+			points = sGameServer->GetMaxLevel(LEVEL_DATA_NORMAL);
 
-			pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->SetLevel(points);
-			pPlayer->Close(6, CLOSE_FLAG_SELECT_CHAR);
-		} break;
+		pPlayer->GetLevelData(LEVEL_DATA_NORMAL)->SetLevel(points);
+		pPlayer->Close(6, CLOSE_FLAG_SELECT_CHAR);
+	} break;
 
 	case 8:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetLevel() + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetLevel() - points;
-			}
+			points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetLevel() + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetLevelData(LEVEL_DATA_MASTER)->GetLevel() - points;
+		}
 
-			if ( points < 0 )
-				points = 0;
+		if (points < 0)
+			points = 0;
 
-			if ( points > sGameServer->GetMaxLevel(LEVEL_DATA_MASTER) )
-				points = sGameServer->GetMaxLevel(LEVEL_DATA_MASTER);
+		if (points > sGameServer->GetMaxLevel(LEVEL_DATA_MASTER))
+			points = sGameServer->GetMaxLevel(LEVEL_DATA_MASTER);
 
-			pPlayer->GetLevelData(LEVEL_DATA_MASTER)->SetLevel(points);
-			pPlayer->Close(6, CLOSE_FLAG_SELECT_CHAR);
-		} break;
+		pPlayer->GetLevelData(LEVEL_DATA_MASTER)->SetLevel(points);
+		pPlayer->Close(6, CLOSE_FLAG_SELECT_CHAR);
+	} break;
 
 	case 9:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetPoints() + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetPoints() - points;
-			}
+			points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetPoints() + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetPoints() - points;
+		}
 
-			if ( points < 0 )
-				points = 0;
+		if (points < 0)
+			points = 0;
 
-			pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->SetPoints(points);
-			pPlayer->MajesticSkillTreeSendPoints();
-		} break;
+		pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->SetPoints(points);
+		pPlayer->MajesticSkillTreeSendPoints();
+	} break;
 
 	case 10:
+	{
+		if (type == 0) // Add
 		{
-			if ( type == 0 ) // Add
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetLevel() + points;
-			}
-			else if ( type == 2 ) // Remove
-			{
-				points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetLevel() - points;
-			}
+			points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetLevel() + points;
+		}
+		else if (type == 2) // Remove
+		{
+			points = pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->GetLevel() - points;
+		}
 
-			if ( points < 0 )
-				points = 0;
+		if (points < 0)
+			points = 0;
 
-			if ( points > sGameServer->GetMaxLevel(LEVEL_DATA_MAJESTIC) )
-				points = sGameServer->GetMaxLevel(LEVEL_DATA_MAJESTIC);
+		if (points > sGameServer->GetMaxLevel(LEVEL_DATA_MAJESTIC))
+			points = sGameServer->GetMaxLevel(LEVEL_DATA_MAJESTIC);
 
-			pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->SetLevel(points);
-			pPlayer->MasterSendStatus();
-		} break;
+		pPlayer->GetLevelData(LEVEL_DATA_MAJESTIC)->SetLevel(points);
+		pPlayer->MasterSendStatus();
+	} break;
 	}
 }
 
-void ChatHandler::CommandAdminChallenge(const char * msg)
+void ChatHandler::CommandAdminChallenge(const char* msg)
 {
 	/*std::stringstream conversor(msg);
 	int32 size = 4;
@@ -3668,7 +3697,7 @@ void ChatHandler::CommandAdminChallenge(const char * msg)
 	}*/
 }
 
-void ChatHandler::CommandAdminSetPK(const char * msg)
+void ChatHandler::CommandAdminSetPK(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -3678,7 +3707,7 @@ void ChatHandler::CommandAdminSetPK(const char * msg)
 
 	conversor >> safe_name >> pk_level;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -3687,61 +3716,61 @@ void ChatHandler::CommandAdminSetPK(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
 	}
 
-	if ( pk_level < 0 )
+	if (pk_level < 0)
 		pk_level = PK_STATUS_COMMONER;
 
-	if ( pk_level >= PK_STATUS_MAX )
+	if (pk_level >= PK_STATUS_MAX)
 		pk_level = PK_STATUS_MURDER_LVL_3;
 
-	switch ( pk_level )
+	switch (pk_level)
 	{
 	case PK_STATUS_HERO:
-		{
-			pk_count = sGameServer->GetPlayerHeroCount();
-			pk_points = 43200 + (3600 * pk_count);
-		} break;
+	{
+		pk_count = sGameServer->GetPlayerHeroCount();
+		pk_points = 43200 + (3600 * pk_count);
+	} break;
 
 	case PK_STATUS_HERO_LVL_2:
-		{
-			pk_count = 2;
-			pk_points = 43200;
-		} break;
+	{
+		pk_count = 2;
+		pk_points = 43200;
+	} break;
 
 	case PK_STATUS_HERO_LVL_1:
-		{
-			pk_count = 1;
-			pk_points = 21600;
-		} break;
+	{
+		pk_count = 1;
+		pk_points = 21600;
+	} break;
 
 	case PK_STATUS_COMMONER:
-		{
-			pk_count = 0;
-			pk_points = 0;
-		} break;
+	{
+		pk_count = 0;
+		pk_points = 0;
+	} break;
 
 	case PK_STATUS_MURDER_LVL_1:
-		{
-			pk_count = 1;
-			pk_points = 21600;
-		} break;
+	{
+		pk_count = 1;
+		pk_points = 21600;
+	} break;
 
 	case PK_STATUS_MURDER_LVL_2:
-		{
-			pk_count = 2;
-			pk_points = 43200;
-		} break;
+	{
+		pk_count = 2;
+		pk_points = 43200;
+	} break;
 
 	case PK_STATUS_MURDER_LVL_3:
-		{
-			pk_count = 3;
-			pk_points = 86400;
-		} break;
+	{
+		pk_count = 3;
+		pk_points = 86400;
+	} break;
 	}
 
 	pPlayer->SetPKCount(pk_count);
@@ -3752,7 +3781,7 @@ void ChatHandler::CommandAdminSetPK(const char * msg)
 	pPlayer->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Your pk status has been changed.");
 }
 
-void ChatHandler::CommandAdminCrywolf(const char * msg)
+void ChatHandler::CommandAdminCrywolf(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 state = CRYWOLF_OCCUPATION_SUCCESS;
@@ -3763,7 +3792,7 @@ void ChatHandler::CommandAdminCrywolf(const char * msg)
 	sServerLink->CrywolfDataSave();
 }
 
-void ChatHandler::CommandAdminSummon(const char * msg)
+void ChatHandler::CommandAdminSummon(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 monster = 0;
@@ -3772,14 +3801,14 @@ void ChatHandler::CommandAdminSummon(const char * msg)
 	int32 type = 0;
 	conversor >> monster >> move_distance >> despawn_time >> type;
 
-	Monster * mMonster = sObjectMgr->MonsterTryAdd(monster, this->GetPlayer()->GetWorldId());
+	Monster* mMonster = sObjectMgr->MonsterTryAdd(monster, this->GetPlayer()->GetWorldId());
 
-	if ( !mMonster )
+	if (!mMonster)
 		return;
-	
+
 	mMonster->SetWorldId(this->GetPlayer()->GetWorldId());
 	mMonster->SetInstance(this->GetPlayer()->GetInstance());
-	mMonster->SetBasicLocation(this->GetPlayer()->GetX(),this->GetPlayer()->GetY(),this->GetPlayer()->GetX(),this->GetPlayer()->GetY());
+	mMonster->SetBasicLocation(this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY());
 	mMonster->SetDirection(this->GetPlayer()->GetDirection());
 	mMonster->SetDespawnTime(despawn_time * IN_MILLISECONDS);
 	mMonster->SetDespawnTick(MyGetTickCount());
@@ -3790,7 +3819,7 @@ void ChatHandler::CommandAdminSummon(const char * msg)
 	mMonster->SetSummoner(this->GetPlayer());
 	mMonster->SetSummonType(type);
 
-	if ( !mMonster->GetWorld() )
+	if (!mMonster->GetWorld())
 	{
 		mMonster->SetConnectStatus(CONNECT_STATUS_NONE);
 		return;
@@ -3799,47 +3828,47 @@ void ChatHandler::CommandAdminSummon(const char * msg)
 	mMonster->AddToWorld();
 }
 
-void ChatHandler::CommandAdminSeason(const char * msg)
+void ChatHandler::CommandAdminSeason(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 season = -1;
 
 	conversor >> season;
 
-	EventSeasonData * pEventSeasonData = sEventMgr->GetSeasonData(season);
+	EventSeasonData* pEventSeasonData = sEventMgr->GetSeasonData(season);
 
-	if ( !pEventSeasonData )
+	if (!pEventSeasonData)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "No season data for id: %d.", season);
 		return;
 	}
 
-	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Season [%d][%s] is %s.", season, pEventSeasonData->GetName().c_str(), pEventSeasonData->IsStarted() ? "active": "not active");
+	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Season [%d][%s] is %s.", season, pEventSeasonData->GetName().c_str(), pEventSeasonData->IsStarted() ? "active" : "not active");
 }
 
-void ChatHandler::CommandAdminResetDuel(const char * msg)
+void ChatHandler::CommandAdminResetDuel(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 room = -1;
 
 	conversor >> room;
 
-	if ( room < -1 )
+	if (room < -1)
 		room = -1;
 
-	if ( room >= MAX_DUEL_ROOM )
+	if (room >= MAX_DUEL_ROOM)
 		room = MAX_DUEL_ROOM - 1;
 
-	if ( room == -1 )
+	if (room == -1)
 	{
-		for ( uint8 i = 0; i < MAX_DUEL_ROOM; ++i )
+		for (uint8 i = 0; i < MAX_DUEL_ROOM; ++i)
 		{
 			DuelRoom* pRoom = sDuelMgr->GetRoom(i);
 
-			if ( !pRoom )
+			if (!pRoom)
 				continue;
 
-			if ( pRoom->GetStatus() == DUEL_ROOM_STARTED )
+			if (pRoom->GetStatus() == DUEL_ROOM_STARTED)
 				pRoom->FinishedOutOfTime();
 			else
 				pRoom->SetState_Empty();
@@ -3849,19 +3878,19 @@ void ChatHandler::CommandAdminResetDuel(const char * msg)
 	{
 		DuelRoom* pRoom = sDuelMgr->GetRoom(room);
 
-		if ( !pRoom )
+		if (!pRoom)
 			return;
 
-		if ( pRoom->GetStatus() == DUEL_ROOM_STARTED )
+		if (pRoom->GetStatus() == DUEL_ROOM_STARTED)
 			pRoom->FinishedOutOfTime();
 		else
 			pRoom->SetState_Empty();
 	}
 }
 
-void ChatHandler::CommandAdminTransfer(const char * msg)
+void ChatHandler::CommandAdminTransfer(const char* msg)
 {
-	if ( !sGameServer->IsTransferEnabled() )
+	if (!sGameServer->IsTransferEnabled())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Server transfer is disabled.");
 		return;
@@ -3872,13 +3901,13 @@ void ChatHandler::CommandAdminTransfer(const char * msg)
 
 	conversor >> server_id;
 
-	if ( server_id < 0 )
+	if (server_id < 0)
 		return;
 
-	if ( server_id == sGameServer->GetServerCode() )
+	if (server_id == sGameServer->GetServerCode())
 		return;
 
-	if ( (server_id / MAX_SERVER_PER_GROUP) != sGameServer->GetServerGroup() )
+	if ((server_id / MAX_SERVER_PER_GROUP) != sGameServer->GetServerGroup())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Server %d does not belong to same group.", server_id);
 		return;
@@ -3889,7 +3918,7 @@ void ChatHandler::CommandAdminTransfer(const char * msg)
 
 	PreparedQueryResult result = LoginDatabase.Query(stmt);
 
-	if ( !result )
+	if (!result)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Server %d does not exist in database.", server_id);
 		return;
@@ -3897,33 +3926,33 @@ void ChatHandler::CommandAdminTransfer(const char * msg)
 
 	Field* fields = result->Fetch();
 
-	if ( !fields[5].GetBool() )
+	if (!fields[5].GetBool())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Server %d is offline.", server_id);
 		return;
 	}
 
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Starting Transfer.");
-	
+
 	int32 count = 0;
 
 	PlayerSessionMap const& character_map = sObjectMgr->GetAllCharacters();
-	for ( PlayerSessionMap::const_iterator it = character_map.begin(); it != character_map.end(); ++it )
+	for (PlayerSessionMap::const_iterator it = character_map.begin(); it != character_map.end(); ++it)
 	{
 		Player* pPlayer = it->second;
 
-		if ( !pPlayer )
+		if (!pPlayer)
 			continue;
 
-		if ( !pPlayer->IsPlaying() || !pPlayer->IsLive() || pPlayer->IsServerQuit() )
+		if (!pPlayer->IsPlaying() || !pPlayer->IsLive() || pPlayer->IsServerQuit())
 			continue;
 
-		if ( pPlayer->GetInterfaceState()->GetID() != InterfaceData::None )
+		if (pPlayer->GetInterfaceState()->GetID() != InterfaceData::None)
 			continue;
 
-		if ( this->GetPlayer() == pPlayer )
+		if (this->GetPlayer() == pPlayer)
 			continue;
-		
+
 		sAuthServer->PlayerServerMoveRequest(pPlayer, server_id, pPlayer->GetWorldId(), pPlayer->GetX(), pPlayer->GetY());
 
 		++count;
@@ -3932,30 +3961,30 @@ void ChatHandler::CommandAdminTransfer(const char * msg)
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Ending Transfer. Transfered %d players", count);
 }
 
-void ChatHandler::CommandAdminAccountKick(const char * msg)
+void ChatHandler::CommandAdminAccountKick(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 account_id = -1;
 
 	conversor >> account_id;
 
-	if ( account_id <= 0 )
+	if (account_id <= 0)
 		return;
 
 	sAuthServer->PlayerAccountKick(uint32(account_id));
 }
 
-void ChatHandler::CommandAdminIP(const char * msg)
-{
-
-}
-	
-void ChatHandler::CommandAdminKickIPMAC(const char * msg)
+void ChatHandler::CommandAdminIP(const char* msg)
 {
 
 }
 
-void ChatHandler::CommandAdminPersonalStore(const char * msg)
+void ChatHandler::CommandAdminKickIPMAC(const char* msg)
+{
+
+}
+
+void ChatHandler::CommandAdminPersonalStore(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -3963,23 +3992,23 @@ void ChatHandler::CommandAdminPersonalStore(const char * msg)
 
 	conversor >> safe_name >> operation;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 		return;
 
 	STRING_SAFE_COPY(name, MAX_CHARACTER_LENGTH + 1, safe_name.c_str(), safe_name.size());
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
 	}
 
-	if ( !pPlayer->GetPersonalStore()->IsOpen() ) ///- Este es el check del posible bug
+	if (!pPlayer->GetPersonalStore()->IsOpen()) ///- Este es el check del posible bug
 		operation = 1;
 
-	if ( operation == 0 ) ///- Esto cierra el personal store de forma segura
+	if (operation == 0) ///- Esto cierra el personal store de forma segura
 	{
 		pPlayer->PersonalStoreClose(false);
 
@@ -3993,18 +4022,18 @@ void ChatHandler::CommandAdminPersonalStore(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAdminPostReset(const char * msg)
+void ChatHandler::CommandAdminPostReset(const char* msg)
 {
 	sGameServer->SetPostManageMACDay(0);
 
 	Player* pPlayer = nullptr;
 
 	PlayerSessionMap const& characters = sObjectMgr->GetAllCharacters();
-	for ( PlayerSessionMap::const_iterator it = characters.begin(); it != characters.end(); ++it )
+	for (PlayerSessionMap::const_iterator it = characters.begin(); it != characters.end(); ++it)
 	{
 		pPlayer = it->second;
 
-		if ( !pPlayer )
+		if (!pPlayer)
 			continue;
 
 		pPlayer->SetPostDay(0);
@@ -4012,11 +4041,11 @@ void ChatHandler::CommandAdminPostReset(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAdminGlobalMute(const char * msg)
+void ChatHandler::CommandAdminGlobalMute(const char* msg)
 {
 	sGameServer->SetGlobalMute(!sGameServer->IsGlobalMute());
 
-	if ( sGameServer->IsGlobalMute() )
+	if (sGameServer->IsGlobalMute())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Global Mute enabled.");
 	}
@@ -4026,7 +4055,7 @@ void ChatHandler::CommandAdminGlobalMute(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAdminMuteMAC(const char * msg)
+void ChatHandler::CommandAdminMuteMAC(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string data;
@@ -4037,7 +4066,7 @@ void ChatHandler::CommandAdminMuteMAC(const char * msg)
 	sGameServer->MACMute(data, operation, this->GetPlayer());
 }
 
-void ChatHandler::CommandAdminMACRestrict(const char * msg)
+void ChatHandler::CommandAdminMACRestrict(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string data;
@@ -4050,7 +4079,7 @@ void ChatHandler::CommandAdminMACRestrict(const char * msg)
 	sGameServer->ApplyMACRestriction(data, operation, restriction, time, this->GetPlayer());
 }
 
-void ChatHandler::CommandAdminItemInfo(const char * msg)
+void ChatHandler::CommandAdminItemInfo(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 type = 0;
@@ -4058,16 +4087,16 @@ void ChatHandler::CommandAdminItemInfo(const char * msg)
 
 	conversor >> type >> data;
 
-	if ( data < 0 )
+	if (data < 0)
 	{
 		data = 0;
 	}
 
 	Item const* pItem = nullptr;
 
-	if ( type == 0 ) // Slot
+	if (type == 0) // Slot
 	{
-		if ( !inventory_range(data) )
+		if (!inventory_range(data))
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong slot %d.", data);
 			return;
@@ -4075,36 +4104,36 @@ void ChatHandler::CommandAdminItemInfo(const char * msg)
 
 		pItem = this->GetPlayer()->GetInventory()->GetItem(data);
 
-		if ( !pItem->IsItem() )
+		if (!pItem->IsItem())
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "No item in slot %d.", data);
 			return;
 		}
 
-		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Item %s +%d +%d", 
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Item %s +%d +%d",
 			pItem->GetName(), pItem->GetLevel(), pItem->GetOption());
 
-		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "DmgMin:%d / DmgMax:%d / Defense:%d", 
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "DmgMin:%d / DmgMax:%d / Defense:%d",
 			pItem->GetMinDamage(), pItem->GetMaxDamage(), pItem->GetDefense());
 
-		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "MagicPwr:%d / CursePwr:%d / PetPwr:%d", 
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "MagicPwr:%d / CursePwr:%d / PetPwr:%d",
 			pItem->GetMagicPower(), pItem->GetCursePower(), pItem->GetPetPower());
 
 	}
-	else if ( type == 1 ) // Id
+	else if (type == 1) // Id
 	{
 
 	}
 }
 
-void ChatHandler::AdminCommandTrace(const char * msg)
+void ChatHandler::AdminCommandTrace(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
 
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4113,7 +4142,7 @@ void ChatHandler::AdminCommandTrace(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -4121,15 +4150,15 @@ void ChatHandler::AdminCommandTrace(const char * msg)
 
 	this->GetPlayer()->TeleportToLocation(pPlayer->GetWorldId(), pPlayer->GetX(), pPlayer->GetY(), pPlayer->GetDirection(), pPlayer->GetInstance());
 }
-	
-void ChatHandler::AdminCommandTrans(const char * msg)
+
+void ChatHandler::AdminCommandTrans(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
 
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4138,7 +4167,7 @@ void ChatHandler::AdminCommandTrans(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -4146,8 +4175,8 @@ void ChatHandler::AdminCommandTrans(const char * msg)
 
 	pPlayer->TeleportToLocation(this->GetPlayer()->GetWorldId(), this->GetPlayer()->GetX(), this->GetPlayer()->GetY(), this->GetPlayer()->GetDirection(), this->GetPlayer()->GetInstance());
 }
-	
-void ChatHandler::AdminCommandGate(const char * msg)
+
+void ChatHandler::AdminCommandGate(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -4155,7 +4184,7 @@ void ChatHandler::AdminCommandGate(const char * msg)
 
 	conversor >> safe_name >> gate;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4164,13 +4193,13 @@ void ChatHandler::AdminCommandGate(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
 	}
 
-	if ( pPlayer->MoveToGate(gate) )
+	if (pPlayer->MoveToGate(gate))
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Player %s moved to gate %d", pPlayer->GetName(), gate);
 	}
@@ -4179,8 +4208,8 @@ void ChatHandler::AdminCommandGate(const char * msg)
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Failed to move Player %s to gate %d", pPlayer->GetName(), gate);
 	}
 }
-	
-void ChatHandler::AdminCommandMove(const char * msg)
+
+void ChatHandler::AdminCommandMove(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -4190,7 +4219,7 @@ void ChatHandler::AdminCommandMove(const char * msg)
 
 	conversor >> safe_name >> world >> x >> y;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4199,7 +4228,7 @@ void ChatHandler::AdminCommandMove(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s.", name);
 		return;
@@ -4207,7 +4236,7 @@ void ChatHandler::AdminCommandMove(const char * msg)
 
 	World* pWorld = sWorldMgr->GetWorld(world);
 
-	if ( !pWorld )
+	if (!pWorld)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong world id %d.", world);
 		return;
@@ -4215,7 +4244,7 @@ void ChatHandler::AdminCommandMove(const char * msg)
 
 	WorldGrid const& grid = pWorld->GetGrid(x, y);
 
-	if ( grid.IsLocked_1() || grid.IsLocked_2() )
+	if (grid.IsLocked_1() || grid.IsLocked_2())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong teleport location.");
 		return;
@@ -4223,8 +4252,8 @@ void ChatHandler::AdminCommandMove(const char * msg)
 
 	pPlayer->TeleportToLocation(world, x, y, pPlayer->GetDirection(), pPlayer->GetInstance());
 }
-	
-void ChatHandler::AdminCommandFollow(const char * msg)
+
+void ChatHandler::AdminCommandFollow(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 target = 0;
@@ -4233,13 +4262,13 @@ void ChatHandler::AdminCommandFollow(const char * msg)
 
 	Monster* pMonster = sObjectMgr->FindMonster(target);
 
-	if ( !pMonster )
+	if (!pMonster)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong monster id %d", target);
 		return;
 	}
 
-	if ( !pMonster->IsPlaying() )
+	if (!pMonster->IsPlaying())
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Monster %d is not playing", target);
 		return;
@@ -4247,15 +4276,15 @@ void ChatHandler::AdminCommandFollow(const char * msg)
 
 	this->GetPlayer()->TeleportToLocation(pMonster->GetWorldId(), pMonster->GetX(), pMonster->GetY(), pMonster->GetDirection(), pMonster->GetInstance());
 }
-	
-void ChatHandler::AdminCommandUpdateStat(const char * msg)
+
+void ChatHandler::AdminCommandUpdateStat(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
 
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4264,7 +4293,7 @@ void ChatHandler::AdminCommandUpdateStat(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -4276,24 +4305,24 @@ void ChatHandler::AdminCommandUpdateStat(const char * msg)
 	}
 }
 
-void ChatHandler::AdminCommandAcitve(const char * msg)
+void ChatHandler::AdminCommandAcitve(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 status = 0;
 
 	conversor >> status;
 
-	sGameServer->SetActive(status == 0 ? false: true);
+	sGameServer->SetActive(status == 0 ? false : true);
 
-	if ( sGameServer->IsActive() != sGameServer->IsActiveStatus() )
+	if (sGameServer->IsActive() != sGameServer->IsActiveStatus())
 	{
 		sGameServer->SetActiveStatus(sGameServer->IsActive());
 		sGameServer->SetInactiveTick(MyGetTickCount());
 		sGameServer->SetInactiveNotificationTick(MyGetTickCount());
 
-		if ( this->GetPlayer() )
+		if (this->GetPlayer())
 		{
-			if ( sGameServer->IsActiveStatus() )
+			if (sGameServer->IsActiveStatus())
 			{
 				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Server Activated.");
 			}
@@ -4305,7 +4334,7 @@ void ChatHandler::AdminCommandAcitve(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAdminArcaWar(const char * msg)
+void ChatHandler::CommandAdminArcaWar(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string command;
@@ -4314,9 +4343,9 @@ void ChatHandler::CommandAdminArcaWar(const char * msg)
 
 	conversor >> command >> data1 >> data2;
 
-	if ( command == "reg" )
+	if (command == "reg")
 	{
-		if ( data1.size() > MAX_GUILD_NAME_LENGTH )
+		if (data1.size() > MAX_GUILD_NAME_LENGTH)
 		{
 			return;
 		}
@@ -4325,7 +4354,7 @@ void ChatHandler::CommandAdminArcaWar(const char * msg)
 
 		Guild* pGuild = sGuildMgr->GetGuild(name);
 
-		if ( !pGuild )
+		if (!pGuild)
 		{
 			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find Guild %s", name);
 			return;
@@ -4333,111 +4362,111 @@ void ChatHandler::CommandAdminArcaWar(const char * msg)
 
 		sServerLink->ArkaWarMasterRegister(this->GetPlayer(), pGuild->GetID());
 	}
-	else if ( command == "regchar" )
+	else if (command == "regchar")
 	{
 
 	}
-	else if ( command == "sign" )
+	else if (command == "sign")
 	{
 
 	}
 }
 
-void ChatHandler::CommandAdminInvi(const char * msg)
+void ChatHandler::CommandAdminInvi(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 type = 0;
 
 	conversor >> type;
 
-	switch ( type )
+	switch (type)
 	{
 	case 0:
+	{
+		if (!this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE))
 		{
-			if ( !this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE) )
+			this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE);
+
+			if (!this->GetPlayer()->HasBuff(BUFF_INVISIBILITY))
 			{
-				this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE);
-
-				if ( !this->GetPlayer()->HasBuff(BUFF_INVISIBILITY) )
-				{
-					this->GetPlayer()->AddBuff(BUFF_INVISIBILITY, -10, BUFF_FLAG_CONSTANT, this->GetPlayer());
-					this->GetPlayer()->ViewportDeleteSend();
-				}
+				this->GetPlayer()->AddBuff(BUFF_INVISIBILITY, -10, BUFF_FLAG_CONSTANT, this->GetPlayer());
+				this->GetPlayer()->ViewportDeleteSend();
 			}
-			else
+		}
+		else
+		{
+			this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE);
+
+			if (this->GetPlayer()->HasBuff(BUFF_INVISIBILITY))
 			{
-				this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE);
-
-				if ( this->GetPlayer()->HasBuff(BUFF_INVISIBILITY) )
-				{
-					this->GetPlayer()->RemoveBuff(BUFF_INVISIBILITY);
-					this->GetPlayer()->ViewportCreate(VIEWPORT_CREATE_FLAG_ME | VIEWPORT_CREATE_FLAG_GEN | VIEWPORT_CREATE_FLAG_GUILD | VIEWPORT_CREATE_FLAG_SIEGE);
-				}
+				this->GetPlayer()->RemoveBuff(BUFF_INVISIBILITY);
+				this->GetPlayer()->ViewportCreate(VIEWPORT_CREATE_FLAG_ME | VIEWPORT_CREATE_FLAG_GEN | VIEWPORT_CREATE_FLAG_GUILD | VIEWPORT_CREATE_FLAG_SIEGE);
 			}
+		}
 
-			sServerLink->CharacterOnOff(this->GetPlayer(), 2);
+		sServerLink->CharacterOnOff(this->GetPlayer(), 2);
 
-			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Invisibility Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE) ? "ON" : "OFF");
-		} break;
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Invisibility Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_FLAG_VISIBLE) ? "ON" : "OFF");
+	} break;
 
 	case 1:
+	{
+		if (!this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_ATTACK))
 		{
-			if ( !this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_ATTACK) )
-			{
-				this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_ATTACK);
-			}
-			else
-			{
-				this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_ATTACK);
-			}
+			this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_ATTACK);
+		}
+		else
+		{
+			this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_ATTACK);
+		}
 
-			sServerLink->CharacterOnOff(this->GetPlayer(), 2);
+		sServerLink->CharacterOnOff(this->GetPlayer(), 2);
 
-			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Attack Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_ATTACK) ? "ON" : "OFF");
-		} break;
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Attack Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_ATTACK) ? "ON" : "OFF");
+	} break;
 
 	case 2:
+	{
+		if (!this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED))
 		{
-			if ( !this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED) )
-			{
-				this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED);
-			}
-			else
-			{
-				this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED);
-			}
+			this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED);
+		}
+		else
+		{
+			this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED);
+		}
 
-			sServerLink->CharacterOnOff(this->GetPlayer(), 2);
+		sServerLink->CharacterOnOff(this->GetPlayer(), 2);
 
-			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Been Attacked Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED) ? "ON" : "OFF");
-		} break;
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Been Attacked Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_BEEN_ATTACKED) ? "ON" : "OFF");
+	} break;
 
 	case 3:
+	{
+		if (!this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_WHISPER))
 		{
-			if ( !this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_WHISPER) )
-			{
-				this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_WHISPER);
-			}
-			else
-			{
-				this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_WHISPER);
-			}
+			this->GetPlayer()->AddAdminPanelFlag(ADMIN_PANEL_WHISPER);
+		}
+		else
+		{
+			this->GetPlayer()->RemoveAdminPanelFlag(ADMIN_PANEL_WHISPER);
+		}
 
-			sServerLink->CharacterOnOff(this->GetPlayer(), 2);
+		sServerLink->CharacterOnOff(this->GetPlayer(), 2);
 
-			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Whisper Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_WHISPER) ? "ON" : "OFF");
-		} break;
+		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Whisper Status: %s", this->GetPlayer()->IsAdminPanelFlag(ADMIN_PANEL_WHISPER) ? "ON" : "OFF");
+	} break;
 	}
 }
 
-void ChatHandler::CommandAdminTrack(const char * msg)
+void ChatHandler::CommandAdminTrack(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
 
 	conversor >> safe_name;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4446,7 +4475,7 @@ void ChatHandler::CommandAdminTrack(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
@@ -4455,7 +4484,7 @@ void ChatHandler::CommandAdminTrack(const char * msg)
 	sGameServer->ProcessTrack(pPlayer);
 }
 
-void ChatHandler::CommandAdminChangeQuestState(const char * msg)
+void ChatHandler::CommandAdminChangeQuestState(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -4464,7 +4493,7 @@ void ChatHandler::CommandAdminChangeQuestState(const char * msg)
 
 	conversor >> safe_name >> id >> state;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4473,26 +4502,26 @@ void ChatHandler::CommandAdminChangeQuestState(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
 	}
 
-	if ( state <= QUEST_EVOLUTION_STATE_NONE )
+	if (state <= QUEST_EVOLUTION_STATE_NONE)
 	{
 		state = QUEST_EVOLUTION_STATE_CLEAR;
 	}
 
-	if ( state >= MAX_QUEST_EVOLUTION_STATE )
+	if (state >= MAX_QUEST_EVOLUTION_STATE)
 	{
 		state = QUEST_EVOLUTION_STATE_CLEAR;
 	}
 
 	pPlayer->QuestEvolutionSetState(id, state);
 }
-	
-void ChatHandler::CommandAdminChangeQuestKillCount(const char * msg)
+
+void ChatHandler::CommandAdminChangeQuestKillCount(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -4502,7 +4531,7 @@ void ChatHandler::CommandAdminChangeQuestKillCount(const char * msg)
 
 	conversor >> safe_name >> id >> slot >> count;
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
@@ -4511,20 +4540,20 @@ void ChatHandler::CommandAdminChangeQuestKillCount(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
 	}
 
-	QuestEvolutionStatus * pQuestStatus = pPlayer->QuestEvolutionFind(id);
+	QuestEvolutionStatus* pQuestStatus = pPlayer->QuestEvolutionFind(id);
 
-	if ( !pQuestStatus )
+	if (!pQuestStatus)
 	{
 		return;
 	}
 
-	if ( slot >= QUEST_EVOLUTION_MONSTER_COUNT )
+	if (slot >= QUEST_EVOLUTION_MONSTER_COUNT)
 	{
 		return;
 	}
@@ -4532,18 +4561,18 @@ void ChatHandler::CommandAdminChangeQuestKillCount(const char * msg)
 	pQuestStatus->SetMonsterCount(slot, count);
 }
 
-void ChatHandler::CommandAdminSpotCreate(const char * msg)
+void ChatHandler::CommandAdminSpotCreate(const char* msg)
 {
 	std::stringstream conversor(msg);
 	RandomValue<int32> m_RandomValue(-1);
 	int32 count = 0;
 
-	while ( conversor )
+	while (conversor)
 	{
 		int32 value = 0;
 		conversor >> value;
 
-		if ( value == -1 )
+		if (value == -1)
 		{
 			break;
 		}
@@ -4553,16 +4582,16 @@ void ChatHandler::CommandAdminSpotCreate(const char * msg)
 
 	conversor >> count;
 
-	if ( count <= 0 )
+	if (count <= 0)
 	{
 		return;
 	}
 
-	for ( int32 i = 0; i < count; ++i )
+	for (int32 i = 0; i < count; ++i)
 	{
 		int32 id = m_RandomValue.GetRandomValue(RANDOM_POOL_RANDOM);
 
-		if ( id == -1 )
+		if (id == -1)
 		{
 			continue;
 		}
@@ -4572,7 +4601,7 @@ void ChatHandler::CommandAdminSpotCreate(const char * msg)
 	}
 }
 
-void ChatHandler::CommandAdminAttrChange(const char * msg)
+void ChatHandler::CommandAdminAttrChange(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 x = 0;
@@ -4601,7 +4630,7 @@ void ChatHandler::CommandAdminAttrChange(const char * msg)
 	pWorld->ApplyAttribute(x, y, attr, apply >= 1 ? true : false);
 }
 
-void ChatHandler::CommandAdminTrackCharacter(const char * msg)
+void ChatHandler::CommandAdminTrackCharacter(const char* msg)
 {
 	std::stringstream conversor(msg);
 	std::string safe_name;
@@ -4610,12 +4639,12 @@ void ChatHandler::CommandAdminTrackCharacter(const char * msg)
 
 	this->GetPlayer()->SetTrackingID(0);
 
-	if ( safe_name.size() > MAX_CHARACTER_LENGTH )
+	if (safe_name.size() > MAX_CHARACTER_LENGTH)
 	{
 		return;
 	}
 
-	if ( safe_name.empty() )
+	if (safe_name.empty())
 	{
 		return;
 	}
@@ -4624,27 +4653,27 @@ void ChatHandler::CommandAdminTrackCharacter(const char * msg)
 
 	Player* pPlayer = sObjectMgr->FindPlayerByNameNoSensitive(name);
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can't find player %s", name);
 		return;
 	}
 
 	this->GetPlayer()->SetTrackingID(pPlayer->GetGUID());
-	
+
 	this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Tracking %s", pPlayer->GetName());
 }
 
-void ChatHandler::ReloadShop(const char * msg)
+void ChatHandler::ReloadShop(const char* msg)
 {
 	sShopMgr->LoadShopTemplate();
 	sShopMgr->LoadShopItems();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Shops reloaded.");
 }
 
-void ChatHandler::ReloadQuest(const char * msg)
+void ChatHandler::ReloadQuest(const char* msg)
 {
 	sQuestMgr->LoadQuestEvolution();
 	sQuestMgr->LoadQuestEvolutionData();
@@ -4654,584 +4683,584 @@ void ChatHandler::ReloadQuest(const char * msg)
 	sQuestMgr->LoadQuestGuided();
 	sQuestMgr->LoadQuestMU();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Quests reloaded.");
 }
 
-void ChatHandler::ReloadEvent(const char * msg)
+void ChatHandler::ReloadEvent(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = -1;
 	int32 sub_id = -1;
 	conversor >> id >> sub_id;
 
-	switch ( id )
+	switch (id)
 	{
 	case -1:
-		{
-			sEventMgr->LoadEventData();
-			sEventMgr->LoadEventSeasonData();
-			sEventMgr->LoadEventContributionReward();
-			sEventMgr->LoadEventLevel();
-			sEventMgr->LoadEventEnterCount();
+	{
+		sEventMgr->LoadEventData();
+		sEventMgr->LoadEventSeasonData();
+		sEventMgr->LoadEventContributionReward();
+		sEventMgr->LoadEventLevel();
+		sEventMgr->LoadEventEnterCount();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Event Manager reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Event Manager reloaded.");
+	} break;
 
 	case EVENT_BLOOD_CASTLE:
-		{
-			sBloodCastleMgr->LoadBloodCastleSetting();
+	{
+		sBloodCastleMgr->LoadBloodCastleSetting();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Blood Castle reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Blood Castle reloaded.");
+	} break;
 
 	case EVENT_DEVIL_SQUARE:
-		{
-			sDevilSquareMgr->LoadDevilSquareSetting();
-			sDevilSquareMgr->LoadDevilSquareRanking();
+	{
+		sDevilSquareMgr->LoadDevilSquareSetting();
+		sDevilSquareMgr->LoadDevilSquareRanking();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Devil Square reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Devil Square reloaded.");
+	} break;
 
 	case EVENT_CHAOS_CASTLE:
-		{
-			sChaosCastleMgr->LoadChaosCastleSetting();
+	{
+		sChaosCastleMgr->LoadChaosCastleSetting();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Chaos Castle reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Chaos Castle reloaded.");
+	} break;
 
 	case EVENT_ILLUSION_TEMPLE:
-		{
-			sIllusionTempleMgr->LoadIllusionTempleSettings();
+	{
+		sIllusionTempleMgr->LoadIllusionTempleSettings();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Illusion Temple reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Illusion Temple reloaded.");
+	} break;
 
 	case EVENT_CRYWOLF:
-		{
-			sCrywolf->LoadData();
+	{
+		sCrywolf->LoadData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Crywolf reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Crywolf reloaded.");
+	} break;
 
 	case EVENT_IMPERIAL_FORTRESS:
-		{
-			sImperialFortressMgr->LoadImperialFortressLevel();
-			sImperialFortressMgr->LoadImperialFortressMonsterSettings();
-			sImperialFortressMgr->LoadImperialFortressTraps();
+	{
+		sImperialFortressMgr->LoadImperialFortressLevel();
+		sImperialFortressMgr->LoadImperialFortressMonsterSettings();
+		sImperialFortressMgr->LoadImperialFortressTraps();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Imperial Fortress reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Imperial Fortress reloaded.");
+	} break;
 
 	case EVENT_RAKLION:
-		{
-			sRaklion->LoadData();
+	{
+		sRaklion->LoadData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Raklion reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Raklion reloaded.");
+	} break;
 
 	case EVENT_KANTURU:
-		{
-			sKanturuMgr->Load();
+	{
+		sKanturuMgr->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Kanturu reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Kanturu reloaded.");
+	} break;
 
 	case EVENT_INVASION:
-		{
-			sInvasionMgr->LoadInvasionData();
-			sInvasionMgr->LoadInvasionGroup();
+	{
+		sInvasionMgr->LoadInvasionData();
+		sInvasionMgr->LoadInvasionGroup();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Invasion reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Invasion reloaded.");
+	} break;
 
 	case EVENT_CASTLE_SIEGE:
-		{
-			sCastleSiege->LoadData();
+	{
+		sCastleSiege->LoadData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Castle Siege reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Castle Siege reloaded.");
+	} break;
 
 	case EVENT_DOPPELGANGER:
-		{
-			sDoppelganger->LoadLevel();
-			sDoppelganger->LoadMonster();
+	{
+		sDoppelganger->LoadLevel();
+		sDoppelganger->LoadMonster();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Doppelganger reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Doppelganger reloaded.");
+	} break;
 
 	case EVENT_SCRAMBLE:
-		{
-			sScramble->LoadWordList();
+	{
+		sScramble->LoadWordList();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Scramble reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Scramble reloaded.");
+	} break;
 
 	case EVENT_DUNGEON_RACE:
-		{
-			sDungeonRace->LoadData();
+	{
+		sDungeonRace->LoadData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Dungeon Race reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Dungeon Race reloaded.");
+	} break;
 
 	case EVENT_LOSTTOWER_RACE:
-		{
-			sLosttowerRace->LoadData();
+	{
+		sLosttowerRace->LoadData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Losttower Race reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Losttower Race reloaded.");
+	} break;
 
 	case EVENT_CHAOS_CASTLE_SURVIVAL:
-		{
-			sChaosCastleSurvivalMgr->LoadChaosCastleSetting();
+	{
+		sChaosCastleSurvivalMgr->LoadChaosCastleSetting();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Chaos Castle Survival reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Chaos Castle Survival reloaded.");
+	} break;
 
 	case EVENT_PROTECTOR_OF_ACHERON:
-		{
-			sProtectorOfAcheron->Load();
+	{
+		sProtectorOfAcheron->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Protector of Acheron reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Protector of Acheron reloaded.");
+	} break;
 
 	case EVENT_TORMENTED_SQUARE:
-		{
-			sTormentedSquare->Load();
-			sTormentedSquare->LoadRanking();
+	{
+		sTormentedSquare->Load();
+		sTormentedSquare->LoadRanking();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Tormented Square reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Tormented Square reloaded.");
+	} break;
 
 	case EVENT_ARKA_WAR:
-		{
-			sArkaWar->Load();
+	{
+		sArkaWar->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Arca War reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Arca War reloaded.");
+	} break;
 
 	case EVENT_LAST_MAN_STANDING:
-		{
-		} break;
+	{
+	} break;
 
 	case EVENT_LABYRINTH_OF_DIMENSIONS:
+	{
+		sLabyrinthDimensions->LoadInfo();
+		sLabyrinthDimensions->LoadMission();
+		sLabyrinthDimensions->LoadArea();
+		sLabyrinthDimensions->LoadAreaData();
+		sLabyrinthDimensions->LoadLevel();
+		sLabyrinthDimensions->LoadMonster();
+		sLabyrinthDimensions->LoadReward();
+
+		if (sub_id == 1)
 		{
-			sLabyrinthDimensions->LoadInfo();
-			sLabyrinthDimensions->LoadMission();
-			sLabyrinthDimensions->LoadArea();
-			sLabyrinthDimensions->LoadAreaData();
-			sLabyrinthDimensions->LoadLevel();
-			sLabyrinthDimensions->LoadMonster();
-			sLabyrinthDimensions->LoadReward();
+			sLabyrinthDimensions->LoadRanking();
+			sLabyrinthDimensions->LoadSchedule();
+		}
 
-			if (sub_id == 1)
-			{
-				sLabyrinthDimensions->LoadRanking();
-				sLabyrinthDimensions->LoadSchedule();
-			}
-
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Labyrinth of dimensions reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Labyrinth of dimensions reloaded.");
+	} break;
 
 	case EVENT_TORMENTED_SQUARE_SURVIVAL:
-		{
-			sTormentedSquareSurvival->Load();
+	{
+		sTormentedSquareSurvival->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Tormented Square survival reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Tormented Square survival reloaded.");
+	} break;
 
 	case EVENT_CASTLE_DEEP:
-		{
-			sCastleDeep->Load();
+	{
+		sCastleDeep->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Castle Deep reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Castle Deep reloaded.");
+	} break;
 
 	case EVENT_INSTANCED_DUNGEON:
+	{
+		sDungeon->LoadInstance();
+		sDungeon->LoadLevel();
+
+		if (sub_id == 1)
 		{
-			sDungeon->LoadInstance();
-			sDungeon->LoadLevel();
+			sDungeon->LoadSavedInstance();
+		}
 
-			if (sub_id == 1)
-			{
-				sDungeon->LoadSavedInstance();
-			}
-
-			if (this->GetPlayer())
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Instanced Dungeon reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Instanced Dungeon reloaded.");
+	} break;
 	}
 }
 
-void ChatHandler::ReloadMonster(const char * msg)
+void ChatHandler::ReloadMonster(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = -1;
 	int32 guid = 0;
 	conversor >> id >> guid;
 
-	switch ( id )
+	switch (id)
 	{
 	case 0:
-		{
-			sMonsterManager->LoadMonsterTemplate();
-			sMonsterManager->LoadMonsterSkill();
-			sMonsterManager->LoadMonsterSkillSpecial();
-			sMonsterManager->LoadMonsterAIElement();
-			sMonsterManager->LoadMonsterAIAutomata();
-			sMonsterManager->LoadMonsterAIUnit();
-			sMonsterManager->LoadMonsterAIGroup();
-			sMonsterManager->LoadMonsterRespawnLocation();
-			sMonsterManager->LoadMonsterEquipment();
-			sMonsterManager->SetLastUpdate(time(nullptr));
+	{
+		sMonsterManager->LoadMonsterTemplate();
+		sMonsterManager->LoadMonsterSkill();
+		sMonsterManager->LoadMonsterSkillSpecial();
+		sMonsterManager->LoadMonsterAIElement();
+		sMonsterManager->LoadMonsterAIAutomata();
+		sMonsterManager->LoadMonsterAIUnit();
+		sMonsterManager->LoadMonsterAIGroup();
+		sMonsterManager->LoadMonsterRespawnLocation();
+		sMonsterManager->LoadMonsterEquipment();
+		sMonsterManager->SetLastUpdate(time(nullptr));
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters data reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters data reloaded.");
+	} break;
 
 	case 1:
+	{
+		HASH_MONSTER(i)
 		{
-			HASH_MONSTER(i)
-			{
-				Monster* pMonster = ObjectContainer[i]->ToCreature();
+			Monster* pMonster = ObjectContainer[i]->ToCreature();
 
-				if ( !pMonster )
-					continue;
+			if (!pMonster)
+				continue;
 
-				if ( pMonster->GetConnectStatus() == CONNECT_STATUS_NONE )
-					continue;
+			if (pMonster->GetConnectStatus() == CONNECT_STATUS_NONE)
+				continue;
 
-				pMonster->Remove();
-			}
+			pMonster->Remove();
+		}
 
-			sObjectMgr->SetRespawnMonsterTime(MyGetTickCount() + (5 * IN_MILLISECONDS));
-			sObjectMgr->SetRespawnMonster(true);
+		sObjectMgr->SetRespawnMonsterTime(MyGetTickCount() + (5 * IN_MILLISECONDS));
+		sObjectMgr->SetRespawnMonster(true);
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters reloaded.");
+	} break;
 
 	case 2:
+	{
+		HASH_MONSTER(i)
 		{
-			HASH_MONSTER(i)
+			Monster* pMonster = ObjectContainer[i]->ToCreature();
+
+			if (!pMonster)
 			{
-				Monster* pMonster = ObjectContainer[i]->ToCreature();
-
-				if ( !pMonster )
-				{
-					continue;
-				}
-
-				if ( pMonster->GetConnectStatus() == CONNECT_STATUS_NONE )
-				{
-					continue;
-				}
-
-				if ( pMonster->GetEntry() < guid )
-				{
-					continue;
-				}
-
-				pMonster->Remove();
+				continue;
 			}
 
-			sMonsterManager->LoadMonster(guid);
+			if (pMonster->GetConnectStatus() == CONNECT_STATUS_NONE)
+			{
+				continue;
+			}
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters reloaded.");
-		} break;
+			if (pMonster->GetEntry() < guid)
+			{
+				continue;
+			}
+
+			pMonster->Remove();
+		}
+
+		sMonsterManager->LoadMonster(guid);
+
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters reloaded.");
+	} break;
 
 	case 3:
-		{
-			sMonsterManager->LoadMonsterEvent();
+	{
+		sMonsterManager->LoadMonsterEvent();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters event reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monsters event reloaded.");
+	} break;
 
 	case 5:
+	{
+		HASH_MONSTER(i)
 		{
-			HASH_MONSTER(i)
+			Monster* pMonster = ObjectContainer[i]->ToCreature();
+
+			if (!pMonster)
 			{
-				Monster* pMonster = ObjectContainer[i]->ToCreature();
-
-				if ( !pMonster )
-				{
-					continue;
-				}
-
-				if ( pMonster->GetConnectStatus() != CONNECT_STATUS_PLAYING )
-				{
-					continue;
-				}
-
-				if ( pMonster->GetWorldId() != guid )
-				{
-					continue;
-				}
-
-				pMonster->SetLastUpdate(0);
+				continue;
 			}
-		} break;
+
+			if (pMonster->GetConnectStatus() != CONNECT_STATUS_PLAYING)
+			{
+				continue;
+			}
+
+			if (pMonster->GetWorldId() != guid)
+			{
+				continue;
+			}
+
+			pMonster->SetLastUpdate(0);
+		}
+	} break;
 
 	case 7:
+	{
+		HASH_MONSTER(i)
 		{
-			HASH_MONSTER(i)
+			Monster* pMonster = ObjectContainer[i]->ToCreature();
+
+			if (!pMonster)
 			{
-				Monster* pMonster = ObjectContainer[i]->ToCreature();
-
-				if ( !pMonster )
-				{
-					continue;
-				}
-
-				if ( pMonster->GetConnectStatus() != CONNECT_STATUS_PLAYING )
-				{
-					continue;
-				}
-
-				if ( pMonster->GetWorldId() != guid )
-				{
-					continue;
-				}
-
-				pMonster->SetLastUpdate(0);
-				pMonster->Kill();
+				continue;
 			}
-		} break;
+
+			if (pMonster->GetConnectStatus() != CONNECT_STATUS_PLAYING)
+			{
+				continue;
+			}
+
+			if (pMonster->GetWorldId() != guid)
+			{
+				continue;
+			}
+
+			pMonster->SetLastUpdate(0);
+			pMonster->Kill();
+		}
+	} break;
 	}
 }
 
-void ChatHandler::ReloadConfig(const char * msg)
+void ChatHandler::ReloadConfig(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
 	conversor >> id;
 
-	switch ( id )
+	switch (id)
 	{
 	case 0:
-		{
-			sGameServer->LoadCommonSettings();
+	{
+		sGameServer->LoadCommonSettings();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Configs reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Configs reloaded.");
+	} break;
 
 	case 3:
-		{
-			sGameServer->LoadNotice();
+	{
+		sGameServer->LoadNotice();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Notice reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Notice reloaded.");
+	} break;
 
 	case 4:
-		{
-			sGameServer->LoadFilter();
+	{
+		sGameServer->LoadFilter();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Filter reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Filter reloaded.");
+	} break;
 
 	case 5:
-		{
-			sGenMgr->LoadGenReward();
-			sGenMgr->LoadGenRanking();
-			sGenMgr->LoadGenKillPoints();
+	{
+		sGenMgr->LoadGenReward();
+		sGenMgr->LoadGenRanking();
+		sGenMgr->LoadGenKillPoints();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Gens reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Gens reloaded.");
+	} break;
 
 	case 6:
-		{
-			sMiniMap->Load();
+	{
+		sMiniMap->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "MiniMap reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "MiniMap reloaded.");
+	} break;
 
 	case 7:
-		{
-			sMuunSystem->Load();
-			sMuunSystem->LoadOption();
-			sMuunSystem->LoadEnergy();
-			sMuunSystem->LoadExchange();
+	{
+		sMuunSystem->Load();
+		sMuunSystem->LoadOption();
+		sMuunSystem->LoadEnergy();
+		sMuunSystem->LoadExchange();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Muun reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Muun reloaded.");
+	} break;
 
 	case 8:
-		{
-			sSummonScroll->Load();
-			sSummonScroll->LoadMonster();
+	{
+		sSummonScroll->Load();
+		sSummonScroll->LoadMonster();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Summon Scroll reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Summon Scroll reloaded.");
+	} break;
 
 	case 9:
-		{
-			sMiningSystem->Load();
+	{
+		sMiningSystem->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mining reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mining reloaded.");
+	} break;
 
 	case 10:
-		{
-			sEvomon->Load();
-			sEvomon->LoadReward();
+	{
+		sEvomon->Load();
+		sEvomon->LoadReward();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Evomon reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Evomon reloaded.");
+	} break;
 
 	case 11:
-		{
-			sGameServer->LoadNotification();
-			sGameServer->SendNotification();
+	{
+		sGameServer->LoadNotification();
+		sGameServer->SendNotification();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Notifications reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Notifications reloaded.");
+	} break;
 
 	case 12:
-		{
-			sGameServer->LoadBaseData();
+	{
+		sGameServer->LoadBaseData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Base data reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Base data reloaded.");
+	} break;
 
 	case 14:
-		{
-			sGameServer->LoadOffsetData();
-			sGameServer->SendOffsetData();
+	{
+		sGameServer->LoadOffsetData();
+		sGameServer->SendOffsetData();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Offset Data reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Offset Data reloaded.");
+	} break;
 
 	case 15:
-		{
-			sGameServer->LoadOffsetFPS();
-			sGameServer->SendOffsetFPS();
+	{
+		sGameServer->LoadOffsetFPS();
+		sGameServer->SendOffsetFPS();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Offset FPS reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Offset FPS reloaded.");
+	} break;
 
 	case 16:
-		{
-			sGameServer->LoadCheatScanWhiteList();
+	{
+		sGameServer->LoadCheatScanWhiteList();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Cheat Scan White List reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Cheat Scan White List reloaded.");
+	} break;
 
 	case 18:
-		{
-			sGameServer->LoadOfflineAttackWorld();
-			sGameServer->LoadOfflineAttackZone();
+	{
+		sGameServer->LoadOfflineAttackWorld();
+		sGameServer->LoadOfflineAttackZone();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Offline Attack World/Zone reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Offline Attack World/Zone reloaded.");
+	} break;
 
 	case 19:
-		{
-			sMiniBomb->LoadReward();
+	{
+		sMiniBomb->LoadReward();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mini Bomb Reward reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mini Bomb Reward reloaded.");
+	} break;
 
 	case 20:
-		{
-			sMuRoomy->LoadReward();
+	{
+		sMuRoomy->LoadReward();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mu Roomy Reward reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mu Roomy Reward reloaded.");
+	} break;
 
 	case 21:
-		{
-			sJewelBingo->LoadReward();
+	{
+		sJewelBingo->LoadReward();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Jewel Bingo Reward reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Jewel Bingo Reward reloaded.");
+	} break;
 
 	case 22:
-		{
-			sMossMerchant->Load();
+	{
+		sMossMerchant->Load();
 
-			if ( this->GetPlayer() )
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Moss Merchant reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Moss Merchant reloaded.");
+	} break;
 
 	case 23:
-		{
-			sGameServer->LoadGoblinPoint();
+	{
+		sGameServer->LoadGoblinPoint();
 
-			if (this->GetPlayer())
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Goblin Point reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Goblin Point reloaded.");
+	} break;
 
 	case 24:
-		{
-			sNumericBaseball->LoadReward();
+	{
+		sNumericBaseball->LoadReward();
 
-			if (this->GetPlayer())
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Numeric Baseball Reward reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Numeric Baseball Reward reloaded.");
+	} break;
 
 	case 25:
-		{
-			sFormulaMgr->Load();
+	{
+		sFormulaMgr->Load();
 
-			if (this->GetPlayer())
-				this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Formula Data reloaded.");
-		} break;
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Formula Data reloaded.");
+	} break;
 
 	case 26:
 	{
-			   sMonsterSoul->LoadConverter();
-			   sMonsterSoul->LoadTransformation();
-			   sMonsterSoul->LoadReward();
+		sMonsterSoul->LoadConverter();
+		sMonsterSoul->LoadTransformation();
+		sMonsterSoul->LoadReward();
 
-			   if (this->GetPlayer())
-				   this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monster Soul reloaded.");
+		if (this->GetPlayer())
+			this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Monster Soul reloaded.");
 	} break;
 	}
 }
 
-void ChatHandler::ReloadItem(const char * msg)
+void ChatHandler::ReloadItem(const char* msg)
 {
 	sItemMgr->LoadItemTemplate();
 	sItemMgr->LoadItemAddOption();
@@ -5278,11 +5307,11 @@ void ChatHandler::ReloadItem(const char * msg)
 	sItemBagMgr->LoadItemBagTemplate();
 	sItemBagMgr->LoadItemBagItems();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Items reloaded.");
 }
 
-void ChatHandler::ReloadCharacter(const char * msg)
+void ChatHandler::ReloadCharacter(const char* msg)
 {
 	sCharacterBase->LoadCharacterBase();
 	sCharacterBase->LoadCharacterBaseSkill();
@@ -5300,11 +5329,11 @@ void ChatHandler::ReloadCharacter(const char * msg)
 	sCharacterBase->LoadCharacterMaxLevelReward();
 	sCharacterBase->LoadCharacterExperienceTable();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Characters data reloaded.");
 }
 
-void ChatHandler::ReloadSkill(const char * msg)
+void ChatHandler::ReloadSkill(const char* msg)
 {
 	sSkillMgr->LoadSkillTemplate();
 	sSkillMgr->LoadSkillLearn();
@@ -5317,21 +5346,21 @@ void ChatHandler::ReloadSkill(const char * msg)
 	sSkillMgr->LoadSkillTreeMajesticStat();
 	sSkillMgr->LoadSkillAttackTime();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Skills reloaded.");
 }
 
-void ChatHandler::ReloadTeleport(const char * msg)
+void ChatHandler::ReloadTeleport(const char* msg)
 {
 	sTeleport->LoadGateTemplate();
 	sTeleport->LoadTeleportTemplate();
 	sTeleport->LoadMoveLevel();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Teleport reloaded.");
 }
 
-void ChatHandler::ReloadCashShop(const char * msg)
+void ChatHandler::ReloadCashShop(const char* msg)
 {
 	sCashShopMgr->LoadItemList();
 	sGameServer->LoadCashShopSettings();
@@ -5354,23 +5383,23 @@ void ChatHandler::ReloadCashShop(const char * msg)
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "CashShop reloaded.");
 }
 
-void ChatHandler::ReloadMix(const char * msg)
+void ChatHandler::ReloadMix(const char* msg)
 {
 	sMixMgr->LoadDisabled();
 	sMixMgr->LoadSpellStone();
 	sMixMgr->LoadGuardian();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Mix reloaded.");
 }
 
-void ChatHandler::ReloadWorld(const char * msg)
+void ChatHandler::ReloadWorld(const char* msg)
 {
 	std::stringstream conversor(msg);
 	int32 id = 0;
 	conversor >> id;
 
-	if ( id == 0 )
+	if (id == 0)
 	{
 		sWorldMgr->LoadWorldList();
 		sWorldMgr->LoadWorldAIPath();
@@ -5394,11 +5423,11 @@ void ChatHandler::ReloadWorld(const char * msg)
 		sWorldMgr->LoadWorldFreePK();
 	}
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "World reloaded.");
 }
 
-void ChatHandler::ReloadPentagram(const char * msg)
+void ChatHandler::ReloadPentagram(const char* msg)
 {
 	sPentagramSystem->LoadType();
 	sPentagramSystem->LoadOption();
@@ -5407,6 +5436,6 @@ void ChatHandler::ReloadPentagram(const char * msg)
 	sPentagramSystem->LoadJewelUpgradeRank();
 	sPentagramSystem->LoadJewelUpgradeLevel();
 
-	if ( this->GetPlayer() )
+	if (this->GetPlayer())
 		this->GetPlayer()->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Pentagram reloaded.");
 }

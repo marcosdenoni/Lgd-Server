@@ -4973,7 +4973,7 @@ void Player::protocol_core(uint8 * packet_buffer, uint16 size, uint8 headcode)
 
 				case 0x57:
 					{
-						this->SendServerList();
+						this->SendServerList(Packet);
 					} break;
 
 				case 0x61:

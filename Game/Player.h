@@ -989,7 +989,7 @@ class Player: public Unit
 		void EarringUpgrade(uint8 * Packet);
 		void EarringUpgradeResult(uint8 result);
 
-		void SendServerList();
+		void SendServerList(uint8* Packet);
 		void ServerWarp(uint8 * Packet);
 
 		void SendAntiMacro();
@@ -1310,6 +1310,10 @@ class Player: public Unit
 	// Experience
 		void GiveSingleExperience(Monster * mMonster, int32 damage);
 		void GivePartyExperience(Monster * mMonster, int32 damage);
+
+	// Season 10 and later Exp Formula
+		void GiveSingleExperienceFormula(Monster* mMonster, int32 damage);
+		void GivePartyExperienceFormula(Monster* mMonster, int32 damage);
 
 		void GiveExperience(int64 & experience, bool apply_buff = false, bool send = false, uint8 type = 0);
 		void GivePetExperience(int64 experience);

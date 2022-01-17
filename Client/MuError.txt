@@ -1,0 +1,205 @@
+
+###### Log Begin ######
+-------------------------------------------------------------------------------------
+Mu online 1.19Ž (Kor) executed. (1.19.46.0)
+2021/12/21 15:01
+-------------------------------------------------------------------------------------
+<System information>
+OS 			: Unknown 6.2 Build 9200 ()
+CPU 			: AuthenticAMD - AMD Unknown 3100Mhz
+RAM 			: 2048MB
+-------------------------------------------------------------------------------------
+Direct-X 		: Direct-X 9.0
+-------------------------------------------------------------------------------------
+> To read config.ini.
+> gg init success.
+-------------------------------------------------------------------------------------
+> Screen size = 800 x 600.
+> Start window success.
+> OpenGL init success.
+-------------------------------------------------------------------------------------
+<OpenGL information>
+Vendor		: ATI Technologies Inc.
+Render		: Radeon (TM) RX 480 Graphics
+OpenGL version	: 4.6.13596 Compatibility Profile Context 20.10.35.02 27.20.1034.6
+Max Texture size	: 16384 x 16384
+Max Viewport size	: 16384 x 16384
+-------------------------------------------------------------------------------------
+> gg connect Window Handle.
+-------------------------------------------------------------------------------------
+<IME information>
+IME Name		: 
+IME File Name		: 
+Keyboard type		: 00000416
+-------------------------------------------------------------------------------------
+CGFxMBoxShop Not Found Model : 6174> Loading ok.
+[Connect to Server] ip address = 192.168.0.193, port = 44405
+> Login Scene init success.
+Send Request Server List.
+Success Receive Server List.
+Success Receive Server List.
+[ReceiveServerConnect][Socket Closed][Clear PacketQueue]
+[Connect to Server] ip address = 192.168.0.193, port = 55509
+> Login Request.
+> Try to Login "user"
+[Socket Closed][Clear PacketQueue]
+Destroy
+
+###### Log Begin ######
+-------------------------------------------------------------------------------------
+Mu online 1.19Ž (Kor) executed. (1.19.46.0)
+2021/12/21 15:04
+-------------------------------------------------------------------------------------
+<System information>
+OS 			: Unknown 6.2 Build 9200 ()
+CPU 			: AuthenticAMD - AMD Unknown 3099Mhz
+RAM 			: 2048MB
+-------------------------------------------------------------------------------------
+Direct-X 		: Direct-X 9.0
+-------------------------------------------------------------------------------------
+> To read config.ini.
+> gg init success.
+-------------------------------------------------------------------------------------
+> Screen size = 800 x 600.
+> Start window success.
+> OpenGL init success.
+-------------------------------------------------------------------------------------
+<OpenGL information>
+Vendor		: ATI Technologies Inc.
+Render		: Radeon (TM) RX 480 Graphics
+OpenGL version	: 4.6.13596 Compatibility Profile Context 20.10.35.02 27.20.1034.6
+Max Texture size	: 16384 x 16384
+Max Viewport size	: 16384 x 16384
+-------------------------------------------------------------------------------------
+> gg connect Window Handle.
+-------------------------------------------------------------------------------------
+<IME information>
+IME Name		: 
+IME File Name		: 
+Keyboard type		: 00000416
+-------------------------------------------------------------------------------------
+CGFxMBoxShop Not Found Model : 6174> Loading ok.
+[Connect to Server] ip address = 192.168.0.193, port = 44405
+> Login Scene init success.
+Send Request Server List.
+Success Receive Server List.
+Success Receive Server List.
+Success Receive Server List.
+Success Receive Server List.
+Success Receive Server List.
+Success Receive Server List.
+[ReceiveServerConnect][Socket Closed][Clear PacketQueue]
+[Connect to Server] ip address = 192.168.0.193, port = 55509
+> Login Request.
+> Try to Login "sfsd"
+[Socket Closed][Clear PacketQueue]
+Destroy
+
+###### Log Begin ######
+-------------------------------------------------------------------------------------
+Mu online 1.19Ž (Kor) executed. (1.19.46.0)
+2021/12/21 15:09
+-------------------------------------------------------------------------------------
+<System information>
+OS 			: Unknown 6.2 Build 9200 ()
+CPU 			: AuthenticAMD - AMD Unknown 3099Mhz
+RAM 			: 2048MB
+-------------------------------------------------------------------------------------
+Direct-X 		: Direct-X 9.0
+-------------------------------------------------------------------------------------
+> To read config.ini.
+> gg init success.
+-------------------------------------------------------------------------------------
+> Screen size = 800 x 600.
+> Start window success.
+> OpenGL init success.
+-------------------------------------------------------------------------------------
+<OpenGL information>
+Vendor		: ATI Technologies Inc.
+Render		: Radeon (TM) RX 480 Graphics
+OpenGL version	: 4.6.13596 Compatibility Profile Context 20.10.35.02 27.20.1034.6
+Max Texture size	: 16384 x 16384
+Max Viewport size	: 16384 x 16384
+-------------------------------------------------------------------------------------
+> gg connect Window Handle.
+-------------------------------------------------------------------------------------
+<IME information>
+IME Name		: 
+IME File Name		: 
+Keyboard type		: 00000416
+-------------------------------------------------------------------------------------
+CGFxMBoxShop Not Found Model : 6174> Loading ok.
+[Connect to Server] ip address = 192.168.0.193, port = 44405
+> Login Scene init success.
+Send Request Server List.
+Success Receive Server List.
+Success Receive Server List.
+[ReceiveServerConnect][Socket Closed][Clear PacketQueue]
+[Connect to Server] ip address = 192.168.0.193, port = 55509
+> Login Request.
+> Try to Login "user"
+> Request Character list
+> Character scene init success.
+> Character selected <6> "guntest"
+> Main Scene init success. 2021/12/21 15:10
+ÀÎµ¦½º¸¦ °øÀ¯ÇÏ°Å³ª Delete¾øÀÌ »ç¿ëÇÏ¿´À½Data\World1\leaf01.tga(0x00007695)->Data\World1\leaf01.jpg
+[Error] Not Exist ItemScriptData[0, -1]. - CItem::SetScriptData()
+¼­¹ö¿ÍÀÇ Á¢¼ÓÁ¾·á.
+[Socket Closed][Clear PacketQueue]
+[Socket Closed][Clear PacketQueue]
+Destroy
+
+###### Log Begin ######
+-------------------------------------------------------------------------------------
+Mu online 1.19Ž (Kor) executed. (1.19.46.0)
+2021/12/21 15:12
+-------------------------------------------------------------------------------------
+<System information>
+OS 			: Unknown 6.2 Build 9200 ()
+CPU 			: AuthenticAMD - AMD Unknown 3099Mhz
+RAM 			: 2048MB
+-------------------------------------------------------------------------------------
+Direct-X 		: Direct-X 9.0
+-------------------------------------------------------------------------------------
+> To read config.ini.
+> gg init success.
+-------------------------------------------------------------------------------------
+> Screen size = 800 x 600.
+> Start window success.
+> OpenGL init success.
+-------------------------------------------------------------------------------------
+<OpenGL information>
+Vendor		: ATI Technologies Inc.
+Render		: Radeon (TM) RX 480 Graphics
+OpenGL version	: 4.6.13596 Compatibility Profile Context 20.10.35.02 27.20.1034.6
+Max Texture size	: 16384 x 16384
+Max Viewport size	: 16384 x 16384
+-------------------------------------------------------------------------------------
+> gg connect Window Handle.
+-------------------------------------------------------------------------------------
+<IME information>
+IME Name		: 
+IME File Name		: 
+Keyboard type		: 00000416
+-------------------------------------------------------------------------------------
+CGFxMBoxShop Not Found Model : 6174> Loading ok.
+[Connect to Server] ip address = 192.168.0.193, port = 44405
+> Login Scene init success.
+Send Request Server List.
+Success Receive Server List.
+Success Receive Server List.
+[ReceiveServerConnect][Socket Closed][Clear PacketQueue]
+[Connect to Server] ip address = 192.168.0.193, port = 55509
+> Login Request.
+> Try to Login "user"
+> Request Character list
+> Character scene init success.
+> Character selected <6> "grow"
+> Main Scene init success. 2021/12/21 15:13
+ÀÎµ¦½º¸¦ °øÀ¯ÇÏ°Å³ª Delete¾øÀÌ »ç¿ëÇÏ¿´À½Data\World3\leaf01.tga(0x00007695)->Data\World3\leaf01.jpg
+[Error] Not Exist ItemScriptData[0, -1]. - CItem::SetScriptData()
+[ReceiveLogOut][Socket Closed][Clear PacketQueue]
+¼­¹ö¿ÍÀÇ Á¢¼ÓÁ¾·á.
+[Socket Closed][Clear PacketQueue]
+[Socket Closed][Clear PacketQueue]
+Destroy

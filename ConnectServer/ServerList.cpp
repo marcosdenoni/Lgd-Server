@@ -85,9 +85,9 @@ void CServerList::SendChannel()
 			{
 				continue;
 			}
-			
+
 			body[head->count].server = pData->GetServer();
-			body[head->count].data1 = 0;
+			body[head->count].data1 = 32;
 			body[head->count].data2 = 0;
 			body[head->count].type = pData->GetType() & 1;
 			body[head->count].gold = pData->GetType() >= 2 ? 1 : 0;

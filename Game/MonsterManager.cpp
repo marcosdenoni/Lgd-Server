@@ -134,6 +134,7 @@ void MonsterManager::LoadMonsterTemplate()
 			data.DamageAbsrob = reader.GetUInt8();
 			data.IsElite = reader.GetBool();
 			data.IsCustom = reader.GetBool();
+			data.ExpLevel = reader.GetUInt16();
 
 			if (!sScriptAI->IsScriptAI(data.ScriptName))
 			{
@@ -1347,6 +1348,14 @@ bool AllowItemDropInWorld(uint16 world, Item const& item)
 			{
 				return false;
 			}
+		}
+	}
+
+	if (item.IsSocket())
+	{
+		if (world != WORLD_RAKLION && world != WORLD_RAKLION_BOSS)
+		{
+			return false;
 		}
 	}
 

@@ -23,11 +23,11 @@ void Player::ClearCharacter()
 	this->SetFruitPointsAdd(0);
 	this->SetFruitPointsDec(0);
 
-	for ( int32 i = 0; i < LEVEL_DATA_MAX; ++i )
+	for (int32 i = 0; i < LEVEL_DATA_MAX; ++i)
 	{
 		this->GetLevelData(i)->Reset();
 	}
-	
+
 	this->MoneySet(0);
 
 	Util::memset<uint8, uint8>(this->preview, 0, MAX_PREVIEW_DATA);
@@ -55,14 +55,14 @@ void Player::ClearCharacter()
 	{
 		this->GetFriend(i)->Reset();
 	}
-	
+
 	MAIL_LOOP(i)
 	{
 		this->GetMailData(i)->Reset();
 	}
 
 	this->ResetPowerFillCount(0);
-	
+
 	POWER_LOOP(i)
 	{
 		this->GetPowerAutorecuperationTime(i)->Start();
@@ -105,7 +105,7 @@ void Player::ClearCharacter()
 
 	this->SetFirstTime(false);
 
-	for ( int32 i = 0; i < PlayerAction::PLAYER_ACTION_MAX; ++i )
+	for (int32 i = 0; i < PlayerAction::PLAYER_ACTION_MAX; ++i)
 	{
 		this->GetRestriction(i)->Reset();
 	}
@@ -135,10 +135,10 @@ void Player::ClearCharacter()
 	this->m_gen_victim_map.clear();
 	this->SetFlag(CHARACTER_FLAG_REQUEST | CHARACTER_FLAG_POST);
 	this->SetAdminPanelFlag(0);
-	
+
 	this->SetPostTime(0);
 
-	for ( uint32 i = 0; i < MULTI_ATTACK_MAX_INFO; ++i )
+	for (uint32 i = 0; i < MULTI_ATTACK_MAX_INFO; ++i)
 	{
 		this->GetMultiAttack(i)->Reset();
 	}
@@ -158,7 +158,7 @@ void Player::ClearCharacter()
 	this->SetCastleSiegeMoneyRemove(false);
 
 	this->SetLastItemUpdate(0);
-	
+
 	this->SetRageFighterSkill(0);
 	this->SetRageFighterSkillTarget(-1);
 	this->SetRageFighterSkillCount(0);
@@ -177,11 +177,11 @@ void Player::ClearCharacter()
 
 	this->ResetAntiSpamMessage();
 
-	for ( int32 i = 0; i < PLAYER_TIMER_MAX; ++i )
+	for (int32 i = 0; i < PLAYER_TIMER_MAX; ++i)
 	{
-		if ( i == PLAYER_TIMER_PACKET ||
-			 i == PLAYER_TIMER_WRONG_SERIAL ||
-			 i == PLAYER_TIMER_WRONG_DECRYPT )
+		if (i == PLAYER_TIMER_PACKET ||
+			i == PLAYER_TIMER_WRONG_SERIAL ||
+			i == PLAYER_TIMER_WRONG_DECRYPT)
 		{
 			continue;
 		}
@@ -216,7 +216,7 @@ void Player::ClearCharacter()
 	this->GetPentagramOption()->Reset();
 	this->GetPentagramJewelOption()->Reset();
 
-	for ( int32 i = 0; i < MAX_PENTAGRAM_JEWEL_INFO; ++i )
+	for (int32 i = 0; i < MAX_PENTAGRAM_JEWEL_INFO; ++i)
 	{
 		this->GetPentagramJewelInfoInventory(i)->Clear();
 		this->GetPentagramJewelInfoWarehouse(i)->Clear();
@@ -274,7 +274,7 @@ void Player::ClearCharacter()
 
 	this->SetHuntingRecordActive(false);
 
-	for ( HuntingRecordDataMap::iterator it = this->hunting_record_data.begin(); it != this->hunting_record_data.end(); ++it )
+	for (HuntingRecordDataMap::iterator it = this->hunting_record_data.begin(); it != this->hunting_record_data.end(); ++it)
 	{
 		LIST_CLEAR(HuntingRecordDataList::iterator, it->second);
 	}
@@ -320,11 +320,11 @@ void Player::ClearCharacter()
 	this->SetMiniBombTotalScore(0);
 	this->SetMiniBombDate(0);
 
-	for ( int32 i = 0; i < MINI_BOMB_SIZE; ++i )
+	for (int32 i = 0; i < MINI_BOMB_SIZE; ++i)
 	{
 		this->GetMiniBombData(i)->Reset();
 	}
-	
+
 	LIST_CLEAR(CashShopItemDataList::iterator, this->m_CashShopItemList);
 	LIST_CLEAR(CashShopItemDataList::iterator, this->m_CashShopGiftList);
 
@@ -333,7 +333,7 @@ void Player::ClearCharacter()
 	this->SetCashShopGiftPackage(0);
 	this->SetCashShopGiftOption(0);
 
-	for ( int32 i = 0; i < WARP_FAVORITE_COUNT; ++i )
+	for (int32 i = 0; i < WARP_FAVORITE_COUNT; ++i)
 	{
 		this->GetWarpFavoriteList(i)->Reset();
 	}
@@ -344,7 +344,7 @@ void Player::ClearCharacter()
 
 	this->SetWorldState(-1);
 
-	for ( MajesticDataMap::iterator itr = this->majestic_data_map.begin(); itr != this->majestic_data_map.end(); ++itr )
+	for (MajesticDataMap::iterator itr = this->majestic_data_map.begin(); itr != this->majestic_data_map.end(); ++itr)
 	{
 		itr->second.clear();
 	}
@@ -360,17 +360,17 @@ void Player::ClearCharacter()
 	this->SetJewelBingoScore3(0);
 	this->SetJewelBingoDate(0);
 
-	for ( int32 i = 0; i < JEWEL_BINGO_GRID_SIZE; ++i )
+	for (int32 i = 0; i < JEWEL_BINGO_GRID_SIZE; ++i)
 	{
 		this->GetJewelBingoGrid(i)->Reset();
 	}
 
-	for ( int32 i = 0; i < JEWEL_BINGO_JEWEL_COUNT; ++i )
+	for (int32 i = 0; i < JEWEL_BINGO_JEWEL_COUNT; ++i)
 	{
 		this->GetJewelBingoJewel(i)->Reset();
 	}
 
-	for ( int32 i = 0; i < JEWEL_BINGO_MATCHING_SIZE; ++i )
+	for (int32 i = 0; i < JEWEL_BINGO_MATCHING_SIZE; ++i)
 	{
 		this->GetJewelBingoMatching(i)->Reset();
 	}
@@ -432,7 +432,7 @@ void Player::CalculateCharacter()
 {
 	CharacterBaseData const* base_data = sCharacterBase->GetCharacterBase(this->GetClass());
 
-	if ( !base_data )
+	if (!base_data)
 	{
 		return;
 	}
@@ -451,7 +451,7 @@ void Player::CalculateCharacter()
 	Item const* Helper = this->GetInventory()->GetItem(GUARDIAN);
 	Item const* Earring01 = this->GetInventory()->GetItem(EARRING_01);
 	Item const* Earring02 = this->GetInventory()->GetItem(EARRING_02);
-	
+
 	Item const* Pentagram = this->GetInventory()->GetItem(PENTAGRAM_SLOT);
 
 	bool item_update = false;
@@ -488,7 +488,7 @@ void Player::CalculateCharacter()
 	this->ResetResistance(0);
 	this->ResetResistanceAdd(0);
 	this->ResetDataFloat(0.0f);
-	
+
 	this->SetStaminaReduction(0.0f);
 	this->SetForceUpgrade(false);
 
@@ -503,7 +503,7 @@ void Player::CalculateCharacter()
 	this->ResetSpecializationStat(0);
 	this->ResetAncientEffect(0);
 
-	for ( MajesticDataMap::iterator itr = this->majestic_data_map.begin(); itr != this->majestic_data_map.end(); ++itr )
+	for (MajesticDataMap::iterator itr = this->majestic_data_map.begin(); itr != this->majestic_data_map.end(); ++itr)
 	{
 		itr->second.clear();
 	}
@@ -531,34 +531,34 @@ void Player::CalculateCharacter()
 		this->ApplyEarringOption(EARRING_01, true);
 		this->ApplyEarringOption(EARRING_02, true);
 		this->ApplyEarringBonus(true);
-		
+
 		sMuunSystem->CalcMuunOption(this, true);
-		
+
 		wear_inventory_loop(i)
 		{
-			if ( !this->GetInventory()->GetItem(i)->IsItem() )
+			if (!this->GetInventory()->GetItem(i)->IsItem())
 			{
 				continue;
 			}
 
-			if ( !this->GetInventory()->GetItem(i)->IsValid() )
+			if (!this->GetInventory()->GetItem(i)->IsValid())
 			{
 				continue;
 			}
 
 			this->GetInventory()->GetItem(i)->SetValid(this->ValidItem(this->GetInventory()->GetItem(i)));
 
-			if ( !this->GetInventory()->GetItem(i)->IsValid() )
+			if (!this->GetInventory()->GetItem(i)->IsValid())
 			{
 				item_update = true;
 			}
 		}
 
-		if ( this->GetInventory()->GetItem(PENTAGRAM_SLOT)->IsItem() && this->GetInventory()->GetItem(PENTAGRAM_SLOT)->IsValid() )
+		if (this->GetInventory()->GetItem(PENTAGRAM_SLOT)->IsItem() && this->GetInventory()->GetItem(PENTAGRAM_SLOT)->IsValid())
 		{
 			this->GetInventory()->GetItem(PENTAGRAM_SLOT)->SetValid(this->ValidItem(this->GetInventory()->GetItem(PENTAGRAM_SLOT)));
 
-			if ( !this->GetInventory()->GetItem(PENTAGRAM_SLOT)->IsValid() )
+			if (!this->GetInventory()->GetItem(PENTAGRAM_SLOT)->IsValid())
 			{
 				item_update = true;
 			}
@@ -603,15 +603,14 @@ void Player::CalculateCharacter()
 				}
 			}
 		}
-	}
-	while ( item_update );
+	} while (item_update);
 
 	/*
 	0x00A928D8 -> Calculate item
 	0x00576570 -> print item required stat
 	0x00A934FE -> Calculate item required stat
-	
-	
+
+
 	0x00CC2104
 	0x00CCE557
 	0x00CC016C
@@ -853,25 +852,25 @@ void Player::CalculateCharacter()
 		{
 			/*
 			v22 = GetItemInfo(pItem);
-              *((_WORD *)v62 + 192) += sub_CC3732(v114, (_WORD *)(v22 + 672), (int **)&pItem, 3);
-              v23 = GetItemInfo(pItem);
-              *((_WORD *)v62 + 193) += sub_CC3732(v109, (_WORD *)(v23 + 674), (int **)&pItem, 3);
-              v24 = GetItemInfo(pItem);
-              *((_WORD *)v62 + 194) += sub_CC3732(v106, (_WORD *)(v24 + 676), (int **)&pItem, 3);
+			  *((_WORD *)v62 + 192) += sub_CC3732(v114, (_WORD *)(v22 + 672), (int **)&pItem, 3);
+			  v23 = GetItemInfo(pItem);
+			  *((_WORD *)v62 + 193) += sub_CC3732(v109, (_WORD *)(v23 + 674), (int **)&pItem, 3);
+			  v24 = GetItemInfo(pItem);
+			  *((_WORD *)v62 + 194) += sub_CC3732(v106, (_WORD *)(v24 + 676), (int **)&pItem, 3);
 			*/
 		}
 		else
 		{
 			/*
 			v25 = i;
-              v26 = GetItemInfo(pItem);
-              LOWORD(v114) = sub_CC3732(v114, (_WORD *)(v26 + 672), (int **)&pItem, v25);
-              v27 = i;
-              v28 = GetItemInfo(pItem);
-              LOWORD(v109) = sub_CC3732(v109, (_WORD *)(v28 + 674), (int **)&pItem, v27);
-              v29 = i;
-              v30 = GetItemInfo(pItem);
-              LOWORD(v106) = sub_CC3732(v106, (_WORD *)(v30 + 676), (int **)&pItem, v29);
+			  v26 = GetItemInfo(pItem);
+			  LOWORD(v114) = sub_CC3732(v114, (_WORD *)(v26 + 672), (int **)&pItem, v25);
+			  v27 = i;
+			  v28 = GetItemInfo(pItem);
+			  LOWORD(v109) = sub_CC3732(v109, (_WORD *)(v28 + 674), (int **)&pItem, v27);
+			  v29 = i;
+			  v30 = GetItemInfo(pItem);
+			  LOWORD(v106) = sub_CC3732(v106, (_WORD *)(v30 + 676), (int **)&pItem, v29);
 			*/
 		}
 
@@ -900,26 +899,26 @@ void Player::CalculateCharacter()
 		}
 	}
 
-	
+
 
 	/*
 	APPLY PENDANT EXCELLENT VALUES
 	*/
 
-	
 
-	if( Pentagram->IsItem() && Pentagram->IsPentagramItem() && Pentagram->IsValid() )
+
+	if (Pentagram->IsItem() && Pentagram->IsPentagramItem() && Pentagram->IsValid())
 	{
 		this->SetElementalAttribute(Pentagram->GetSocketBonus() % 16);
 		this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE, Pentagram->GetDefense());
 		this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MIN, Pentagram->GetMinDamage());
 		this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MAX, Pentagram->GetMaxDamage());
 
-		if ( (this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_FIRE && this->HasBuff(BUFF_FIRE_TOWER)) ||
-			 (this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_WATER && this->HasBuff(BUFF_WATER_TOWER)) ||
-			 (this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_EARTH && this->HasBuff(BUFF_EARTH_TOWER)) ||
-			 (this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_WIND && this->HasBuff(BUFF_WIND_TOWER)) ||
-			 (this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_DARK && this->HasBuff(BUFF_DARKNESS_TOWER)) )
+		if ((this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_FIRE && this->HasBuff(BUFF_FIRE_TOWER)) ||
+			(this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_WATER && this->HasBuff(BUFF_WATER_TOWER)) ||
+			(this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_EARTH && this->HasBuff(BUFF_EARTH_TOWER)) ||
+			(this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_WIND && this->HasBuff(BUFF_WIND_TOWER)) ||
+			(this->GetElementalAttribute() == ELEMENTAL_ATTRIBUTE_DARK && this->HasBuff(BUFF_DARKNESS_TOWER)))
 		{
 			this->GetPentagramOption()->IncreaseMulPentagramDamage(5);
 			this->GetPentagramOption()->IncreaseMulPentagramDefense(5);
@@ -970,9 +969,9 @@ void Player::CalculateCharacter()
 	this->IncreaseDataFloat(PLAYER_FLOAT_MP_RECOVERY_RATE, base_data->GetAutomaticPowerRecovery(POWER_MANA));
 	this->IncreaseDataFloat(PLAYER_FLOAT_AG_RECOVERY_RATE, base_data->GetAutomaticPowerRecovery(POWER_STAMINA));
 
-	if ( Right->IsValid() && Left->IsValid() )
+	if (Right->IsValid() && Left->IsValid())
 	{
-		if ( (Left->GetItem() == ITEMGET(4, 7) || Left->GetItem() == ITEMGET(4, 15)) && Left->GetLevel() >= 1 )
+		if ((Left->GetItem() == ITEMGET(4, 7) || Left->GetItem() == ITEMGET(4, 15)) && Left->GetLevel() >= 1)
 		{
 			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, this->GetIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN) * (2 * Left->GetLevel() + 1) / 100);
 			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, this->GetIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX) * (2 * Left->GetLevel() + 1) / 100);
@@ -981,7 +980,7 @@ void Player::CalculateCharacter()
 		}
 	}
 
-	
+
 
 	this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, this->GetAleEffect(ALE_SPEED));
 	this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, this->GetAleEffect(ALE_SPEED));
@@ -989,32 +988,32 @@ void Player::CalculateCharacter()
 	bool right = false;
 	bool left = false;
 
-	if ( Right->IsValid() && Right->GetItem() != ITEMGET(4, 7) && Right->GetItem() != ITEMGET(4, 15) && Right->GetItem() >= ITEMGET(0, 0) && Right->GetItem() < ITEMGET(6, 0) )
+	if (Right->IsValid() && Right->GetItem() != ITEMGET(4, 7) && Right->GetItem() != ITEMGET(4, 15) && Right->GetItem() >= ITEMGET(0, 0) && Right->GetItem() < ITEMGET(6, 0))
 	{
 		right = true;
 	}
-	if ( Left->IsValid() && Left->GetItem() != ITEMGET(4, 7) && Left->GetItem() != ITEMGET(4, 15) && Left->GetItem() >= ITEMGET(0, 0) && Left->GetItem() < ITEMGET(6, 0) )
+	if (Left->IsValid() && Left->GetItem() != ITEMGET(4, 7) && Left->GetItem() != ITEMGET(4, 15) && Left->GetItem() >= ITEMGET(0, 0) && Left->GetItem() < ITEMGET(6, 0))
 	{
 		left = true;
 	}
 
-	if ( right && left )
+	if (right && left)
 	{
 		this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, (Right->GetAttackSpeed() + Left->GetAttackSpeed()) / 2);
 		this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, (Right->GetAttackSpeed() + Left->GetAttackSpeed()) / 2);
 	}
-	else if ( right )
+	else if (right)
 	{
 		this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, Right->GetAttackSpeed());
 		this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, Right->GetAttackSpeed());
 	}
-	else if ( left )
+	else if (left)
 	{
 		this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, Left->GetAttackSpeed());
 		this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, Left->GetAttackSpeed());
 	}
 
-	if ( Gloves->IsValid() )
+	if (Gloves->IsValid())
 	{
 		this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, Gloves->GetAttackSpeed());
 		this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, Gloves->GetAttackSpeed());
@@ -1043,7 +1042,7 @@ void Player::CalculateCharacter()
 	}
 
 	Item const* pDarkHorse = this->GetActiveInventoryItem(PET_DARK_HORSE);
-	
+
 	if (pDarkHorse && pDarkHorse->IsValid() && !pDarkHorse->IsExpired())
 	{
 		this->IncreaseIntData(UNIT_INT_DEFENSE, this->GetOnlyEquipmentStat(AGILITY) / 20 + pDarkHorse->GetOptionValue(ItemOption::DARK_HORSE_DEFENSE));
@@ -1051,15 +1050,15 @@ void Player::CalculateCharacter()
 
 	this->SetArmorSetBonus(true);
 
-	for ( uint8 i = HELM; i <= BOOTS; i++ )
+	for (uint8 i = HELM; i <= BOOTS; i++)
 	{
-		if ( i == HELM && this->GetClass() == Character::MAGIC_GLADIATOR )
+		if (i == HELM && this->GetClass() == Character::MAGIC_GLADIATOR)
 			continue;
 
-		if ( i == GLOVES && this->GetClass() == Character::RAGE_FIGHTER )
+		if (i == GLOVES && this->GetClass() == Character::RAGE_FIGHTER)
 			continue;
 
-		if ( !this->GetInventory()->GetItem(i)->IsItem() || !this->GetInventory()->GetItem(i)->IsValid() )
+		if (!this->GetInventory()->GetItem(i)->IsItem() || !this->GetInventory()->GetItem(i)->IsValid())
 		{
 			this->SetArmorSetBonus(false);
 			break;
@@ -1073,98 +1072,98 @@ void Player::CalculateCharacter()
 	int32 level_14_count = 0;
 	int32 level_15_count = 0;
 
-	if ( this->IsArmorSetBonus() )
+	if (this->IsArmorSetBonus())
 	{
 		uint16 set_index = Armor->GetItemIndex();
 
-		if ( this->GetClass() == Character::MAGIC_GLADIATOR )
+		if (this->GetClass() == Character::MAGIC_GLADIATOR)
 		{
 			this->SetArmorSetBonus(Armor->IsExclusiveClass(this->GetClass()) &&
-								   Pants->IsExclusiveClass(this->GetClass()) &&
-								   Gloves->IsExclusiveClass(this->GetClass()) &&
-								   Boots->IsExclusiveClass(this->GetClass()));
+				Pants->IsExclusiveClass(this->GetClass()) &&
+				Gloves->IsExclusiveClass(this->GetClass()) &&
+				Boots->IsExclusiveClass(this->GetClass()));
 		}
-		if ( this->GetClass() == Character::RAGE_FIGHTER )
+		if (this->GetClass() == Character::RAGE_FIGHTER)
 		{
 			this->SetArmorSetBonus(Helm->IsExclusiveClass(this->GetClass()) &&
-								   Armor->IsExclusiveClass(this->GetClass()) &&
-								   Pants->IsExclusiveClass(this->GetClass()) &&
-								   Boots->IsExclusiveClass(this->GetClass()));
+				Armor->IsExclusiveClass(this->GetClass()) &&
+				Pants->IsExclusiveClass(this->GetClass()) &&
+				Boots->IsExclusiveClass(this->GetClass()));
 		}
 
-		if ( this->GetClass() == Character::MAGIC_GLADIATOR || this->GetClass() == Character::RAGE_FIGHTER )
+		if (this->GetClass() == Character::MAGIC_GLADIATOR || this->GetClass() == Character::RAGE_FIGHTER)
 		{
 			level_15_count++;
 		}
 
-		for ( uint8 i = HELM; i <= BOOTS; i++ )
+		for (uint8 i = HELM; i <= BOOTS; i++)
 		{
-			if ( this->GetClass() == Character::MAGIC_GLADIATOR && i == HELM )
+			if (this->GetClass() == Character::MAGIC_GLADIATOR && i == HELM)
 				continue;
 
-			if ( this->GetClass() == Character::RAGE_FIGHTER && i == GLOVES )
+			if (this->GetClass() == Character::RAGE_FIGHTER && i == GLOVES)
 				continue;
 
-			if ( set_index != this->GetInventory()->GetItem(i)->GetItemIndex() )
+			if (set_index != this->GetInventory()->GetItem(i)->GetItemIndex())
 			{
 				this->SetArmorSetBonus(false);
 			}
 
-			if ( this->GetInventory()->GetItem(i)->GetLevel() == 15 )
+			if (this->GetInventory()->GetItem(i)->GetLevel() == 15)
 			{
 				level_15_count++;
 			}
-			else if ( this->GetInventory()->GetItem(i)->GetLevel() == 14 )
+			else if (this->GetInventory()->GetItem(i)->GetLevel() == 14)
 			{
 				level_14_count++;
 			}
-			else if ( this->GetInventory()->GetItem(i)->GetLevel() == 13 )
+			else if (this->GetInventory()->GetItem(i)->GetLevel() == 13)
 			{
 				level_13_count++;
 			}
-			else if ( this->GetInventory()->GetItem(i)->GetLevel() == 12 )
+			else if (this->GetInventory()->GetItem(i)->GetLevel() == 12)
 			{
 				level_12_count++;
 			}
-			else if ( this->GetInventory()->GetItem(i)->GetLevel() == 11 )
+			else if (this->GetInventory()->GetItem(i)->GetLevel() == 11)
 			{
 				level_11_count++;
 			}
-			else if ( this->GetInventory()->GetItem(i)->GetLevel() == 10 )
+			else if (this->GetInventory()->GetItem(i)->GetLevel() == 10)
 			{
 				level_10_count++;
 			}
 		}
 
-		if ( this->IsArmorSetBonus() )
+		if (this->IsArmorSetBonus())
 		{
 			this->IncreaseIntData(UNIT_INT_DEFENSE_RATE, this->GetIntData(UNIT_INT_DEFENSE_RATE) / 10);
 		}
 	}
 
-	if ( (level_15_count + level_14_count + level_13_count + level_12_count + level_11_count + level_10_count) >= 5 && this->IsArmorSetBonus() )
+	if ((level_15_count + level_14_count + level_13_count + level_12_count + level_11_count + level_10_count) >= 5 && this->IsArmorSetBonus())
 	{
-		if ( level_15_count == 5 )
+		if (level_15_count == 5)
 		{
 			this->PercentIntData(UNIT_INT_DEFENSE, 30);
 		}
-		else if ( level_14_count == 5 || (level_14_count + level_15_count) == 5 )
+		else if (level_14_count == 5 || (level_14_count + level_15_count) == 5)
 		{
 			this->PercentIntData(UNIT_INT_DEFENSE, 25);
 		}
-		else if ( level_13_count == 5 || (level_13_count + level_14_count + level_15_count) == 5 )
+		else if (level_13_count == 5 || (level_13_count + level_14_count + level_15_count) == 5)
 		{
 			this->PercentIntData(UNIT_INT_DEFENSE, 20);
 		}
-		else if ( level_12_count == 5 || (level_12_count + level_13_count + level_14_count + level_15_count) == 5 )
+		else if (level_12_count == 5 || (level_12_count + level_13_count + level_14_count + level_15_count) == 5)
 		{
 			this->PercentIntData(UNIT_INT_DEFENSE, 15);
 		}
-		else if ( level_11_count == 5 || (level_11_count + level_12_count + level_13_count + level_14_count + level_15_count) == 5 )
+		else if (level_11_count == 5 || (level_11_count + level_12_count + level_13_count + level_14_count + level_15_count) == 5)
 		{
 			this->PercentIntData(UNIT_INT_DEFENSE, 10);
 		}
-		else if ( level_10_count == 5 || (level_10_count + level_11_count + level_12_count + level_13_count + level_14_count + level_15_count) == 5)
+		else if (level_10_count == 5 || (level_10_count + level_11_count + level_12_count + level_13_count + level_14_count + level_15_count) == 5)
 		{
 			this->PercentIntData(UNIT_INT_DEFENSE, 5);
 		}
@@ -1174,7 +1173,7 @@ void Player::CalculateCharacter()
 
 	this->ApplyBuffNonStatEffect();
 
-	this->CalculateExeItem(); 
+	this->CalculateExeItem();
 	this->Calculate380Item();
 	this->CalculateHarmonyItem();
 
@@ -1247,7 +1246,7 @@ void Player::CalculateCharacter()
 	this->CalculateSocketItem(false);
 
 	this->CalculateAncientItem();
-		
+
 	this->ApplySkillTree(false);
 
 	auto pBerserker = this->GetBuffByGroup(BUFF_BERSERKER);
@@ -1268,7 +1267,7 @@ void Player::CalculateCharacter()
 			power_value = this->GetIntData(UNIT_INT_CURSE_DAMAGE_MAX) * power;
 		}
 
-		float add_power = (this->GetEnergy() / 3.5f) + (power_value - (power_value * 0.86f))*(power_value * 0.002f);
+		float add_power = (this->GetEnergy() / 3.5f) + (power_value - (power_value * 0.86f)) * (power_value * 0.002f);
 		if (add_power < 0)
 		{
 			add_power = 0;
@@ -1311,7 +1310,7 @@ void Player::CalculateCharacter()
 			power_value = this->GetIntData(UNIT_INT_MAGIC_DAMAGE_MAX) * power;
 		}
 
-		float add_power = (power_value - (power_value * 0.91f))*(power_value * 0.002f);
+		float add_power = (power_value - (power_value * 0.91f)) * (power_value * 0.002f);
 		if (add_power < 0)
 		{
 			add_power = 0;
@@ -1348,13 +1347,13 @@ void Player::CalculateCharacter()
 	this->ApplyMasteryBonus(false);
 	this->ApplyWingGradedOption(false);
 	this->ApplyWingErrtelOption(false);
-		
-	if ( this->GetData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT) > sGameServer->GetShieldDefenseRateLimit() )
+
+	if (this->GetData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT) > sGameServer->GetShieldDefenseRateLimit())
 	{
 		this->SetData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT, sGameServer->GetShieldDefenseRateLimit());
 	}
 
-	if ( Left->IsValid() && Left->GetKind2() == ItemKind::SHIELD )
+	if (Left->IsValid() && Left->GetKind2() == ItemKind::SHIELD)
 	{
 		this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE, Left->GetDefense() * this->GetData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT) / 100);
 
@@ -1368,8 +1367,8 @@ void Player::CalculateCharacter()
 	}
 
 	this->CalculateMaxShield();
-	
-	for ( uint8 i = 0; i < Element::MAX; i++ )
+
+	for (uint8 i = 0; i < Element::MAX; i++)
 	{
 		this->IncreaseResistance(i, GET_MAX_RESISTANCE(Ring01->GetResistance(i), Ring02->GetResistance(i), Pendant->GetResistance(i)));
 	}
@@ -1519,43 +1518,43 @@ void Player::CalculateCharacter()
 	this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, this->GetAleEffect(ALE_DAMAGE));
 	this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, this->GetAleEffect(ALE_DAMAGE));
 
-	for ( uint8 i = 0; i < POWER_MAX; i++ )
+	for (uint8 i = 0; i < POWER_MAX; i++)
 	{
-		if ( this->PowerGet(i) > this->PowerGetTotal(i) )
+		if (this->PowerGet(i) > this->PowerGetTotal(i))
 		{
 			this->PowerSet(i, this->PowerGetTotal(i));
 		}
 	}
 
-	for ( uint8 i = 0; i < POWER_MAX; i++ )
+	for (uint8 i = 0; i < POWER_MAX; i++)
 	{
-		if ( this->PowerGet(i) < 0 )
+		if (this->PowerGet(i) < 0)
 		{
 			this->PowerSet(i, 0);
 		}
 	}
 
-	if ( this->GetFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE) > static_cast<float>(sGameServer->GetExcellentDamageRateLimit()) )
+	if (this->GetFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE) > static_cast<float>(sGameServer->GetExcellentDamageRateLimit()))
 	{
 		this->SetFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, static_cast<float>(sGameServer->GetExcellentDamageRateLimit()));
 	}
 
-	if ( this->GetFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE) > static_cast<float>(sGameServer->GetCriticalDamageRateLimit()) )
+	if (this->GetFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE) > static_cast<float>(sGameServer->GetCriticalDamageRateLimit()))
 	{
 		this->SetFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, static_cast<float>(sGameServer->GetCriticalDamageRateLimit()));
 	}
 
-	if ( this->GetIntData(UNIT_INT_DAMAGE_DECREASE) > static_cast<float>(sGameServer->GetDecreaseDamageRateLimit()) )
+	if (this->GetIntData(UNIT_INT_DAMAGE_DECREASE) > static_cast<float>(sGameServer->GetDecreaseDamageRateLimit()))
 	{
 		this->SetIntData(UNIT_INT_DAMAGE_DECREASE, static_cast<float>(sGameServer->GetDecreaseDamageRateLimit()));
 	}
 
-	if ( this->GetFloatData(UNIT_FLOAT_REFLECT_DAMAGE_RATE) > static_cast<float>(sGameServer->GetReflectDamageRateLimit()) )
+	if (this->GetFloatData(UNIT_FLOAT_REFLECT_DAMAGE_RATE) > static_cast<float>(sGameServer->GetReflectDamageRateLimit()))
 	{
 		this->SetFloatData(UNIT_FLOAT_REFLECT_DAMAGE_RATE, static_cast<float>(sGameServer->GetReflectDamageRateLimit()));
 	}
 
-	if ( this->GetFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE) > static_cast<float>(sGameServer->GetIgnoreDefenseRateLimit()) )
+	if (this->GetFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE) > static_cast<float>(sGameServer->GetIgnoreDefenseRateLimit()))
 	{
 		this->SetFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, static_cast<float>(sGameServer->GetIgnoreDefenseRateLimit()));
 	}
@@ -1579,12 +1578,12 @@ void Player::CalculateCharacter()
 		}
 	}
 
-	if ( this->GetIntData(UNIT_INT_ATTACK_SPEED) > sGameServer->GetMaxAttackSpeed(this->GetClass()) )
+	if (this->GetIntData(UNIT_INT_ATTACK_SPEED) > sGameServer->GetMaxAttackSpeed(this->GetClass()))
 	{
 		this->SetIntData(UNIT_INT_ATTACK_SPEED, sGameServer->GetMaxAttackSpeed(this->GetClass()));
 	}
 
-	if ( this->GetIntData(UNIT_INT_MAGIC_SPEED) > sGameServer->GetMaxAttackSpeed(this->GetClass()) )
+	if (this->GetIntData(UNIT_INT_MAGIC_SPEED) > sGameServer->GetMaxAttackSpeed(this->GetClass()))
 	{
 		this->SetIntData(UNIT_INT_MAGIC_SPEED, sGameServer->GetMaxAttackSpeed(this->GetClass()));
 	}
@@ -1629,7 +1628,7 @@ void Player::CalculateCharacter()
 	this->UpdatePowers(POWER_LIFE, true);
 	this->UpdatePowers(POWER_MANA, false);
 	this->UpdatePowers(POWER_MANA, true);
-	
+
 	this->LimitMaxStaminaReduction(100.0f);
 
 	if (this->IsAdministrator())
@@ -2421,24 +2420,24 @@ void Player::CalculateSocketItem(bool flag)
 	this->ApplySocketPackage(flag, socket_count);
 }
 
-void Player::ApplySocketEffect(bool flag, SocketDataType socket, uint8 * socket_count)
+void Player::ApplySocketEffect(bool flag, SocketDataType socket, uint8* socket_count)
 {
 	uint8 index = socket % MAX_SOCKET_OPTION;
 	uint8 level = socket / MAX_SOCKET_OPTION;
 
-	if ( level >= MAX_SOCKET_LEVEL )
+	if (level >= MAX_SOCKET_LEVEL)
 	{
 		return;
 	}
 
 	item_socket_seed const* seed = sItemMgr->GetSocketSeed(index);
 
-	if ( !seed )
+	if (!seed)
 	{
 		return;
 	}
 
-	if ( seed->GetType() <= 0 )
+	if (seed->GetType() <= 0)
 	{
 		return;
 	}
@@ -2446,250 +2445,250 @@ void Player::ApplySocketEffect(bool flag, SocketDataType socket, uint8 * socket_
 	socket_count[seed->GetType() - 1]++;
 	uint32 value = seed->GetLevel(level);
 
-	if ( !flag )
+	if (!flag)
 	{
-		if ( index == 34 ||
-			 index == 35 ||
-			 index == 36 ||
-			 index == 37 )
+		if (index == 34 ||
+			index == 35 ||
+			index == 36 ||
+			index == 37)
 		{
 			return;
 		}
 	}
 	else
 	{
-		if ( index != 34 &&
-			 index != 35 &&
-			 index != 36 &&
-			 index != 37 )
+		if (index != 34 &&
+			index != 35 &&
+			index != 36 &&
+			index != 37)
 		{
 			return;
 		}
 	}
 
-	switch(index)
+	switch (index)
 	{
 	case 0:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, ((this->GetTotalLevel() / 20) * value) / 10);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, ((this->GetTotalLevel() / 20) * value) / 10);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, ((this->GetTotalLevel() / 20) * value) / 10);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, ((this->GetTotalLevel() / 20) * value) / 10);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, ((this->GetTotalLevel() / 20) * value) / 10);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, ((this->GetTotalLevel() / 20) * value) / 10);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, ((this->GetTotalLevel() / 20) * value) / 10);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, ((this->GetTotalLevel() / 20) * value) / 10);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, ((this->GetTotalLevel() / 20) * value) / 10);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, ((this->GetTotalLevel() / 20) * value) / 10);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, ((this->GetTotalLevel() / 20) * value) / 10);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, ((this->GetTotalLevel() / 20) * value) / 10);
+	} break;
 
 	case 1:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, value);
+	} break;
 
 	case 2:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
+	} break;
 
 	case 3:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
+	} break;
 
 	case 4:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
+	} break;
 
 	case 5:
-		{
-			this->IncreaseStaminaReduction(value);
-		} break;
+	{
+		this->IncreaseStaminaReduction(value);
+	} break;
 
 	case 10:
-		{
-			this->PercentIntData(UNIT_INT_DEFENSE_RATE, value);
-		} break;
+	{
+		this->PercentIntData(UNIT_INT_DEFENSE_RATE, value);
+	} break;
 
 	case 11:
-		{
-			this->IncreaseIntData(UNIT_INT_DEFENSE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_DEFENSE, value);
+	} break;
 
 	case 12:
-		{
-			this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT, value);
+	} break;
 
 	case 13:
-		{
-			this->IncreaseIntData(UNIT_INT_DAMAGE_DECREASE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_DAMAGE_DECREASE, value);
+	} break;
 
 	case 14:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_REFLECT_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_REFLECT_DAMAGE_RATE, value);
+	} break;
 
 	case 16:
-		{
-			   this->IncreaseData(PLAYER_DATA_MONSTER_DIE_HP, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_MONSTER_DIE_HP, value);
+	} break;
 
 	case 17:
-		{
-			   this->IncreaseData(PLAYER_DATA_MONSTER_DIE_MP, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_MONSTER_DIE_MP, value);
+	} break;
 
 	case 18:
-		{
-			this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
+	} break;
 
 	case 19:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_RATE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_RATE, value);
+	} break;
 
 	case 20:
-		{
-		} break;
+	{
+	} break;
 
 	case 21:
-		{
-			this->IncreaseData(PLAYER_DATA_HP_RECOVERY_ADD, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_HP_RECOVERY_ADD, value);
+	} break;
 
 	case 22:
-		{
-			this->PowerIncreseAdd(POWER_LIFE, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_LIFE, value, false);
+	} break;
 
 	case 23:
-		{
-			this->PowerIncreseAdd(POWER_MANA, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_MANA, value, false);
+	} break;
 
 	case 24:
-		{
-			this->IncreaseData(PLAYER_DATA_MP_RECOVERY_ADD, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_MP_RECOVERY_ADD, value);
+	} break;
 
 	case 25:
-		{
-			this->PowerIncreseAdd(POWER_STAMINA, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_STAMINA, value, false);
+	} break;
 
 	case 26:
-		{
-			this->IncreaseData(PLAYER_DATA_AG_RECOVERY_ADD, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_AG_RECOVERY_ADD, value);
+	} break;
 
 	case 29:
-		{
-			this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, value);
+	} break;
 
 	case 30:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, value);
+	} break;
 
 	case 31:
-		{
-			this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, value);
+	} break;
 
 	case 32:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, value);
+	} break;
 
 	case 34:
-		{
-			this->IncreaseAddStat(STRENGTH, value);
-		} break;
+	{
+		this->IncreaseAddStat(STRENGTH, value);
+	} break;
 
 	case 35:
-		{
-			this->IncreaseAddStat(AGILITY, value);
-		} break;
+	{
+		this->IncreaseAddStat(AGILITY, value);
+	} break;
 
 	case 36:
-		{
-			this->IncreaseAddStat(VITALITY, value);
-		} break;
+	{
+		this->IncreaseAddStat(VITALITY, value);
+	} break;
 
 	case 37:
-		{
-			this->IncreaseAddStat(ENERGY, value);
-		} break;
+	{
+		this->IncreaseAddStat(ENERGY, value);
+	} break;
 	}
 }
 
 void Player::ApplySocketBonus(bool flag, uint8 socket_bonus)
 {
-	if ( flag )
+	if (flag)
 	{
 		return;
 	}
 
 	item_socket_bonus const* bonus = sItemMgr->GetSocketBonus(socket_bonus);
 
-	if ( !bonus )
+	if (!bonus)
 		return;
 
 	uint32 value = bonus->GetValue();
 
-	switch(socket_bonus)
+	switch (socket_bonus)
 	{
 	case 0:
 	case 6:
 	case 12:
 	case 18:
 	case 24:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
+	} break;
 
 	case 1:
 	case 7:
 	case 13:
 	case 19:
 	case 25:
-		{
-			this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
+	} break;
 
 	case 2:
 	case 8:
 	case 14:
 	case 20:
 	case 26:
-		{
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
+	} break;
 
 	case 3:
 	case 9:
 	case 15:
 	case 21:
 	case 27:
-		{
-			this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
+	} break;
 
 	case 4:
 	case 10:
@@ -2701,9 +2700,9 @@ void Player::ApplySocketBonus(bool flag, uint8 socket_bonus)
 	case 34:
 	case 36:
 	case 38:
-		{
-			this->IncreaseIntData(UNIT_INT_DEFENSE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_DEFENSE, value);
+	} break;
 
 	case 5:
 	case 11:
@@ -2715,15 +2714,15 @@ void Player::ApplySocketBonus(bool flag, uint8 socket_bonus)
 	case 35:
 	case 37:
 	case 39:
-		{
-			this->PowerIncreseAdd(POWER_LIFE, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_LIFE, value, false);
+	} break;
 	}
 }
 
-void Player::ApplySocketPackage(bool flag, uint8 * socket_count)
+void Player::ApplySocketPackage(bool flag, uint8* socket_count)
 {
-	if ( flag )
+	if (flag)
 	{
 		return;
 	}
@@ -2788,7 +2787,7 @@ void Player::CalculateAncientItemStat()
 			}
 		}
 
-		AncientSetData & data = this->m_AncientSetDataMap[ancient_option];
+		AncientSetData& data = this->m_AncientSetDataMap[ancient_option];
 
 		data.SetID(ancient_option);
 		data.IncreaseParts(1);
@@ -2805,7 +2804,7 @@ void Player::CalculateAncientItemStat()
 
 	for (AncientSetDataMap::iterator it = this->m_AncientSetDataMap.begin(); it != this->m_AncientSetDataMap.end(); ++it)
 	{
-		AncientSetData & data = it->second;
+		AncientSetData& data = it->second;
 
 		uint8 option_id = data.GetID();
 		int32 option_count = data.GetParts();
@@ -2848,7 +2847,7 @@ void Player::CalculateAncientItem()
 
 	for (AncientSetDataMap::iterator it = this->m_AncientSetDataMap.begin(); it != this->m_AncientSetDataMap.end(); ++it)
 	{
-		AncientSetData & data = it->second;
+		AncientSetData& data = it->second;
 
 		uint8 option_id = data.GetID();
 		int32 option_count = data.GetParts();
@@ -2875,7 +2874,7 @@ void Player::CalculateAncientItem()
 	}
 }
 
-bool Player::GetAncientOption(uint8 option_id, int32 OptTableNum, uint8 * option, int32 * value)
+bool Player::GetAncientOption(uint8 option_id, int32 OptTableNum, uint8* option, int32* value)
 {
 	option[0] = -1;
 	value[0] = 0;
@@ -2884,19 +2883,19 @@ bool Player::GetAncientOption(uint8 option_id, int32 OptTableNum, uint8 * option
 
 	item_set_option const* option_data = sItemMgr->GetItemSetOption(option_id);
 
-	if ( !option_data )
+	if (!option_data)
 	{
 		return false;
 	}
 
-	if ( OptTableNum >= option_data->GetOptionCount() )
+	if (OptTableNum >= option_data->GetOptionCount())
 	{
 		return false;
 	}
 
-	if ( OptTableNum >= MAX_ITEM_ANCIENT_OPTION )
+	if (OptTableNum >= MAX_ITEM_ANCIENT_OPTION)
 	{
-		if ( OptTableNum <= (MAX_ITEM_ANCIENT_OPTION + 1) )
+		if (OptTableNum <= (MAX_ITEM_ANCIENT_OPTION + 1))
 		{
 			option[0] = option_data->GetExtraOptionTable(OptTableNum - MAX_ITEM_ANCIENT_OPTION);
 			value[0] = option_data->GetExtraOptionTableValue(OptTableNum - MAX_ITEM_ANCIENT_OPTION);
@@ -2915,205 +2914,205 @@ bool Player::GetAncientOption(uint8 option_id, int32 OptTableNum, uint8 * option
 
 void Player::SetAncientOptionStat(uint8 option, int32 value)
 {
-	switch ( option )
+	switch (option)
 	{
 	case ANCIENT_EFFECT_STRENGTH:
-		{
-			this->IncreaseAddStat(STRENGTH, value);
-		} break;
+	{
+		this->IncreaseAddStat(STRENGTH, value);
+	} break;
 
 	case ANCIENT_EFFECT_AGILITY:
-		{
-			this->IncreaseAddStat(AGILITY, value);
-		} break;
+	{
+		this->IncreaseAddStat(AGILITY, value);
+	} break;
 
 	case ANCIENT_EFFECT_VITALITY:
-		{
-			this->IncreaseAddStat(VITALITY, value);
-		} break;
+	{
+		this->IncreaseAddStat(VITALITY, value);
+	} break;
 
 	case ANCIENT_EFFECT_ENERGY:
-		{
-			this->IncreaseAddStat(ENERGY, value);
-		} break;
+	{
+		this->IncreaseAddStat(ENERGY, value);
+	} break;
 
 	case ANCIENT_EFFECT_LEADERSHIP:
+	{
+		if (this->GetClass() == Character::DARK_LORD)
 		{
-			if (this->GetClass() == Character::DARK_LORD)
-			{
-				this->IncreaseAddStat(LEADERSHIP, value);
-			}
-		} break;
+			this->IncreaseAddStat(LEADERSHIP, value);
+		}
+	} break;
 
 	case ANCIENT_EFFECT_INCREASE_ALL_STATS:
-		{
-			this->IncreaseAddStat(STRENGTH, value);
-			this->IncreaseAddStat(AGILITY, value);
-			this->IncreaseAddStat(VITALITY, value);
-			this->IncreaseAddStat(ENERGY, value);
+	{
+		this->IncreaseAddStat(STRENGTH, value);
+		this->IncreaseAddStat(AGILITY, value);
+		this->IncreaseAddStat(VITALITY, value);
+		this->IncreaseAddStat(ENERGY, value);
 
-			if ( this->GetClass() == Character::DARK_LORD )
-			{
-				this->IncreaseAddStat(LEADERSHIP, value);
-			}
-		} break;
+		if (this->GetClass() == Character::DARK_LORD)
+		{
+			this->IncreaseAddStat(LEADERSHIP, value);
+		}
+	} break;
 	}
 }
 
 void Player::SetAncientOption(uint8 option, int32 value)
 {
-	if ( !CHECK_RANGE(option, ANCIENT_EFFECT_MAX) )
+	if (!CHECK_RANGE(option, ANCIENT_EFFECT_MAX))
 	{
 		return;
 	}
 
 	this->IncreaseAncientEffect(option, value);
 
-	switch ( option )
+	switch (option)
 	{
 	case ANCIENT_EFFECT_ATTACK_DAMAGE_MIN:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
+	} break;
 
 	case ANCIENT_EFFECT_ATTACK_DAMAGE_MAX:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
+	} break;
 
 	case ANCIENT_EFFECT_MAGIC_DAMAGE:
-		{
-			this->PercentIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
-			this->PercentIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
-		} break;
+	{
+		this->PercentIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
+		this->PercentIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
+	} break;
 
 	case ANCIENT_EFFECT_DAMAGE:
-		{
-			this->IncreaseIntData(UNIT_INT_DAMAGE_ADD, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_DAMAGE_ADD, value);
+	} break;
 
 	case ANCIENT_EFFECT_ATTACK_RATE:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_RATE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_RATE, value);
+	} break;
 
 	case ANCIENT_EFFECT_DEFENSE:
-		{
-			//this->IncreaseIntData(UNIT_INT_DEFENSE, value * 10 / 20);
-			this->IncreaseIntData(UNIT_INT_DEFENSE, value);
-		} break;
+	{
+		//this->IncreaseIntData(UNIT_INT_DEFENSE, value * 10 / 20);
+		this->IncreaseIntData(UNIT_INT_DEFENSE, value);
+	} break;
 
 	case ANCIENT_EFFECT_MAX_LIFE:
-		{
-			this->PowerIncreseAdd(POWER_LIFE, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_LIFE, value, false);
+	} break;
 
 	case ANCIENT_EFFECT_MAX_MANA:
-		{
-			this->PowerIncreseAdd(POWER_MANA, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_MANA, value, false);
+	} break;
 
 	case ANCIENT_EFFECT_MAX_STAMINA:
-		{
-			this->PowerIncreseAdd(POWER_STAMINA, value, false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_STAMINA, value, false);
+	} break;
 
 	case ANCIENT_EFFECT_STAMINA_VALUE:
-		{
-			this->IncreaseData(PLAYER_DATA_AG_RECOVERY_ADD, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_AG_RECOVERY_ADD, value);
+	} break;
 
 	case ANCIENT_EFFECT_CRITICAL_DAMAGE_RATE:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, value);
+	} break;
 
 	case ANCIENT_EFFECT_CRITICAL_DAMAGE:
-		{
-			this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, value);
+	} break;
 
 	case ANCIENT_EFFECT_EXCELLENT_DAMAGE_RATE:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, value);
+	} break;
 
 	case ANCIENT_EFFECT_EXCELLENT_DAMAGE:
-		{
-			this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, value);
+	} break;
 
 	case ANCIENT_EFFECT_SKILL_DAMAGE_ADD:
-		{
-			this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, value);
+	} break;
 
 	case ANCIENT_EFFECT_DOUBLE_DAMAGE_RATE:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_DOUBLE_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_DOUBLE_DAMAGE_RATE, value);
+	} break;
 
 	case ANCIENT_EFFECT_IGNORE_DEFENSE_RATE:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, value);
+	} break;
 
 	case ANCIENT_EFFECT_SHIELD_DEFENSE:
-		{
-			this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE, value);
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE, value);
+	} break;
 
 	case ANCIENT_EFFECT_TWO_HAND_SWORD_DAMAGE:
+	{
+		if ((this->GetInventory()->GetItem(WEAPON_01)->IsValid() && this->GetInventory()->GetItem(WEAPON_01)->IsTwoHand()) ||
+			(this->GetInventory()->GetItem(WEAPON_02)->IsValid() && this->GetInventory()->GetItem(WEAPON_02)->IsTwoHand()))
 		{
-			if ( (this->GetInventory()->GetItem(WEAPON_01)->IsValid() && this->GetInventory()->GetItem(WEAPON_01)->IsTwoHand()) || 
-				 (this->GetInventory()->GetItem(WEAPON_02)->IsValid() && this->GetInventory()->GetItem(WEAPON_02)->IsTwoHand() ) )
-			{
-				this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
-				this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
-				this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
-				this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
-			}
-		} break;
+			this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
+			this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
+			this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
+			this->PercentIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
+		}
+	} break;
 
 	case ANCIENT_EFFECT_INCREASE_DEFENSE_BASE:
-		{
-			this->IncreaseIntData(UNIT_INT_DEFENSE_BASE, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_DEFENSE_BASE, value);
+	} break;
 
 	case ANCIENT_EFFECT_DAMAGE_2:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, value);
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, value);
+	} break;
 
 	case ANCIENT_EFFECT_MAGIC_DAMAGE_2:
-		{
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
+	} break;
 
 	case ANCIENT_EFFECT_TRIPLE_DAMAGE:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_TRIPLE_DAMAGE_RATE, value);
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_TRIPLE_DAMAGE_RATE, value);
+	} break;
 
 	case ANCIENT_EFFECT_WIZARDRY_CURSE:
-		{
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
-			this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, value);
-			this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, value);
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, value);
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, value);
+		this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, value);
+		this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, value);
+	} break;
 	}
 }
 
 bool Player::GetAncientFullOption(uint8 option_id, int32 count, uint8* option, int32* value)
 {
-	for ( int32 i = 0; i < MAX_ITEM_ANCIENT_OPTION_FULL; ++i )
+	for (int32 i = 0; i < MAX_ITEM_ANCIENT_OPTION_FULL; ++i)
 	{
 		option[i] = -1;
 		value[i] = 0;
@@ -3121,17 +3120,17 @@ bool Player::GetAncientFullOption(uint8 option_id, int32 count, uint8* option, i
 
 	item_set_option const* option_data = sItemMgr->GetItemSetOption(option_id);
 
-	if ( !option_data )
+	if (!option_data)
 	{
 		return false;
 	}
 
-	if ( option_data->GetOptionCount() >= count )
+	if (option_data->GetOptionCount() >= count)
 	{
 		return false;
 	}
 
-	for ( int32 i = 0; i < MAX_ITEM_ANCIENT_OPTION_FULL; ++i )
+	for (int32 i = 0; i < MAX_ITEM_ANCIENT_OPTION_FULL; ++i)
 	{
 		option[i] = option_data->GetFullOptionTable(i);
 		value[i] = option_data->GetFullOptionTableValue(i);
@@ -3175,7 +3174,7 @@ void Player::SetAncientMastery(bool stat)
 		uint8 ancient = pItem->GetAncientType();
 		uint8 ancient_option = pAncientData->GetAncientID(ancient - 1);
 
-		AncientSetData & data = this->m_AncientSetDataMap[ancient_option];
+		AncientSetData& data = this->m_AncientSetDataMap[ancient_option];
 
 		uint8 option_id = data.GetID();
 		int32 option_count = data.GetParts();
@@ -3338,22 +3337,22 @@ int32 Player::GetSpecialItemExperience()
 {
 	Item const* Pet = this->GetInventory()->GetItem(GUARDIAN);
 
-	if ( !Pet->IsValid() )
+	if (!Pet->IsValid())
 	{
 		return 0;
 	}
 
-	if ( Pet->GetItem() == ITEMGET(13, 80) ||
-		 Pet->GetItem() == ITEMGET(13, 123) )
+	if (Pet->GetItem() == ITEMGET(13, 80) ||
+		Pet->GetItem() == ITEMGET(13, 123))
 	{
-		if ( this->GetInventory()->IsWearingRing(ITEMGET(13, 76), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 77), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 78), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 122), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 163), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 164), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 165), 0) ||
-			 this->GetInventory()->IsWearingRing(ITEMGET(13, 268), 0) )
+		if (this->GetInventory()->IsWearingRing(ITEMGET(13, 76), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 77), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 78), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 122), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 163), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 164), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 165), 0) ||
+			this->GetInventory()->IsWearingRing(ITEMGET(13, 268), 0))
 		{
 			return sGameServer->GetPetComboExperience();
 		}
@@ -4012,44 +4011,44 @@ void Player::ApplyMasteryBonus(bool stat)
 		switch (pData->GetType())
 		{
 		case 1:
+		{
+			switch (pData->GetID())
 			{
-				switch (pData->GetID())
+			case 1:
+			case 2:
+			case 3:
+			{
+				if (!stat)
 				{
-				case 1:
-				case 2:
-				case 3:
-					{
-						if (!stat)
-						{
-							this->IncreaseIntData(UNIT_INT_DAMAGE_DECREASE_ADD, pData->GetValue());
-						}
-					} break;
+					this->IncreaseIntData(UNIT_INT_DAMAGE_DECREASE_ADD, pData->GetValue());
 				}
 			} break;
+			}
+		} break;
 
 		case 2:
+		{
+			switch (pData->GetID())
 			{
-				switch (pData->GetID())
+			case 1:
+			case 2:
+			case 3:
+			{
+				if (stat)
 				{
-				case 1:
-				case 2:
-				case 3:
-					{
-						if (stat)
-						{
-							this->IncreaseAddStat(STRENGTH, pData->GetValue());
-							this->IncreaseAddStat(AGILITY, pData->GetValue());
-							this->IncreaseAddStat(VITALITY, pData->GetValue());
-							this->IncreaseAddStat(ENERGY, pData->GetValue());
+					this->IncreaseAddStat(STRENGTH, pData->GetValue());
+					this->IncreaseAddStat(AGILITY, pData->GetValue());
+					this->IncreaseAddStat(VITALITY, pData->GetValue());
+					this->IncreaseAddStat(ENERGY, pData->GetValue());
 
-							if (this->GetClass() == Character::DARK_LORD)
-							{
-								this->IncreaseAddStat(LEADERSHIP, pData->GetValue());
-							}
-						}
-					} break;
+					if (this->GetClass() == Character::DARK_LORD)
+					{
+						this->IncreaseAddStat(LEADERSHIP, pData->GetValue());
+					}
 				}
 			} break;
+			}
+		} break;
 		}
 	}
 }
@@ -4098,60 +4097,60 @@ void Player::ApplyWingGradedOption(bool stat)
 		switch (id)
 		{
 		case 0:
-			{
-				this->IncreaseFloatData(UNIT_FLOAT_TOTAL_MANA_RECOVERY, value);
-			} break;
+		{
+			this->IncreaseFloatData(UNIT_FLOAT_TOTAL_MANA_RECOVERY, value);
+		} break;
 
 		case 1:
-			{
-				this->IncreaseFloatData(UNIT_FLOAT_TOTAL_LIFE_RECOVERY, value);
-			} break;
+		{
+			this->IncreaseFloatData(UNIT_FLOAT_TOTAL_LIFE_RECOVERY, value);
+		} break;
 
 		case 2:
-			{
-				this->IncreaseFloatData(UNIT_FLOAT_TOTAL_REFLECT_DAMAGE, value);
-			} break;
+		{
+			this->IncreaseFloatData(UNIT_FLOAT_TOTAL_REFLECT_DAMAGE, value);
+		} break;
 
 		case 3:
-			{
-				this->IncreaseFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, value);
-			} break;
+		{
+			this->IncreaseFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, value);
+		} break;
 
 		case 4:
-			{
-				this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, value);
-				this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, value);
-			} break;
+		{
+			this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, value);
+			this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, value);
+		} break;
 
 		case 5:
-			{
-				this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, value);
-			} break;
+		{
+			this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, value);
+		} break;
 
 		case 6:
-			{
-				this->IncreaseFloatData(UNIT_FLOAT_DOUBLE_DAMAGE_RATE, value);
-			} break;
+		{
+			this->IncreaseFloatData(UNIT_FLOAT_DOUBLE_DAMAGE_RATE, value);
+		} break;
 
 		case 7:
-			{
-				this->IncreaseAddStat(STRENGTH, value);
-			} break;
+		{
+			this->IncreaseAddStat(STRENGTH, value);
+		} break;
 
 		case 8:
-			{
-				this->IncreaseAddStat(VITALITY, value);
-			} break;
+		{
+			this->IncreaseAddStat(VITALITY, value);
+		} break;
 
 		case 9:
-			{
-				this->IncreaseAddStat(ENERGY, value);
-			} break;
+		{
+			this->IncreaseAddStat(ENERGY, value);
+		} break;
 
 		case 10:
-			{
-				this->IncreaseAddStat(AGILITY, value);
-			} break;
+		{
+			this->IncreaseAddStat(AGILITY, value);
+		} break;
 		}
 	}
 }
@@ -4189,41 +4188,41 @@ void Player::ApplyWingErrtelOption(bool stat)
 			switch (id)
 			{
 			case 0:
-				{
-					this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MIN, value);
-					this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MAX, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MIN, value);
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MAX, value);
+			} break;
 
 			case 1:
-				{
-					  this->IncreaseIntData(UNIT_INT_ELEMENTAL_ATTACK_SUCCESS_RATE, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_ATTACK_SUCCESS_RATE, value);
+			} break;
 
 			case 2:
-				{
-					  this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE_SUCCESS_RATE, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE_SUCCESS_RATE, value);
+			} break;
 
 			case 3:
-				{
-					this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MIN, value);
-					this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MAX, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MIN, value);
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DAMAGE_MAX, value);
+			} break;
 
 			case 4:
-				{
-					this->PercentIntData(UNIT_INT_ELEMENTAL_DEFENSE, value);
-				} break;
+			{
+				this->PercentIntData(UNIT_INT_ELEMENTAL_DEFENSE, value);
+			} break;
 
 			case 5:
-				{
-					  this->IncreaseIntData(UNIT_INT_ELEMENTAL_ATTACK_SUCCESS_RATE, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_ATTACK_SUCCESS_RATE, value);
+			} break;
 
 			case 6:
-				{
-					  this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE_SUCCESS_RATE, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE_SUCCESS_RATE, value);
+			} break;
 			}
 		}
 	}
@@ -4240,9 +4239,9 @@ void Player::ApplyWingErrtelOption(bool stat)
 			switch (id)
 			{
 			case 0:
-				{
-					this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE, value);
-				} break;
+			{
+				this->IncreaseIntData(UNIT_INT_ELEMENTAL_DEFENSE, value);
+			} break;
 			}
 		}
 	}
@@ -4312,190 +4311,190 @@ void Player::ApplyEarringOption(uint8 level, uint8 group, uint8 option, uint8 va
 	switch (option)
 	{
 	case 0:
-		{
-			this->IncreaseAddStat(STRENGTH, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseAddStat(STRENGTH, pEarringValue->GetValue());
+	} break;
 
 	case 1:
-		{
-			this->IncreaseAddStat(AGILITY, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseAddStat(AGILITY, pEarringValue->GetValue());
+	} break;
 
 	case 2:
-		{
-			this->IncreaseAddStat(ENERGY, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseAddStat(ENERGY, pEarringValue->GetValue());
+	} break;
 
 	case 3:
-		{
-			this->IncreaseAddStat(VITALITY, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseAddStat(VITALITY, pEarringValue->GetValue());
+	} break;
 
 	case 4:
+	{
+		if (this->GetClass() == Character::DARK_LORD)
 		{
-			if (this->GetClass() == Character::DARK_LORD)
-			{
-				this->IncreaseAddStat(LEADERSHIP, pEarringValue->GetValue());
-			}
-		} break;
+			this->IncreaseAddStat(LEADERSHIP, pEarringValue->GetValue());
+		}
+	} break;
 
 	case 5:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, pEarringValue->GetValue());
+	} break;
 
 	case 6:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, pEarringValue->GetValue());
+	} break;
 
 	case 7:
-		{
-			//7	"Increases wizardry"	2
-			  ///- TODO:
-		} break;
+	{
+		//7	"Increases wizardry"	2
+		  ///- TODO:
+	} break;
 
 	case 8:
-		{
-			//8	"Increases damage"	2
-			  ///- TODO:
-		} break;
+	{
+		//8	"Increases damage"	2
+		  ///- TODO:
+	} break;
 
 	case 9:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_SPEED, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_MAGIC_SPEED, pEarringValue->GetValue());
+	} break;
 
 	case 10:
-		{
-			this->IncreaseIntData(UNIT_INT_DEFENSE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_DEFENSE, pEarringValue->GetValue());
+	} break;
 
 	case 11:
-		{
-			this->PowerIncreseAdd(POWER_LIFE, pEarringValue->GetValue(), false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_LIFE, pEarringValue->GetValue(), false);
+	} break;
 
 	case 12:
-		{
-			this->PowerIncreseAdd(POWER_MANA, pEarringValue->GetValue(), false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_MANA, pEarringValue->GetValue(), false);
+	} break;
 
 	case 13:
-		{
-			this->PowerIncreseAdd(POWER_STAMINA, pEarringValue->GetValue(), false);
-		} break;
+	{
+		this->PowerIncreseAdd(POWER_STAMINA, pEarringValue->GetValue(), false);
+	} break;
 
 	case 14:
-		{
-			this->IncreaseDataFloat(PLAYER_FLOAT_AG_RECOVERY_RATE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseDataFloat(PLAYER_FLOAT_AG_RECOVERY_RATE, pEarringValue->GetValue());
+	} break;
 
 	case 15:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_CRITICAL_DAMAGE_RATE, pEarringValue->GetValue());
+	} break;
 
 	case 16:
-		{
-			this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, pEarringValue->GetValue());
+	} break;
 
 	case 17:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_EXCELLENT_DAMAGE_RATE, pEarringValue->GetValue());
+	} break;
 
 	case 18:
-		{
-			this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, pEarringValue->GetValue());
+	} break;
 
 	case 19:
-		{
-			this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_SKILL_ADD_DAMAGE, pEarringValue->GetValue());
+	} break;
 
 	case 20:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_DOUBLE_DAMAGE_RATE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_DOUBLE_DAMAGE_RATE, pEarringValue->GetValue());
+	} break;
 
 	case 21:
-		{
-			this->IncreaseFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseFloatData(UNIT_FLOAT_IGNORE_DEFENSE_RATE, pEarringValue->GetValue());
+	} break;
 
 	case 22:
-		{
-			this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseData(PLAYER_DATA_SHIELD_DEFENSE_INCREASE_PERCENT, pEarringValue->GetValue());
+	} break;
 
 	case 23:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_CURSE_DAMAGE_MAX, pEarringValue->GetValue());
+	} break;
 
 	case 26:
-		{
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, pEarringValue->GetValue());
+	} break;
 
 	case 27:
-		{
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, pEarringValue->GetValue());
-			this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, pEarringValue->GetValue());
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, pEarringValue->GetValue());
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, pEarringValue->GetValue());
+	} break;
 
 	case 24:
-		{
-			this->IncreaseAddStat(STRENGTH, pEarringValue->GetValue());
-			this->IncreaseAddStat(AGILITY, pEarringValue->GetValue());
-			this->IncreaseAddStat(ENERGY, pEarringValue->GetValue());
-			this->IncreaseAddStat(VITALITY, pEarringValue->GetValue());
+	{
+		this->IncreaseAddStat(STRENGTH, pEarringValue->GetValue());
+		this->IncreaseAddStat(AGILITY, pEarringValue->GetValue());
+		this->IncreaseAddStat(ENERGY, pEarringValue->GetValue());
+		this->IncreaseAddStat(VITALITY, pEarringValue->GetValue());
 
-			if (this->GetClass() == Character::DARK_LORD)
-			{
-				this->IncreaseAddStat(LEADERSHIP, pEarringValue->GetValue());
-			}
-		} break;
+		if (this->GetClass() == Character::DARK_LORD)
+		{
+			this->IncreaseAddStat(LEADERSHIP, pEarringValue->GetValue());
+		}
+	} break;
 
 	case 28:
-		{
-			   this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-			   this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-			   this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-			   this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-			   this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-			   this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MIN, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_LEFT_MAX, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MIN, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+		this->IncreaseIntData(UNIT_INT_ATTACK_DAMAGE_RIGHT_MAX, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MIN, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+		this->IncreaseIntData(UNIT_INT_MAGIC_DAMAGE_MAX, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+	} break;
 
 	case 29:
-		{
-			   this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_EXCELLENT_DAMAGE_ADD, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+	} break;
 
 	case 30:
-		{
-			   this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
-		} break;
+	{
+		this->IncreaseIntData(UNIT_INT_CRITICAL_DAMAGE_ADD, sFormulaMgr->GetOrCreateValue(9, pEarringValue->GetValue(), level));
+	} break;
 	}
 }
 
@@ -4544,24 +4543,24 @@ void Player::CalculateMaxHP()
 {
 	CharacterBaseData const* base_data = sCharacterBase->GetCharacterBase(this->GetClass());
 
-	if ( !base_data )
+	if (!base_data)
 		return;
 
-	this->PowerSetMax(POWER_LIFE, base_data->GetLife() + 
-					 ((this->GetTotalLevel() - 1) * base_data->GetLevelToLife()) + 
-					 ((this->GetTotalStat(VITALITY) - base_data->GetStat(VITALITY)) * base_data->GetVitalityToLife()));
+	this->PowerSetMax(POWER_LIFE, base_data->GetLife() +
+		((this->GetTotalLevel() - 1) * base_data->GetLevelToLife()) +
+		((this->GetTotalStat(VITALITY) - base_data->GetStat(VITALITY)) * base_data->GetVitalityToLife()));
 }
 
 void Player::CalculateMaxMana()
 {
 	CharacterBaseData const* base_data = sCharacterBase->GetCharacterBase(this->GetClass());
 
-	if ( !base_data )
+	if (!base_data)
 		return;
 
-	this->PowerSetMax(POWER_MANA, base_data->GetMana() + 
-					 ((this->GetTotalLevel() - 1) * base_data->GetLevelToMana()) + 
-					 ((this->GetTotalStat(ENERGY) - base_data->GetStat(ENERGY)) * base_data->GetEnergyToMana()));
+	this->PowerSetMax(POWER_MANA, base_data->GetMana() +
+		((this->GetTotalLevel() - 1) * base_data->GetLevelToMana()) +
+		((this->GetTotalStat(ENERGY) - base_data->GetStat(ENERGY)) * base_data->GetEnergyToMana()));
 }
 
 void Player::CalculateMaxShield()
@@ -4626,7 +4625,7 @@ void Player::CalculateMaxStamina()
 	{
 		stamina = (this->GetTotalStat(STRENGTH) * 0.15f) + (this->GetTotalStat(AGILITY) * 0.2f) + (this->GetTotalStat(VITALITY) * 0.3f) + (this->GetTotalStat(ENERGY) * 1.0f);
 	} break;
-	
+
 	case Character::GUN_CRUSHER:
 	{
 		stamina = (this->GetTotalStat(STRENGTH) / 5) + (this->GetTotalStat(AGILITY) / 5) + (this->GetTotalStat(VITALITY) / 3) + (this->GetTotalStat(ENERGY) * 0.75f);
@@ -4643,7 +4642,7 @@ void Player::SendStats(bool flag)
 	CHARACTER_ATTACK_SPEED_SEND pMsg(this->GetIntData(UNIT_INT_ATTACK_SPEED), this->GetIntData(UNIT_INT_MAGIC_SPEED));
 	this->sendPacket(MAKE_PCT(pMsg));
 
-	if ( !flag )
+	if (!flag)
 	{
 		return;
 	}
@@ -4709,7 +4708,7 @@ void Player::SendStats(bool flag)
 	pMsg3.basic_defense = this->GetIntData(UNIT_INT_DEFENSE_BASE);
 	pMsg3.triple_damage_rate = this->GetFloatData(UNIT_FLOAT_TRIPLE_DAMAGE_RATE);
 	pMsg3.damage_reduction_amount = this->GetIntData(UNIT_INT_DAMAGE_DECREASE_ADD);
-	
+
 	this->sendPacket(MAKE_PCT(pMsg3));
 
 	CHARACTER_ELEMENTAL_DATA pMsg4;
@@ -4751,7 +4750,7 @@ void Player::SendStats(bool flag)
 	 2 = Attack Rate
 	 3 = Attack Rate PVP
 	 4 = Defense
-	 5 = 
+	 5 =
 	 6 = Defense Rate
 	 7 = Defense Rate PVP
 	 8 =
@@ -4762,7 +4761,7 @@ void Player::SendStats(bool flag)
 	CHARACTER_SPECIALIZATION_STAT pMsg5;
 
 	int32 spec_count = 0;
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_DAMAGE_MIN) > 0 || this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_DAMAGE_MAX) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_DAMAGE_MIN) > 0 || this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_DAMAGE_MAX) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 1;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_DAMAGE_MIN);
@@ -4770,42 +4769,42 @@ void Player::SendStats(bool flag)
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_SUCCESS_RATE) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_SUCCESS_RATE) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 2;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_SUCCESS_RATE);
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_SUCCESS_RATE_PVP) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_SUCCESS_RATE_PVP) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 3;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_ATTACK_SUCCESS_RATE_PVP);
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 4;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE);
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE_SUCCESS_RATE) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE_SUCCESS_RATE) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 6;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE_SUCCESS_RATE);
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE_SUCCESS_RATE_PVP) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE_SUCCESS_RATE_PVP) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 7;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_DEFENSE_SUCCESS_RATE_PVP);
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_MAGIC_DAMAGE_MIN) > 0 || this->GetSpecializationStat(CHARACTER_SPECIALIZATION_MAGIC_DAMAGE_MAX) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_MAGIC_DAMAGE_MIN) > 0 || this->GetSpecializationStat(CHARACTER_SPECIALIZATION_MAGIC_DAMAGE_MAX) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 9;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_MAGIC_DAMAGE_MIN);
@@ -4813,7 +4812,7 @@ void Player::SendStats(bool flag)
 		spec_count++;
 	}
 
-	if ( this->GetSpecializationStat(CHARACTER_SPECIALIZATION_CURSE_DAMAGE_MIN) > 0 || this->GetSpecializationStat(CHARACTER_SPECIALIZATION_CURSE_DAMAGE_MAX) > 0 && spec_count < 5 )
+	if (this->GetSpecializationStat(CHARACTER_SPECIALIZATION_CURSE_DAMAGE_MIN) > 0 || this->GetSpecializationStat(CHARACTER_SPECIALIZATION_CURSE_DAMAGE_MAX) > 0 && spec_count < 5)
 	{
 		pMsg5.data[spec_count].type = 10;
 		pMsg5.data[spec_count].spl_value1 = this->GetSpecializationStat(CHARACTER_SPECIALIZATION_CURSE_DAMAGE_MIN);
@@ -4858,12 +4857,12 @@ void Player::CalculateNextExperience()
 {
 	uint8 level_type = LEVEL_DATA_NORMAL;
 
-	if ( this->IsMaster() )
+	if (this->IsMaster())
 	{
 		level_type = LEVEL_DATA_MASTER;
 	}
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		level_type = LEVEL_DATA_MAJESTIC;
 	}
@@ -4875,12 +4874,12 @@ int64 Player::GetNextExperience(int16 add_level) const
 {
 	uint8 level_type = LEVEL_DATA_NORMAL;
 
-	if ( this->IsMaster() )
+	if (this->IsMaster())
 	{
 		level_type = LEVEL_DATA_MASTER;
 	}
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		level_type = LEVEL_DATA_MAJESTIC;
 	}
@@ -4895,15 +4894,15 @@ void Player::AutoRefill()
 		this->IncreasePowerFillCount(i, 1);
 	}
 
-	if ( this->GetPowerFillCount(POWER_LIFE) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_LIFE): sGameServer->GetAutoRecuperationCount(POWER_LIFE)) )
+	if (this->GetPowerFillCount(POWER_LIFE) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_LIFE) : sGameServer->GetAutoRecuperationCount(POWER_LIFE)))
 	{
 		this->SetPowerFillCount(POWER_LIFE, 0);
 
-		if ( this->PowerGet(POWER_LIFE) < this->PowerGetTotal(POWER_LIFE) )
+		if (this->PowerGet(POWER_LIFE) < this->PowerGetTotal(POWER_LIFE))
 		{
 			float rate = this->GetDataFloat(PLAYER_FLOAT_HP_RECOVERY_RATE);
 
-			if ( sGameServer->IsAutoRecuperationEnabled(POWER_LIFE) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_LIFE) )
+			if (sGameServer->IsAutoRecuperationEnabled(POWER_LIFE) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_LIFE))
 			{
 				rate += this->GetPowerAutorecuperationTime(POWER_LIFE)->GetElapsed() > 5000 ? 5 : 0;
 			}
@@ -4912,12 +4911,12 @@ void Player::AutoRefill()
 
 			value += this->GetData(PLAYER_DATA_HP_RECOVERY_ADD);
 
-			if ( this->HasBuff(BUFF_PARALYSIS) )
+			if (this->HasBuff(BUFF_PARALYSIS))
 			{
 				value -= value * sGameServer->GetRadianceParalysisEffect() / 100;
 			}
 
-			if ( value < 0 )
+			if (value < 0)
 			{
 				value = 0;
 			}
@@ -4926,17 +4925,17 @@ void Player::AutoRefill()
 		}
 	}
 
-	if ( this->GetPowerFillCount(POWER_SHIELD) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_SHIELD): sGameServer->GetAutoRecuperationCount(POWER_SHIELD)) )
+	if (this->GetPowerFillCount(POWER_SHIELD) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_SHIELD) : sGameServer->GetAutoRecuperationCount(POWER_SHIELD)))
 	{
 		this->SetPowerFillCount(POWER_SHIELD, 0);
 
-		if ( this->PowerGet(POWER_SHIELD) < this->PowerGetTotal(POWER_SHIELD) )
+		if (this->PowerGet(POWER_SHIELD) < this->PowerGetTotal(POWER_SHIELD))
 		{
 			float rate = this->GetDataFloat(PLAYER_FLOAT_SD_RECOVERY_RATE);
 
-			if ( this->GetData(PLAYER_DATA_SHIELD_REFILL_ON) != 0 || this->IsInSafeZone() )
+			if (this->GetData(PLAYER_DATA_SHIELD_REFILL_ON) != 0 || this->IsInSafeZone())
 			{
-				if ( sGameServer->IsAutoRecuperationEnabled(POWER_SHIELD) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_SHIELD) )
+				if (sGameServer->IsAutoRecuperationEnabled(POWER_SHIELD) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_SHIELD))
 				{
 					rate += this->GetPowerAutorecuperationTime(POWER_SHIELD)->GetElapsed() > 5000 ? 5 : 0;
 				}
@@ -4946,12 +4945,12 @@ void Player::AutoRefill()
 
 			value += this->GetData(PLAYER_DATA_SD_RECOVERY_ADD);
 
-			if ( this->HasBuff(BUFF_PARALYSIS) )
+			if (this->HasBuff(BUFF_PARALYSIS))
 			{
 				value -= value * sGameServer->GetRadianceParalysisEffect() / 100;
 			}
 
-			if ( value < 0 )
+			if (value < 0)
 			{
 				value = 0;
 			}
@@ -4960,15 +4959,15 @@ void Player::AutoRefill()
 		}
 	}
 
-	if ( this->GetPowerFillCount(POWER_MANA) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_MANA): sGameServer->GetAutoRecuperationCount(POWER_MANA)) )
+	if (this->GetPowerFillCount(POWER_MANA) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_MANA) : sGameServer->GetAutoRecuperationCount(POWER_MANA)))
 	{
 		this->SetPowerFillCount(POWER_MANA, 0);
 
-		if ( this->PowerGet(POWER_MANA) < this->PowerGetTotal(POWER_MANA) )
+		if (this->PowerGet(POWER_MANA) < this->PowerGetTotal(POWER_MANA))
 		{
 			float rate = this->GetDataFloat(PLAYER_FLOAT_MP_RECOVERY_RATE);
 
-			if ( sGameServer->IsAutoRecuperationEnabled(POWER_MANA) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_MANA) )
+			if (sGameServer->IsAutoRecuperationEnabled(POWER_MANA) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_MANA))
 			{
 				rate += this->GetPowerAutorecuperationTime(POWER_MANA)->GetElapsed() > 5000 ? 3 : 0;
 			}
@@ -4977,29 +4976,29 @@ void Player::AutoRefill()
 
 			value += this->GetData(PLAYER_DATA_MP_RECOVERY_ADD);
 
-			if ( this->HasBuff(BUFF_PARALYSIS) )
+			if (this->HasBuff(BUFF_PARALYSIS))
 			{
 				value -= value * sGameServer->GetRadianceParalysisEffect() / 100;
 			}
 
-			if ( value < 0 )
+			if (value < 0)
 			{
 				value = 0;
 			}
-			
+
 			this->PowerIncrease(POWER_MANA, value, true);
 		}
 	}
 
-	if ( this->GetPowerFillCount(POWER_STAMINA) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_STAMINA): sGameServer->GetAutoRecuperationCount(POWER_STAMINA)) )
+	if (this->GetPowerFillCount(POWER_STAMINA) > (this->IsRest() ? sGameServer->GetAutoRecuperationCountRest(POWER_STAMINA) : sGameServer->GetAutoRecuperationCount(POWER_STAMINA)))
 	{
 		this->SetPowerFillCount(POWER_STAMINA, 0);
 
-		if ( this->PowerGet(POWER_STAMINA) < this->PowerGetTotal(POWER_STAMINA) )
+		if (this->PowerGet(POWER_STAMINA) < this->PowerGetTotal(POWER_STAMINA))
 		{
 			float rate = this->GetDataFloat(PLAYER_FLOAT_AG_RECOVERY_RATE);
 
-			if ( sGameServer->IsAutoRecuperationEnabled(POWER_STAMINA) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_STAMINA) )
+			if (sGameServer->IsAutoRecuperationEnabled(POWER_STAMINA) && this->GetTotalLevel() <= sGameServer->GetAutoRecuperationMaxLevel(POWER_STAMINA))
 			{
 				rate += this->GetPowerAutorecuperationTime(POWER_STAMINA)->GetElapsed() > 5000 ? 3 : 0;
 			}
@@ -5008,12 +5007,12 @@ void Player::AutoRefill()
 
 			value += this->GetData(PLAYER_DATA_AG_RECOVERY_ADD);
 
-			if ( this->HasBuff(BUFF_PARALYSIS) )
+			if (this->HasBuff(BUFF_PARALYSIS))
 			{
 				value -= value * sGameServer->GetRadianceParalysisEffect() / 100;
 			}
 
-			if ( value < 0 )
+			if (value < 0)
 			{
 				value = 0;
 			}
@@ -5025,40 +5024,40 @@ void Player::AutoRefill()
 
 bool Player::IsSpecialCharacter()
 {
-	return (this->GetClass() == Character::MAGIC_GLADIATOR || 
-			this->GetClass() == Character::DARK_LORD ||
-			this->GetClass() == Character::RAGE_FIGHTER ||
-			this->GetClass() == Character::GROW_LANCER);
+	return (this->GetClass() == Character::MAGIC_GLADIATOR ||
+		this->GetClass() == Character::DARK_LORD ||
+		this->GetClass() == Character::RAGE_FIGHTER ||
+		this->GetClass() == Character::GROW_LANCER);
 }
 
 void Player::UpdateInterface()
 {
-	if ( this->GetInterfaceState()->GetID() == InterfaceData::None )
+	if (this->GetInterfaceState()->GetID() == InterfaceData::None)
 		return;
 
-	if ( this->GetInterfaceState()->GetID() == InterfaceData::DuelGate )
+	if (this->GetInterfaceState()->GetID() == InterfaceData::DuelGate)
 	{
 		sDuelMgr->SendDuelRoomStatus(this);
 	}
 
-	if ( this->GetInterfaceState()->GetState() )
+	if (this->GetInterfaceState()->GetState())
 		return;
 
-	if ( !this->GetInterfaceState()->GetTime() )
+	if (!this->GetInterfaceState()->GetTime())
 		return;
 
-	if ( GetTickCount() < this->GetInterfaceState()->GetTime() )
+	if (GetTickCount() < this->GetInterfaceState()->GetTime())
 		return;
-	
-	if ( this->GetInterfaceState()->GetID() == InterfaceData::Party )
+
+	if (this->GetInterfaceState()->GetID() == InterfaceData::Party)
 	{
 		this->PartyRequestResult(PARTY_REQUEST_FAILED);
 	}
-	else if ( this->GetInterfaceState()->GetID() == InterfaceData::Trade )
+	else if (this->GetInterfaceState()->GetID() == InterfaceData::Trade)
 	{
 		this->TradeResult(TRADE_OVER_TIME_AUTO_CANCEL);
 	}
-	else if ( this->GetInterfaceState()->GetID() == InterfaceData::Duel )
+	else if (this->GetInterfaceState()->GetID() == InterfaceData::Duel)
 	{
 		this->SetDueling(false);
 		this->SetDuelScore(0);
@@ -5066,7 +5065,7 @@ void Player::UpdateInterface()
 		this->SetDuelClassic(false);
 		this->SetDuelTarget(nullptr);
 	}
-	else if ( this->GetInterfaceState()->GetID() == InterfaceData::GuildWarRequest )
+	else if (this->GetInterfaceState()->GetID() == InterfaceData::GuildWarRequest)
 	{
 		sGuildWarMgr->StartWarRequestResult(this, 0);
 	}
@@ -5085,15 +5084,15 @@ uint8 Player::GetManaPotionSlot()
 {
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->GetItem(i)->IsItem() )
+		if (!this->GetInventory()->GetItem(i)->IsItem())
 			continue;
 
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) ) 
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 			continue;
 
-		if ( this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 4) ||
-			 this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 5) ||
-			 this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 6) )
+		if (this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 4) ||
+			this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 5) ||
+			this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 6))
 		{
 			return i;
 		}
@@ -5101,13 +5100,13 @@ uint8 Player::GetManaPotionSlot()
 
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->GetItem(i)->IsItem() )
+		if (!this->GetInventory()->GetItem(i)->IsItem())
 			continue;
 
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) ) 
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 			continue;
 
-		if ( this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 71) )
+		if (this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(14, 71))
 		{
 			return i;
 		}
@@ -5118,12 +5117,12 @@ uint8 Player::GetManaPotionSlot()
 
 void Player::DecreaseItemDurabilityByUse(uint8 position, float durability)
 {
-	if ( !this->GetInventory()->GetItem(position)->IsItem() )
+	if (!this->GetInventory()->GetItem(position)->IsItem())
 		return;
 
 	this->GetInventory()->GetItem(position)->AlterDurability(0, durability);
 
-	if ( this->GetInventory()->GetItem(position)->GetDurability() > 0.0f )
+	if (this->GetInventory()->GetItem(position)->GetDurability() > 0.0f)
 	{
 		this->SendItemDurability(position, 1);
 	}
@@ -5135,33 +5134,33 @@ void Player::DecreaseItemDurabilityByUse(uint8 position, float durability)
 
 void Player::ItemDelete(uint16 item, uint8 level, int32 count)
 {
-	if ( count <= 0 )
+	if (count <= 0)
 	{
 		return;
 	}
 
 	item_template const* item_info = sItemMgr->GetItem(item);
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		return;
 	}
 
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 		{
 			continue;
 		}
 
-		Item * pItem = this->GetInventory()->GetItem(i);
+		Item* pItem = this->GetInventory()->GetItem(i);
 
-		if ( !pItem )
+		if (!pItem)
 		{
 			continue;
 		}
 
-		if ( !pItem->IsItem() )
+		if (!pItem->IsItem())
 		{
 			continue;
 		}
@@ -5239,17 +5238,17 @@ void Player::ItemDeleteByUse(uint8 slot)
 
 bool Player::UpgradeItemCommon(uint8 source_slot, uint8 target_slot)
 {
-	if ( !use_inventory_range(source_slot) ||
-		 !use_inventory_range(target_slot) )
+	if (!use_inventory_range(source_slot) ||
+		!use_inventory_range(target_slot))
 		return false;
 
-	if ( !this->GetInventory()->GetItem(source_slot)->IsItem() ||
-		 !this->GetInventory()->GetItem(target_slot)->IsItem() )
-		 return false;
+	if (!this->GetInventory()->GetItem(source_slot)->IsItem() ||
+		!this->GetInventory()->GetItem(target_slot)->IsItem())
+		return false;
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(source_slot) ||
-		 !this->GetInventory()->CanUseExpandedSlot(target_slot) )
-		 return false;
+	if (!this->GetInventory()->CanUseExpandedSlot(source_slot) ||
+		!this->GetInventory()->CanUseExpandedSlot(target_slot))
+		return false;
 
 	return true;
 }
@@ -5263,24 +5262,24 @@ void Player::UpgradeItemSuccess(uint8 source_slot, uint8 target_slot)
 
 bool Player::UpgradeItemUsingBless(uint8 source_slot, uint8 target_slot)
 {
-	if ( !this->UpgradeItemCommon(source_slot, target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 		return false;
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	Item * source_item = this->GetInventory()->GetItem(source_slot);
-	
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+	Item* source_item = this->GetInventory()->GetItem(source_slot);
+
 	item_template const* item_info = sItemMgr->GetItem(target_item->GetItem());
 
-	if ( !item_info )
+	if (!item_info)
 		return false;
 
-	if ( !item_info->IsFlag(ITEM_FLAG_ALLOW_BLESS) )
+	if (!item_info->IsFlag(ITEM_FLAG_ALLOW_BLESS))
 		return false;
 
-	if ( target_item->GetExpireDate() > 0 )
+	if (target_item->GetExpireDate() > 0)
 		return false;
 
-	if( target_item->GetItem() == ITEMGET(0, 41) ) // Pick Axe
+	if (target_item->GetItem() == ITEMGET(0, 41)) // Pick Axe
 	{
 		if (target_item->GetDurability() >= item_info->GetDurability())
 		{
@@ -5291,7 +5290,7 @@ bool Player::UpgradeItemUsingBless(uint8 source_slot, uint8 target_slot)
 
 		goto upgrade_success;
 	}
-	else if( target_item->GetItem() == ITEMGET(13, 268) ) // Dark Transformation Ring
+	else if (target_item->GetItem() == ITEMGET(13, 268)) // Dark Transformation Ring
 	{
 		if (target_item->GetDurability() >= item_info->GetDurability())
 		{
@@ -5313,7 +5312,7 @@ bool Player::UpgradeItemUsingBless(uint8 source_slot, uint8 target_slot)
 
 		goto upgrade_success;
 	}
-	else if ( target_item->GetItem() == PET_FENRIR )
+	else if (target_item->GetItem() == PET_FENRIR)
 	{
 		if (target_item->GetDurability() >= item_info->GetDurability())
 		{
@@ -5326,17 +5325,17 @@ bool Player::UpgradeItemUsingBless(uint8 source_slot, uint8 target_slot)
 
 			target_item->AlterDurability(1, add_durability);
 
-			this->SendNotice(NOTICE_NORMAL_BLUE,"[FENRIR REPAIR] It's life Successfully Regenerated (%d/255).", int32(target_item->GetDurability()));
+			this->SendNotice(NOTICE_NORMAL_BLUE, "[FENRIR REPAIR] It's life Successfully Regenerated (%d/255).", int32(target_item->GetDurability()));
 		}
 		else
 		{
-			this->SendNotice(NOTICE_NORMAL_BLUE,"[FENRIR REPAIR] It's life Failed to Regenerate (%d).", int32(target_item->GetDurability()));
+			this->SendNotice(NOTICE_NORMAL_BLUE, "[FENRIR REPAIR] It's life Failed to Regenerate (%d).", int32(target_item->GetDurability()));
 		}
 
 		goto upgrade_success;
 	}
 
-	if ( target_item->GetLevel() >= 6 )
+	if (target_item->GetLevel() >= 6)
 	{
 		return false;
 	}
@@ -5346,38 +5345,38 @@ bool Player::UpgradeItemUsingBless(uint8 source_slot, uint8 target_slot)
 	target_item->AlterDurability(3, 0.0f);
 	target_item->Convert(true);
 
-upgrade_success:	
+upgrade_success:
 
-	sLog->outInfo("jewel", "[ Jewel of Bless ] Success: [Source: %d (%u/ %u/ %u) / Target: %d (%d / %d) (%u/ %u/ %u)] --- %s", 
-		source_slot, source_item->GetSerialServer(), source_item->GetSerial(), source_item->GetSerialShop(), 
-		target_slot, target_item->GetItem(), target_item->GetLevel(), target_item->GetSerialServer(), target_item->GetSerial(), target_item->GetSerialShop(), 
+	sLog->outInfo("jewel", "[ Jewel of Bless ] Success: [Source: %d (%u/ %u/ %u) / Target: %d (%d / %d) (%u/ %u/ %u)] --- %s",
+		source_slot, source_item->GetSerialServer(), source_item->GetSerial(), source_item->GetSerialShop(),
+		target_slot, target_item->GetItem(), target_item->GetLevel(), target_item->GetSerialServer(), target_item->GetSerial(), target_item->GetSerialShop(),
 		this->BuildLog().c_str());
 
 	this->UpgradeItemSuccess(source_slot, target_slot);
-	
+
 	return true;
 }
-	
+
 bool Player::UpgradeItemUsingSoul(uint8 source_slot, uint8 target_slot)
 {
 	if (!sGameServer->IsJewelOfSoulEnabled())
 		return false;
 
-	if ( !this->UpgradeItemCommon(source_slot, target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 		return false;
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	Item * source_item = this->GetInventory()->GetItem(source_slot);
-	
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+	Item* source_item = this->GetInventory()->GetItem(source_slot);
+
 	item_template const* item_info = sItemMgr->GetItem(target_item->GetItem());
 
-	if ( !item_info )
+	if (!item_info)
 		return false;
 
-	if ( !item_info->IsFlag(ITEM_FLAG_ALLOW_SOUL) )
+	if (!item_info->IsFlag(ITEM_FLAG_ALLOW_SOUL))
 		return false;
 
-	if ( target_item->GetLevel() >= 9 )
+	if (target_item->GetLevel() >= 9)
 		return false;
 
 	int32 success = sGameServer->GetJewelOfSoulRate();
@@ -5396,11 +5395,11 @@ bool Player::UpgradeItemUsingSoul(uint8 source_slot, uint8 target_slot)
 	}
 	else
 	{
-		if ( target_item->GetLevel() >= 7 )
+		if (target_item->GetLevel() >= 7)
 		{
 			target_item->SetLevel(0);
 		}
-		else if ( target_item->GetLevel() > 0 )
+		else if (target_item->GetLevel() > 0)
 		{
 			target_item->ReduceLevel(1);
 		}
@@ -5409,16 +5408,16 @@ bool Player::UpgradeItemUsingSoul(uint8 source_slot, uint8 target_slot)
 	target_item->AlterDurability(3, 0.0f);
 	target_item->Convert(true);
 
-	sLog->outInfo("jewel", "[ Jewel of Soul ] %s - Rate: %d: [Source: %d (%u/ %u/ %u) / Target: %d (%d / %d) (%u/ %u/ %u)] --- %s", 
+	sLog->outInfo("jewel", "[ Jewel of Soul ] %s - Rate: %d: [Source: %d (%u/ %u/ %u) / Target: %d (%d / %d) (%u/ %u/ %u)] --- %s",
 		is_success ? "Success" : "Fail", success,
-		source_slot, source_item->GetSerialServer(), source_item->GetSerial(), source_item->GetSerialShop(), 
-		target_slot, target_item->GetItem(), target_item->GetLevel(), target_item->GetSerialServer(), target_item->GetSerial(), target_item->GetSerialShop(), 
+		source_slot, source_item->GetSerialServer(), source_item->GetSerial(), source_item->GetSerialShop(),
+		target_slot, target_item->GetItem(), target_item->GetLevel(), target_item->GetSerialServer(), target_item->GetSerial(), target_item->GetSerialShop(),
 		this->BuildLog().c_str());
 
 	this->UpgradeItemSuccess(source_slot, target_slot);
 	return true;
 }
-	
+
 bool Player::UpgradeItemUsingLife(uint8 source_slot, uint8 target_slot)
 {
 	if (!sGameServer->IsJewelOfLifeEnabled())
@@ -5431,8 +5430,8 @@ bool Player::UpgradeItemUsingLife(uint8 source_slot, uint8 target_slot)
 		return false;
 	}
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+
 	item_template const* item_info = sItemMgr->GetItem(target_item->GetItem());
 
 	if (!item_info)
@@ -5469,18 +5468,18 @@ bool Player::UpgradeItemUsingLife(uint8 source_slot, uint8 target_slot)
 			switch (Random(3))
 			{
 			case 1:
-				{
-					target_item->OrExe(0x10);
-				} break;
+			{
+				target_item->OrExe(0x10);
+			} break;
 
 			case 2:
-				{
-					target_item->OrExe(0x20);
-				} break;
+			{
+				target_item->OrExe(0x20);
+			} break;
 
 			default:
-				{
-				} break;
+			{
+			} break;
 			}
 		}
 		else if (target_item->IsWingMonster())
@@ -5493,7 +5492,7 @@ bool Player::UpgradeItemUsingLife(uint8 source_slot, uint8 target_slot)
 			}
 		}
 	}
-	
+
 	int32 rate = Random(sGameServer->jewel_of_life_max_rate.get());
 	int32 success = sGameServer->jewel_of_life_rate_normal.get();
 
@@ -5530,55 +5529,55 @@ bool Player::UpgradeItemUsingLife(uint8 source_slot, uint8 target_slot)
 
 bool Player::UpgradeItemUsingHarmony(uint8 source_slot, uint8 target_slot)
 {
-	if ( !sGameServer->IsHarmonyEnabled() )
+	if (!sGameServer->IsHarmonyEnabled())
 	{
 		return false;
 	}
 
-	if ( !this->UpgradeItemCommon(source_slot, target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 	{
 		return false;
 	}
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
 
 	item_template const* item_info = sItemMgr->GetItem(target_item->GetItem());
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		return false;
 	}
 
-	if ( !item_info->IsFlag(ITEM_FLAG_ALLOW_HARMONY) )
+	if (!item_info->IsFlag(ITEM_FLAG_ALLOW_HARMONY))
 	{
 		return false;
 	}
 
-	if ( target_item->IsHarmonyUpgrade() )
+	if (target_item->IsHarmonyUpgrade())
 	{
 		return false;
 	}
-	
-	if ( target_item->IsAncient() && !sGameServer->IsHarmonyOnAncient() )
+
+	if (target_item->IsAncient() && !sGameServer->IsHarmonyOnAncient())
 	{
 		return false;
 	}
 
 	HarmonyItemType type = target_item->GetHarmonyItem();
 
-	if ( type == HARMONY_ITEM_NONE )
+	if (type == HARMONY_ITEM_NONE)
 	{
 		return false;
 	}
 
 	item_harmony_data const* harmony_data = sItemMgr->GetRandomHarmonyOption(target_item);
 
-	if ( !harmony_data )
+	if (!harmony_data)
 	{
 		return false;
 	}
-	
-	if ( RANDOM(100) >= sGameServer->harmony_strengthen_rate.get() )
+
+	if (RANDOM(100) >= sGameServer->harmony_strengthen_rate.get())
 	{
 		this->SendNotice(NOTICE_NORMAL_BLUE, "Regeneration gem strengthening defeat.");
 		goto harmony_clear_item;
@@ -5589,7 +5588,7 @@ bool Player::UpgradeItemUsingHarmony(uint8 source_slot, uint8 target_slot)
 	target_item->OrHarmony(harmony_data->GetMinLevel() & 0x0F);
 
 	this->SendNotice(NOTICE_NORMAL_BLUE, "The regeneration gem strengthens successfully.");
-	
+
 	target_item->AlterDurability(3, 0.0f);
 	target_item->Convert(true);
 
@@ -5597,43 +5596,43 @@ harmony_clear_item:
 	this->UpgradeItemSuccess(source_slot, target_slot);
 	return true;
 }
-	
+
 bool Player::UpgradeItemUsingRefineStone(uint8 source_slot, uint8 target_slot)
 {
-	if ( !sGameServer->IsHarmonyEnabled() )
+	if (!sGameServer->IsHarmonyEnabled())
 	{
 		return false;
 	}
 
-	if ( !this->UpgradeItemCommon(source_slot,target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 	{
 		return false;
 	}
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	Item * source_item = this->GetInventory()->GetItem(source_slot);
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+	Item* source_item = this->GetInventory()->GetItem(source_slot);
 	item_template const* item_info = sItemMgr->GetItem(target_item->GetItem());
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		return false;
 	}
 
-	if ( !item_info->IsFlag(ITEM_FLAG_ALLOW_HARMONY) )
+	if (!item_info->IsFlag(ITEM_FLAG_ALLOW_HARMONY))
 	{
 		return false;
 	}
 
-	if ( !target_item->IsHarmonyUpgrade() )
+	if (!target_item->IsHarmonyUpgrade())
 	{
 		return false;
 	}
 
 	uint8 option_level = target_item->GetHarmonyLevel();
 
-	if ( option_level >= target_item->GetLevel() || option_level >= 13 )
+	if (option_level >= target_item->GetLevel() || option_level >= 13)
 	{
-		if ( option_level == 13 )
+		if (option_level == 13)
 		{
 			this->SendNotice(NOTICE_NORMAL_BLUE, "Already strengthened for the fiercest value, was unable to continue to strengthen.");
 		}
@@ -5645,17 +5644,17 @@ bool Player::UpgradeItemUsingRefineStone(uint8 source_slot, uint8 target_slot)
 		return false;
 	}
 
-	if ( target_item->GetHarmonyItem() == HARMONY_ITEM_WEAPON )
+	if (target_item->GetHarmonyItem() == HARMONY_ITEM_WEAPON)
 	{
-		if ( target_item->GetHarmonyOption() == HARMONY_WEAPON_ATTACK_DAMAGE_MIN )
+		if (target_item->GetHarmonyOption() == HARMONY_WEAPON_ATTACK_DAMAGE_MIN)
 		{
 			uint8 next_option_level = option_level + 1;
 
-			if ( item_harmony_data const* item_data = sItemMgr->GetHarmony(target_item->GetHarmonyItem(), target_item->GetHarmonyOption()) )
+			if (item_harmony_data const* item_data = sItemMgr->GetHarmony(target_item->GetHarmonyItem(), target_item->GetHarmonyOption()))
 			{
 				int32 value = item_data->GetValue(next_option_level);
 
-				if ( (target_item->GetMinDamage() + value) > target_item->GetMaxDamage() )
+				if ((target_item->GetMinDamage() + value) > target_item->GetMaxDamage())
 				{
 					this->SendNotice(NOTICE_NORMAL_BLUE, "Already strengthened for the fiercest value, was unable to continue to strengthen.");
 					return false;
@@ -5667,17 +5666,17 @@ bool Player::UpgradeItemUsingRefineStone(uint8 source_slot, uint8 target_slot)
 	int32 success_rate = RANDOM(100);
 	int32 rate = sGameServer->harmony_strengthen_update_normal_rate.get();
 
-	if ( source_item->GetItem() == JEWEL::HIGH_REFINE_STONE )
+	if (source_item->GetItem() == JEWEL::HIGH_REFINE_STONE)
 		rate = sGameServer->harmony_strengthen_update_exe_rate.get();
 
 	item_harmony_data const* item_data = sItemMgr->GetHarmony(target_item->GetHarmonyItem(), target_item->GetHarmonyOption());
 
-	if ( !item_data )
+	if (!item_data)
 	{
 		return false;
 	}
 
-	if ( success_rate >= rate )
+	if (success_rate >= rate)
 	{
 		uint8 next_option_level = item_data->GetMinLevel();
 		target_item->SetHarmony(target_item->GetHarmony() & 0xF0);
@@ -5703,12 +5702,12 @@ bool Player::UpgradeItemUsingRefineStone(uint8 source_slot, uint8 target_slot)
 
 bool Player::UpgradeItemUsingExtension(uint8 source_slot, uint8 target_slot)
 {
-	if ( !this->UpgradeItemCommon(source_slot,target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 		return false;
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	
-	if ( !sItemMgr->IsLuckyItem(target_item->GetItem()) )
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+
+	if (!sItemMgr->IsLuckyItem(target_item->GetItem()))
 	{
 		return false;
 	}
@@ -5722,35 +5721,35 @@ bool Player::UpgradeItemUsingExtension(uint8 source_slot, uint8 target_slot)
 	this->UpgradeItemSuccess(source_slot, target_slot);
 	return true;
 }
-	
+
 bool Player::UpgradeItemUsingElevation(uint8 source_slot, uint8 target_slot)
 {
-	if ( !this->UpgradeItemCommon(source_slot,target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 		return false;
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	
-	if ( !sItemMgr->IsLuckyItem(target_item->GetItem()) )
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+
+	if (!sItemMgr->IsLuckyItem(target_item->GetItem()))
 	{
 		return false;
 	}
 
 	HarmonyItemType type = target_item->GetHarmonyItem();
 
-	if ( type == HARMONY_ITEM_NONE )
+	if (type == HARMONY_ITEM_NONE)
 		return false;
 
 	item_harmony_data const* harmony_data = sItemMgr->GetRandomHarmonyOption(target_item);
 
-	if ( !harmony_data )
+	if (!harmony_data)
 		return false;
-	
+
 	target_item->SetHarmony(HARMONY_EFFECT_NONE);
 	target_item->OrHarmony(harmony_data->GetOption() << 4);
 	target_item->OrHarmony(harmony_data->GetMinLevel() & 0x0F);
 
 	this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "The regeneration gem strengthens successfully.");
-	
+
 	target_item->AlterDurability(3, 0.0f);
 	target_item->Convert(true);
 
@@ -5760,12 +5759,12 @@ bool Player::UpgradeItemUsingElevation(uint8 source_slot, uint8 target_slot)
 
 bool Player::UpgradeItemUsingTradeableSeal(uint8 source_slot, uint8 target_slot)
 {
-	if ( !this->UpgradeItemCommon(source_slot, target_slot) )
+	if (!this->UpgradeItemCommon(source_slot, target_slot))
 		return false;
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
-	
-	if ( !target_item->IsPentagramItem() || target_item->GetDurability() >= 255.0f )
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
+
+	if (!target_item->IsPentagramItem() || target_item->GetDurability() >= 255.0f)
 		return false;
 
 	target_item->AlterDurability(1, 1.0f);
@@ -5782,7 +5781,7 @@ bool Player::UpgradeItemUsingMysteriousStone(uint8 source_slot, uint8 target_slo
 		return false;
 	}
 
-	Item * target_item = this->GetInventory()->GetItem(target_slot);
+	Item* target_item = this->GetInventory()->GetItem(target_slot);
 
 	item_template const* item_info = sItemMgr->GetItem(target_item->GetItem());
 
@@ -5893,9 +5892,9 @@ bool Player::UpgradeItemUsingMysteriousStone(uint8 source_slot, uint8 target_slo
 	return true;
 }
 
-void Player::ItemRepairRequest(uint8 * Packet)
+void Player::ItemRepairRequest(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		this->ItemRepairResult();
 		return;
@@ -5920,21 +5919,21 @@ void Player::ItemRepairRequest(uint8 * Packet)
 		}
 	}
 
-	if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
+	if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
 	{
 		this->ItemRepairResult();
 		return;
 	}
 
-	if ( lpMsg->repair_way == 1 ) // Manual Repair
+	if (lpMsg->repair_way == 1) // Manual Repair
 	{
-		if ( !sGameServer->IsCharacterRepairButtonEnabled() )
+		if (!sGameServer->IsCharacterRepairButtonEnabled())
 		{
 			this->ItemRepairResult();
 			return;
 		}
 
-		if ( this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() < sGameServer->GetCharacterRepairButtonMinLevel() )
+		if (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() < sGameServer->GetCharacterRepairButtonMinLevel())
 		{
 			this->ItemRepairResult();
 			return;
@@ -5942,13 +5941,13 @@ void Player::ItemRepairRequest(uint8 * Packet)
 	}
 	else // Npc Repair
 	{
-		if ( this->GetInterfaceState()->GetID() == InterfaceData::None )
+		if (this->GetInterfaceState()->GetID() == InterfaceData::None)
 		{
 			this->ItemRepairResult();
 			return;
 		}
 
-		if ( !this->GetInterfaceState()->GetTarget() )
+		if (!this->GetInterfaceState()->GetTarget())
 		{
 			this->ItemRepairResult();
 			return;
@@ -5956,14 +5955,14 @@ void Player::ItemRepairRequest(uint8 * Packet)
 
 		Monster* pNpc = this->GetInterfaceState()->GetTarget()->ToCreature();
 
-		if ( !pNpc )
+		if (!pNpc)
 		{
 			this->ItemRepairResult();
 			return;
 		}
 	}
 
-	if ( lpMsg->slot == 0xFF ) // Repair All
+	if (lpMsg->slot == 0xFF) // Repair All
 	{
 		inventory_loop(i, 0, use_inventory_size)
 		{
@@ -5983,25 +5982,25 @@ void Player::ItemRepairRequest(uint8 * Packet)
 		return;
 	}
 
-	if ( !this->GetInventory()->GetItem(lpMsg->slot)->IsItem() )
+	if (!this->GetInventory()->GetItem(lpMsg->slot)->IsItem())
 	{
 		this->ItemRepairResult();
 		return;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(lpMsg->slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(lpMsg->slot))
 	{
 		this->ItemRepairResult();
 		return;
 	}
 
-	if ( !this->GetInventory()->GetItem(lpMsg->slot)->IsFlag(ITEM_FLAG_ALLOW_REPAIR) )
+	if (!this->GetInventory()->GetItem(lpMsg->slot)->IsFlag(ITEM_FLAG_ALLOW_REPAIR))
 	{
 		this->ItemRepairResult();
 		return;
 	}
 
-	if ( this->GetInventory()->GetItem(lpMsg->slot)->GetDurabilityOriginal() <= 0.0f )
+	if (this->GetInventory()->GetItem(lpMsg->slot)->GetDurabilityOriginal() <= 0.0f)
 	{
 		this->ItemRepairResult();
 		return;
@@ -6011,7 +6010,7 @@ void Player::ItemRepairRequest(uint8 * Packet)
 
 	//if ( lpMsg->slot < PLAYER_MAX_EQUIPMENT || lpMsg->slot == PENTAGRAM_SLOT )
 	//{
-		this->CalculateCharacter();
+	this->CalculateCharacter();
 	//}
 }
 
@@ -6037,36 +6036,36 @@ void Player::ItemRepairSingle(uint8 slot, uint8 repair_way)
 
 void Player::ItemRepair(uint8 slot, uint8 repair_way, bool autorepair)
 {
-	Item * item = this->GetInventory()->GetItem(slot);
+	Item* item = this->GetInventory()->GetItem(slot);
 
 	int32 repair_cost = item->GetRepairZen(repair_way);
 
-	if ( repair_cost <= 0 )
+	if (repair_cost <= 0)
 	{
-		if ( !autorepair )
+		if (!autorepair)
 		{
 			this->ItemRepairResult();
 		}
 		return;
 	}
 
-	if ( this->IsAdministrator() )
+	if (this->IsAdministrator())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Repair Cost: %d", repair_cost);
 	}
 
 	repair_cost -= (repair_cost * this->GetDataFloat(PLAYER_DATA_DECREASE_REPAIR_FEE)) / 100;
 
-	if ( !this->MoneyHave(repair_cost) )
+	if (!this->MoneyHave(repair_cost))
 	{
-		if ( !autorepair )
+		if (!autorepair)
 		{
 			this->ItemRepairResult();
 		}
 		return;
 	}
-	
-	if ( !autorepair )
+
+	if (!autorepair)
 	{
 		this->MoneyReduce(repair_cost, false);
 	}
@@ -6081,16 +6080,16 @@ void Player::ItemRepair(uint8 slot, uint8 repair_way, bool autorepair)
 
 	this->SendItemDurability(slot, 0);
 
-	if ( item->GetItem() == PET_DARK_HORSE )
+	if (item->GetItem() == PET_DARK_HORSE)
 	{
 		this->PetInfoResult(1, 0, slot);
 	}
-	else if ( item->GetItem() == PET_DARK_RAVEN )
+	else if (item->GetItem() == PET_DARK_RAVEN)
 	{
 		this->PetInfoResult(0, 0, slot);
 	}
 
-	if ( !autorepair )
+	if (!autorepair)
 	{
 		this->ItemRepairResult(this->MoneyGet());
 	}
@@ -6109,7 +6108,7 @@ void Player::ItemRepairResult(uint32 zen)
 // Hago un respaldo del Inventario
 bool Player::BeginTransaction()
 {
-	if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
+	if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
 		return false;
 
 	this->GetTransactionInventory()->Assign(this->GetInventory());
@@ -6131,7 +6130,7 @@ bool Player::BeginTransaction()
 // No realizo ningun cambio, dejo el inventario como esta
 bool Player::CommitTransaction()
 {
-	if ( this->GetTransaction() != TRANSACTION_TYPE_BEGIN )
+	if (this->GetTransaction() != TRANSACTION_TYPE_BEGIN)
 		return false;
 
 	this->SetTransaction(TRANSACTION_TYPE_COMMIT);
@@ -6141,7 +6140,7 @@ bool Player::CommitTransaction()
 // Devuelvo el inventario a su estado original
 bool Player::RollBackTransaction()
 {
-	if ( this->GetTransaction() != TRANSACTION_TYPE_BEGIN )
+	if (this->GetTransaction() != TRANSACTION_TYPE_BEGIN)
 		return false;
 
 	this->GetInventory()->Assign(this->GetTransactionInventory());
@@ -6153,7 +6152,7 @@ bool Player::RollBackTransaction()
 		this->GetSkill(i)->SetLevel(this->GetTransactionSkill(i)->GetLevel());
 	}
 
-	if ( sGameServer->IsTransactionRollbackCurrency() )
+	if (sGameServer->IsTransactionRollbackCurrency())
 	{
 		this->SetRuudMoney(this->GetTransactionRuud());
 		this->SetCredits(this->GetTransactionCredits());
@@ -6166,13 +6165,13 @@ bool Player::RollBackTransaction()
 
 void Player::CancelAllActivities()
 {
-	if ( this->GetInterfaceState()->GetID() == InterfaceData::Warehouse )
+	if (this->GetInterfaceState()->GetID() == InterfaceData::Warehouse)
 	{
 		this->WarehouseClose();
 	}
-	else if ( this->GetInterfaceState()->GetID() == InterfaceData::Trade )
+	else if (this->GetInterfaceState()->GetID() == InterfaceData::Trade)
 	{
-		if ( this->GetInterfaceState()->GetState() == 1 )
+		if (this->GetInterfaceState()->GetState() == 1)
 		{
 			this->GetInterfaceState()->GetTarget()->ToPlayer()->TradeCancel();
 			this->GetInterfaceState()->GetTarget()->ToPlayer()->TradeResult(0);
@@ -6180,26 +6179,26 @@ void Player::CancelAllActivities()
 			this->TradeResult(0);
 		}
 	}
-	else if ( this->GetInterfaceState()->IsCommonMix() || this->GetInterfaceState()->GetID() == InterfaceData::PetTrainer )
+	else if (this->GetInterfaceState()->IsCommonMix() || this->GetInterfaceState()->GetID() == InterfaceData::PetTrainer)
 	{
 		this->ChaosMixCloseResult();
 		this->MixSafeItemRecoverAttempt();
 	}
 
-	if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
+	if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
 		this->RollBackTransaction();
 
 	this->GetInterfaceState()->Reset();
 }
 
-void Player::TeleportRequest(uint8 * Packet)
+void Player::TeleportRequest(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !this->IsActionAllowed(PlayerAction::PLAYER_ACTION_TELEPORT) )
+	if (!this->IsActionAllowed(PlayerAction::PLAYER_ACTION_TELEPORT))
 	{
 		return;
 	}
@@ -6272,9 +6271,9 @@ void Player::TeleportRequest(TeleportData const* teleportData, uint8 eventId)
 		MoneyReduce(price);
 }
 
-void Player::TeleportRequestSecond(uint8 * Packet)
+void Player::TeleportRequestSecond(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this, false) )
+	if (!Player::IsPlayerBasicState(this, false))
 	{
 		//this->TeleportResult(0, false);
 		return;
@@ -6282,34 +6281,34 @@ void Player::TeleportRequestSecond(uint8 * Packet)
 
 	if (this->HasTeleportRestrictionBuff())
 	{
-		this->TeleportResult(0,false);
+		this->TeleportResult(0, false);
 		return;
 	}
 
-	if ( CC_MAP_RANGE(this->GetWorldId()) )
+	if (CC_MAP_RANGE(this->GetWorldId()))
 	{
-		if ( this->GetEventId() == EVENT_CHAOS_CASTLE && CHAOS_CASTLE_GROUND_RANGE(this->GetEventGround()) )
+		if (this->GetEventId() == EVENT_CHAOS_CASTLE && CHAOS_CASTLE_GROUND_RANGE(this->GetEventGround()))
 		{
-			if ( sChaosCastleMgr->GetGround(this->GetEventGround())->GetState() == CHAOS_CASTLE_STATE_PLAYEND )
+			if (sChaosCastleMgr->GetGround(this->GetEventGround())->GetState() == CHAOS_CASTLE_STATE_PLAYEND)
 			{
-				this->TeleportResult(0,false);
+				this->TeleportResult(0, false);
 				return;
 			}
 		}
-		else if ( this->GetEventId() == EVENT_CHAOS_CASTLE_SURVIVAL )
+		else if (this->GetEventId() == EVENT_CHAOS_CASTLE_SURVIVAL)
 		{
-			if ( sChaosCastleSurvivalMgr->GetGround()->GetState() == CHAOS_CASTLE_STATE_PLAYEND )
+			if (sChaosCastleSurvivalMgr->GetGround()->GetState() == CHAOS_CASTLE_STATE_PLAYEND)
 			{
-				this->TeleportResult(0,false);
+				this->TeleportResult(0, false);
 				return;
 			}
 		}
 	}
 
-	if ( this->GetNova()->IsRunning() )
+	if (this->GetNova()->IsRunning())
 	{
 		this->RunNova();
-		this->TeleportResult(0,false);
+		this->TeleportResult(0, false);
 		return;
 	}
 
@@ -6335,7 +6334,7 @@ void Player::TeleportRequestSecond(uint8 * Packet)
 			return;
 		}
 
-		Skill * mSkill = this->MagicGet(SKILL_TELEPORT);
+		Skill* mSkill = this->MagicGet(SKILL_TELEPORT);
 
 		if (!mSkill)
 		{
@@ -6449,58 +6448,58 @@ void Player::TeleportRequestSecond(uint8 * Packet)
 		}
 		else
 		{*/
-			this->TeleportResult(1, false);
+		this->TeleportResult(1, false);
 		//}
 	}
 }
 
-void Player::TeleportRequestTarget(uint8 * Packet)
+void Player::TeleportRequestTarget(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this, false) )
+	if (!Player::IsPlayerBasicState(this, false))
 	{
 		return;
 	}
 
-	if ( this->IsInSafeZone() )
+	if (this->IsInSafeZone())
 	{
 		return;
 	}
 
-	if ( this->HasBuff(BUFF_STUN) || this->HasBuff(BUFF_SLEEP) || this->HasBuff(BUFF_EARTH_PRISON))
+	if (this->HasBuff(BUFF_STUN) || this->HasBuff(BUFF_SLEEP) || this->HasBuff(BUFF_EARTH_PRISON))
 	{
 		return;
 	}
 
 	POINTER_PCT_LOG(TELEPORT_REQUEST_TARGET, lpMsg, Packet, 0);
 
-	Player * mPlayer = sObjectMgr->FindPlayer(lpMsg->entry);
+	Player* mPlayer = sObjectMgr->FindPlayer(lpMsg->entry);
 
-	if ( !Player::IsPlayerBasicState(mPlayer, false) )
+	if (!Player::IsPlayerBasicState(mPlayer, false))
 	{
 		return;
 	}
 
-	if ( !this->SameDimension(mPlayer) )
+	if (!this->SameDimension(mPlayer))
 	{
 		return;
 	}
 
-	if ( this->GetPartyID() == PARTY_NULL )
+	if (this->GetPartyID() == PARTY_NULL)
 	{
 		return;
 	}
 
-	if ( mPlayer->GetPartyID() != this->GetPartyID() )
+	if (mPlayer->GetPartyID() != this->GetPartyID())
 	{
 		return;
 	}
 
-	if ( !mPlayer->TeleportAreaCheck(lpMsg->x, lpMsg->y) )
+	if (!mPlayer->TeleportAreaCheck(lpMsg->x, lpMsg->y))
 	{
 		return;
 	}
 
-	if ( sCrywolf->IsInAltar(mPlayer) )
+	if (sCrywolf->IsInAltar(mPlayer))
 	{
 		return;
 	}
@@ -6510,16 +6509,16 @@ void Player::TeleportRequestTarget(uint8 * Packet)
 		return;
 	}
 
-	Skill * mSkill = this->MagicGet(SKILL_MASS_TELEPORT);
+	Skill* mSkill = this->MagicGet(SKILL_MASS_TELEPORT);
 
-	if ( !mSkill )
+	if (!mSkill)
 	{
 		return;
 	}
 
 	skill_template const* skill_info = sSkillMgr->GetSkill(mSkill->GetSkill());
 
-	if ( !skill_info )
+	if (!skill_info)
 	{
 		return;
 	}
@@ -6527,7 +6526,7 @@ void Player::TeleportRequestTarget(uint8 * Packet)
 	int32 manause = this->SkillManaUse(mSkill, skill_info);
 	int32 staminause = this->SkillStaminaUse(mSkill, skill_info);
 
-	if ( !this->PowerHas(POWER_MANA, manause) || !this->PowerHas(POWER_STAMINA, staminause) )
+	if (!this->PowerHas(POWER_MANA, manause) || !this->PowerHas(POWER_STAMINA, staminause))
 	{
 		return;
 	}
@@ -6544,7 +6543,7 @@ void Player::TeleportRequestTarget(uint8 * Packet)
 
 void Player::TeleportResult(uint16 id, bool regen)
 {
-	if ( regen )
+	if (regen)
 	{
 		TELEPORT_RESULT pMsg(id, this->GetRegenLocation()->GetDisplayWorld(), this->GetRegenLocation()->GetX(), this->GetRegenLocation()->GetY(), this->GetRegenLocation()->GetDirection());
 		this->sendPacket(MAKE_PCT(pMsg));
@@ -6647,7 +6646,7 @@ void Player::TeleportToLocation(uint16 world)
 {
 	World* pWorld = sWorldMgr->GetWorld(world);
 
-	if ( !pWorld )
+	if (!pWorld)
 	{
 		return;
 	}
@@ -6683,11 +6682,11 @@ void Player::StartRegen(uint16 world, int16 x, int16 y, uint8 direction, int32 i
 {
 	this->CancelAllActivities();
 
-	if ( this->GetWorldId() != world )
+	if (this->GetWorldId() != world)
 	{
 		uint16 server_move = sWorldMgr->AllowMoveToWorld(this, world);
 
-		if ( server_move != sGameServer->GetServerCode() )
+		if (server_move != sGameServer->GetServerCode())
 		{
 			//if ( server_move == uint16(-1) )
 			//	return;
@@ -6713,9 +6712,9 @@ void Player::StartRegen(uint16 world, int16 x, int16 y, uint8 direction, int32 i
 	this->GetRegenLocation()->SetY(y);
 	this->GetRegenLocation()->SetDirection(direction);
 	this->GetRegenLocation()->SetInstance(instance);
-	
+
 	sTeleport->SendBattleZone(this, this->GetRegenLocation()->GetWorldId());
-	
+
 	sLog->outInfo(LOG_PLAYER, "Teleport From [World:%d - %d/%d - Instance:%d] To [World:%d - %d/%d - Instance:%d] -- %s",
 		this->GetWorldId(), this->GetX(), this->GetY(), this->GetInstance(), world, x, y, instance, this->BuildLog().c_str());
 
@@ -6732,24 +6731,24 @@ void Player::StartRegen(uint16 world, int16 x, int16 y, uint8 direction, int32 i
 
 	this->ClearPathData();
 	this->SetRegenStatus(REGEN_STANDBY);
-	
+
 	this->RestoreEventAnimation();
 
 	//this->ViewportDeleteSend();
 
-	if ( world != WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE )
+	if (world != WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE)
 	{
 		this->TeleportResult(1);
 	}
 
-	if ( world != WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE )
+	if (world != WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE)
 	{
 		//this->ViewportCreate(VIEWPORT_CREATE_FLAG_ME);
 		this->ViewportCreate(VIEWPORT_CREATE_FLAG_ME | VIEWPORT_CREATE_FLAG_GEN | VIEWPORT_CREATE_FLAG_GUILD | VIEWPORT_CREATE_FLAG_SIEGE);
 
 		this->ViewportClear();
 	}
-	
+
 	this->SendExperienceEvent();
 }
 
@@ -6760,13 +6759,13 @@ void Player::MoveFail()
 
 void Player::DataLoadingConfirm()
 {
-	if ( this->GetRegenStatus() == REGEN_STANDBY )
+	if (this->GetRegenStatus() == REGEN_STANDBY)
 		this->SetRegenStatus(REGEN_READY);
 }
 
 void Player::UpdateStatus()
 {
-	if ( this->GetTeleportStatus() == TELEPORT_NONE && this->GetViewState() == VIEW_STATE_TELEPORT )
+	if (this->GetTeleportStatus() == TELEPORT_NONE && this->GetViewState() == VIEW_STATE_TELEPORT)
 	{
 		this->SetViewState(VIEW_STATE_NONE);
 	}
@@ -6778,27 +6777,27 @@ void Player::UpdateStatus()
 
 	this->UpdateTeleport();
 
-	if ( this->GetState() == OBJECT_STATE_STAND_BY )
+	if (this->GetState() == OBJECT_STATE_STAND_BY)
 	{
 		this->SetState(OBJECT_STATE_READY);
 	}
 
-	if ( this->GetRegenStatus() == REGEN_STARTED )
+	if (this->GetRegenStatus() == REGEN_STARTED)
 	{
 		this->SetRegenStatus(REGEN_NONE);
 	}
-	
-	if ( this->GetRegenStatus() == REGEN_STANDBY && this->GetHelper()->IsOffline() )
+
+	if (this->GetRegenStatus() == REGEN_STANDBY && this->GetHelper()->IsOffline())
 	{
 		this->SetRegenStatus(REGEN_READY);
 	}
 
-	if ( this->GetRegenStatus() == REGEN_STANDBY && this->GetPersonalStore()->IsOpen() && this->GetPersonalStore()->IsOff() )
+	if (this->GetRegenStatus() == REGEN_STANDBY && this->GetPersonalStore()->IsOpen() && this->GetPersonalStore()->IsOff())
 	{
 		this->SetRegenStatus(REGEN_READY);
 	}
 
-	if ( this->GetRegenStatus() == REGEN_READY )
+	if (this->GetRegenStatus() == REGEN_READY)
 	{
 		this->SetState(OBJECT_STATE_STAND_BY);
 		this->SetRegenStatus(REGEN_STARTED);
@@ -6832,19 +6831,19 @@ void Player::UpdateStatus()
 			this->SetQuestMUAutoMoving(0);
 		}
 
-		if ( this->GetWorldId() == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE )
+		if (this->GetWorldId() == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE)
 		{
 			//this->ViewportCreate(VIEWPORT_CREATE_FLAG_ME | VIEWPORT_CREATE_FLAG_GEN | VIEWPORT_CREATE_FLAG_GUILD | VIEWPORT_CREATE_FLAG_SIEGE);
 		}
 	}
 
-	if ( this->GetRegenStatus() == REGEN_NONE )
+	if (this->GetRegenStatus() == REGEN_NONE)
 	{
-		if ( this->GetWorldId() != WORLD_LAST_MAN_STANDING && 
-			 this->GetWorldId() != WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE && 
-			 this->GetWorldId() != WORLD_PLACE_OF_QUALIFICATION && 
-			 !sDungeon->IsDungeon(this->GetWorldId()) &&
-			 !IF_MAP_RANGE(this->GetWorldId()))
+		if (this->GetWorldId() != WORLD_LAST_MAN_STANDING &&
+			this->GetWorldId() != WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE &&
+			this->GetWorldId() != WORLD_PLACE_OF_QUALIFICATION &&
+			!sDungeon->IsDungeon(this->GetWorldId()) &&
+			!IF_MAP_RANGE(this->GetWorldId()))
 		{
 			this->SetInstance(-1);
 		}
@@ -6853,18 +6852,18 @@ void Player::UpdateStatus()
 
 void Player::LoadDefaultSkill()
 {
-	if ( this->GetClass() >= Character::MAX_CLASS )
+	if (this->GetClass() >= Character::MAX_CLASS)
 		return;
 
 	CharacterSkillBaseList const& base_list = sCharacterBase->char_skill_base[this->GetClass()];
 
-	for ( CharacterSkillBaseList::const_iterator it = base_list.begin(); it != base_list.end(); ++it )
+	for (CharacterSkillBaseList::const_iterator it = base_list.begin(); it != base_list.end(); ++it)
 	{
 		this->MagicAdd(*it, 0);
 	}
 }
 
-void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
+void Player::GiveSingleExperience(Monster* mMonster, int32 damage)
 {
 	if (sGameServer->GetTimeCheckLevelMax() != -1 && this->GetTotalLevel() > sGameServer->GetTimeCheckLevelMax())
 	{
@@ -6874,7 +6873,7 @@ void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
 
 	World* pWorld = this->GetWorld();
 
-	if ( !pWorld )
+	if (!pWorld)
 		return;
 
 	if (!pWorld->flagHas(WORLD_FLAG_NO_LEVEL_CHECK))
@@ -6894,15 +6893,15 @@ void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
 
 	int32 level = (mMonster->GetLevel() + 25) * mMonster->GetLevel() / 3;
 
-	if ( (mMonster->GetLevel() + 10) < this->GetTotalLevel() )
+	if ((mMonster->GetLevel() + 10) < this->GetTotalLevel())
 		level = ((mMonster->GetLevel() + 10) * level) / this->GetTotalLevel();
 
-	if ( mMonster->GetLevel() >= 65 )
+	if (mMonster->GetLevel() >= 65)
 		level += (mMonster->GetLevel() / 4) * (mMonster->GetLevel() - 64);
 
 	int32 max_level = 0;
 
-	if(level > 0)
+	if (level > 0)
 		max_level = level / 2;
 	else
 		level = 0;
@@ -6934,8 +6933,8 @@ void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
 	}
 
 	experience = experience * pWorld->GetExperienceRate() / 100;
-	
-	if ( sCrywolf->GetOccupationState() == CRYWOLF_OCCUPATION_FAIL && sGameServer->IsCrywolfPenaltyApply() )
+
+	if (sCrywolf->GetOccupationState() == CRYWOLF_OCCUPATION_FAIL && sGameServer->IsCrywolfPenaltyApply())
 	{
 		experience = experience * sGameServer->GetCrywolfPenaltyExperienceGain() / 100;
 	}
@@ -6946,11 +6945,11 @@ void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
 
 	int32 m_zen = 0;
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		m_zen = experience * sGameServer->GetMajesticZen() / 100;
 	}
-	else if ( this->IsMaster() )
+	else if (this->IsMaster())
 	{
 		m_zen = experience * sGameServer->GetMasterZen() / 100;
 	}
@@ -6961,7 +6960,7 @@ void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
 
 	m_zen = m_zen * pWorld->GetZenRate() / 100;
 
-	if ( m_zen < 0 )
+	if (m_zen < 0)
 		m_zen = 0;
 
 	mMonster->IncreaseZen(m_zen);
@@ -6969,40 +6968,141 @@ void Player::GiveSingleExperience(Monster * mMonster, int32 damage)
 	this->GiveExperience(experience, false, true, 1);
 }
 
-void Player::GivePartyExperience(Monster * mMonster, int32 damage)
+void Player::GiveSingleExperienceFormula(Monster* mMonster, int32 damage)
+{
+	if (sGameServer->GetTimeCheckLevelMax() != -1 && this->GetTotalLevel() > sGameServer->GetTimeCheckLevelMax())
+	{
+		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't get more experience on this server.");
+		return;
+	}
+
+	World* pWorld = this->GetWorld();
+
+	if (!pWorld)
+		return;
+
+	if (!pWorld->flagHas(WORLD_FLAG_NO_LEVEL_CHECK))
+	{
+		if (this->IsMajestic() && mMonster->GetLevel() < sGameServer->GetMinMonsterLevelMajestic())
+		{
+			return;
+		}
+
+		if (this->IsMaster() && mMonster->GetLevel() < sGameServer->GetMinMonsterLevelMaster())
+		{
+			return;
+		}
+	}
+
+	this->UpdateGoblinPoints(mMonster);
+
+	int64 experience = 0;
+
+	if (this->GetTotalLevel() <= mMonster->GetMonsterTemplate()->ExpLevel)
+		experience = sFormulaMgr->GetValue(0, 0, this->GetTotalLevel(), this->GetTotalLevel(), mMonster->GetMonsterTemplate()->ExpLevel, this->GetTotalLevel());
+	else
+		experience = sFormulaMgr->GetValue(0, 1, mMonster->GetMonsterTemplate()->ExpLevel, this->GetTotalLevel(), mMonster->GetMonsterTemplate()->ExpLevel, this->GetTotalLevel());
+
+	if (experience < 0)
+		experience = 1;
+
+	if (damage > mMonster->PowerGetTotal(POWER_LIFE))
+		damage = mMonster->PowerGetTotal(POWER_LIFE);
+
+	experience = sFormulaMgr->GetValue(0, 3, (uint32)experience, damage, mMonster->PowerGetTotal(POWER_LIFE));
+
+	int32 m_zen = 0;
+
+	if (this->IsMajestic())
+	{
+		m_zen = experience * sGameServer->GetMajesticZen() / 100;
+	}
+	else if (this->IsMaster())
+	{
+		m_zen = experience * sGameServer->GetMasterZen() / 100;
+	}
+	else
+	{
+		m_zen = experience * sGameServer->GetNormalZen() / 100;
+	}
+
+	m_zen = m_zen * pWorld->GetZenRate() / 100;
+
+	if (m_zen < 0)
+		m_zen = 0;
+
+	mMonster->IncreaseZen(m_zen);
+
+	CharacterExperienceTable const* pCharacterExperienceTable = sCharacterBase->GetCharacterExperienceTable(this);
+
+	if (pCharacterExperienceTable)
+	{
+		experience *= pCharacterExperienceTable->GetExperienceRate();
+	}
+	else
+	{
+		if (this->IsMajestic())
+		{
+			experience *= sGameServer->GetMajesticExperience();
+		}
+		else if (this->IsMaster())
+		{
+			experience *= sGameServer->GetMasterExperience();
+		}
+		else
+		{
+			experience *= sGameServer->GetNormalExperience();
+		}
+	}
+
+	experience = experience * pWorld->GetExperienceRate() / 100;
+
+	if (sCrywolf->GetOccupationState() == CRYWOLF_OCCUPATION_FAIL && sGameServer->IsCrywolfPenaltyApply())
+	{
+		experience = experience * sGameServer->GetCrywolfPenaltyExperienceGain() / 100;
+	}
+
+	this->ApplyBuffExperience(experience, 1);
+
+	sCharacterBase->ApplyExperienceAdjust(this, experience);
+
+	this->GiveExperience(experience, false, true, 1);
+}
+
+void Player::GivePartyExperience(Monster* mMonster, int32 damage)
 {
 	World* pWorld = this->GetWorld();
 
-	if ( !pWorld )
+	if (!pWorld)
 		return;
 
-	bool CharacterBonus[Character::MAX_CLASS] = {false, false, false, false, false, false, false, false, false, false, false};
+	bool CharacterBonus[Character::MAX_CLASS] = { false, false, false, false, false, false, false, false, false, false, false };
 	int32 total_level = 0;
 	int32 party_level = 0;
 	uint8 viewplayer = 0;
 	int32 viewpercent = 100;
-	int32 level = ( mMonster->GetLevel() + 25) * mMonster->GetLevel() / 3;
+	int32 level = (mMonster->GetLevel() + 25) * mMonster->GetLevel() / 3;
 
 	Party* pParty = this->GetParty();
 	Player* pPlayer = nullptr;
 
-	if ( !pParty )
+	if (!pParty)
 		return;
 
-	for ( uint8 i = 0; i < MAX_PARTY_MEMBERS; ++i )
+	for (uint8 i = 0; i < MAX_PARTY_MEMBERS; ++i)
 	{
-		if ( pParty->GetMember(i)->GetStatus() != PARTY_USER_FLAG_PLAYING )
+		if (pParty->GetMember(i)->GetStatus() != PARTY_USER_FLAG_PLAYING)
 			continue;
 
 		pPlayer = pParty->GetMember(i)->GetPlayer();
 
-		if ( !pPlayer )
+		if (!pPlayer)
 			continue;
 
-		if ( !this->SameDimension(pPlayer) )
+		if (!this->SameDimension(pPlayer))
 			continue;
 
-		if ( !IN_RANGE(this, pPlayer, MAX_PARTY_MONSTER_KILL_DISTANCE) )
+		if (!IN_RANGE(this, pPlayer, MAX_PARTY_MONSTER_KILL_DISTANCE))
 			continue;
 
 		viewplayer++;
@@ -7010,12 +7110,12 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 		CharacterBonus[pPlayer->GetClass()] = true;
 	}
 
-	if ( !viewplayer )
+	if (!viewplayer)
 	{
 		return;
 	}
 
-	if( sCharacterBase->IsExperienceBonus(CharacterBonus) )
+	if (sCharacterBase->IsExperienceBonus(CharacterBonus))
 	{
 		viewpercent = sGameServer->GetPartyBonusExperience(viewplayer - 1);
 	}
@@ -7026,19 +7126,19 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 
 	party_level = total_level / viewplayer;
 
-	if ( (mMonster->GetLevel() + 10) < party_level )
+	if ((mMonster->GetLevel() + 10) < party_level)
 	{
 		level = ((mMonster->GetLevel() + 10) * level) / party_level;
 	}
 
-	if ( mMonster->GetLevel() >= 65 )
+	if (mMonster->GetLevel() >= 65)
 	{
 		level += (mMonster->GetLevel() / 4) * (mMonster->GetLevel() - 64);
 	}
 
 	int32 max_level = 0;
 
-	if(level > 0)
+	if (level > 0)
 		max_level = level / 2;
 	else
 		level = 0;
@@ -7050,20 +7150,20 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 
 	total_experience = (total_experience * (viewpercent / viewplayer)) / 100;
 
-	for ( uint8 i = 0; i < MAX_PARTY_MEMBERS; ++i )
+	for (uint8 i = 0; i < MAX_PARTY_MEMBERS; ++i)
 	{
-		if ( pParty->GetMember(i)->GetStatus() != PARTY_USER_FLAG_PLAYING )
+		if (pParty->GetMember(i)->GetStatus() != PARTY_USER_FLAG_PLAYING)
 			continue;
 
 		pPlayer = pParty->GetMember(i)->GetPlayer();
 
-		if ( !pPlayer )
+		if (!pPlayer)
 			continue;
 
-		if ( !this->SameDimension(pPlayer) )
+		if (!this->SameDimension(pPlayer))
 			continue;
 
-		if ( !IN_RANGE(this, pPlayer, MAX_PARTY_MONSTER_KILL_DISTANCE) )
+		if (!IN_RANGE(this, pPlayer, MAX_PARTY_MONSTER_KILL_DISTANCE))
 			continue;
 
 		if (!pWorld->flagHas(WORLD_FLAG_NO_LEVEL_CHECK))
@@ -7116,7 +7216,7 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 
 		experience = experience * pWorld->GetExperienceRate() / 100;
 
-		if ( sCrywolf->GetOccupationState() == CRYWOLF_OCCUPATION_FAIL && sGameServer->IsCrywolfPenaltyApply() )
+		if (sCrywolf->GetOccupationState() == CRYWOLF_OCCUPATION_FAIL && sGameServer->IsCrywolfPenaltyApply())
 		{
 			experience = experience * sGameServer->GetCrywolfPenaltyExperienceGain() / 100;
 		}
@@ -7127,11 +7227,11 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 
 		int32 m_zen = 0;
 
-		if ( pPlayer->IsMajestic() )
+		if (pPlayer->IsMajestic())
 		{
 			m_zen = experience * sGameServer->GetMajesticZen() / 100;
 		}
-		else if ( pPlayer->IsMaster() )
+		else if (pPlayer->IsMaster())
 		{
 			m_zen = experience * sGameServer->GetMasterZen() / 100;
 		}
@@ -7142,7 +7242,7 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 
 		m_zen = m_zen * pWorld->GetZenRate() / 100;
 
-		if ( m_zen < 0 )
+		if (m_zen < 0)
 			m_zen = 0;
 
 		mMonster->IncreaseZen(m_zen);
@@ -7151,20 +7251,195 @@ void Player::GivePartyExperience(Monster * mMonster, int32 damage)
 	}
 }
 
-void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint8 type)
+void Player::GivePartyExperienceFormula(Monster* mMonster, int32 damage)
 {
-	if ( apply_buff )
+	World* pWorld = this->GetWorld();
+
+	if (!pWorld)
+		return;
+
+	bool CharacterBonus[Character::MAX_CLASS] = { false, false, false, false, false, false, false, false, false, false, false };
+	int32 total_level = 0;
+	int32 top_level = 0;
+	uint8 viewplayer = 0;
+	int32 viewpercent = 100;
+	int64 solo_exp = 0;
+
+	Party* pParty = this->GetParty();
+	Player* pPlayer = nullptr;
+
+	if (!pParty)
+		return;
+
+	for (uint8 i = 0; i < MAX_PARTY_MEMBERS; ++i)
+	{
+		if (pParty->GetMember(i)->GetStatus() != PARTY_USER_FLAG_PLAYING)
+			continue;
+
+		pPlayer = pParty->GetMember(i)->GetPlayer();
+
+		if (!pPlayer)
+			continue;
+
+		if (!this->SameDimension(pPlayer))
+			continue;
+
+		if (!IN_RANGE(this, pPlayer, MAX_PARTY_MONSTER_KILL_DISTANCE))
+			continue;
+
+		viewplayer++;
+		total_level += pPlayer->GetTotalLevel();
+		CharacterBonus[pPlayer->GetClass()] = true;
+
+		if (pPlayer->GetTotalLevel() > top_level)
+		{
+			top_level = pPlayer->GetTotalLevel();
+		}
+	}
+
+	if (!viewplayer)
+	{
+		return;
+	}
+
+	if (top_level <= mMonster->GetMonsterTemplate()->ExpLevel)
+		solo_exp = sFormulaMgr->GetValue(0, 0, top_level, top_level, mMonster->GetMonsterTemplate()->ExpLevel, top_level);
+	else
+		solo_exp = sFormulaMgr->GetValue(0, 1, mMonster->GetMonsterTemplate()->ExpLevel, top_level, mMonster->GetMonsterTemplate()->ExpLevel, top_level);
+
+	if (solo_exp < 0)
+		solo_exp = 1;
+
+	if (damage > mMonster->PowerGetTotal(POWER_LIFE))
+		damage = mMonster->PowerGetTotal(POWER_LIFE);
+
+	solo_exp = sFormulaMgr->GetValue(0, 3, (uint32)solo_exp, damage, mMonster->PowerGetTotal(POWER_LIFE));
+
+	if (sCharacterBase->IsExperienceBonus(CharacterBonus))
+	{
+		viewpercent = sGameServer->GetPartyBonusExperience(viewplayer - 1);
+	}
+	else
+	{
+		viewpercent = sGameServer->GetPartyExperience(viewplayer - 1);
+	}
+
+	int64 experience = 0;
+	int32 m_zen = 0;
+
+	for (uint8 i = 0; i < MAX_PARTY_MEMBERS; ++i)
+	{
+		if (pParty->GetMember(i)->GetStatus() != PARTY_USER_FLAG_PLAYING)
+			continue;
+
+		pPlayer = pParty->GetMember(i)->GetPlayer();
+
+		if (!pPlayer)
+			continue;
+
+		if (!this->SameDimension(pPlayer))
+			continue;
+
+		if (!IN_RANGE(this, pPlayer, MAX_PARTY_MONSTER_KILL_DISTANCE))
+			continue;
+
+		if (!pWorld->flagHas(WORLD_FLAG_NO_LEVEL_CHECK))
+		{
+			if (pPlayer->IsMajestic() && mMonster->GetLevel() < sGameServer->GetMinMonsterLevelMajestic())
+			{
+				continue;
+			}
+
+			if (pPlayer->IsMaster() && mMonster->GetLevel() < sGameServer->GetMinMonsterLevelMaster())
+			{
+				continue;
+			}
+		}
+
+		if (sGameServer->GetTimeCheckLevelMax() != -1 && pPlayer->GetTotalLevel() > sGameServer->GetTimeCheckLevelMax())
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't get more experience on this server.");
+			continue;
+		}
+
+		pPlayer->UpdateGoblinPoints(mMonster);
+
+		experience = sFormulaMgr->GetValue(0, 4, (uint32)solo_exp, (float)(viewpercent / 100.0), pPlayer->GetTotalLevel(), total_level);
+
+		if (pPlayer == this)
+		{
+			if (pPlayer->IsMajestic())
+			{
+				m_zen = experience * sGameServer->GetMajesticZen() / 100;
+			}
+			else if (pPlayer->IsMaster())
+			{
+				m_zen = experience * sGameServer->GetMasterZen() / 100;
+			}
+			else
+			{
+				m_zen = experience * sGameServer->GetNormalZen() / 100;
+			}
+
+			m_zen = m_zen * pWorld->GetZenRate() / 100;
+
+			if (m_zen < 0)
+				m_zen = 0;
+		}
+
+		mMonster->IncreaseZen(m_zen);
+
+		CharacterExperienceTable const* pCharacterExperienceTable = sCharacterBase->GetCharacterExperienceTable(pPlayer);
+
+		if (pCharacterExperienceTable)
+		{
+			experience *= pCharacterExperienceTable->GetExperienceRate();
+		}
+		else
+		{
+			if (pPlayer->IsMajestic())
+			{
+				experience *= sGameServer->GetMajesticExperience();
+			}
+			else if (pPlayer->IsMaster())
+			{
+				experience *= sGameServer->GetMasterExperience();
+			}
+			else
+			{
+				experience *= sGameServer->GetNormalExperience();
+			}
+		}
+
+		experience = experience * pWorld->GetExperienceRate() / 100;
+
+		if (sCrywolf->GetOccupationState() == CRYWOLF_OCCUPATION_FAIL && sGameServer->IsCrywolfPenaltyApply())
+		{
+			experience = experience * sGameServer->GetCrywolfPenaltyExperienceGain() / 100;
+		}
+
+		pPlayer->ApplyBuffExperience(experience, viewplayer);
+
+		sCharacterBase->ApplyExperienceAdjust(pPlayer, experience);
+
+		pPlayer->GiveExperience(experience, false, true, 1);
+	}
+}
+
+void Player::GiveExperience(int64& experience, bool apply_buff, bool send, uint8 type)
+{
+	if (apply_buff)
 	{
 		this->ApplyBuffExperience(experience, 1);
 	}
 
-	if ( experience <= 0 )
+	if (experience <= 0)
 	{
 		experience = 0;
 		return;
 	}
 
-	if ( !this->IsActionAllowed(PlayerAction::PLAYER_ACTION_GAIN_EXPERIENCE) )
+	if (!this->IsActionAllowed(PlayerAction::PLAYER_ACTION_GAIN_EXPERIENCE))
 	{
 		experience = 0;
 		return;
@@ -7176,23 +7451,23 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 
 	uint8 level_type = LEVEL_DATA_NORMAL;
 
-	if ( this->IsMaster() )
+	if (this->IsMaster())
 	{
 		level_type = LEVEL_DATA_MASTER;
 	}
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		level_type = LEVEL_DATA_MAJESTIC;
 	}
 
-	if ( this->GetLevelData(level_type)->GetLevel() >= sGameServer->GetMaxLevel(level_type) )
+	if (this->GetLevelData(level_type)->GetLevel() >= sGameServer->GetMaxLevel(level_type))
 	{
 		experience = 0;
 		return;
 	}
 
-	if ( type == 1 )
+	if (type == 1)
 	{
 		sHuntingRecord->Update(this, 0, 0, 0, 0, experience);
 
@@ -7202,7 +7477,7 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 		}
 	}
 
-	if ( (this->GetLevelData(level_type)->GetExperience() + experience) < this->GetLevelData(level_type)->GetNextExperience() )
+	if ((this->GetLevelData(level_type)->GetExperience() + experience) < this->GetLevelData(level_type)->GetNextExperience())
 	{
 		this->GetLevelData(level_type)->IncreaseExperience(experience);
 		goto end_send;
@@ -7210,7 +7485,7 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 
 	int16 level = this->GetTotalLevel();
 
-	while(true)
+	while (true)
 	{
 		this->GetLevelData(level_type)->IncreaseLevel(1);
 
@@ -7221,7 +7496,7 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 		//this->GetLevelData(level_type)->SetExperience(this->GetLevelData(level_type)->GetNextExperience());
 		this->GetLevelData(level_type)->SetExperience(0);
 
-		sLog->outInfo(LOG_PLAYER, "%s %s - Level: %d - %s", this->IsMaster() ? "MasterLevelUp()": "LevelUp()", this->BuildLog().c_str(), this->GetLevelData(level_type)->GetLevel(), this->BuildLocationLog().c_str());
+		sLog->outInfo(LOG_PLAYER, "%s %s - Level: %d - %s", this->IsMaster() ? "MasterLevelUp()" : "LevelUp()", this->BuildLog().c_str(), this->GetLevelData(level_type)->GetLevel(), this->BuildLocationLog().c_str());
 
 		this->CalculateNextExperience();
 
@@ -7234,16 +7509,16 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 			this->NormalSendLevelUp();
 		}*/
 
-		if ( this->GetLevelData(level_type)->GetLevel() >= sGameServer->GetMaxLevel(level_type) )
+		if (this->GetLevelData(level_type)->GetLevel() >= sGameServer->GetMaxLevel(level_type))
 		{
 			experience = 0;
 			break;
 		}
-		
+
 		//if ( (this->GetLevelData(level_type)->GetExperience() + experience) < this->GetLevelData(level_type)->GetNextExperience() )
-		if ( experience < this->GetLevelData(level_type)->GetNextExperience() )
+		if (experience < this->GetLevelData(level_type)->GetNextExperience())
 		{
-			if ( level_type == LEVEL_DATA_NORMAL )
+			if (level_type == LEVEL_DATA_NORMAL)
 			{
 				this->GetLevelData(level_type)->IncreaseExperience(experience);
 			}
@@ -7255,12 +7530,12 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 
 	sCharacterBase->LevelUpReward(this, level);
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		this->MasterSendLevelUp();
 		this->MajesticSkillTreeSendPoints();
 	}
-	else if ( this->IsMaster() )
+	else if (this->IsMaster())
 	{
 		this->MasterSendLevelUp();
 	}
@@ -7269,12 +7544,12 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 		this->NormalSendLevelUp();
 	}
 
-	if ( experience < 0 )
+	if (experience < 0)
 	{
 		experience = 0;
 	}
-	
-	if ( !this->IsMaster() )
+
+	if (!this->IsMaster())
 	{
 		this->CheckAddInfinityArrow();
 	}
@@ -7295,13 +7570,13 @@ void Player::GiveExperience(int64 & experience, bool apply_buff, bool send, uint
 	this->ElfSoldierBuffUP(true);
 	this->UpdateQuestMULevel();
 
-	if ( level_type == LEVEL_DATA_MASTER || level_type == LEVEL_DATA_MAJESTIC )
+	if (level_type == LEVEL_DATA_MASTER || level_type == LEVEL_DATA_MAJESTIC)
 	{
 		this->GetLevelData(level_type)->IncreaseExperience(experience);
 	}
 
 end_send:
-	if ( send )
+	if (send)
 	{
 		this->KillExperienceSend(uint16(-1), experience);
 	}
@@ -7309,12 +7584,12 @@ end_send:
 
 void Player::GivePetExperience(int64 experience)
 {
-	if ( this->GetClass() != Character::DARK_LORD )
+	if (this->GetClass() != Character::DARK_LORD)
 	{
 		return;
 	}
 
-	Item * Mount = this->GetActiveInventoryItem(PET_DARK_HORSE);
+	Item* Mount = this->GetActiveInventoryItem(PET_DARK_HORSE);
 
 	if (Mount && Mount->IsValid())
 	{
@@ -7341,7 +7616,7 @@ void Player::GivePetExperience(int64 experience)
 		}
 	}
 
-	Item * Raven = this->GetActiveInventoryItem(PET_DARK_RAVEN);
+	Item* Raven = this->GetActiveInventoryItem(PET_DARK_RAVEN);
 
 	if (Raven && Raven->IsValid())
 	{
@@ -7373,14 +7648,14 @@ void Player::LevelUpAddPoints()
 {
 	CharacterBaseData const* base_info = sCharacterBase->GetCharacterBase(this->GetClass());
 
-	if ( !base_info )
+	if (!base_info)
 		return;
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		this->GetLevelData(LEVEL_DATA_MAJESTIC)->IncreasePoints(base_info->GetMajesticLevelUpPoints());
 	}
-	else if ( this->IsMaster() )
+	else if (this->IsMaster())
 	{
 		this->GetLevelData(LEVEL_DATA_MASTER)->IncreasePoints(base_info->GetMasterLevelUpPoints());
 	}
@@ -7388,7 +7663,7 @@ void Player::LevelUpAddPoints()
 	{
 		this->GetLevelData(LEVEL_DATA_NORMAL)->IncreasePoints(base_info->GetLevelUpPoints());
 
-		if ( this->QuestEvolutionGetState(2) == QUEST_EVOLUTION_STATE_COMPLETE )
+		if (this->QuestEvolutionGetState(2) == QUEST_EVOLUTION_STATE_COMPLETE)
 		{
 			this->GetLevelData(LEVEL_DATA_NORMAL)->IncreasePoints(base_info->GetPlusLevelUpPoints());
 		}
@@ -7397,7 +7672,7 @@ void Player::LevelUpAddPoints()
 
 void Player::KillExperienceSend(uint16 target, int64 experience, uint16 damage, uint8 flag)
 {
-	if ( experience <= 0 )
+	if (experience <= 0)
 	{
 		return;
 	}
@@ -7406,20 +7681,20 @@ void Player::KillExperienceSend(uint16 target, int64 experience, uint16 damage, 
 	this->sendPacket(MAKE_PCT(pMsg));
 }
 
-void Player::ApplyBuffExperience(int64 & experience, uint8 count)
+void Player::ApplyBuffExperience(int64& experience, uint8 count)
 {
 	int32 experience_rate = 100;
 
 	experience_rate += this->GetData(PLAYER_DATA_ADD_EXPERIENCE_RATE);
 
-	if ( count > 1 )
+	if (count > 1)
 	{
 		experience_rate += static_cast<int32>(this->GetEffect(BUFF_OPTION_INCREASE_EXPERIENCE_PARTY) * (count - 1));
 	}
 
 	experience_rate += this->GetSpecialItemExperience();
 
-	if ( sHappyHour->GetState() == HAPPY_HOUR_STATE_START )
+	if (sHappyHour->GetState() == HAPPY_HOUR_STATE_START)
 	{
 		experience_rate += sGameServer->happy_hour_experience_add.get();
 	}
@@ -7428,18 +7703,18 @@ void Player::ApplyBuffExperience(int64 & experience, uint8 count)
 
 	experience_rate += sWorldMgr->GetWorldExperienceRate(this->GetWorldId(), count);
 
-	if ( this->HasBuff(BUFF_FEEL_TIRED) || this->HasBuff(BUFF_FEEL_EXHAUSTED) )
+	if (this->HasBuff(BUFF_FEEL_TIRED) || this->HasBuff(BUFF_FEEL_EXHAUSTED))
 	{
 		experience_rate = 50;
 	}
 
-	if ( this->GetEffect(BUFF_OPTION_EXPERIENCE_DISABLED) > 0.0f )
+	if (this->GetEffect(BUFF_OPTION_EXPERIENCE_DISABLED) > 0.0f)
 	{
 		experience_rate = 0;
 	}
 
 	experience = experience * experience_rate / 100;
-	
+
 	sVipMgr->ApplyVipExperience(this, experience);
 }
 
@@ -7464,7 +7739,7 @@ void Player::LogLevelUp()
 	MuLogDatabase.CommitTransaction(trans);
 }
 
-void Player::MonsterDiePlus(Unit * mMonster)
+void Player::MonsterDiePlus(Unit* mMonster)
 {
 	if (!mMonster || !mMonster->IsCreature() || !mMonster->ToCreature()->IsMonster())
 	{
@@ -7483,7 +7758,7 @@ void Player::MonsterDiePlus(Unit * mMonster)
 
 void Player::SendSummonedHP(int32 hp, int32 max_hp)
 {
-	if ( !this->GetSummoned() )
+	if (!this->GetSummoned())
 		return;
 
 	SUMMONED_HP pMsg(hp * 100 / max_hp);
@@ -7492,24 +7767,24 @@ void Player::SendSummonedHP(int32 hp, int32 max_hp)
 
 void Player::IncreaseAggroAround(int64 value)
 {
-	Object * mUnit;
+	Object* mUnit;
 
 	VIEWPORT_LOOP(mUnit)
 
-		if ( !mUnit->IsCreature() || !mUnit->ToCreature()->IsMonster() )
+		if (!mUnit->IsCreature() || !mUnit->ToCreature()->IsMonster())
 			continue;
 
-		if ( mUnit->ToUnit()->IsSummoned() && mUnit->ToUnit()->GetSummoner()->IsPlayer() )
-			continue;
+	if (mUnit->ToUnit()->IsSummoned() && mUnit->ToUnit()->GetSummoner()->IsPlayer())
+		continue;
 
-		if ( Party* pParty = this->GetParty() )
-		{
-			pParty->IncreaseAggroAround(this, mUnit->ToCreature(), value);
-		}
-		else
-		{
-			mUnit->ToCreature()->GetThreatManager()->AddThreat(this, value);
-		}
+	if (Party* pParty = this->GetParty())
+	{
+		pParty->IncreaseAggroAround(this, mUnit->ToCreature(), value);
+	}
+	else
+	{
+		mUnit->ToCreature()->GetThreatManager()->AddThreat(this, value);
+	}
 
 	VIEWPORT_CLOSE
 }
@@ -7526,14 +7801,14 @@ void Player::UpdateMovement()
 {
 	World* pWorld = this->GetWorld();
 
-	if ( !pWorld )
+	if (!pWorld)
 	{
 		return;
 	}
 
-	if ( this->HasRestrictionBuff() )
+	if (this->HasRestrictionBuff())
 	{
-		if ( this->GetPathData()->GetCount() > 0 )
+		if (this->GetPathData()->GetCount() > 0)
 		{
 			this->ClearPathData(false);
 		}
@@ -7541,11 +7816,11 @@ void Player::UpdateMovement()
 		return;
 	}
 
-	if ( this->GetHelper()->IsStarted() && this->GetHelper()->IsOffline() )
+	if (this->GetHelper()->IsStarted() && this->GetHelper()->IsOffline())
 	{
-		if ( Unit* pUnit = this->GetHelper()->GetTarget() )
+		if (Unit* pUnit = this->GetHelper()->GetTarget())
 		{
-			if ( IN_RANGE(this, pUnit, this->GetHelper()->GetTargetRange()) )
+			if (IN_RANGE(this, pUnit, this->GetHelper()->GetTargetRange()))
 			{
 				this->ClearPathData(false);
 				return;
@@ -7553,39 +7828,39 @@ void Player::UpdateMovement()
 		}
 	}
 
-	if ( this->GetPathData()->GetCount() > 0 )
+	if (this->GetPathData()->GetCount() > 0)
 	{
 		this->SetIntData(UNIT_INT_MOVE_SPEED, sGameServer->GetPlayerWalkSpeed());
 
-		if ( this->GetPathData()->GetCurrent() >= 14 )
+		if (this->GetPathData()->GetCurrent() >= 14)
 		{
 			return;
 		}
 
-		uint32 MoveTime = this->GetIntData(UNIT_INT_MOVE_SPEED) + (this->HasSlowdownBuff() ? 300: 0);
+		uint32 MoveTime = this->GetIntData(UNIT_INT_MOVE_SPEED) + (this->HasSlowdownBuff() ? 300 : 0);
 
 		PathPosition const* Position = this->GetPathData()->GetPosition(this->GetPathData()->GetCurrent());
-	
-		if( (Position->GetDir() % 2) == 0 )
+
+		if ((Position->GetDir() % 2) == 0)
 		{
 			MoveTime = (uint32)((double)(MoveTime) * 1.3f);
 		}
 
-		if ( this->HasBuff(BUFF_PARALYZE) || this->HasBuff(BUFF_PARALYZE_IMPROVED) )
+		if (this->HasBuff(BUFF_PARALYZE) || this->HasBuff(BUFF_PARALYZE_IMPROVED))
 		{
 			MoveTime += MoveTime * 50 / 100;
 		}
-	
-		if( this->GetMovePathTime()->Elapsed(MoveTime) )
+
+		if (this->GetMovePathTime()->Elapsed(MoveTime))
 		{
 			int16 nextX = Position->GetX();
 			int16 nextY = Position->GetY();
 
 			WorldGrid const& grid = pWorld->GetGrid(nextX, nextY);
 
-			if( grid.IsLocked_1() || grid.IsLocked_2() )
+			if (grid.IsLocked_1() || grid.IsLocked_2())
 			{
-				sLog->outWarn(LOG_PLAYER, "[ MOVEMENT ] %s Map[%d]-(%d,%d) (%d,%d) Can not Move Position Attr[%d]", 
+				sLog->outWarn(LOG_PLAYER, "[ MOVEMENT ] %s Map[%d]-(%d,%d) (%d,%d) Can not Move Position Attr[%d]",
 					this->BuildLog().c_str(), this->GetWorldId(), nextX, nextY, this->GetX(), this->GetY(), grid.attribute);
 
 				this->ClearPathData(true);
@@ -7606,13 +7881,13 @@ void Player::UpdateMovement()
 			this->GetACPathData()->SetX(nextX);
 			this->GetACPathData()->SetY(nextY);
 
-			if ( this->GetHelper()->IsStarted() && this->GetHelper()->IsOffline() )
+			if (this->GetHelper()->IsStarted() && this->GetHelper()->IsOffline())
 			{
 				this->MoveSend(this->GetX(), this->GetY(), this->GetDirection() << 4);
 				this->GetHelper()->SetLastMoveTime(MyGetTickCount());
 			}
 
-			if ( this->GetPathData()->GetCurrent() >= this->GetPathData()->GetCount() )
+			if (this->GetPathData()->GetCurrent() >= this->GetPathData()->GetCount())
 			{
 				this->GetPathData()->SetCurrent(0);
 				this->GetPathData()->SetCount(0);
@@ -7622,7 +7897,7 @@ void Player::UpdateMovement()
 	}
 	else
 	{
-		if ( this->GetPathData()->IsStartEnd() )
+		if (this->GetPathData()->IsStartEnd())
 		{
 			this->GetPathData()->SetStartEnd(false);
 		}
@@ -7633,9 +7908,9 @@ uint8 Player::GetKalimaLevelEntrance()
 {
 	uint8 return_level = -1;
 
-	for ( uint8 i = 0; i < KALIMA_LEVEL; ++i )
+	for (uint8 i = 0; i < KALIMA_LEVEL; ++i)
 	{
-		if ( this->GetTotalLevel() >= g_KalimaLevel[i][this->GetClass()] )
+		if (this->GetTotalLevel() >= g_KalimaLevel[i][this->GetClass()])
 			return_level = i;
 	}
 
@@ -7644,27 +7919,27 @@ uint8 Player::GetKalimaLevelEntrance()
 
 bool Player::CreateKalimaGate(uint8 level, int16 x, int16 y)
 {
-	if ( level == 0 || level > KALIMA_LEVEL )
+	if (level == 0 || level > KALIMA_LEVEL)
 		return false;
 
 	World* pWorld = this->GetWorld();
 
-	if ( !pWorld )
+	if (!pWorld)
 		return false;
 
-	if ( !pWorld->flagHas(WORLD_FLAG_ALLOW_KALIMA_GATE) )
+	if (!pWorld->flagHas(WORLD_FLAG_ALLOW_KALIMA_GATE))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't summon a Kalima gate within this zone.");
 		return false;
 	}
 
-	if ( this->IsInSafeZone() )
+	if (this->IsInSafeZone())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't summon a Kalima gate within safe zone.");
 		return false;
 	}
 
-	if ( sObjectMgr->ExistKalimaGate(this) )
+	if (sObjectMgr->ExistKalimaGate(this))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You already possess a Kalima gate.");
 		return false;
@@ -7672,7 +7947,7 @@ bool Player::CreateKalimaGate(uint8 level, int16 x, int16 y)
 
 	uint8 entrance_level = this->GetKalimaLevelEntrance();
 
-	if ( entrance_level == uint8(-1) || entrance_level < (level-1) )
+	if (entrance_level == uint8(-1) || entrance_level < (level - 1))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You don't have enough level to summon this Kalima gate.");
 		return false;
@@ -7682,9 +7957,9 @@ bool Player::CreateKalimaGate(uint8 level, int16 x, int16 y)
 
 	WorldGrid const& attr = pWorld->GetGrid(x, y);
 
-	if ( attr.attribute != 0 )
+	if (attr.attribute != 0)
 	{
-		if ( !this->GetKalimaGateRandomLocation(x, y) )
+		if (!this->GetKalimaGateRandomLocation(x, y))
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Couldn't find correct zone to summon Kalima gate.");
 			return false;
@@ -7693,9 +7968,9 @@ bool Player::CreateKalimaGate(uint8 level, int16 x, int16 y)
 
 	int32 monster_class = 152 + entrance_level;
 
-	Monster * mMonster = sObjectMgr->MonsterTryAdd(monster_class, this->GetWorldId());
+	Monster* mMonster = sObjectMgr->MonsterTryAdd(monster_class, this->GetWorldId());
 
-	if ( !mMonster )
+	if (!mMonster)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Couldn't summon Kalima gate.");
 		return false;
@@ -7716,7 +7991,7 @@ bool Player::CreateKalimaGate(uint8 level, int16 x, int16 y)
 	return true;
 }
 
-bool Player::GetKalimaGateRandomLocation(int16 & x, int16 & y)
+bool Player::GetKalimaGateRandomLocation(int16& x, int16& y)
 {
 	int32 count = 100;
 	int16 ix = x;
@@ -7724,29 +7999,29 @@ bool Player::GetKalimaGateRandomLocation(int16 & x, int16 & y)
 
 	World* pWorld = this->GetWorld();
 
-	if ( !pWorld )
+	if (!pWorld)
 		return false;
 
-	while ( count-- > 0 )
+	while (count-- > 0)
 	{
 		x = Random(6) * (((Random(2) == 0) ? -1 : 1)) + ix;
 		y = Random(6) * (((Random(2) == 0) ? -1 : 1)) + iy;
 
-		if ( pWorld->GetGrid(x, y).attribute == 0 )
+		if (pWorld->GetGrid(x, y).attribute == 0)
 			return true;
 	}
 
 	return false;
 }
 
-void Player::PetInfoRequest(uint8 * Packet)
+void Player::PetInfoRequest(uint8* Packet)
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 		return;
 
 	POINTER_PCT_LOG(PET_INFO_REQUEST, lpMsg, Packet, 0);
 
-	if ( lpMsg->pet > 1 || lpMsg->type > 6 )
+	if (lpMsg->pet > 1 || lpMsg->type > 6)
 		return;
 
 	this->SetDarkLordPetSlot(lpMsg->slot);
@@ -7758,92 +8033,92 @@ void Player::PetInfoRequest(uint8 * Packet)
 
 void Player::PetInfoResult(uint8 pet, uint8 type, uint8 slot)
 {
-	if ( this->GetDarkLordPetSlot() != slot )
+	if (this->GetDarkLordPetSlot() != slot)
 	{
 		return;
 	}
 
-	if ( this->GetDarkLordPetType() != pet )
+	if (this->GetDarkLordPetType() != pet)
 	{
 		return;
 	}
 
-	if ( this->GetDarkLordPetFlag() != type )
+	if (this->GetDarkLordPetFlag() != type)
 	{
 		return;
 	}
 
-	PET_INFO_RESULT pMsg(pet,type,slot);
+	PET_INFO_RESULT pMsg(pet, type, slot);
 	pMsg.experience = 0;
 	pMsg.level = 0;
 	pMsg.durability = 0;
 	Item const* item = nullptr;
 
-	if ( type == 0 ) // inventory
+	if (type == 0) // inventory
 	{
 		if (slot == 0x0B)
 		{
 			return;
 		}
 
-		if ( inventory_range(slot) )
+		if (inventory_range(slot))
 		{
 			item = this->GetInventory()->GetItem(slot);
 		}
 	}
-	else if ( type == 1 ) // warehouse
+	else if (type == 1) // warehouse
 	{
-		if ( warehouse_range(slot) )
+		if (warehouse_range(slot))
 		{
-			if ( this->GetInterfaceState()->GetID() == InterfaceData::Warehouse )
+			if (this->GetInterfaceState()->GetID() == InterfaceData::Warehouse)
 			{
 				item = this->GetWarehouse()->GetItem(slot);
 			}
 		}
 	}
-	else if ( type == 2 ) // trade
+	else if (type == 2) // trade
 	{
-		if ( trade_range(slot) )
+		if (trade_range(slot))
 		{
-			if ( this->GetInterfaceState()->GetID() == InterfaceData::Trade && this->GetInterfaceState()->GetState() == 1 )
+			if (this->GetInterfaceState()->GetID() == InterfaceData::Trade && this->GetInterfaceState()->GetState() == 1)
 			{
 				item = this->GetTradeInventory()->GetItem(slot);
 			}
 		}
 	}
-	else if ( type == 3 ) // trade target
+	else if (type == 3) // trade target
 	{
-		if ( trade_range(slot) )
+		if (trade_range(slot))
 		{
-			if ( this->GetInterfaceState()->GetID() == InterfaceData::Trade && this->GetInterfaceState()->GetState() == 1 && this->GetInterfaceState()->GetTarget() )
+			if (this->GetInterfaceState()->GetID() == InterfaceData::Trade && this->GetInterfaceState()->GetState() == 1 && this->GetInterfaceState()->GetTarget())
 			{
-				Player * mPlayer = this->GetInterfaceState()->GetTarget()->ToPlayer();
+				Player* mPlayer = this->GetInterfaceState()->GetTarget()->ToPlayer();
 
-				if ( mPlayer->GetInterfaceState()->GetID() == InterfaceData::Trade && mPlayer->GetInterfaceState()->GetState() == 1 && mPlayer->GetInterfaceState()->GetTarget() == this )
+				if (mPlayer->GetInterfaceState()->GetID() == InterfaceData::Trade && mPlayer->GetInterfaceState()->GetState() == 1 && mPlayer->GetInterfaceState()->GetTarget() == this)
 				{
 					item = mPlayer->GetTradeInventory()->GetItem(slot);
 				}
 			}
 		}
 	}
-	else if ( type == 4 ) // chaos
+	else if (type == 4) // chaos
 	{
-		if ( chaos_box_range(slot) )
+		if (chaos_box_range(slot))
 		{
-			if ( this->GetInterfaceState()->IsCommonMix() || this->GetInterfaceState()->GetID() == InterfaceData::PetTrainer )
+			if (this->GetInterfaceState()->IsCommonMix() || this->GetInterfaceState()->GetID() == InterfaceData::PetTrainer)
 			{
 				item = this->GetMixInventory()->GetItem(slot);
 			}
 		}
 	}
-	else if ( type == 5 ) // personal shop
+	else if (type == 5) // personal shop
 	{
-		if ( inventory_range(slot) )
+		if (inventory_range(slot))
 		{
 		}
 	}
 
-	if ( item && item->IsItem() )
+	if (item && item->IsItem())
 	{
 		pMsg.experience = item->pet_dark.experience;
 		pMsg.level = item->pet_dark.level;
@@ -7865,19 +8140,19 @@ void Player::PetInfoLevelUp(uint8 slot, uint8 pet)
 
 bool Player::CreateMercenary(uint8 level, int16 x, int16 y)
 {
-	if ( this->GetWorldId() != WORLD_CASTLE_SIEGE )
+	if (this->GetWorldId() != WORLD_CASTLE_SIEGE)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Soldiers can be summoned only in Castle Siege map.");
 		return false;
 	}
 
-	if ( sCastleSiege->GetState() != CASTLE_SIEGE_STATE_START )
+	if (sCastleSiege->GetState() != CASTLE_SIEGE_STATE_START)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Soldiers can be summoned only after the Siege begins.");
 		return false;
 	}
 
-	if ( !this->isCastleSiegeDefender() )
+	if (!this->isCastleSiegeDefender())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Only the Defensive Alliance can summon Soldiers.");
 		return false;
@@ -7885,54 +8160,54 @@ bool Player::CreateMercenary(uint8 level, int16 x, int16 y)
 
 	Guild* pGuild = this->GuildGet();
 
-	if ( !pGuild )
+	if (!pGuild)
 		return false;
 
-	if ( pGuild->GetMemberRanking(this) != GUILD_RANK_MASTER && pGuild->GetMemberRanking(this) != GUILD_RANK_ASISTANT )
+	if (pGuild->GetMemberRanking(this) != GUILD_RANK_MASTER && pGuild->GetMemberRanking(this) != GUILD_RANK_ASISTANT)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Only the Guild Master and Assistant Guild Master can summon Soldiers.");
 		return false;
 	}
 
-	if ( mercenary_count > 100 )
+	if (mercenary_count > 100)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "The maximum number of Soldiers has been exceeded.");
 		return false;
 	}
 
-	Monster * mMonster = sObjectMgr->MonsterTryAdd((level==0)?286:287, this->GetWorldId());
+	Monster* mMonster = sObjectMgr->MonsterTryAdd((level == 0) ? 286 : 287, this->GetWorldId());
 
-	if ( !mMonster )
+	if (!mMonster)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Soldier summon failed!.");
 		return false;
 	}
 
 	mMonster->SetWorldId(this->GetWorldId());
-	mMonster->SetBasicLocation(x,y,x,y);
+	mMonster->SetBasicLocation(x, y, x, y);
 	mMonster->SetInstance(this->GetInstance());
 	mMonster->SetRespawnType(GAME_OBJECT_RESPAWN_DELETE);
 	mMonster->SetMoveDistance(0);
 	mMonster->SetDirection(1);
 	mMonster->SetCastleSiegeJoinSide(1);
 	mMonster->AddToWorld();
-			
+
 	this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Soldier summon succeeded!.");
 
 	mercenary_count++;
-	
+
 	return true;
 }
 
 bool Player::CreateLifeStone()
 {
-	if ( this->GetWorldId() != WORLD_CASTLE_SIEGE )
+	if (this->GetWorldId() != WORLD_CASTLE_SIEGE)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Life Stone can be summoned only in Castle Siege map");
 		return false;
 	}
 
-	if ( sCastleSiege->GetState() != CASTLE_SIEGE_STATE_START )
+	if (sCastleSiege->GetState() != CASTLE_SIEGE_STATE_START)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't summon the Life Stone after the Siege begins");
 		return false;
@@ -7952,27 +8227,27 @@ bool Player::CreateLifeStone()
 		return false;
 	}
 
-	if ( !this->isCastleSiegeAttacker() )
+	if (!this->isCastleSiegeAttacker())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Can only be used by the Offensive Alliance");
 		return false;
 	}
 
-	if ( pGuild->GetLifeStone() )
+	if (pGuild->GetLifeStone())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Life Stone has already been summoned");
 		return false;
 	}
 
-	if ( this->IsInDragonTower() )
+	if (this->IsInDragonTower())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't summon the Life Stone inside the Dragon Tower");
 		return false;
 	}
 
-	Monster * mMonster = sObjectMgr->MonsterTryAdd(278, this->GetWorldId());
+	Monster* mMonster = sObjectMgr->MonsterTryAdd(278, this->GetWorldId());
 
-	if ( !mMonster )
+	if (!mMonster)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Life Stone summon failed!");
 		return false;
@@ -7998,103 +8273,103 @@ bool Player::CreateLifeStone()
 
 void Player::CommandSend(uint8 type, uint8 cmd1, uint8 cmd2)
 {
-	SERVER_COMMAND pMsg(type,cmd1,cmd2);
+	SERVER_COMMAND pMsg(type, cmd1, cmd2);
 	this->sendPacket(MAKE_PCT(pMsg));
 }
 
 void Player::DamagePet(int32 damage)
 {
-	if ( damage <= 0 )
+	if (damage <= 0)
 		return;
 
-	Item * pet = this->GetInventory()->GetItem(GUARDIAN);
+	Item* pet = this->GetInventory()->GetItem(GUARDIAN);
 
-	if ( !pet->IsItem() || pet->GetDurability() < 1.0f )
+	if (!pet->IsItem() || pet->GetDurability() < 1.0f)
 		return;
 
-	if ( pet->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION) )
+	if (pet->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION))
 		return;
 
-	if ( !pet->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE) )
+	if (!pet->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE))
 		return;
 
-	if ( pet->GetExpireDate() )
+	if (pet->GetExpireDate())
 		return;
 
 	float fN = 10.0f;
 	float fdamage = damage;
 	bool send_dur = false;
 
-	if ( this->GetItemDurabilityReduction(pet->GetDurabilityReduction()) > 0.0f )
+	if (this->GetItemDurabilityReduction(pet->GetDurabilityReduction()) > 0.0f)
 	{
 		fN = this->GetItemDurabilityReduction(pet->GetDurabilityReduction());
 	}
 
-	if ( pet->GetItem() == PET_GUARDIAN_ANGEL )
+	if (pet->GetItem() == PET_GUARDIAN_ANGEL)
 	{
 		fdamage = ((damage * 3) / 10) / fN;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_SATAN )
+	else if (pet->GetItem() == PET_SATAN)
 	{
 		fdamage = ((damage * 2) / 10) / fN;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_DEMON )
+	else if (pet->GetItem() == PET_DEMON)
 	{
 		fdamage = ((damage * 3) / 10) / 20.0f;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_SPIRIT_OF_GUARDIAN )
+	else if (pet->GetItem() == PET_SPIRIT_OF_GUARDIAN)
 	{
 		fdamage = ((damage * 2) / 10) / 20.0f;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_RUDOLF )
+	else if (pet->GetItem() == PET_RUDOLF)
 	{
 		fdamage = ((damage * 3) / 10) / 10.0f;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_PANDA )
+	else if (pet->GetItem() == PET_PANDA)
 	{
 		fdamage = (damage / 20) / 20.0f;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_UNICORN )
+	else if (pet->GetItem() == PET_UNICORN)
 	{
 		fdamage = (damage / 20) / 20.0f;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
-	else if ( pet->GetItem() == PET_SKELETON )
+	else if (pet->GetItem() == PET_SKELETON)
 	{
 		fdamage = (damage / 20) / 10.0f;
 		pet->AlterDurability(0, fdamage);
 		send_dur = true;
 	}
 
-	if ( !send_dur )
+	if (!send_dur)
 	{
 		return;
 	}
 
 	this->SendItemDurability(GUARDIAN, 0);
 
-	if ( pet->GetDurability() < 1.0f )
+	if (pet->GetDurability() < 1.0f)
 	{
 		uint16 item_tmp = pet->GetItem();
 
 		this->ClearItem(GUARDIAN);
-		
-		if ( this->IsWorldFlag(WORLD_FLAG_ALLOW_AUTO_PET_CHANGE) )
+
+		if (this->IsWorldFlag(WORLD_FLAG_ALLOW_AUTO_PET_CHANGE))
 		{
-			if ( item_tmp == PET_SATAN || item_tmp == PET_GUARDIAN_ANGEL )
+			if (item_tmp == PET_SATAN || item_tmp == PET_GUARDIAN_ANGEL)
 			{
 				this->EquipmentAutochange(GUARDIAN, item_tmp, 0);
 			}
@@ -8114,7 +8389,7 @@ void Player::DamageMount(int32 damage)
 
 	for (int32 i = 0; i < use_inventory_size; ++i)
 	{
-		Item * pItem = this->GetInventory()->GetItem(i);
+		Item* pItem = this->GetInventory()->GetItem(i);
 
 		if (!pItem || !pItem->IsItem() || !pItem->IsMount() || pItem->GetDurability() < 1)
 		{
@@ -8232,71 +8507,71 @@ void Player::DamageMount(int32 damage, Item* pet)
 	}
 }
 
-void Player::ApplyWingDamage(int32 & damage, uint16 skill)
+void Player::ApplyWingDamage(int32& damage, uint16 skill)
 {
-	if ( damage <= 0 )
+	if (damage <= 0)
 	{
 		return;
 	}
 
-	if ( !this->GetInventory()->GetItem(WINGS)->IsValid() )
+	if (!this->GetInventory()->GetItem(WINGS)->IsValid())
 	{
 		return;
 	}
 
-	if ( !this->GetInventory()->GetItem(WINGS)->IsMiniWing() ) ///- Solamente reduzco hp cuando usan alas normales
+	if (!this->GetInventory()->GetItem(WINGS)->IsMiniWing()) ///- Solamente reduzco hp cuando usan alas normales
 	{
-		switch ( this->GetClass() )
+		switch (this->GetClass())
 		{
 		case Character::DARK_WIZARD:
 		case Character::FAIRY_ELF:
 		case Character::SUMMONER:
-			{
-				this->PowerReduce(POWER_LIFE, 1, true);
-			} break;
+		{
+			this->PowerReduce(POWER_LIFE, 1, true);
+		} break;
 
 		case Character::RAGE_FIGHTER:
+		{
+			if (skill == 260 || skill == 261 || skill == 270 || skill == 264)
 			{
-				if( skill == 260 || skill == 261 || skill == 270 || skill == 264 )
-				{
-					this->PowerReduce(POWER_LIFE, 2, true);
-				}
-				else if( skill == 262 || skill == 269 || skill == 263 )
-				{
-					this->PowerReduce(POWER_LIFE, 4, true);
-				}
-				else if( skill == 265 )
-				{
-					this->PowerReduce(POWER_LIFE, 100, true);
-				}
-				else
-				{
-					this->PowerReduce(POWER_LIFE, 3, true);
-				}
-			} break;
-
-		default:
+				this->PowerReduce(POWER_LIFE, 2, true);
+			}
+			else if (skill == 262 || skill == 269 || skill == 263)
+			{
+				this->PowerReduce(POWER_LIFE, 4, true);
+			}
+			else if (skill == 265)
+			{
+				this->PowerReduce(POWER_LIFE, 100, true);
+			}
+			else
 			{
 				this->PowerReduce(POWER_LIFE, 3, true);
-			} break;
+			}
+		} break;
+
+		default:
+		{
+			this->PowerReduce(POWER_LIFE, 3, true);
+		} break;
 		}
 	}
 
-	if ( this->PowerGet(POWER_LIFE) <= 0 )
+	if (this->PowerGet(POWER_LIFE) <= 0)
 	{
 		return;
 	}
 
 	int32 inc = this->GetWingDamage();
 
-	if ( inc <= 0 )
+	if (inc <= 0)
 	{
 		return;
 	}
 
 	damage += damage * inc / 100;
 
-	if ( damage < 0 )
+	if (damage < 0)
 	{
 		damage = 0;
 	}
@@ -8305,15 +8580,15 @@ void Player::ApplyWingDamage(int32 & damage, uint16 skill)
 void Player::ApplyFenrirEquipmentReduction()
 {
 	uint8 slot = Random<uint8>(5) + 2;
-	Item * equipment = this->GetInventory()->GetItem(slot);
+	Item* equipment = this->GetInventory()->GetItem(slot);
 
-	if ( !equipment->IsItem() )
+	if (!equipment->IsItem())
 		return;
 
-	if ( equipment->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION) )
+	if (equipment->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION))
 		return;
 
-	if ( !equipment->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE) )
+	if (!equipment->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE))
 		return;
 
 	int32 value = 50 + (7 * this->GetItemDurabilityReduction(equipment->GetDurabilityReduction()));
@@ -8329,10 +8604,10 @@ void Player::ApplyFenrirEquipmentReduction()
 
 void Player::ItemDurabilityDown(DurabilityState state, uint8 slot)
 {
-	if ( state == DURABILITY_STATE_NONE )
+	if (state == DURABILITY_STATE_NONE)
 		return;
 
-	if ( this->GetInventory()->GetItem(slot)->GetDurability() < 1.0f && this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_DURABILITY_DESTROY) )
+	if (this->GetInventory()->GetItem(slot)->GetDurability() < 1.0f && this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_DURABILITY_DESTROY))
 	{
 		this->ClearItem(slot);
 		state = DURABILITY_STATE_CHANGED;
@@ -8341,8 +8616,8 @@ void Player::ItemDurabilityDown(DurabilityState state, uint8 slot)
 	{
 		this->SendItemDurability(slot, 0);
 	}
-	
-	if ( state == DURABILITY_STATE_CHANGED )
+
+	if (state == DURABILITY_STATE_CHANGED)
 	{
 		this->CalculateCharacter();
 	}
@@ -8350,26 +8625,26 @@ void Player::ItemDurabilityDown(DurabilityState state, uint8 slot)
 
 void Player::WeaponDurabilityDown(Unit* pTarget, bool melee)
 {
-	if ( this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION) )
+	if (this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION))
 	{
 		return;
 	}
 
 	int32 target_defense = pTarget->GetIntData(UNIT_INT_DEFENSE);
-	Item * Right = this->GetInventory()->GetItem(WEAPON_01);
-	Item * Left = this->GetInventory()->GetItem(WEAPON_02);
+	Item* Right = this->GetInventory()->GetItem(WEAPON_01);
+	Item* Left = this->GetInventory()->GetItem(WEAPON_02);
 
-	if( melee )
+	if (melee)
 	{
-		if ( (this->GetClass() == Character::DARK_KNIGHT || 
-			  this->GetClass() == Character::MAGIC_GLADIATOR || 
-			  this->GetClass() == Character::DARK_LORD || 
-			  this->GetClass() == Character::RAGE_FIGHTER || 
-			  this->GetClass() == Character::GROW_LANCER ||
-			  this->GetClass() == Character::SLAYER) &&
-			  (Right->GetItem() >= 0 && Right->GetItem() < ITEMGET(4, 0) && Left->GetItem() >= 0 && Left->GetItem() < ITEMGET(4, 0)) )
+		if ((this->GetClass() == Character::DARK_KNIGHT ||
+			this->GetClass() == Character::MAGIC_GLADIATOR ||
+			this->GetClass() == Character::DARK_LORD ||
+			this->GetClass() == Character::RAGE_FIGHTER ||
+			this->GetClass() == Character::GROW_LANCER ||
+			this->GetClass() == Character::SLAYER) &&
+			(Right->GetItem() >= 0 && Right->GetItem() < ITEMGET(4, 0) && Left->GetItem() >= 0 && Left->GetItem() < ITEMGET(4, 0)))
 		{
-			if ( Random(2) == 0 )
+			if (Random(2) == 0)
 			{
 				this->ItemDurabilityDown(Left->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Left->GetDurabilityReduction())), WEAPON_02);
 			}
@@ -8378,31 +8653,31 @@ void Player::WeaponDurabilityDown(Unit* pTarget, bool melee)
 				this->ItemDurabilityDown(Right->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Right->GetDurabilityReduction())), WEAPON_01);
 			}
 		}
-		else if( Left->GetKind2() == ItemKind::BOW )
+		else if (Left->GetKind2() == ItemKind::BOW)
 		{
 			this->ItemDurabilityDown(Left->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Left->GetDurabilityReduction())), WEAPON_02);
 		}
-		else if( Right->GetKind2() == ItemKind::CROSSBOW )
+		else if (Right->GetKind2() == ItemKind::CROSSBOW)
 		{
 			this->ItemDurabilityDown(Right->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Right->GetDurabilityReduction())), WEAPON_01);
 		}
-		else if( Right->GetItem() >= ITEMGET(0, 0) && Right->GetItem() < ITEMGET(6, 0) && Right->GetItem() != ITEMGET(0, 41) )
+		else if (Right->GetItem() >= ITEMGET(0, 0) && Right->GetItem() < ITEMGET(6, 0) && Right->GetItem() != ITEMGET(0, 41))
 		{
 			this->ItemDurabilityDown(Right->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Right->GetDurabilityReduction())), WEAPON_01);
 		}
 	}
 	else
 	{
-		if ( pTarget->IsCreature() )
+		if (pTarget->IsCreature())
 		{
 			target_defense = pTarget->GetIntData(UNIT_INT_DEFENSE_MAGIC);
 		}
 
-		if ( this->GetClass() == Character::SUMMONER )
+		if (this->GetClass() == Character::SUMMONER)
 		{
-			if( Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0) && Left->GetItem() >= ITEMGET(5, 0) && Left->GetItem() < ITEMGET(6, 0) )
+			if (Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0) && Left->GetItem() >= ITEMGET(5, 0) && Left->GetItem() < ITEMGET(6, 0))
 			{
-				if(rand()%2==0)
+				if (rand() % 2 == 0)
 				{
 					this->ItemDurabilityDown(Right->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Right->GetDurabilityReduction())), WEAPON_01);
 				}
@@ -8412,14 +8687,14 @@ void Player::WeaponDurabilityDown(Unit* pTarget, bool melee)
 				}
 				return;
 			}
-		
-			if( Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0) )
+
+			if (Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0))
 			{
 				this->ItemDurabilityDown(Right->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Right->GetDurabilityReduction())), WEAPON_01);
 				return;
 			}
-		
-			if( Left->GetItem() >= ITEMGET(5, 0) && Left->GetItem() < ITEMGET(6, 0) )
+
+			if (Left->GetItem() >= ITEMGET(5, 0) && Left->GetItem() < ITEMGET(6, 0))
 			{
 				this->ItemDurabilityDown(Left->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Left->GetDurabilityReduction())), WEAPON_02);
 				return;
@@ -8427,7 +8702,7 @@ void Player::WeaponDurabilityDown(Unit* pTarget, bool melee)
 		}
 		else
 		{
-			if( Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0) )
+			if (Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0))
 			{
 				this->ItemDurabilityDown(Right->DurabilityDownWeapon(target_defense, this->GetItemDurabilityReduction(Right->GetDurabilityReduction())), WEAPON_01);
 			}
@@ -8437,15 +8712,15 @@ void Player::WeaponDurabilityDown(Unit* pTarget, bool melee)
 
 void Player::DecreaseWeaponDurabilityInCastle(float value)
 {
-	Item * Right = this->GetInventory()->GetItem(WEAPON_01);
-	Item * Left = this->GetInventory()->GetItem(WEAPON_02);
+	Item* Right = this->GetInventory()->GetItem(WEAPON_01);
+	Item* Left = this->GetInventory()->GetItem(WEAPON_02);
 
 	bool right_durability_down = false;
 	bool left_durability_down = false;
 
 	if (this->GetClass() == Character::DARK_KNIGHT || this->GetClass() == Character::MAGIC_GLADIATOR || this->GetClass() == Character::DARK_LORD || this->GetClass() == Character::RAGE_FIGHTER || this->GetClass() == Character::SLAYER)
 	{
-		if ( Right->GetItem() >= ITEMGET(0,0) && Right->GetItem() < ITEMGET(4,0) && Left->GetItem() >= ITEMGET(0,0) && Left->GetItem() < ITEMGET(4,0) )
+		if (Right->GetItem() >= ITEMGET(0, 0) && Right->GetItem() < ITEMGET(4, 0) && Left->GetItem() >= ITEMGET(0, 0) && Left->GetItem() < ITEMGET(4, 0))
 		{
 			right_durability_down = true;
 			left_durability_down = true;
@@ -8456,48 +8731,48 @@ void Player::DecreaseWeaponDurabilityInCastle(float value)
 	{
 		right_durability_down = true;
 	}
-	if ( Right->GetItem() >= ITEMGET(0,0) && Right->GetItem() < ITEMGET(4,0) )
+	if (Right->GetItem() >= ITEMGET(0, 0) && Right->GetItem() < ITEMGET(4, 0))
 	{
 		right_durability_down = true;
 	}
-	if ( Right->GetItem() >= ITEMGET(5,0) && Right->GetItem() < ITEMGET(6,0) )
+	if (Right->GetItem() >= ITEMGET(5, 0) && Right->GetItem() < ITEMGET(6, 0))
 	{
 		right_durability_down = true;
 	}
 
-	if ( !Right->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE) )
+	if (!Right->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE))
 	{
 		right_durability_down = false;
 	}
-	if ( !Left->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE) )
+	if (!Left->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE))
 	{
 		left_durability_down = false;
 	}
 
-	if ( right_durability_down )
+	if (right_durability_down)
 	{
 		uint8 ret = Right->DurabilityDownSimple(value);
 
-		if ( ret )
+		if (ret)
 		{
 			this->SendItemDurability(WEAPON_01, 0);
 
-			if ( ret == 1 )
+			if (ret == 1)
 			{
 				this->CalculateCharacter();
 			}
 		}
 	}
 
-	if ( left_durability_down )
+	if (left_durability_down)
 	{
 		uint8 ret = Left->DurabilityDownSimple(value);
 
-		if ( ret )
+		if (ret)
 		{
 			this->SendItemDurability(WEAPON_02, 0);
 
-			if ( ret == 1 )
+			if (ret == 1)
 			{
 				this->CalculateCharacter();
 			}
@@ -8507,12 +8782,12 @@ void Player::DecreaseWeaponDurabilityInCastle(float value)
 
 void Player::UpdateDurabilityTime()
 {
-	if ( this->GetInterfaceState()->GetID() != InterfaceData::None )
+	if (this->GetInterfaceState()->GetID() != InterfaceData::None)
 	{
 		return;
 	}
 
-	if ( !this->IsLive() )
+	if (!this->IsLive())
 	{
 		return;
 	}
@@ -8523,7 +8798,7 @@ void Player::UpdateDurabilityTime()
 
 	uint16 pet_item = -1;
 	uint8 pet_level = 0;
-	
+
 	wear_inventory_loop(i)
 	{
 		Item* item = this->GetInventory()->GetItem(i);
@@ -8598,29 +8873,29 @@ void Player::UpdateDurabilityTime()
 	{
 		Item* item = this->GetInventory()->GetItem(i);
 
-		if ( !item->IsItem() )
+		if (!item->IsItem())
 		{
 			continue;
 		}
 
-		if ( !item->IsInventoryActive() )
+		if (!item->IsInventoryActive())
 		{
 			continue;
 		}
 
-		if ( item->GetExpireDate() )
+		if (item->GetExpireDate())
 		{
 			continue;
 		}
 
 		ret = item->ProcessDurabilityTime(this);
 
-		if ( item->GetDurability() < 1.0f && item->IsFlag(ITEM_FLAG_DURABILITY_DESTROY) )
+		if (item->GetDurability() < 1.0f && item->IsFlag(ITEM_FLAG_DURABILITY_DESTROY))
 		{
 			this->InventoryItemUse(0xFF, i);
 			this->ClearItem(i);
 		}
-		else if ( ret )
+		else if (ret)
 		{
 			this->SendItemDurability(i, 0);
 
@@ -8639,7 +8914,7 @@ void Player::UpdateDurabilityTime()
 
 	bool update_item = false;
 
-	if ( this->GetLastItemUpdate() != sItemMgr->GetLastItemUpdate() )
+	if (this->GetLastItemUpdate() != sItemMgr->GetLastItemUpdate())
 	{
 		this->SetLastItemUpdate(sItemMgr->GetLastItemUpdate());
 		update_item = true;
@@ -8649,12 +8924,12 @@ void Player::UpdateDurabilityTime()
 	{
 		Item* item = this->GetInventory()->GetItem(i);
 
-		if ( !item->IsItem() )
+		if (!item->IsItem())
 			continue;
 
-		if ( item->IsExpired() )
+		if (item->IsExpired())
 		{
-			if ( i == GUARDIAN )
+			if (i == GUARDIAN)
 			{
 				pet_item = item->GetItem();
 				pet_level = item->GetLevel();
@@ -8666,7 +8941,7 @@ void Player::UpdateDurabilityTime()
 			this->ClearItem(i);
 			recalculate_character = true;
 
-			if ( i < PLAYER_MAX_EQUIPMENT || i == PENTAGRAM_SLOT )
+			if (i < PLAYER_MAX_EQUIPMENT || i == PENTAGRAM_SLOT)
 			{
 				weared_item = true;
 			}
@@ -8674,7 +8949,7 @@ void Player::UpdateDurabilityTime()
 			continue;
 		}
 
-		if ( update_item )
+		if (update_item)
 		{
 			item->Convert(true);
 
@@ -8682,24 +8957,24 @@ void Player::UpdateDurabilityTime()
 		}
 	}
 
-	if ( pet_item != uint16(-1) )
+	if (pet_item != uint16(-1))
 	{
-		if ( this->IsWorldFlag(WORLD_FLAG_ALLOW_AUTO_PET_CHANGE) )
+		if (this->IsWorldFlag(WORLD_FLAG_ALLOW_AUTO_PET_CHANGE))
 		{
-			if ( pet_item == PET_SATAN || pet_item == PET_GUARDIAN_ANGEL )
+			if (pet_item == PET_SATAN || pet_item == PET_GUARDIAN_ANGEL)
 			{
 				this->EquipmentAutochange(GUARDIAN, pet_item, pet_level);
 			}
 		}
 	}
 
-	if ( weared_item )
+	if (weared_item)
 		sItemMgr->IsUsingTransformationItem(this);
 
-	if ( recalculate_character )
+	if (recalculate_character)
 		this->CalculateCharacter();
 
-	if ( weared_item )
+	if (weared_item)
 		this->PreviewSend();
 }
 
@@ -8707,17 +8982,17 @@ void Player::RandomArmorDurabilityDown(Unit* mAttacker, int32 damage)
 {
 	uint8 slot = Random<uint8>(5) + 2;
 
-	if ( !this->GetInventory()->GetItem(slot)->IsItem() )
-		 return;
-
-	if ( !this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE) )
+	if (!this->GetInventory()->GetItem(slot)->IsItem())
 		return;
 
-	if ( this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION) )
+	if (!this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE))
 		return;
 
-	Item * item = this->GetInventory()->GetItem(slot);
-	
+	if (this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION))
+		return;
+
+	Item* item = this->GetInventory()->GetItem(slot);
+
 	this->ItemDurabilityDown(item->DurabilityDownArmor(static_cast<float>(damage), this->GetItemDurabilityReduction(item->GetDurabilityReduction())), slot);
 }
 
@@ -8725,16 +9000,16 @@ void Player::RandomArmorDurabilityDownPercent(Unit* mAttacker, int32 percent)
 {
 	uint8 slot = Random<uint8>(5) + 2;
 
-	if ( !this->GetInventory()->GetItem(slot)->IsItem() )
-		 return;
-
-	if ( !this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE) )
+	if (!this->GetInventory()->GetItem(slot)->IsItem())
 		return;
 
-	if ( this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION) )
+	if (!this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_DURABILITY_DAMAGE))
 		return;
 
-	Item * item = this->GetInventory()->GetItem(slot);
+	if (this->GetInventory()->GetItem(slot)->IsFlag(ITEM_FLAG_TALISMAN_ITEM_PROTECTION) && this->HasBuff(BUFF_TALISMAN_OF_ITEM_PROTECTION))
+		return;
+
+	Item* item = this->GetInventory()->GetItem(slot);
 
 	this->ItemDurabilityDown(item->DurabilityDownArmor(item->GetDurability() * percent / 100, this->GetItemDurabilityReduction(item->GetDurabilityReduction())), slot);
 }
@@ -8744,8 +9019,8 @@ void Player::Respawn()
 	this->GetTalismanResurrection()->Set(this->GetLocation());
 
 	this->CalculateCharacter();
-	
-	for ( uint8 i = 0; i < POWER_MAX; ++i )
+
+	for (uint8 i = 0; i < POWER_MAX; ++i)
 	{
 		this->PowerSet(i, this->PowerGetTotal(i));
 	}
@@ -8764,10 +9039,10 @@ void Player::Respawn()
 	this->GenerateRespawnLocation();
 	this->SetKiller(nullptr);
 	this->SetCurrentGate(0);
-	
+
 	uint16 server_move = sWorldMgr->AllowMoveToWorld(this, this->GetWorldId());
 
-	if ( server_move != sGameServer->GetServerCode() )
+	if (server_move != sGameServer->GetServerCode())
 	{
 		//if ( server_move == uint16(-1) )
 		//	return;
@@ -8776,11 +9051,11 @@ void Player::Respawn()
 		return;
 	}
 
-	if ( AW_MAP_RANGE(this->GetWorldId()) && sArkaWar->GetState() == ARKA_WAR_STATE_PLAYING )
+	if (AW_MAP_RANGE(this->GetWorldId()) && sArkaWar->GetState() == ARKA_WAR_STATE_PLAYING)
 	{
 		this->AddBuff(BUFF_RESURRECTION_PENALTY, 90, BUFF_FLAG_DB_STORE, this);
 	}
-	
+
 	this->ClearPathData();
 	this->SetTX(this->GetX());
 	this->SetTY(this->GetY());
@@ -8804,11 +9079,11 @@ void Player::Respawn()
 
 	pMsg.zen = this->MoneyGet();
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		Util::ConvertToByte(this->GetLevelData(LEVEL_DATA_MAJESTIC)->GetExperience(), pMsg.experience);
 	}
-	else if ( this->IsMaster() )
+	else if (this->IsMaster())
 	{
 		Util::ConvertToByte(this->GetLevelData(LEVEL_DATA_MASTER)->GetExperience(), pMsg.experience);
 	}
@@ -8839,7 +9114,7 @@ void Player::Respawn()
 	sSwampOfDarkness->SendState(this);
 
 	sLabyrinthDimensions->Respawn(this);
-	
+
 	//sMiniMap->GCMiniMapInfoSend(this);
 
 	sTeleport->SendBattleZone(this, this->GetWorldId());
@@ -8858,31 +9133,31 @@ void Player::GenerateRespawnLocation(bool from_select)
 
 	SafeAssert(pWorld, "pWorld == nullptr");
 
-	if ( !from_select && pGuild && this->IsInGuildWar() )
+	if (!from_select && pGuild && this->IsInGuildWar())
 	{
-		if ( pGuild->GetWarData()->GetType() == GUILD_WAR_TYPE_NORMAL )
+		if (pGuild->GetWarData()->GetType() == GUILD_WAR_TYPE_NORMAL)
 		{
-			pWorld->GetRandomLocation(x, y, 18);	
+			pWorld->GetRandomLocation(x, y, 18);
 		}
-		else if ( pGuild->GetWarData()->GetType() == GUILD_WAR_TYPE_SOCCER )
+		else if (pGuild->GetWarData()->GetType() == GUILD_WAR_TYPE_SOCCER)
 		{
 			sBattleSoccerMgr->GetRespawnLocation(x, y, this);
 		}
 	}
-	else if ( this->IsDueling() && (this->IsDuelClassic() || (!this->IsDuelClassic() && this->GetWorldId() == WORLD_VULCANUS_ROOM)) )
+	else if (this->IsDueling() && (this->IsDuelClassic() || (!this->IsDuelClassic() && this->GetWorldId() == WORLD_VULCANUS_ROOM)))
 	{
 		sDuelMgr->GenerateRespawn(this, world, x, y);
 	}
-	else if ( world == WORLD_CASTLE_SIEGE )
+	else if (world == WORLD_CASTLE_SIEGE)
 	{
-		if ( !pGuild || !pGuild->LifeStoneTeleport(this, x, y) )
+		if (!pGuild || !pGuild->LifeStoneTeleport(this, x, y))
 		{
-			this->GetValidCoordinates(this->isCastleSiegeDefender() ? 105: 100, world, x, y);
+			this->GetValidCoordinates(this->isCastleSiegeDefender() ? 105 : 100, world, x, y);
 		}
 	}
-	else if ( world == WORLD_CRYWOLF_FIRST_ZONE )
+	else if (world == WORLD_CRYWOLF_FIRST_ZONE)
 	{
-		if ( sCrywolf->GetState() == CRYWOLF_STATE_START )
+		if (sCrywolf->GetState() == CRYWOLF_STATE_START)
 		{
 			this->GetValidCoordinates(118, world, x, y);
 		}
@@ -8891,7 +9166,7 @@ void Player::GenerateRespawnLocation(bool from_select)
 			this->GetValidCoordinates(258, world, x, y);
 		}
 	}
-	else if ( world == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE )
+	else if (world == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE)
 	{
 		world = g_LabyrinthOfDimensionsWorldData[0].world;
 		x = g_LabyrinthOfDimensionsWorldData[0].x;
@@ -8944,14 +9219,14 @@ void Player::LocationChange()
 
 void Player::UpdateDelayedTeleport()
 {
-	if ( !this->IsDelayedTeleport() )
+	if (!this->IsDelayedTeleport())
 		return;
 
 	this->ReduceDelayedTeleportTime(1);
 
-	if ( this->GetDelayedTeleportTime() > 0 )
+	if (this->GetDelayedTeleportTime() > 0)
 	{
-		if ( this->GetDelayedTeleportTime() <= 5 )
+		if (this->GetDelayedTeleportTime() <= 5)
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Will be summoned in %d seconds.", this->GetDelayedTeleportTime());
 		}
@@ -8965,7 +9240,7 @@ void Player::UpdateDelayedTeleport()
 		bool busy = this->IsBusy();
 		bool equipment = this->CanEnterWorld(this->GetDelayedLocation()->GetWorldId(), this->GetDelayedLocation()->GetX(), this->GetDelayedLocation()->GetY(), this->GetDelayedLocation()->GetX(), this->GetDelayedLocation()->GetY());
 
-		if ( !summon_world || busy || !equipment )
+		if (!summon_world || busy || !equipment)
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Summoning Canceled.");
 		}
@@ -8974,13 +9249,13 @@ void Player::UpdateDelayedTeleport()
 			sDungeonRace->ResetPlayer(this);
 			sLosttowerRace->ResetPlayer(this);
 
-			if ( this->GetHelper()->IsOffline() )
+			if (this->GetHelper()->IsOffline())
 			{
 				this->GetHelper()->SetX(this->GetDelayedLocation()->GetX());
 				this->GetHelper()->SetY(this->GetDelayedLocation()->GetY());
 			}
 
-			if ( this->GetWorldId() == this->GetDelayedLocation()->GetWorldId() )
+			if (this->GetWorldId() == this->GetDelayedLocation()->GetWorldId())
 			{
 				this->MagicAttackSend(ENTRY(this), SKILL_TELEPORT);
 				this->SkillTeleportUse(this->GetDelayedLocation()->GetX(), this->GetDelayedLocation()->GetY());
@@ -8996,7 +9271,7 @@ void Player::UpdateDelayedTeleport()
 	}
 }
 
-void Player::InventoryItemUse(uint8 * Packet)
+void Player::InventoryItemUse(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -9023,7 +9298,7 @@ bool Player::InventoryItemUse(uint8 use_type, uint8 slot, bool from_packet)
 		return false;
 	}
 
-	Item * pItem = this->GetInventory()->GetItem(slot);
+	Item* pItem = this->GetInventory()->GetItem(slot);
 
 	if (!pItem || !pItem->IsItem())
 	{
@@ -9183,7 +9458,7 @@ void Player::InventoryItemSend()
 {
 	use_inventory_loop(i)
 	{
-		Item * pItem = this->GetInventory()->GetItem(i);
+		Item* pItem = this->GetInventory()->GetItem(i);
 
 		if (!pItem->IsItem())
 		{
@@ -9212,14 +9487,14 @@ void Player::InventoryItemSend()
 
 bool Player::hasMoonstoneRing()
 {
-	if ( this->GetInventory()->GetItem(RING_01)->IsValid() &&
-		 this->GetInventory()->GetItem(RING_01)->GetItem() == ITEMGET(13,38) )
+	if (this->GetInventory()->GetItem(RING_01)->IsValid() &&
+		this->GetInventory()->GetItem(RING_01)->GetItem() == ITEMGET(13, 38))
 	{
 		return true;
 	}
 
-	if ( this->GetInventory()->GetItem(RING_02)->IsValid() &&
-		 this->GetInventory()->GetItem(RING_02)->GetItem() == ITEMGET(13,38) )
+	if (this->GetInventory()->GetItem(RING_02)->IsValid() &&
+		this->GetInventory()->GetItem(RING_02)->GetItem() == ITEMGET(13, 38))
 	{
 		return true;
 	}
@@ -9229,22 +9504,22 @@ bool Player::hasMoonstoneRing()
 
 void Player::AddNormalPoints(int32 points, uint8 stat)
 {
-	if ( stat == LEADERSHIP && this->GetClass() != Character::DARK_LORD )
+	if (stat == LEADERSHIP && this->GetClass() != Character::DARK_LORD)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Only available for Dark Lord");
 		return;
 	}
 
-	if ( points <= 0)
+	if (points <= 0)
 		return;
 
-	if ( points > this->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints() )
+	if (points > this->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints())
 		points = this->GetLevelData(LEVEL_DATA_NORMAL)->GetPoints();
 
-	if ( this->GetStat(stat) + points > sGameServer->GetMaxStat(stat) )
+	if (this->GetStat(stat) + points > sGameServer->GetMaxStat(stat))
 		points = sGameServer->GetMaxStat(stat) - this->GetStat(stat);
 
-	if ( points <= 0 )
+	if (points <= 0)
 		return;
 
 	this->GetLevelData(LEVEL_DATA_NORMAL)->ReducePoints(points);
@@ -9257,33 +9532,33 @@ void Player::AddNormalPoints(int32 points, uint8 stat)
 	this->CalculateCharacter();
 }
 
-void Player::EventGetRemainTime(uint8 * Packet)
+void Player::EventGetRemainTime(uint8* Packet)
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 		return;
 
 	POINTER_PCT(EVENT_REMAIN_TIME_REQUEST, lpMsg, Packet, 0);
-	
+
 	EVENT_REMAIN_TIME_RESULT pMsg(lpMsg->event_id);
 
 	uint32 remain_time = 0;
 
-	if ( sEventMgr->GetEventRemainTimeData(lpMsg->event_id, remain_time, pMsg.entered_user, this) )
+	if (sEventMgr->GetEventRemainTimeData(lpMsg->event_id, remain_time, pMsg.entered_user, this))
 	{
-		switch ( lpMsg->event_id )
+		switch (lpMsg->event_id)
 		{
 		case 1:
 		case 2:
 		case 5:
-			{
-				pMsg.remain_time = remain_time;
-			} break;
+		{
+			pMsg.remain_time = remain_time;
+		} break;
 
 		case 4:
-			{
-				pMsg.remain_time = SET_NUMBERH(remain_time);
-				pMsg.remain_time_low = SET_NUMBERL(remain_time);
-			} break;
+		{
+			pMsg.remain_time = SET_NUMBERH(remain_time);
+			pMsg.remain_time_low = SET_NUMBERL(remain_time);
+		} break;
 		}
 
 		this->sendPacket(MAKE_PCT(pMsg));
@@ -9306,7 +9581,7 @@ void Player::SendJoinInfo()
 	sTeleport->SendBattleZone(this, this->GetWorldId());
 
 	///- CHANGELOG 03/10
-	if ( sGameServer->IsArkaWarEnabled() )
+	if (sGameServer->IsArkaWarEnabled())
 	{
 		sArkaWar->SendPlayInfo(this);
 		sArkaWar->SendState(this);
@@ -9318,12 +9593,12 @@ void Player::SendJoinInfo()
 	pMsg.world = this->GetDisplayWorld();
 	pMsg.direction = this->GetDirection();
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		Util::ConvertToByte(this->GetLevelData(LEVEL_DATA_MAJESTIC)->GetExperience(), pMsg.experience);
 		Util::ConvertToByte(this->GetLevelData(LEVEL_DATA_MAJESTIC)->GetNextExperience(), pMsg.next_experience);
 	}
-	else if ( this->IsMaster() )
+	else if (this->IsMaster())
 	{
 		Util::ConvertToByte(this->GetLevelData(LEVEL_DATA_MASTER)->GetExperience(), pMsg.experience);
 		Util::ConvertToByte(this->GetLevelData(LEVEL_DATA_MASTER)->GetNextExperience(), pMsg.next_experience);
@@ -9407,7 +9682,7 @@ void Player::SendInventory()
 
 	full_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->GetItem(i)->IsItem() )
+		if (!this->GetInventory()->GetItem(i)->IsItem())
 			continue;
 
 		body[head->count].slot = i;
@@ -9437,7 +9712,7 @@ void Player::SendSkill()
 			continue;
 		}
 
-		auto & data = body[head->count++];
+		auto& data = body[head->count++];
 
 		data.position = i;
 		data.skill = this->GetSkill(i)->GetSkill();
@@ -9445,7 +9720,7 @@ void Player::SendSkill()
 		data.level |= data.skill & 0x07;
 	}
 
-	head->h.set(HEADCODE_MISC_CHARACTER_DATA, SUBCODE_MISC_CHARACTER_DATA_SKILL, sizeof(SKILL_LIST_HEAD)+sizeof(SKILL_LIST_BODY)* head->count);
+	head->h.set(HEADCODE_MISC_CHARACTER_DATA, SUBCODE_MISC_CHARACTER_DATA_SKILL, sizeof(SKILL_LIST_HEAD) + sizeof(SKILL_LIST_BODY) * head->count);
 	head->mode = 0;
 
 	this->sendPacket(buffer, head->h.get_size());
@@ -9472,7 +9747,7 @@ void Player::SendSkill(uint8 slot, uint16 skill, uint8 level, bool add)
 	uint8 buffer[1000];
 	POINTER_PCT(SKILL_LIST_HEAD, head, buffer, 0);
 	POINTER_PCT(SKILL_LIST_BODY, body, buffer, sizeof(SKILL_LIST_HEAD));
-	head->count = add ? 0xFE: 0xFF;
+	head->count = add ? 0xFE : 0xFF;
 	body[0].position = slot;
 	body[0].skill = skill;
 	body[0].level = level << 3;
@@ -9521,7 +9796,7 @@ void Player::SendFriendList()
 
 	FRIEND_LOOP(i)
 	{
-		if ( strlen(this->GetFriend(i)->GetName()) > 0 )
+		if (strlen(this->GetFriend(i)->GetName()) > 0)
 		{
 			memcpy(body[head->friend_count].name, this->GetFriend(i)->GetName(), MAX_CHARACTER_LENGTH);
 			body[head->friend_count].server = this->GetFriend(i)->GetServer();
@@ -9567,7 +9842,7 @@ void Player::NormalSendLevelUp(bool effect)
 	pMsg.ViewMaxAG = this->PowerGetTotal(POWER_STAMINA);
 	this->sendPacket(MAKE_PCT(pMsg));
 
-	if ( effect )
+	if (effect)
 	{
 		this->EffectSend(0x10);
 	}
@@ -9578,7 +9853,7 @@ void Player::Summon(uint32 id, uint32 time)
 
 }
 
-void Player::EnterWorldSuccess(uint8 * Packet)
+void Player::EnterWorldSuccess(uint8* Packet)
 {
 	this->SendInventory();
 	this->SendSkill();
@@ -9608,12 +9883,12 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 	{
 		sGremoryCase->ItemListSend(this, i);
 	}
-	
+
 	this->SendPCRoom();
 
 	sServerLink->CharacterOnOff(this, 1);
 
-	if ( !sItemMgr->IsUsingTransformationItem(this) )
+	if (!sItemMgr->IsUsingTransformationItem(this))
 	{
 		this->ViewportCreate(VIEWPORT_CREATE_FLAG_ME | VIEWPORT_CREATE_FLAG_GUILD | VIEWPORT_CREATE_FLAG_SIEGE);
 	}
@@ -9636,7 +9911,7 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 	this->LifeSend(true);
 	this->LifeSend(false);
 
-	for ( int32 i = 0; i < EVENT_NOTIFICATION_MAX; ++i )
+	for (int32 i = 0; i < EVENT_NOTIFICATION_MAX; ++i)
 	{
 		this->SendEventNotification(i, 0);
 	}
@@ -9658,7 +9933,7 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 	this->SendEventEnterCount();
 
 	this->WarpFavoriteListSend();
-	
+
 	this->QuestGuidedSetStarting();
 	this->QuestGuidedSend();
 
@@ -9668,7 +9943,7 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 	this->MajesticSkillTreeSend();
 	this->MajesticSkillTreeStatSend();
 
-	this->SendServerList();
+	//this->SendServerList();
 
 	sMonsterSoul->SendStatus(this);
 
@@ -9687,7 +9962,7 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 
 	this->GetTimer(PLAYER_TIMER_CASH_SHOP_GIFT)->SetTimer(0);
 
-	if ( !this->IsAuthorizationEnabled() )
+	if (!this->IsAuthorizationEnabled())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized to use this account.");
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Use /auth <security_code> to authorize it.");
@@ -9696,38 +9971,38 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 
 	this->SetAutoLoginInfo(0);
 
-	if ( this->IsAutoLogin() )
+	if (this->IsAutoLogin())
 	{
-		switch ( this->GetAutoLoginType() )
+		switch (this->GetAutoLoginType())
 		{
 		case 1: ///- OffStore
 		case 2:
+		{
+			PERSONAL_STORE_STATE pMsg1;
+			memcpy(pMsg1.seller, this->GetName(), MAX_CHARACTER_LENGTH);
+			memcpy(pMsg1.description, this->GetPersonalStore()->GetName(), PERSONAL_STORE_NAME_LENGTH);
+
+			this->HandlePersonalStoreState((uint8*)&pMsg1);
+
+			if (this->GetPersonalStore()->IsOpen())
 			{
-				PERSONAL_STORE_STATE pMsg1;
-				memcpy(pMsg1.seller, this->GetName(), MAX_CHARACTER_LENGTH);
-				memcpy(pMsg1.description, this->GetPersonalStore()->GetName(), PERSONAL_STORE_NAME_LENGTH);
+				this->GetPersonalStore()->SetOff(true);
+				this->GetPersonalStore()->SetOffTime(MyGetTickCount());
 
-				this->HandlePersonalStoreState((uint8*)&pMsg1);
-
-				if (this->GetPersonalStore()->IsOpen())
-				{
-					this->GetPersonalStore()->SetOff(true);
-					this->GetPersonalStore()->SetOffTime(MyGetTickCount());
-
-					this->UpdateAccountStatusType(1);
-				}
-			} break;
+				this->UpdateAccountStatusType(1);
+			}
+		} break;
 
 		case 3: ///- OffAttack
+		{
+			if (this->HelperStart())
 			{
-				if ( this->HelperStart() )
-				{
-					this->GetHelper()->SetStartedTime(MyGetTickCount());
-					this->GetHelper()->SetOffline(true);
+				this->GetHelper()->SetStartedTime(MyGetTickCount());
+				this->GetHelper()->SetOffline(true);
 
-					this->UpdateAccountStatusType(2);
-				}
-			} break;
+				this->UpdateAccountStatusType(2);
+			}
+		} break;
 		}
 	}
 
@@ -9738,7 +10013,7 @@ void Player::EnterWorldSuccess(uint8 * Packet)
 
 void Player::UpdateStatistic(uint32 statistic_id, uint64 count)
 {
-	if ( statistic_id >= STATISTIC_MAX )
+	if (statistic_id >= STATISTIC_MAX)
 		return;
 
 	this->GetStatisticData(statistic_id)->IncreaseCount(count);
@@ -9746,7 +10021,7 @@ void Player::UpdateStatistic(uint32 statistic_id, uint64 count)
 
 uint64 Player::GetStatistic(uint32 statistic_id)
 {
-	if ( statistic_id >= STATISTIC_MAX )
+	if (statistic_id >= STATISTIC_MAX)
 		return 0;
 
 	return this->GetStatisticData(statistic_id)->GetCount();
@@ -9754,12 +10029,12 @@ uint64 Player::GetStatistic(uint32 statistic_id)
 
 void Player::ReduceStatistic(uint32 statistic_id, uint64 count)
 {
-	if ( statistic_id >= STATISTIC_MAX )
+	if (statistic_id >= STATISTIC_MAX)
 		return;
 
-	StatisticData * statistic_data = this->GetStatisticData(statistic_id);
+	StatisticData* statistic_data = this->GetStatisticData(statistic_id);
 
-	if ( statistic_data->GetCount() >= count )
+	if (statistic_data->GetCount() >= count)
 	{
 		statistic_data->ReduceCount(count);
 	}
@@ -9771,491 +10046,491 @@ void Player::ReduceStatistic(uint32 statistic_id, uint64 count)
 
 bool Player::IsActionAllowed(uint32 action, Unit* pTarget, bool notify)
 {
-	if ( this->HasRestriction(action, notify) )
+	if (this->HasRestriction(action, notify))
 		return false;
 
-	if ( sGameServer->IsMACRestriction(action, this) )
+	if (sGameServer->IsMACRestriction(action, this))
 		return false;
 
-	switch ( action )
+	switch (action)
 	{
 	case PlayerAction::PLAYER_ACTION_TRADE:
+	{
+		if (!Player::IsPlayerBasicState(this))
 		{
-			if ( !Player::IsPlayerBasicState(this) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( !sGameServer->trade_enabled )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Trade is disabled.");
-				this->TradeRequestResult(0, "");
-				return false;
-			}
+		if (!sGameServer->trade_enabled)
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Trade is disabled.");
+			this->TradeRequestResult(0, "");
+			return false;
+		}
 
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				this->TradeRequestResult(0, "");
-				return false;
-			}
+		if (!this->IsAuthorizationEnabled())
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			this->TradeRequestResult(0, "");
+			return false;
+		}
 
-			if ( this->IsAdministrator() && !this->IsAdministratorFlag(ADMIN_FLAG_TRADE) )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You don't have permission to trade.");
-				this->TradeRequestResult(0, "");
-				return false;
-			}
+		if (this->IsAdministrator() && !this->IsAdministratorFlag(ADMIN_FLAG_TRADE))
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You don't have permission to trade.");
+			this->TradeRequestResult(0, "");
+			return false;
+		}
 
-			if ( !pTarget )
-			{
-				this->TradeRequestResult(0, "");
-				return false;
-			}
+		if (!pTarget)
+		{
+			this->TradeRequestResult(0, "");
+			return false;
+		}
 
-			if ( !this->CanInteract(pTarget, true) )
-			{
-				this->TradeRequestResult(0, "");
-				return false;
-			}
+		if (!this->CanInteract(pTarget, true))
+		{
+			this->TradeRequestResult(0, "");
+			return false;
+		}
 
-			Player* pPlayer = pTarget->ToPlayer();
+		Player* pPlayer = pTarget->ToPlayer();
 
-			if ( !Player::IsPlayerBasicState(pPlayer, false) )
-			{
-				this->TradeRequestResult(0, "");
-				return false;
-			}
+		if (!Player::IsPlayerBasicState(pPlayer, false))
+		{
+			this->TradeRequestResult(0, "");
+			return false;
+		}
 
-			if ( pPlayer->HasRestriction(PlayerAction::PLAYER_ACTION_TRADE) )
-			{
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (pPlayer->HasRestriction(PlayerAction::PLAYER_ACTION_TRADE))
+		{
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( sGameServer->IsMACRestriction(PlayerAction::PLAYER_ACTION_TRADE, pPlayer) )
-			{
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (sGameServer->IsMACRestriction(PlayerAction::PLAYER_ACTION_TRADE, pPlayer))
+		{
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( !pPlayer->IsAuthorizationEnabled() )
-			{
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (!pPlayer->IsAuthorizationEnabled())
+		{
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( pPlayer->IsAdministrator() && !pPlayer->IsAdministratorFlag(ADMIN_FLAG_TRADE) )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "%s doesn't have permission to trade.", pTarget->GetName());
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (pPlayer->IsAdministrator() && !pPlayer->IsAdministratorFlag(ADMIN_FLAG_TRADE))
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "%s doesn't have permission to trade.", pTarget->GetName());
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( !pPlayer->IsFlag(CHARACTER_FLAG_REQUEST) )
-			{
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (!pPlayer->IsFlag(CHARACTER_FLAG_REQUEST))
+		{
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( !this->IsWorldFlag(WORLD_FLAG_ALLOW_EXCHANGE) )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Trade is not allowed on this map.");
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (!this->IsWorldFlag(WORLD_FLAG_ALLOW_EXCHANGE))
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Trade is not allowed on this map.");
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( this->GetInterfaceState()->GetID() != InterfaceData::None || pPlayer->GetInterfaceState()->GetID() != InterfaceData::None )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You and %s need to be free to trade.", pTarget->GetName());
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (this->GetInterfaceState()->GetID() != InterfaceData::None || pPlayer->GetInterfaceState()->GetID() != InterfaceData::None)
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You and %s need to be free to trade.", pTarget->GetName());
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( this->GetPersonalStore()->IsBusy() || pPlayer->GetPersonalStore()->IsBusy() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You and %s need to be free to trade.", pTarget->GetName());
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
+		if (this->GetPersonalStore()->IsBusy() || pPlayer->GetPersonalStore()->IsBusy())
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You and %s need to be free to trade.", pTarget->GetName());
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
 
-			if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN || pPlayer->GetTransaction() == TRANSACTION_TYPE_BEGIN )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You and %s need to be free to trade.", pTarget->GetName());
-				this->TradeRequestResult(0, pTarget->GetName());
-				return false;
-			}
-		} break;
+		if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN || pPlayer->GetTransaction() == TRANSACTION_TYPE_BEGIN)
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You and %s need to be free to trade.", pTarget->GetName());
+			this->TradeRequestResult(0, pTarget->GetName());
+			return false;
+		}
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_TRADE_ANSWER:
+	{
+		if (!pTarget || !pTarget->IsPlaying() || !pTarget->IsLive() || !pTarget->IsPlayer())
 		{
-			if ( !pTarget || !pTarget->IsPlaying() || !pTarget->IsLive() || !pTarget->IsPlayer() )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( pTarget->ToPlayer()->HasRestriction(PlayerAction::PLAYER_ACTION_TRADE) )
-			{
-				return false;
-			}
+		if (pTarget->ToPlayer()->HasRestriction(PlayerAction::PLAYER_ACTION_TRADE))
+		{
+			return false;
+		}
 
-			if ( sGameServer->IsMACRestriction(PlayerAction::PLAYER_ACTION_TRADE, pTarget->ToPlayer()) )
-			{
-				return false;
-			}
+		if (sGameServer->IsMACRestriction(PlayerAction::PLAYER_ACTION_TRADE, pTarget->ToPlayer()))
+		{
+			return false;
+		}
 
-			if ( !Player::InterfaceSharedCheck(this, pTarget->ToPlayer(), InterfaceData::Trade, 0) )
-			{
-				return false;
-			}
+		if (!Player::InterfaceSharedCheck(this, pTarget->ToPlayer(), InterfaceData::Trade, 0))
+		{
+			return false;
+		}
 
-			if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN || pTarget->ToPlayer()->GetTransaction() == TRANSACTION_TYPE_BEGIN )
-			{
-				return false;
-			}
-	
-			if ( Util::Distance(this->GetX(), this->GetY(), pTarget->GetX(), pTarget->GetY()) > 2 )
-			{
-				return false;
-			}
+		if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN || pTarget->ToPlayer()->GetTransaction() == TRANSACTION_TYPE_BEGIN)
+		{
+			return false;
+		}
 
-			if ( this->IsServerQuit() || pTarget->ToPlayer()->IsServerQuit() )
-			{
-				return false;
-			}
-		} break;
+		if (Util::Distance(this->GetX(), this->GetY(), pTarget->GetX(), pTarget->GetY()) > 2)
+		{
+			return false;
+		}
+
+		if (this->IsServerQuit() || pTarget->ToPlayer()->IsServerQuit())
+		{
+			return false;
+		}
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_PARTY:
-		{
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+	{
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_DUEL:
+	{
+		if (!this->IsAuthorizationEnabled())
 		{
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				return false;
-			}
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			return false;
+		}
 
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ITEM_DROP:
+	{
+		if (!this->IsPlaying())
+			return false;
+
+		if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
+			return false;
+
+		if (this->GetInterfaceState()->GetID() != InterfaceData::None && !sShopMgr->IsShop(this->GetInterfaceState()->GetID()))
+			return false;
+
+		//if ( this->GetPersonalStore()->IsBusy() )
+		//	return false;
+
+		if (!this->IsAuthorizationEnabled())
 		{
-			if ( !this->IsPlaying() )
-				return false;
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			return false;
+		}
 
-			if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
-				return false;
-
-			if ( this->GetInterfaceState()->GetID() != InterfaceData::None && !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) )
-				return false;
-
-			//if ( this->GetPersonalStore()->IsBusy() )
-			//	return false;
-
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				return false;
-			}
-
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ITEM_LOOT:
+	{
+		if (!Player::IsPlayerBasicState(this, false))
 		{
-			if ( !Player::IsPlayerBasicState(this, false) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
-				return false;
+		if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
+			return false;
 
-			if ( !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) && this->GetInterfaceState()->GetID() != InterfaceData::None )
-				return false;
+		if (!sShopMgr->IsShop(this->GetInterfaceState()->GetID()) && this->GetInterfaceState()->GetID() != InterfaceData::None)
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->IsSpectator() )
-				return false;
-		} break;
+		if (this->IsSpectator())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ITEM_USE:
+	{
+		if (!Player::IsPlayerBasicState(this, false))
 		{
-			if ( !Player::IsPlayerBasicState(this, false) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
-				return false;
+		if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->GetInterfaceState()->GetID() != InterfaceData::None && !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) )
-				return false;
+		if (this->GetInterfaceState()->GetID() != InterfaceData::None && !sShopMgr->IsShop(this->GetInterfaceState()->GetID()))
+			return false;
 
-			if ( this->IsSpectator() )
-				return false;
-		} break;
+		if (this->IsSpectator())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ITEM_MOVE:
+	{
+		if (!Player::IsPlayerBasicState(this, false))
 		{
-			if ( !Player::IsPlayerBasicState(this, false) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
-		} break;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ITEM_BUY_NPC:
+	{
+		if (!Player::IsPlayerBasicState(this))
 		{
-			if ( !Player::IsPlayerBasicState(this) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) && this->GetInterfaceState()->GetID() != InterfaceData::MixRecovery)
-				return false;
+		if (!sShopMgr->IsShop(this->GetInterfaceState()->GetID()) && this->GetInterfaceState()->GetID() != InterfaceData::MixRecovery)
+			return false;
 
-			if ( !this->GetInterfaceState()->GetTarget() || !this->GetInterfaceState()->GetTarget()->IsCreature() || !this->GetInterfaceState()->GetTarget()->ToCreature()->IsNpc() )
-				return false;
+		if (!this->GetInterfaceState()->GetTarget() || !this->GetInterfaceState()->GetTarget()->IsCreature() || !this->GetInterfaceState()->GetTarget()->ToCreature()->IsNpc())
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->GetShopTime() == 0 )
-			{
-				this->SetShopTime(1);
-			}
+		if (this->GetShopTime() == 0)
+		{
+			this->SetShopTime(1);
+		}
 
-			if ( this->GetShopTime() > 60 )
-			{
-				this->GetInterfaceState()->Reset();
-				return false;
-			}
-		} break;
+		if (this->GetShopTime() > 60)
+		{
+			this->GetInterfaceState()->Reset();
+			return false;
+		}
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ITEM_SELL_NPC:
+	{
+		if (!this->IsAuthorizationEnabled())
 		{
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				return false;
-			}
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			return false;
+		}
 
-			if ( !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) )
-				return false;
+		if (!sShopMgr->IsShop(this->GetInterfaceState()->GetID()))
+			return false;
 
-			if ( !this->GetInterfaceState()->GetTarget() || !this->GetInterfaceState()->GetTarget()->IsCreature() || !this->GetInterfaceState()->GetTarget()->ToCreature()->IsNpc() )
-				return false;
-		} break;
+		if (!this->GetInterfaceState()->GetTarget() || !this->GetInterfaceState()->GetTarget()->IsCreature() || !this->GetInterfaceState()->GetTarget()->ToCreature()->IsNpc())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_TELEPORT:
-		{
-			if ( this->IsServerQuit() )
-				return false;
+	{
+		if (this->IsServerQuit())
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
-		} break;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_GAIN_EXPERIENCE:
-		{
-		} break;
+	{
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_NPC_INTERACTION:
+	{
+		if (!Player::IsPlayerBasicState(this))
 		{
-			if ( !Player::IsPlayerBasicState(this) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( !Player::IsPlayerTransactionFree(this) )
-			{
-				return false;
-			}
+		if (!Player::IsPlayerTransactionFree(this))
+		{
+			return false;
+		}
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-			{
-				return false;
-			}
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+		{
+			return false;
+		}
 
-			if ( this->GetAuthority() == AUTHORITY_CODE_BANNED )
-			{
-				return false;
-			}
-		} break;
+		if (this->GetAuthority() == AUTHORITY_CODE_BANNED)
+		{
+			return false;
+		}
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_ATTACK_REQUEST:
+	{
+		if (!Player::IsPlayerBasicState(this, false))
 		{
-			if ( !Player::IsPlayerBasicState(this, false) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( this->IsTeleporting() )
-				return false;
+		if (this->IsTeleporting())
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->GetAuthority() == AUTHORITY_CODE_BANNED )
-				return false;
+		if (this->GetAuthority() == AUTHORITY_CODE_BANNED)
+			return false;
 
-			if ( this->IsSpectator() )
-				return false;
-		} break;
+		if (this->IsSpectator())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_MAGIC_REQUEST:
+	{
+		if (!Player::IsPlayerBasicState(this, false))
 		{
-			if ( !Player::IsPlayerBasicState(this, false) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->GetAuthority() == AUTHORITY_CODE_BANNED )
-				return false;
+		if (this->GetAuthority() == AUTHORITY_CODE_BANNED)
+			return false;
 
-			if ( this->IsSpectator() )
-				return false;
-		} break;
+		if (this->IsSpectator())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_CANCEL_MAGIC:
-		{
-			if ( !this->IsPlaying() )
-				return false;
+	{
+		if (!this->IsPlaying())
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->GetAuthority() == AUTHORITY_CODE_BANNED )
-				return false;
+		if (this->GetAuthority() == AUTHORITY_CODE_BANNED)
+			return false;
 
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_WHISPER:
-		{
-			if ( !this->ChatCanSpeak() )
-				return false;
+	{
+		if (!this->ChatCanSpeak())
+			return false;
 
-			if ( !this->Object::IsPlaying() )
-				return false;
+		if (!this->Object::IsPlaying())
+			return false;
 
-			if ( this->IsAdministrator() && !this->IsAuthorizationEnabled() )
-				return false;
+		if (this->IsAdministrator() && !this->IsAuthorizationEnabled())
+			return false;
 
-			if ( this->GetAuthority() == AUTHORITY_CODE_BANNED )
-				return false;
+		if (this->GetAuthority() == AUTHORITY_CODE_BANNED)
+			return false;
 
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_SPEAK:
-		{
-			if ( !this->ChatCanSpeak() )
-				return false;
+	{
+		if (!this->ChatCanSpeak())
+			return false;
 
-			if ( !this->Object::IsPlaying() )
-				return false;
+		if (!this->Object::IsPlaying())
+			return false;
 
-			if ( this->GetAuthority() == AUTHORITY_CODE_BANNED )
-				return false;
+		if (this->GetAuthority() == AUTHORITY_CODE_BANNED)
+			return false;
 
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_CASH_SHOP_USE:
+	{
+		if (!this->IsAuthorizationEnabled())
 		{
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				return false;
-			}
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			return false;
+		}
 
-			if ( this->IsWorldFlag(WORLD_FLAG_DISABLE_CASH_SHOP) )
-			{
-				this->SendMessageBox(1, "Cash Shop", "Can't use Cash Shop on this zone.");
-				return false;
-			}
-		} break;
+		if (this->IsWorldFlag(WORLD_FLAG_DISABLE_CASH_SHOP))
+		{
+			this->SendMessageBox(1, "Cash Shop", "Can't use Cash Shop on this zone.");
+			return false;
+		}
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_GUILD_JOIN:
+	{
+		if (!this->PacketTimeCheck())
+			return false;
+
+		if (!this->IsPlaying())
+			return false;
+
+		if (!this->IsAuthorizationEnabled())
 		{
-			if ( !this->PacketTimeCheck() )
-				return false;
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			return false;
+		}
 
-			if ( !this->IsPlaying() )
-				return false;
-
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				return false;
-			}
-
-			if ( this->IsServerQuit() )
-				return false;
-		} break;
+		if (this->IsServerQuit())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_RESET:
+	{
+		if (!Player::IsPlayerBasicState(this, false))
 		{
-			if ( !Player::IsPlayerBasicState(this, false) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				return false;
-			}
+		if (!this->IsAuthorizationEnabled())
+		{
+			return false;
+		}
 
-			if ( this->GetInterfaceState()->GetID() != InterfaceData::None || this->GetPersonalStore()->IsBusy() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "[ RESET ]: You need to close any menu.");
-				return false;
-			}
+		if (this->GetInterfaceState()->GetID() != InterfaceData::None || this->GetPersonalStore()->IsBusy())
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "[ RESET ]: You need to close any menu.");
+			return false;
+		}
 
-			if ( !this->CanInteract() )
-				return false;
-		} break;
+		if (!this->CanInteract())
+			return false;
+	} break;
 
 	case PlayerAction::PLAYER_ACTION_GUILD_CREATE:
+	{
+		if (!Player::IsPlayerBasicState(this))
 		{
-			if ( !Player::IsPlayerBasicState(this) )
-			{
-				return false;
-			}
+			return false;
+		}
 
-			if ( this->GetInterfaceState()->GetID() != InterfaceData::Guild )
-				return false;
+		if (this->GetInterfaceState()->GetID() != InterfaceData::Guild)
+			return false;
 
-			if ( !this->IsAuthorizationEnabled() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
-				return false;
-			}
-		} break;
+		if (!this->IsAuthorizationEnabled())
+		{
+			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
+			return false;
+		}
+	} break;
 	}
 
 	return true;
@@ -10263,24 +10538,24 @@ bool Player::IsActionAllowed(uint32 action, Unit* pTarget, bool notify)
 
 void Player::NpcInteractionBarrackTeleport()
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !sGameServer->IsBarracksMoveEnabled() )
-	{
-		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_WEREWOLF, 0);
-		return;
-	}
-
-	if ( this->GetTotalLevel() < sGameServer->GetBarracksMoveMinLevel() )
+	if (!sGameServer->IsBarracksMoveEnabled())
 	{
 		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_WEREWOLF, 0);
 		return;
 	}
 
-	if ( !this->MoneyHave(sGameServer->GetBarracksMoveCost()) )
+	if (this->GetTotalLevel() < sGameServer->GetBarracksMoveMinLevel())
+	{
+		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_WEREWOLF, 0);
+		return;
+	}
+
+	if (!this->MoneyHave(sGameServer->GetBarracksMoveCost()))
 	{
 		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_WEREWOLF, 0);
 		return;
@@ -10288,7 +10563,7 @@ void Player::NpcInteractionBarrackTeleport()
 
 	uint8 state = this->QuestEvolutionGetState(5);
 
-	if ( state != QUEST_EVOLUTION_STATE_ACCEPTED && state != QUEST_EVOLUTION_STATE_COMPLETE )
+	if (state != QUEST_EVOLUTION_STATE_ACCEPTED && state != QUEST_EVOLUTION_STATE_COMPLETE)
 	{
 		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_WEREWOLF, 0);
 		return;
@@ -10296,31 +10571,31 @@ void Player::NpcInteractionBarrackTeleport()
 
 	this->MoneyReduce(sGameServer->GetBarracksMoveCost());
 
-	if ( sGameServer->IsBarracksMoveParty() )
+	if (sGameServer->IsBarracksMoveParty())
 	{
 		Unit* pMember[MAX_PARTY_MEMBERS];
 		uint8 count = 0;
 
 		this->GetPartyMembers(pMember, count, 10);
 
-		if ( count > MAX_PARTY_MEMBERS )
+		if (count > MAX_PARTY_MEMBERS)
 			count = 1;
 
-		for ( uint8 i = 0; i < count; ++i )
+		for (uint8 i = 0; i < count; ++i)
 		{
-			if ( !pMember[i] )
+			if (!pMember[i])
 			{
 				continue;
 			}
 
 			Player* pPlayer = pMember[i]->ToPlayer();
 
-			if ( !pPlayer )
+			if (!pPlayer)
 			{
 				continue;
 			}
 
-			if ( pPlayer->GetTotalLevel() < sGameServer->GetBarracksMoveMinLevel() )
+			if (pPlayer->GetTotalLevel() < sGameServer->GetBarracksMoveMinLevel())
 				continue;
 
 			pPlayer->MoveToGate(256);
@@ -10330,28 +10605,28 @@ void Player::NpcInteractionBarrackTeleport()
 	{
 		this->MoveToGate(256);
 	}
-}	
+}
 
 void Player::NpcInteractionRefugeTeleport()
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !sGameServer->IsRefugeMoveEnabled() )
-	{
-		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_GATE_KEEPER, 0);
-		return;
-	}
-
-	if ( this->GetTotalLevel() < sGameServer->GetRefugeMoveMinLevel() )
+	if (!sGameServer->IsRefugeMoveEnabled())
 	{
 		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_GATE_KEEPER, 0);
 		return;
 	}
 
-	if ( !this->MoneyHave(sGameServer->GetRefugeMoveCost()) )
+	if (this->GetTotalLevel() < sGameServer->GetRefugeMoveMinLevel())
+	{
+		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_GATE_KEEPER, 0);
+		return;
+	}
+
+	if (!this->MoneyHave(sGameServer->GetRefugeMoveCost()))
 	{
 		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_GATE_KEEPER, 0);
 		return;
@@ -10359,7 +10634,7 @@ void Player::NpcInteractionRefugeTeleport()
 
 	uint8 state = this->QuestEvolutionGetState(6);
 
-	if ( state != QUEST_EVOLUTION_STATE_ACCEPTED && state != QUEST_EVOLUTION_STATE_COMPLETE )
+	if (state != QUEST_EVOLUTION_STATE_ACCEPTED && state != QUEST_EVOLUTION_STATE_COMPLETE)
 	{
 		this->NpcInteractionResult(SUBCODE_NPC_INTERACTION_GATE_KEEPER, 0);
 		return;
@@ -10367,31 +10642,31 @@ void Player::NpcInteractionRefugeTeleport()
 
 	this->MoneyReduce(sGameServer->GetRefugeMoveCost());
 
-	if ( sGameServer->IsRefugeMoveParty() )
+	if (sGameServer->IsRefugeMoveParty())
 	{
 		Unit* pMember[MAX_PARTY_MEMBERS];
 		uint8 count = 0;
 
 		this->GetPartyMembers(pMember, count, 10);
 
-		if ( count > MAX_PARTY_MEMBERS )
+		if (count > MAX_PARTY_MEMBERS)
 			count = 1;
 
-		for ( uint8 i = 0; i < count; i++ )
+		for (uint8 i = 0; i < count; i++)
 		{
-			if ( !pMember[i] )
+			if (!pMember[i])
 			{
 				continue;
 			}
 
 			Player* pPlayer = pMember[i]->ToPlayer();
 
-			if ( !pPlayer )
+			if (!pPlayer)
 			{
 				continue;
 			}
 
-			if ( pPlayer->GetTotalLevel() < sGameServer->GetRefugeMoveMinLevel() )
+			if (pPlayer->GetTotalLevel() < sGameServer->GetRefugeMoveMinLevel())
 			{
 				continue;
 			}
@@ -10411,16 +10686,16 @@ void Player::NpcInteractionResult(uint8 npc, uint8 result)
 	this->sendPacket(MAKE_PCT(pMsg));
 }
 
-void Player::AfterHitCheck(Unit * pAttacker, int32 damage, int32 shield_damage, uint16 damage_flag)
+void Player::AfterHitCheck(Unit* pAttacker, int32 damage, int32 shield_damage, uint16 damage_flag)
 {
-	if ( !pAttacker )
+	if (!pAttacker)
 	{
 		return;
 	}
 
-	Unit * pAttackerMaster = pAttacker->GetSummoner();
+	Unit* pAttackerMaster = pAttacker->GetSummoner();
 
-	if ( !pAttackerMaster )
+	if (!pAttackerMaster)
 	{
 		return;
 	}
@@ -10431,20 +10706,20 @@ void Player::AfterHitCheck(Unit * pAttacker, int32 damage, int32 shield_damage, 
 	this->SetKillCount(0);
 	this->KillCountSend();
 
-	if ( pPlayer && this != pAttackerMaster )
+	if (pPlayer && this != pAttackerMaster)
 	{
-		if ( Party* pParty = pPlayer->GetParty() )
+		if (Party* pParty = pPlayer->GetParty())
 		{
 			pParty->SendKillDamage(pPlayer, this, damage, shield_damage, damage_flag);
 		}
 
-		if ( CC_MAP_RANGE(pAttackerMaster->GetWorldId()) )
+		if (CC_MAP_RANGE(pAttackerMaster->GetWorldId()))
 		{
-			if ( pAttackerMaster->GetEventId() == EVENT_CHAOS_CASTLE && CHAOS_CASTLE_GROUND_RANGE(pAttackerMaster->GetEventGround()) )
+			if (pAttackerMaster->GetEventId() == EVENT_CHAOS_CASTLE && CHAOS_CASTLE_GROUND_RANGE(pAttackerMaster->GetEventGround()))
 			{
 				sChaosCastleMgr->GetGround(pAttackerMaster->GetEventGround())->KillPlayer(pPlayer);
 			}
-			else if ( pAttackerMaster->GetEventId() == EVENT_CHAOS_CASTLE_SURVIVAL )
+			else if (pAttackerMaster->GetEventId() == EVENT_CHAOS_CASTLE_SURVIVAL)
 			{
 				sChaosCastleSurvivalMgr->GetGround()->KillPlayer(pPlayer);
 			}
@@ -10469,68 +10744,68 @@ void Player::AfterHitCheck(Unit * pAttacker, int32 damage, int32 shield_damage, 
 
 void Player::UpdateWrongWorld()
 {
-	if ( !this->IsLive() )
+	if (!this->IsLive())
 		return;
 
-	if ( this->GetRegenStatus() != REGEN_NONE )
+	if (this->GetRegenStatus() != REGEN_NONE)
 	{
 		this->HelperStop(0x01);
 		//return;
 	}
 
-	if ( this->GetRegenStatus() == REGEN_STANDBY ||
-		 this->GetRegenStatus() == REGEN_READY )
+	if (this->GetRegenStatus() == REGEN_STANDBY ||
+		this->GetRegenStatus() == REGEN_READY)
 		return;
 
-	if ( this->GetPartyID() != PARTY_NULL && !this->IsWorldFlag(WORLD_FLAG_ALLOW_PARTY) )
+	if (this->GetPartyID() != PARTY_NULL && !this->IsWorldFlag(WORLD_FLAG_ALLOW_PARTY))
 	{
 		this->PartyRemove();
 	}
 
-	if ( this->GetPartyID() != PARTY_NULL && this->GetWorldId() == WORLD_LAST_MAN_STANDING )
+	if (this->GetPartyID() != PARTY_NULL && this->GetWorldId() == WORLD_LAST_MAN_STANDING)
 	{
 		this->PartyRemove();
 	}
 
-	if ( this->GetPersonalStore()->IsOpen() && !this->IsWorldFlag(WORLD_FLAG_ALLOW_EXCHANGE) )
+	if (this->GetPersonalStore()->IsOpen() && !this->IsWorldFlag(WORLD_FLAG_ALLOW_EXCHANGE))
 	{
 		this->PersonalStoreClose(!this->GetPersonalStore()->IsOff());
 	}
 
-	if ( this->GetHelper()->IsStarted() && !this->IsWorldFlag(WORLD_FLAG_ALLOW_HELPER) )
+	if (this->GetHelper()->IsStarted() && !this->IsWorldFlag(WORLD_FLAG_ALLOW_HELPER))
 	{
 		this->HelperStop(0x01);
 	}
 
-	if ( this->GetSummoned() && !this->IsWorldFlag(WORLD_FLAG_ALLOW_SUMMON_MONSTER) )
+	if (this->GetSummoned() && !this->IsWorldFlag(WORLD_FLAG_ALLOW_SUMMON_MONSTER))
 	{
 		this->SendSummonedHP(0, 60);
 		this->KillSummoned();
 	}
 
-	if ( this->IsDuelSpectatorActive() && !this->IsSpectator() )
+	if (this->IsDuelSpectatorActive() && !this->IsSpectator())
 	{
 		this->SetDuelSpectatorActive(false);
 		this->RemoveBuff(BUFF_DUEL_WATCHER);
 		this->RemoveBuff(BUFF_TRANSPARENCY);
 	}
 
-	if ( !this->IsAdministrator() )
+	if (!this->IsAdministrator())
 	{
-		if ( this->GetWorldId() == WORLD_VULCANUS_ROOM )
+		if (this->GetWorldId() == WORLD_VULCANUS_ROOM)
 		{
 			DuelRoom const* pRoom = sDuelMgr->GetRoom(this->GetDuelRoom());
 
-			if ( !pRoom )
+			if (!pRoom)
 			{
 				this->TeleportToLocation(WORLD_VULCANUS);
 				return;
 			}
 
-			if ( !this->IsSpectator()  )
+			if (!this->IsSpectator())
 			{
-				if ( pRoom->GetDueler(0)->GetPlayer() != this && 
-					 pRoom->GetDueler(1)->GetPlayer() != this)
+				if (pRoom->GetDueler(0)->GetPlayer() != this &&
+					pRoom->GetDueler(1)->GetPlayer() != this)
 				{
 					this->TeleportToLocation(WORLD_VULCANUS);
 					return;
@@ -10539,45 +10814,45 @@ void Player::UpdateWrongWorld()
 		}
 	}
 
-	if ( this->IsDueling() && !this->IsDuelClassic() && this->GetWorldId() != WORLD_VULCANUS_ROOM )
+	if (this->IsDueling() && !this->IsDuelClassic() && this->GetWorldId() != WORLD_VULCANUS_ROOM)
 	{
 		this->SetDueling(false);
 	}
-	
-	if ( this->IsDueling() && this->IsDuelClassic() )
+
+	if (this->IsDueling() && this->IsDuelClassic())
 	{
 		sDuelMgr->ClassicUpdate(this);
 	}
 
-	if ( sWorldBoss->GetState() != WORLD_BOSS_STATE_PLAYING )
+	if (sWorldBoss->GetState() != WORLD_BOSS_STATE_PLAYING)
 	{
 		this->SetCounter(PLAYER_COUNTER_WORLD_BOSS, 0);
 	}
 
-	if ( this->GetMiniBombState() != MINI_BOMB_GAME_START && (!sMiniBomb->IsActive() || !sGameServer->IsMiniBombEnabled()) )
+	if (this->GetMiniBombState() != MINI_BOMB_GAME_START && (!sMiniBomb->IsActive() || !sGameServer->IsMiniBombEnabled()))
 	{
 		this->SetMiniBombState(MINI_BOMB_GAME_START);
 		this->SetMiniBombCurrentScore(0);
 		this->SetMiniBombTotalScore(0);
 	}
 
-	if ( this->GetTimer(PLAYER_TIMER_WRONG_LOCATION)->Elapsed(IN_MILLISECONDS) && this->GetRegenStatus() == REGEN_NONE && this->IsWorldFlag(WORLD_FLAG_ALLOW_WRONG_LOCATION_CHECK) )
+	if (this->GetTimer(PLAYER_TIMER_WRONG_LOCATION)->Elapsed(IN_MILLISECONDS) && this->GetRegenStatus() == REGEN_NONE && this->IsWorldFlag(WORLD_FLAG_ALLOW_WRONG_LOCATION_CHECK))
 	{
 		WorldGrid const& grid = this->GetGrid();
 
-		if ( grid.IsLocked_1() || grid.IsLocked_2() )
+		if (grid.IsLocked_1() || grid.IsLocked_2())
 		{
 			this->TeleportToGate(17);
 			return;
 		}
 	}
 
-	if ( this->IsAdministrator() )
+	if (this->IsAdministrator())
 		return;
 
-	if ( this->GetWorldId() == WORLD_KANTURU_BOSS )
+	if (this->GetWorldId() == WORLD_KANTURU_BOSS)
 	{
-		if ( this->GetEventId() != EVENT_KANTURU && this->GetRegenStatus() == REGEN_NONE )
+		if (this->GetEventId() != EVENT_KANTURU && this->GetRegenStatus() == REGEN_NONE)
 		{
 			this->MoveToGate(KANTURU_GATE_OUT);
 			return;
@@ -10592,7 +10867,7 @@ void Player::UpdateWrongWorld()
 			return;
 		}
 	}*/
-	
+
 	if (this->GetWorldId() == WORLD_ICARUS || this->GetWorldId() == WORLD_KANTURU_BOSS || this->GetWorldId() == WORLD_SCARLET_ICARUS)
 	{
 		/*if ( this->IsActiveInventoryItem(PET_UNIRIA) )
@@ -10600,7 +10875,7 @@ void Player::UpdateWrongWorld()
 			this->UnMountBuff();
 		}*/
 
-		if ( this->GetInventory()->GetItem(WINGS)->IsItem() )
+		if (this->GetInventory()->GetItem(WINGS)->IsItem())
 		{
 			return;
 		}
@@ -10612,17 +10887,17 @@ void Player::UpdateWrongWorld()
 
 		use_inventory_loop(i)
 		{
-			if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+			if (!this->GetInventory()->CanUseExpandedSlot(i))
 			{
 				continue;
 			}
 
-			if ( !this->GetInventory()->GetItem(i)->IsItem() )
+			if (!this->GetInventory()->GetItem(i)->IsItem())
 			{
 				continue;
 			}
 
-			if ( this->GetInventory()->GetItem(i)->GetItem() != PET_DINORANT )
+			if (this->GetInventory()->GetItem(i)->GetItem() != PET_DINORANT)
 			{
 				continue;
 			}
@@ -10630,42 +10905,42 @@ void Player::UpdateWrongWorld()
 			this->InventoryItemUse(0xFE, i);
 			return;
 		}
-		
+
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You need to wear Wings, Dinorant or Fenrir to stay in Icarus.");
 		this->MoveToGate(22);
 	}
-	else if ( this->GetWorldId() == WORLD_RAKLION_BOSS )
+	else if (this->GetWorldId() == WORLD_RAKLION_BOSS)
 	{
-		if ( sRaklion->GetState() == RAKLION_STATE_NONE ||
-			 sRaklion->GetState() == RAKLION_STATE_CLOSED )
+		if (sRaklion->GetState() == RAKLION_STATE_NONE ||
+			sRaklion->GetState() == RAKLION_STATE_CLOSED)
 		{
 			this->MoveToGate(287);
 		}
 	}
-	else if ( this->GetWorldId() == WORLD_LAND_OF_TRIALS )
+	else if (this->GetWorldId() == WORLD_LAND_OF_TRIALS)
 	{
-		if ( (!sCastleSiege->IsHuntEnabled() && !sCastleSiege->CastleOwnerMember(this) && !sCastleSiege->CastleOwnerUnionMember(this)) ||
-			 sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START )
+		if ((!sCastleSiege->IsHuntEnabled() && !sCastleSiege->CastleOwnerMember(this) && !sCastleSiege->CastleOwnerUnionMember(this)) ||
+			sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START)
 		{
 			this->MoveToGate(106);
 		}
 	}
-	else if ( this->GetWorldId() == WORLD_ATLANS )
+	else if (this->GetWorldId() == WORLD_ATLANS)
 	{
 		/*if ( this->IsActiveInventoryItem(PET_UNIRIA) ||
 			 this->IsActiveInventoryItem(PET_DINORANT) )
 		{
-			this->UnMountBuff();			
+			this->UnMountBuff();
 		}*/
 	}
-	else if ( this->GetWorldId() == WORLD_CASTLE_SIEGE )
+	else if (this->GetWorldId() == WORLD_CASTLE_SIEGE)
 	{
-		if ( sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START )
+		if (sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START)
 		{
-			if ( this->GetHelper()->IsStarted() )
+			if (this->GetHelper()->IsStarted())
 				this->HelperStop(0x01);
 
-			if ( !this->GetCastleSiegeJoinSide() && this->IsInDragonTower() )
+			if (!this->GetCastleSiegeJoinSide() && this->IsInDragonTower())
 				this->MoveToGate(103);
 		}
 	}
@@ -10673,9 +10948,9 @@ void Player::UpdateWrongWorld()
 
 bool Player::SummonPersonalMerchant()
 {
-	Monster * mMonster = sObjectMgr->MonsterTryAdd(1600, this->GetWorldId());
+	Monster* mMonster = sObjectMgr->MonsterTryAdd(1600, this->GetWorldId());
 
-	if ( !mMonster )
+	if (!mMonster)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Couldn't summon Personal Merchant.");
 		return false;
@@ -10694,12 +10969,12 @@ bool Player::SummonPersonalMerchant()
 	this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Personal Merchant created.");
 	return true;
 }
-	
+
 bool Player::SummonPersonalWarehouse()
 {
-	Monster * mMonster = sObjectMgr->MonsterTryAdd(1602, this->GetWorldId());
+	Monster* mMonster = sObjectMgr->MonsterTryAdd(1602, this->GetWorldId());
 
-	if ( !mMonster )
+	if (!mMonster)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Couldn't summon Personal Warehouse.");
 		return false;
@@ -10730,7 +11005,7 @@ void Player::FinalClose()
 
 bool Player::WearItem(Item const* mItem, uint8 slot)
 {
-	if ( mItem->GetSlot() == uint8(-1) )
+	if (mItem->GetSlot() == uint8(-1))
 	{
 		return false;
 	}
@@ -10742,7 +11017,7 @@ bool Player::WearItem(Item const* mItem, uint8 slot)
 		return false;
 	}
 
-	for ( uint8 i = 0; i < MAX_STAT_TYPE; ++i )
+	for (uint8 i = 0; i < MAX_STAT_TYPE; ++i)
 	{
 		if (sGameServer->IsOnlyBaseStatForEquipment())
 		{
@@ -10781,30 +11056,30 @@ bool Player::WearItem(Item const* mItem, uint8 slot)
 			}
 		}
 	}
-	
-	if ( this->GetTotalLevel() < mItem->GetRequiredLevel() )
+
+	if (this->GetTotalLevel() < mItem->GetRequiredLevel())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required Level: %d", mItem->GetRequiredLevel());
 		return false;
 	}
 
-	if ( !mItem->IsRequiredClass(this->GetClass(), this->GetChangeUP(0), this->GetChangeUP(1), this->GetChangeUP(2)) )
+	if (!mItem->IsRequiredClass(this->GetClass(), this->GetChangeUP(0), this->GetChangeUP(1), this->GetChangeUP(2)))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong character class.");
 		return false;
 	}
 
-	if( mItem->GetSlot() != slot && slot != WEAPON_01 && slot != WEAPON_02 && slot != RING_01 && slot != RING_02 )
+	if (mItem->GetSlot() != slot && slot != WEAPON_01 && slot != WEAPON_02 && slot != RING_01 && slot != RING_02)
 	{
 		return false;
 	}
 
-	if( mItem->GetSlot() != slot && ((slot == WEAPON_01 || slot == WEAPON_02) && mItem->GetSlot() != WEAPON_01 && mItem->GetSlot() != WEAPON_02) )
+	if (mItem->GetSlot() != slot && ((slot == WEAPON_01 || slot == WEAPON_02) && mItem->GetSlot() != WEAPON_01 && mItem->GetSlot() != WEAPON_02))
 	{
 		return false;
 	}
 
-	if( mItem->GetSlot() != slot && ((slot == RING_01 || slot == RING_02) && mItem->GetSlot() != RING_01 && mItem->GetSlot() != RING_02) )
+	if (mItem->GetSlot() != slot && ((slot == RING_01 || slot == RING_02) && mItem->GetSlot() != RING_01 && mItem->GetSlot() != RING_02))
 	{
 		return false;
 	}
@@ -10817,86 +11092,86 @@ bool Player::WearItem(Item const* mItem, uint8 slot)
 	auto weapon_kind_01 = this->GetInventory()->GetItem(WEAPON_01)->GetKind2();
 	auto weapon_kind_02 = this->GetInventory()->GetItem(WEAPON_02)->GetKind2();
 
-	if( slot == WEAPON_01 && this->GetInventory()->GetItem(WEAPON_02)->IsItem() )
+	if (slot == WEAPON_01 && this->GetInventory()->GetItem(WEAPON_02)->IsItem())
 	{
-		if ( this->GetInventory()->GetItem(WEAPON_02)->IsTwoHand() )
+		if (this->GetInventory()->GetItem(WEAPON_02)->IsTwoHand())
 		{
 			return false;
 		}
 
-		if ( mItem->IsTwoHand() )
+		if (mItem->IsTwoHand())
 		{
 			if (item_info->GetKind2() != ItemKind::BOW && item_info->GetKind2() != ItemKind::CROSSBOW)
 			{
 				return false;
 			}
 
-			if (weapon_kind_02 != ItemKind::ARROW && weapon_kind_02 != ItemKind::BOLT &&  weapon_kind_02 != ItemKind::QUIVER)
+			if (weapon_kind_02 != ItemKind::ARROW && weapon_kind_02 != ItemKind::BOLT && weapon_kind_02 != ItemKind::QUIVER)
 			{
 				return false;
 			}
 		}
 	}
 
-	if( slot == WEAPON_02 && this->GetInventory()->GetItem(WEAPON_01)->IsItem() )
+	if (slot == WEAPON_02 && this->GetInventory()->GetItem(WEAPON_01)->IsItem())
 	{
-		if ( mItem->IsTwoHand() )
+		if (mItem->IsTwoHand())
 		{
 			return false;
 		}
 
-		if ( this->GetInventory()->GetItem(WEAPON_01)->IsTwoHand() && weapon_kind_01 != ItemKind::BOW && weapon_kind_01 != ItemKind::CROSSBOW)
+		if (this->GetInventory()->GetItem(WEAPON_01)->IsTwoHand() && weapon_kind_01 != ItemKind::BOW && weapon_kind_01 != ItemKind::CROSSBOW)
 		{
 			return false;
 		}
 
 		if (weapon_kind_01 == ItemKind::BOW || weapon_kind_01 == ItemKind::CROSSBOW)
 		{
-			if (item_info->GetKind2() != ItemKind::ARROW && item_info->GetKind2() != ItemKind::BOLT &&  item_info->GetKind2() != ItemKind::QUIVER)
+			if (item_info->GetKind2() != ItemKind::ARROW && item_info->GetKind2() != ItemKind::BOLT && item_info->GetKind2() != ItemKind::QUIVER)
 			{
 				return false;
 			}
 		}
 	}
 
-	if ( sGameServer->GetMaxSocketWear() > 0 )
+	if (sGameServer->GetMaxSocketWear() > 0)
 	{
-		if ( slot == WEAPON_02 && mItem->GetMaxSocket() > 0 && this->GetInventory()->GetItem(WEAPON_01)->IsItem() && this->GetInventory()->GetItem(WEAPON_01)->GetMaxSocket() > 0 )
+		if (slot == WEAPON_02 && mItem->GetMaxSocket() > 0 && this->GetInventory()->GetItem(WEAPON_01)->IsItem() && this->GetInventory()->GetItem(WEAPON_01)->GetMaxSocket() > 0)
 		{
-			if ( (mItem->GetSocketCount() + this->GetInventory()->GetItem(WEAPON_01)->GetSocketCount()) > sGameServer->GetMaxSocketWear() )
-			{
-				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You have exceeded the maximum socket slot that can be worn on both hands. (Up to 6 socket slots)");
-				return false;
-			}
-		}
-
-		if ( slot == WEAPON_01 && mItem->GetMaxSocket() > 0 && this->GetInventory()->GetItem(WEAPON_02)->IsItem() && this->GetInventory()->GetItem(WEAPON_02)->GetMaxSocket() > 0 )
-		{
-			if ( (mItem->GetSocketCount() + this->GetInventory()->GetItem(WEAPON_02)->GetSocketCount()) > sGameServer->GetMaxSocketWear() )
+			if ((mItem->GetSocketCount() + this->GetInventory()->GetItem(WEAPON_01)->GetSocketCount()) > sGameServer->GetMaxSocketWear())
 			{
 				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You have exceeded the maximum socket slot that can be worn on both hands. (Up to 6 socket slots)");
 				return false;
 			}
 		}
+
+		if (slot == WEAPON_01 && mItem->GetMaxSocket() > 0 && this->GetInventory()->GetItem(WEAPON_02)->IsItem() && this->GetInventory()->GetItem(WEAPON_02)->GetMaxSocket() > 0)
+		{
+			if ((mItem->GetSocketCount() + this->GetInventory()->GetItem(WEAPON_02)->GetSocketCount()) > sGameServer->GetMaxSocketWear())
+			{
+				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You have exceeded the maximum socket slot that can be worn on both hands. (Up to 6 socket slots)");
+				return false;
+			}
+		}
 	}
 
-	if( CC_MAP_RANGE(this->GetWorldId()) || IT_MAP_RANGE(this->GetWorldId()) )
+	if (CC_MAP_RANGE(this->GetWorldId()) || IT_MAP_RANGE(this->GetWorldId()))
 	{
-		if ( mItem->IsTransformationRing() )
+		if (mItem->IsTransformationRing())
 		{
 			return false;
 		}
 	}
 
-	if ( slot == RING_01 || slot == RING_02 ) // Verificar que no se puedan usar 2 rings de transformación
+	if (slot == RING_01 || slot == RING_02) // Verificar que no se puedan usar 2 rings de transformación
 	{
-		if ( mItem->GetSlot() != RING_01 && mItem->GetSlot() != RING_02 )
+		if (mItem->GetSlot() != RING_01 && mItem->GetSlot() != RING_02)
 		{
 			return false;
 		}
 
-		if ( (slot == RING_01 && mItem->IsTransformationRing() && this->GetInventory()->GetItem(RING_02)->IsTransformationRing()) ||
-			 (slot == RING_02 && mItem->IsTransformationRing() && this->GetInventory()->GetItem(RING_01)->IsTransformationRing()) )
+		if ((slot == RING_01 && mItem->IsTransformationRing() && this->GetInventory()->GetItem(RING_02)->IsTransformationRing()) ||
+			(slot == RING_02 && mItem->IsTransformationRing() && this->GetInventory()->GetItem(RING_01)->IsTransformationRing()))
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Cannot be equipped while another Transformation Ring is equipped.");
 			return false;
@@ -10936,17 +11211,17 @@ void Player::WearedItemApplySkill()
 
 	wear_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->GetItem(i)->IsItem() )
+		if (!this->GetInventory()->GetItem(i)->IsItem())
 		{
 			continue;
 		}
 
-		if ( this->GetInventory()->GetItem(i)->GetSkill() )
+		if (this->GetInventory()->GetItem(i)->GetSkill())
 		{
 			this->MagicAddWeapon(this->GetInventory()->GetItem(i)->GetSkillID(), 0);
 		}
 
-		if ( this->GetInventory()->GetItem(i)->IsBlessedArchangelWeapon() )
+		if (this->GetInventory()->GetItem(i)->IsBlessedArchangelWeapon())
 		{
 			this->MagicAddWeapon(SKILL_ARCHANGELS_WILL, 0);
 		}
@@ -10955,12 +11230,12 @@ void Player::WearedItemApplySkill()
 
 void Player::WearedItemRemove(uint8 slot)
 {
-	if( !INVENTORY_WEAR_RANGE(slot) )
+	if (!INVENTORY_WEAR_RANGE(slot))
 	{
 		return;
 	}
 
-	if( slot == RING_01 || slot == RING_02 )
+	if (slot == RING_01 || slot == RING_02)
 	{
 		sItemMgr->IsUsingTransformationItem(this);
 	}
@@ -10978,17 +11253,17 @@ void Player::PreviewMake()
 	this->preview[CS_CLASS].set(this->GetDBClass() & ~7);
 
 	///- 2nd Class
-	if ( this->GetChangeUP(0) != 0 )
+	if (this->GetChangeUP(0) != 0)
 	{
 		this->preview[CS_CLASS].op_or(8);
 	}
 	///- 3th Class
-	if ( this->GetChangeUP(1) != 0 )
+	if (this->GetChangeUP(1) != 0)
 	{
 		this->preview[CS_CLASS].op_or(4);
 	}
 	///- 4th Class
-	if ( this->GetChangeUP(2) != 0 )
+	if (this->GetChangeUP(2) != 0)
 	{
 		//this->preview[CS_CLASS].op_and(~4);
 		this->preview[CS_CLASS].op_or(2);
@@ -10997,7 +11272,7 @@ void Player::PreviewMake()
 	// Set Right Hand Item
 	this->preview[CS_WEAPON1_DATA].op_or(DBI_GET_TYPE(this->GetInventory()->item[0].GetItem()));
 	this->preview[CS_WEAPON1_TYPE].set(DBI_GET_INDEX(this->GetInventory()->item[0].GetItem()));
-			
+
 	// Set Left Hand Item
 	this->preview[CS_WEAPON2_DATA].op_or(DBI_GET_TYPE(this->GetInventory()->item[1].GetItem()));
 	this->preview[CS_WEAPON2_TYPE].set(DBI_GET_INDEX(this->GetInventory()->item[1].GetItem()));
@@ -11036,102 +11311,102 @@ void Player::PreviewMake()
 	case ITEMGET(12, 0):
 	case ITEMGET(12, 1):
 	case ITEMGET(12, 2):
-		{
-			this->preview[16].op_or(0x04 * ((pWings->GetItem() - ITEMGET(12, 0)) + 1));
-		} break;
+	{
+		this->preview[16].op_or(0x04 * ((pWings->GetItem() - ITEMGET(12, 0)) + 1));
+	} break;
 
 	case ITEMGET(12, 3): // ELF Lvl 2
 	case ITEMGET(12, 424): // ELF Lvl 2
-		{
-			this->preview[16].op_or(16);
-		} break;
+	{
+		this->preview[16].op_or(16);
+	} break;
 
 	case ITEMGET(12, 4): // DW Lvl 2
 	case ITEMGET(12, 422): // DW Lvl 2
-		{
-			this->preview[16].op_or(20);
-		} break;
+	{
+		this->preview[16].op_or(20);
+	} break;
 
 	case ITEMGET(12, 5): // DK Lvl 2
 	case ITEMGET(12, 423): // DK Lvl 2
-		{
-			this->preview[16].op_or(24);
-		} break;
+	{
+		this->preview[16].op_or(24);
+	} break;
 
 	case ITEMGET(12, 6): // MG Lvl 2
 	case ITEMGET(12, 425): // MG Lvl 2
-		{
-			this->preview[16].op_or(28);
-		} break;
+	{
+		this->preview[16].op_or(28);
+	} break;
 
 	case ITEMGET(12, 36): // DK Lvl 3
 	case ITEMGET(12, 431): // DK Lvl 3
-		{
-			this->preview[16].op_or(0);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(0);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 37): // DW Lvl 3
 	case ITEMGET(12, 430): // DW Lvl 3
-		{
-			this->preview[16].op_or(4);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(4);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 38): // ELF Lvl 3
 	case ITEMGET(12, 432): // ELF Lvl 3
-		{
-			this->preview[16].op_or(8);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(8);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 39): // MG Lvl 3
 	case ITEMGET(12, 433): // MG Lvl 3
-		{
-			this->preview[16].op_or(12);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(12);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 40): // DL Lvl 3
 	case ITEMGET(12, 434): // DL Lvl 3
-		{
-			this->preview[16].op_or(16);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(16);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 41): // SUM Lvl 1
-		{
-			this->preview[16].op_or(20);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(20);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 42): // SUM Lvl 2
 	case ITEMGET(12, 427): // SUM Lvl 2
-		{
-			this->preview[16].op_or(24);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(24);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 43): // SUM Lvl 3
 	case ITEMGET(12, 435): // SUM Lvl 3
-		{
-			this->preview[16].op_or(28);
-			this->preview[9].op_or(1);
-		} break;
+	{
+		this->preview[16].op_or(28);
+		this->preview[9].op_or(1);
+	} break;
 
 	case ITEMGET(12, 49): // RF Lvl 2
 	case ITEMGET(12, 428): // RF Lvl 2
-		{
-			this->preview[16].op_or(0);
-			this->preview[9].op_or(2);
-		} break;
+	{
+		this->preview[16].op_or(0);
+		this->preview[9].op_or(2);
+	} break;
 
 	case ITEMGET(12, 50): // RF Lvl 3
 	case ITEMGET(12, 436): // RF Lvl 3
-		{
-			this->preview[16].op_or(4);
-			this->preview[9].op_or(2);
-		} break;
+	{
+		this->preview[16].op_or(4);
+		this->preview[9].op_or(2);
+	} break;
 
 	case ITEMGET(12, 130): // Small Cape of Lord
 	case ITEMGET(12, 131): // Small Wings of Misery
@@ -11139,193 +11414,193 @@ void Player::PreviewMake()
 	case ITEMGET(12, 133): // Small Wings of Heaven
 	case ITEMGET(12, 134): // Small Wings of Satan
 	case ITEMGET(12, 135): // Small Cloak of Warrior
-		{
-			this->preview[16].op_or(0x04 * ((pWings->GetItem() - ITEMGET(12, 130) + 2)));
-			this->preview[9].op_or(2);
-		} break;
+	{
+		this->preview[16].op_or(0x04 * ((pWings->GetItem() - ITEMGET(12, 130) + 2)));
+		this->preview[9].op_or(2);
+	} break;
 
 	case ITEMGET(12, 262):
 	case ITEMGET(12, 263):
 	case ITEMGET(12, 264):
 	case ITEMGET(12, 265):
 	case ITEMGET(12, 267):
-		{
-			this->preview[16].op_or(0x04 * (pWings->GetItem() - ITEMGET(12, 262)));
-			this->preview[9].op_or(3);
-		} break;
+	{
+		this->preview[16].op_or(0x04 * (pWings->GetItem() - ITEMGET(12, 262)));
+		this->preview[9].op_or(3);
+	} break;
 
 	case ITEMGET(13, 30): // DL Lvl 2
 	case ITEMGET(12, 426): // DL Lvl 2
-		{
-			this->preview[16].op_or(24);
-			this->preview[9].op_or(3);
-		} break;
+	{
+		this->preview[16].op_or(24);
+		this->preview[9].op_or(3);
+	} break;
 
 	case ITEMGET(12, 269): // GL Lvl 2
 	case ITEMGET(12, 429): // GL Lvl 2
-		{
-			this->preview[16].op_or(28);
-			this->preview[9].op_or(3);
-		} break;
+	{
+		this->preview[16].op_or(28);
+		this->preview[9].op_or(3);
+	} break;
 
 	case ITEMGET(12, 270): // GL Lvl 3
 	case ITEMGET(12, 437): // GL Lvl 3
+	{
+		if (pWings->GetLevel() == 15)
 		{
-			if (pWings->GetLevel() == 15)
-			{
-				this->preview[16].op_or(8); // 34
-				this->preview[9].op_or(4);
-			}
-			else
-			{
-				this->preview[16].op_or(0); // 32
-				this->preview[9].op_or(4);
-			}
-		} break;
+			this->preview[16].op_or(8); // 34
+			this->preview[9].op_or(4);
+		}
+		else
+		{
+			this->preview[16].op_or(0); // 32
+			this->preview[9].op_or(4);
+		}
+	} break;
 
 	case ITEMGET(12, 278):
-		{
-			this->preview[16].op_or(4);
-			this->preview[9].op_or(4);
-		} break;
+	{
+		this->preview[16].op_or(4);
+		this->preview[9].op_or(4);
+	} break;
 
 	case ITEMGET(12, 268):
 	case ITEMGET(12, 266):
-		{
-			this->preview[16].op_or(12);
-			this->preview[9].op_or(4);
-		} break;
+	{
+		this->preview[16].op_or(12);
+		this->preview[9].op_or(4);
+	} break;
 
 	case ITEMGET(12, 279):
 	case ITEMGET(12, 284):
-		{
-			this->preview[16].op_or(16);
-			this->preview[9].op_or(4);
-		} break;
+	{
+		this->preview[16].op_or(16);
+		this->preview[9].op_or(4);
+	} break;
 
 	case ITEMGET(12, 280):
 	case ITEMGET(12, 285):
-		{
-			this->preview[16].op_or(20);
-			this->preview[9].op_or(4);
-		} break;
+	{
+		this->preview[16].op_or(20);
+		this->preview[9].op_or(4);
+	} break;
 
 	case ITEMGET(12, 281):
 	case ITEMGET(12, 286):
-		{
-			this->preview[16].op_or(24);
-			this->preview[9].op_or(4);
-		} break;
+	{
+		this->preview[16].op_or(24);
+		this->preview[9].op_or(4);
+	} break;
 
 	case ITEMGET(12, 282):
 	case ITEMGET(12, 287):
-		{
-			this->preview[16].op_or(28);
-			this->preview[9].op_or(4);
-		} break;
+	{
+		this->preview[16].op_or(28);
+		this->preview[9].op_or(4);
+	} break;
 
 	case ITEMGET(12, 414):
-		{
-			this->preview[16].op_or(0);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(0);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 415):
-		{
-			this->preview[16].op_or(4);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(4);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 416):
-		{
-			this->preview[16].op_or(8);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(8);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 417):
-		{
-			this->preview[16].op_or(12);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(12);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 418):
-		{
-			this->preview[16].op_or(16);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(16);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 419):
-		{
-			this->preview[16].op_or(20);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(20);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 420):
-		{
-			this->preview[16].op_or(24);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(24);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 421):
-		{
-			this->preview[16].op_or(28);
-			this->preview[9].op_or(5);
-		} break;
+	{
+		this->preview[16].op_or(28);
+		this->preview[9].op_or(5);
+	} break;
 
 	case ITEMGET(12, 438):
-		{
-			this->preview[16].op_or(0);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(0);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 439):
-		{
-			this->preview[16].op_or(4);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(4);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 440):
-		{
-			this->preview[16].op_or(8);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(8);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 441):
-		{
-			this->preview[16].op_or(12);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(12);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 442):
-		{
-			this->preview[16].op_or(16);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(16);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 443):
-		{
-			this->preview[16].op_or(20);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(20);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 444):
-		{
-			this->preview[16].op_or(24);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(24);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 445):
-		{
-			this->preview[16].op_or(28);
-			this->preview[9].op_or(6);
-		} break;
+	{
+		this->preview[16].op_or(28);
+		this->preview[9].op_or(6);
+	} break;
 
 	case ITEMGET(12, 467):
 	case ITEMGET(12, 468):
-		{
-			this->preview[16].op_or(0);
-			this->preview[9].op_or(7);
-		} break;
+	{
+		this->preview[16].op_or(0);
+		this->preview[9].op_or(7);
+	} break;
 
 	case ITEMGET(12, 469):
 	{
@@ -11336,26 +11611,26 @@ void Player::PreviewMake()
 	case ITEMGET(12, 472):
 	case ITEMGET(12, 473):
 	{
-							 this->preview[16].op_or(16);
-							 this->preview[9].op_or(7);
+		this->preview[16].op_or(16);
+		this->preview[9].op_or(7);
 	} break;
 
 	case ITEMGET(12, 474):
 	{
-							 this->preview[16].op_or(20);
-							 this->preview[9].op_or(7);
+		this->preview[16].op_or(20);
+		this->preview[9].op_or(7);
 	} break;
 
 	case ITEMGET(12, 480):
 	{
-							 this->preview[16].op_or(12);
-							 this->preview[9].op_or(7);
+		this->preview[16].op_or(12);
+		this->preview[9].op_or(7);
 	} break;
 
 	default:
-		{
-			index |= 0;
-		} break;
+	{
+		index |= 0;
+	} break;
 	}
 
 	int32 levelindex = CS_SET_SMALLLEVEL_RH(sItemMgr->LevelSmallConvert(this->GetInventory()->item[0].GetLevel()));
@@ -11382,66 +11657,66 @@ void Player::PreviewMake()
 
 	// Set Set Items
 	this->preview[CS_ANC_EFFECT].set(0);
-	if ( this->GetInventory()->item[2].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x80);
-	if ( this->GetInventory()->item[3].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x40);
-	if ( this->GetInventory()->item[4].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x20);
-	if ( this->GetInventory()->item[5].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x10);
-	if ( this->GetInventory()->item[6].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x08);
-	if ( this->GetInventory()->item[0].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x04);
-	if ( this->GetInventory()->item[1].IsAncient() ) this->preview[CS_ANC_EFFECT].op_or(0x02);
+	if (this->GetInventory()->item[2].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x80);
+	if (this->GetInventory()->item[3].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x40);
+	if (this->GetInventory()->item[4].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x20);
+	if (this->GetInventory()->item[5].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x10);
+	if (this->GetInventory()->item[6].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x08);
+	if (this->GetInventory()->item[0].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x04);
+	if (this->GetInventory()->item[1].IsAncient()) this->preview[CS_ANC_EFFECT].op_or(0x02);
 
-	if ( this->IsFullAncient() )
+	if (this->IsFullAncient())
 	{
 		this->preview[CS_ANC_EFFECT].op_or(0x01);
 	}
 
 	// Pets Set
-	switch ( this->GetInventory()->item[8].GetItem() )
+	switch (this->GetInventory()->item[8].GetItem())
 	{
-	case ITEMGET(13,0):
-	case ITEMGET(13,1):
-		{
-			index |= CS_SET_HELPER(this->GetInventory()->item[8].GetItem());
-		} break;
+	case ITEMGET(13, 0):
+	case ITEMGET(13, 1):
+	{
+		index |= CS_SET_HELPER(this->GetInventory()->item[8].GetItem());
+	} break;
 
-	case ITEMGET(13,80): // Panda Pet
-		{
-			this->preview[16].op_or(224);
-		} break;
+	case ITEMGET(13, 80): // Panda Pet
+	{
+		this->preview[16].op_or(224);
+	} break;
 
-	case ITEMGET(13,106): // Unicorn
-		{
-			this->preview[16].op_or(160);
-		} break;
+	case ITEMGET(13, 106): // Unicorn
+	{
+		this->preview[16].op_or(160);
+	} break;
 
-	case ITEMGET(13,67): // Rudolf Pet
-		{
-			this->preview[16].op_or(128);
-		} break;
+	case ITEMGET(13, 67): // Rudolf Pet
+	{
+		this->preview[16].op_or(128);
+	} break;
 
-	case ITEMGET(13,123): // Skeleton Pet
-		{
-			this->preview[16].op_or(96);
-		} break;
+	case ITEMGET(13, 123): // Skeleton Pet
+	{
+		this->preview[16].op_or(96);
+	} break;
 
-	case ITEMGET(13,65): // Spirit of Guardian
-		{	
-			this->preview[16].op_or(64);
-		} break;
+	case ITEMGET(13, 65): // Spirit of Guardian
+	{
+		this->preview[16].op_or(64);
+	} break;
 
-	case ITEMGET(13,64): // Demon Pet
-		{
-			this->preview[16].op_or(32);
-		} break;
+	case ITEMGET(13, 64): // Demon Pet
+	{
+		this->preview[16].op_or(32);
+	} break;
 
 	default:
-		{
-			index |= 3;
-		} break;
+	{
+		index |= 3;
+	} break;
 	}
 
 	Item const* pMount = this->GetActiveInventoryItem(this->GetVisibleMount());
-	
+
 	if (pMount)
 	{
 		if (pMount->GetItem() == PET_DARK_HORSE)
@@ -11484,23 +11759,23 @@ void Player::PreviewSend()
 
 void Player::SantaClausGift()
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 		return;
 
-	if ( !this->GetSantaClausGiftRequest() )
+	if (!this->GetSantaClausGiftRequest())
 	{
 		this->CommandSend(16, 3, 0);
 		return;
 	}
 
 	this->SetSantaClausGiftRequest(0);
-	
-	if ( sItemBagMgr->ExecuteItemBag(ITEM_BAG_MISC, this, sGameServer->GetSantaVillageSantaClausItemBag()) == ITEM_BAG_RESULT_SUCCESS )
+
+	if (sItemBagMgr->ExecuteItemBag(ITEM_BAG_MISC, this, sGameServer->GetSantaVillageSantaClausItemBag()) == ITEM_BAG_RESULT_SUCCESS)
 	{
 		this->SetSantaClausGiftDate(time(nullptr));
 	}
 }
-	
+
 void Player::SnowmanMove()
 {
 	this->MoveToGate(22);
@@ -11518,69 +11793,69 @@ bool Player::IsBusy()
 
 void Player::Autosave()
 {
-	if ( this->GetInterfaceState()->GetID() != InterfaceData::None )
+	if (this->GetInterfaceState()->GetID() != InterfaceData::None)
 	{
 		return;
 	}
 
-	if ( this->IsServerQuit() )
+	if (this->IsServerQuit())
 	{
 		return;
 	}
 
-	if ( this->IsAutoLogin() )
+	if (this->IsAutoLogin())
 	{
 		return;
 	}
 
-	if ( this->GetAccountData()->GetCloseCount() > 0 )
+	if (this->GetAccountData()->GetCloseCount() > 0)
 	{
 		return;
 	}
 
-	if ( !this->GetPersonalStore()->IsBusy() )
+	if (!this->GetPersonalStore()->IsBusy())
 	{
 		uint32 save_time = sGameServer->GetAutoSaveTime();
 
-		if ( (this->GetHelper()->IsOffline()) || (this->GetPersonalStore()->IsOff()) )
+		if ((this->GetHelper()->IsOffline()) || (this->GetPersonalStore()->IsOff()))
 		{
 			save_time = sGameServer->GetAutoSaveOfflineTime();
 		}
 
-		if ( this->GetTimer(PLAYER_TIMER_SAVE_DB)->Elapsed(save_time) )
+		if (this->GetTimer(PLAYER_TIMER_SAVE_DB)->Elapsed(save_time))
 		{
 			this->SaveCharacter();
 		}
 
 		this->CashShopCoinUpdate();
 
-		if ( this->GetTimer(PLAYER_TIMER_CASH_SHOP_GIFT)->GetTimer() == 0 || this->GetTimer(PLAYER_TIMER_CASH_SHOP_GIFT)->Elapsed(sGameServer->GetCashShopGiftUpdateTime()) )
+		if (this->GetTimer(PLAYER_TIMER_CASH_SHOP_GIFT)->GetTimer() == 0 || this->GetTimer(PLAYER_TIMER_CASH_SHOP_GIFT)->Elapsed(sGameServer->GetCashShopGiftUpdateTime()))
 		{
 			this->GetTimer(PLAYER_TIMER_CASH_SHOP_GIFT)->Start();
 			this->CashShopGiftUpdate();
 		}
 	}
 
-	if ( this->GetTimer(PLAYER_TIMER_MAIL)->GetTimer() == 0 || this->GetTimer(PLAYER_TIMER_MAIL)->Elapsed(sGameServer->GetFriendMailUpdateInterval()) )
+	if (this->GetTimer(PLAYER_TIMER_MAIL)->GetTimer() == 0 || this->GetTimer(PLAYER_TIMER_MAIL)->Elapsed(sGameServer->GetFriendMailUpdateInterval()))
 	{
 		this->GetTimer(PLAYER_TIMER_MAIL)->Start();
 		this->MailNewUpdate();
 	}
 }
 
-void Player::PositionSet(uint8 * Packet)
+void Player::PositionSet(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( this->IsTeleporting() )
+	if (this->IsTeleporting())
 	{
 		return;
 	}
 
-	if ( this->GetRegenStatus() != REGEN_NONE )
+	if (this->GetRegenStatus() != REGEN_NONE)
 	{
 		return;
 	}
@@ -11620,7 +11895,7 @@ void Player::PositionSet(uint8 * Packet)
 
 int32 Player::MagicAddWeapon(uint16 skill, uint8 level)
 {
-	if ( !sSkillMgr->IsSkillRequiredClass(skill, this->GetClass(), this->GetChangeUP(0), this->GetChangeUP(1), this->GetChangeUP(2)) )
+	if (!sSkillMgr->IsSkillRequiredClass(skill, this->GetClass(), this->GetChangeUP(0), this->GetChangeUP(1), this->GetChangeUP(2)))
 	{
 		return -1;
 	}
@@ -11636,7 +11911,7 @@ void Player::MagicDelWeapon(uint16 skill, uint8 level)
 
 	int32 result = this->MagicRemove(skill);
 
-	if ( result != -1 )
+	if (result != -1)
 	{
 		this->SendSkill(result, skill, level, false);
 	}
@@ -11646,7 +11921,7 @@ bool Player::MagicFindSkillTree(uint16 skill) const
 {
 	skill_template const* skill_info = sSkillMgr->GetSkill(skill);
 
-	if ( !skill_info )
+	if (!skill_info)
 	{
 		return false;
 	}
@@ -11655,12 +11930,12 @@ bool Player::MagicFindSkillTree(uint16 skill) const
 
 	SKILL_LOOP(i)
 	{
-		if ( !(skill_info_tmp = sSkillMgr->GetSkill(this->GetSkill(i)->GetSkill())) )
+		if (!(skill_info_tmp = sSkillMgr->GetSkill(this->GetSkill(i)->GetSkill())))
 		{
 			continue;
 		}
 
-		if ( skill_info_tmp->GetBaseSkill() != skill_info->GetBaseSkill() )
+		if (skill_info_tmp->GetBaseSkill() != skill_info->GetBaseSkill())
 		{
 			continue;
 		}
@@ -11682,7 +11957,7 @@ float Player::MagicGetValue(uint16 skill, bool majestic)
 			return 0.0f;
 		}
 
-		skill_tree_majestic * skill_info = sSkillMgr->GetSkillTreeMajestic(this->GetClass(), pSkill->GetSection(), pSkill->GetID());
+		skill_tree_majestic* skill_info = sSkillMgr->GetSkillTreeMajestic(this->GetClass(), pSkill->GetSection(), pSkill->GetID());
 
 		if (skill_info)
 		{
@@ -11718,7 +11993,7 @@ Skill const* Player::MagicGetByBase(uint16 skill) const
 {
 	skill_template const* skill_info = sSkillMgr->GetSkill(skill);
 
-	if ( !skill_info )
+	if (!skill_info)
 	{
 		return nullptr;
 	}
@@ -11727,12 +12002,12 @@ Skill const* Player::MagicGetByBase(uint16 skill) const
 
 	SKILL_LOOP(i)
 	{
-		if ( !(skill_info_tmp = sSkillMgr->GetSkill(this->GetSkill(i)->GetSkill())) )
+		if (!(skill_info_tmp = sSkillMgr->GetSkill(this->GetSkill(i)->GetSkill())))
 		{
 			continue;
 		}
 
-		if ( skill_info_tmp->GetBaseSkill() != skill_info->GetBaseSkill() )
+		if (skill_info_tmp->GetBaseSkill() != skill_info->GetBaseSkill())
 		{
 			continue;
 		}
@@ -11742,12 +12017,12 @@ Skill const* Player::MagicGetByBase(uint16 skill) const
 
 	return nullptr;
 }
-	
-Skill * Player::MagicGetByBase(uint16 skill)
+
+Skill* Player::MagicGetByBase(uint16 skill)
 {
 	skill_template const* skill_info = sSkillMgr->GetSkill(skill);
 
-	if ( !skill_info )
+	if (!skill_info)
 	{
 		return nullptr;
 	}
@@ -11756,12 +12031,12 @@ Skill * Player::MagicGetByBase(uint16 skill)
 
 	SKILL_LOOP(i)
 	{
-		if ( !(skill_info_tmp = sSkillMgr->GetSkill(this->GetSkill(i)->GetSkill())) )
+		if (!(skill_info_tmp = sSkillMgr->GetSkill(this->GetSkill(i)->GetSkill())))
 		{
 			continue;
 		}
 
-		if ( skill_info_tmp->GetBaseSkill() != skill_info->GetBaseSkill() )
+		if (skill_info_tmp->GetBaseSkill() != skill_info->GetBaseSkill())
 		{
 			continue;
 		}
@@ -11789,7 +12064,7 @@ void Player::MoneySet(uint32 ammount, bool send)
 {
 	this->zen.set(ammount);
 
-	if ( send )
+	if (send)
 		this->MoneySend();
 }
 
@@ -11800,9 +12075,9 @@ bool Player::MoneyReachMaximum(uint32 ammount) const
 
 void Player::MoneyAdd(uint32 ammount, bool send)
 {
-	if ( ammount )
+	if (ammount)
 	{
-		if ( this->MoneyReachMaximum(ammount) )
+		if (this->MoneyReachMaximum(ammount))
 		{
 			this->MoneySet(sGameServer->GetMaxCharacterZen());
 		}
@@ -11812,15 +12087,15 @@ void Player::MoneyAdd(uint32 ammount, bool send)
 		}
 	}
 
-	if ( send )
+	if (send)
 		this->MoneySend();
 }
 
 void Player::MoneyReduce(uint32 ammount, bool send)
 {
-	if ( ammount )
+	if (ammount)
 	{
-		if ( this->MoneyGet() < ammount )
+		if (this->MoneyGet() < ammount)
 		{
 			this->MoneySet(0);
 		}
@@ -11830,13 +12105,13 @@ void Player::MoneyReduce(uint32 ammount, bool send)
 		}
 	}
 
-	if ( send )
+	if (send)
 		this->MoneySend();
 }
 
 bool Player::MoneyHave(uint32 ammount) const
 {
-	if ( !ammount )
+	if (!ammount)
 		return true;
 
 	return this->MoneyGet() >= ammount;
@@ -11844,12 +12119,12 @@ bool Player::MoneyHave(uint32 ammount) const
 
 void Player::TownPortalScrollUse(uint8 slot)
 {
-	if ( this->GetRegenStatus() != REGEN_NONE || !this->IsLive() )
+	if (this->GetRegenStatus() != REGEN_NONE || !this->IsLive())
 	{
 		return;
 	}
 
-	if ( this->GetWorldId() == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE )
+	if (this->GetWorldId() == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE)
 	{
 		return;
 	}
@@ -11916,41 +12191,41 @@ void Player::TownPortalScrollUse(uint8 slot)
 
 void Player::OnDie(Unit* pUnit)
 {
-	if ( this->GetHelper()->IsOffline() )
+	if (this->GetHelper()->IsOffline())
 	{
 		this->GetHelper()->SetDieTime(GetTickCount());
 	}
 
-	if ( this->GetCounter(PLAYER_COUNTER_WORLD_BOSS) > 0 )
+	if (this->GetCounter(PLAYER_COUNTER_WORLD_BOSS) > 0)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "World Boss kill points reseted.");
 		this->SetCounter(PLAYER_COUNTER_WORLD_BOSS, 0);
 	}
-	
-	if ( BC_MAP_RANGE(this->GetWorldId()) || DS_MAP_RANGE(this->GetWorldId()) )
+
+	if (BC_MAP_RANGE(this->GetWorldId()) || DS_MAP_RANGE(this->GetWorldId()))
 	{
 		return;
 	}
 
-	if ( this->GetWorldId() == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE ||
-		 this->GetWorldId() == WORLD_PLACE_OF_QUALIFICATION )
+	if (this->GetWorldId() == WORLD_LABYRINTH_OF_DIMENSIONS_BATTLE ||
+		this->GetWorldId() == WORLD_PLACE_OF_QUALIFICATION)
 	{
 		return;
 	}
 
-	if ( this->HasBuff(BUFF_TALISMAN_OF_GUARDIAN) )
+	if (this->HasBuff(BUFF_TALISMAN_OF_GUARDIAN))
 	{
 		return;
 	}
-	
+
 	uint8 level_type = LEVEL_DATA_NORMAL;
 
-	if ( this->IsMaster() )
+	if (this->IsMaster())
 	{
 		level_type = LEVEL_DATA_MASTER;
 	}
 
-	if ( this->IsMajestic() )
+	if (this->IsMajestic())
 	{
 		level_type = LEVEL_DATA_MAJESTIC;
 	}
@@ -11961,70 +12236,70 @@ void Player::OnDie(Unit* pUnit)
 	int32 decrease_money_rate = 0;
 	int32 decrease_experience_ammount = 0;
 	int32 decrease_money_ammount = 0;
-	
-	if ( !pUnit->IsPlayer() )
+
+	if (!pUnit->IsPlayer())
 	{
-		if ( this->GetTotalLevel() < 11 )
+		if (this->GetTotalLevel() < 11)
 		{
 			decrease_experience_rate = 0;
 		}
-		else if ( this->GetTotalLevel() <= 150 )
+		else if (this->GetTotalLevel() <= 150)
 		{
-			if ( this->GetPKLevel() == PK_STATUS_COMMONER )
+			if (this->GetPKLevel() == PK_STATUS_COMMONER)
 				decrease_experience_rate = 3;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_1 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_1)
 				decrease_experience_rate = 5;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_2 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_2)
 				decrease_experience_rate = 10;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_3 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_3)
 				decrease_experience_rate = 20;
 		}
-		else if ( this->GetTotalLevel() <= 220 )
+		else if (this->GetTotalLevel() <= 220)
 		{
-			if ( this->GetPKLevel() == PK_STATUS_COMMONER )
+			if (this->GetPKLevel() == PK_STATUS_COMMONER)
 				decrease_experience_rate = 2;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_1 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_1)
 				decrease_experience_rate = 5;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_2 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_2)
 				decrease_experience_rate = 10;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_3 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_3)
 				decrease_experience_rate = 20;
 		}
 		else
 		{
-			if ( this->GetPKLevel() == PK_STATUS_COMMONER )
+			if (this->GetPKLevel() == PK_STATUS_COMMONER)
 				decrease_experience_rate = 1;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_1 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_1)
 				decrease_experience_rate = 5;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_2 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_2)
 				decrease_experience_rate = 10;
-			else if ( this->GetPKLevel() == PK_STATUS_MURDER_LVL_3 )
+			else if (this->GetPKLevel() == PK_STATUS_MURDER_LVL_3)
 				decrease_experience_rate = 20;
 		}
-	
-		if ( this->GetPKLevel() == PK_STATUS_COMMONER ||
-			 this->GetPKLevel() == PK_STATUS_MURDER_LVL_1 ||
-			 this->GetPKLevel() == PK_STATUS_MURDER_LVL_2 || 
-			 this->GetPKLevel() == PK_STATUS_MURDER_LVL_3 )
+
+		if (this->GetPKLevel() == PK_STATUS_COMMONER ||
+			this->GetPKLevel() == PK_STATUS_MURDER_LVL_1 ||
+			this->GetPKLevel() == PK_STATUS_MURDER_LVL_2 ||
+			this->GetPKLevel() == PK_STATUS_MURDER_LVL_3)
 		{
 			decrease_money_rate = 4;
 		}
 	}
 
-	if ( sGameServer->IsCharacterDieExperienceDecrease() )
+	if (sGameServer->IsCharacterDieExperienceDecrease())
 	{
-		if ( pLevelData->GetLevel() < sGameServer->GetMaxLevel(level_type) )
+		if (pLevelData->GetLevel() < sGameServer->GetMaxLevel(level_type))
 		{
 			//int64 experience_min = sCharacterBase->GetCharacterExperience(level_type, pLevelData->GetLevel());
 			int64 experience_min = 0;
 			int64 experience_max = sCharacterBase->GetCharacterExperience(level_type, pLevelData->GetLevel() + 1);
 
-			if ( decrease_experience_rate > 0 )
+			if (decrease_experience_rate > 0)
 			{
 				int64 decrease_experience = ((experience_max - experience_min) * decrease_experience_rate) / 100;
 				int64 sub_experience = pLevelData->GetExperience() - decrease_experience;
 
-				if ( sub_experience < experience_min )
+				if (sub_experience < experience_min)
 				{
 					sub_experience = experience_min;
 				}
@@ -12032,11 +12307,11 @@ void Player::OnDie(Unit* pUnit)
 				pLevelData->SetExperience(sub_experience);
 			}
 
-			if ( decrease_experience_ammount > 0 )
+			if (decrease_experience_ammount > 0)
 			{
 				int64 sub_experience = pLevelData->GetExperience() - decrease_experience_ammount;
-				
-				if ( sub_experience < experience_min )
+
+				if (sub_experience < experience_min)
 				{
 					sub_experience = experience_min;
 				}
@@ -12046,15 +12321,15 @@ void Player::OnDie(Unit* pUnit)
 		}
 	}
 
-	if ( sGameServer->IsCharacterDieZenDecrease() )
+	if (sGameServer->IsCharacterDieZenDecrease())
 	{
-		if ( decrease_money_rate > 0 )
+		if (decrease_money_rate > 0)
 		{
 			this->MoneyReduce(this->MoneyGet() * decrease_money_rate / 100);
 			this->GetWarehouse()->MoneyReduce(this->GetWarehouse()->GetZen() * decrease_money_rate / 100);
 		}
 
-		if ( decrease_money_ammount > 0 )
+		if (decrease_money_ammount > 0)
 		{
 			this->MoneyReduce(decrease_money_ammount);
 			this->GetWarehouse()->MoneyReduce(decrease_money_ammount);
@@ -12064,16 +12339,16 @@ void Player::OnDie(Unit* pUnit)
 
 void Player::LorenMarketTeleport()
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 		return;
 
-	if ( this->GetInterfaceState()->GetID() != InterfaceData::None )
+	if (this->GetInterfaceState()->GetID() != InterfaceData::None)
 		return;
 
-	if ( this->GetPersonalStore()->IsBusy() )
+	if (this->GetPersonalStore()->IsBusy())
 		return;
 
-	if ( this->GetWorldId() != WORLD_LOREN_MARKET )
+	if (this->GetWorldId() != WORLD_LOREN_MARKET)
 	{
 		this->MoveToGate(333);
 	}
@@ -12105,7 +12380,7 @@ void Player::SendWeather(uint8 weather)
 
 void Player::SendWeather()
 {
-	if ( World* pWorld = this->GetWorld() )
+	if (World* pWorld = this->GetWorld())
 	{
 		this->SendWeather(pWorld->GetWeatherConverted());
 	}
@@ -12159,10 +12434,10 @@ void Player::SendWeather()
 
 void Player::SendDataSingle(Object* pObject)
 {
-	if ( !pObject )
+	if (!pObject)
 		return;
 
-	if ( Unit* pUnit = pObject->ToUnit() )
+	if (Unit* pUnit = pObject->ToUnit())
 	{
 
 	}
@@ -12170,17 +12445,17 @@ void Player::SendDataSingle(Object* pObject)
 
 void Player::CheckAddInfinityArrow()
 {
-	if ( this->GetClass() == Character::FAIRY_ELF && this->GetChangeUP(0) == 1 )
+	if (this->GetClass() == Character::FAIRY_ELF && this->GetChangeUP(0) == 1)
 	{
 		skill_template const* skill_info = sSkillMgr->GetSkill(SKILL_INFINITY_ARROW);
 
-		if ( skill_info && this->GetTotalLevel() >= skill_info->GetRequiredLevel() )
+		if (skill_info && this->GetTotalLevel() >= skill_info->GetRequiredLevel())
 		{
-			if ( !this->MagicFindSkillTree(SKILL_INFINITY_ARROW) )
+			if (!this->MagicFindSkillTree(SKILL_INFINITY_ARROW))
 			{
 				int32 result = this->MagicAdd(SKILL_INFINITY_ARROW, 0);
 
-				if ( result != -1 )
+				if (result != -1)
 				{
 					this->SendSkill(result, this->GetSkill(result)->GetSkill(), this->GetSkill(result)->GetLevel());
 				}
@@ -12188,17 +12463,17 @@ void Player::CheckAddInfinityArrow()
 		}
 	}
 
-	if ( this->GetClass() == Character::GROW_LANCER && this->QuestEvolutionGetState(3) == QUEST_EVOLUTION_STATE_COMPLETE )
+	if (this->GetClass() == Character::GROW_LANCER && this->QuestEvolutionGetState(3) == QUEST_EVOLUTION_STATE_COMPLETE)
 	{
 		skill_template const* skill_info = sSkillMgr->GetSkill(SKILL_CIRCLE_SHIELD);
 
-		if ( skill_info && this->GetTotalLevel() >= skill_info->GetRequiredLevel() )
+		if (skill_info && this->GetTotalLevel() >= skill_info->GetRequiredLevel())
 		{
-			if ( !this->MagicFindSkillTree(SKILL_CIRCLE_SHIELD) )
+			if (!this->MagicFindSkillTree(SKILL_CIRCLE_SHIELD))
 			{
 				int32 result = this->MagicAdd(SKILL_CIRCLE_SHIELD, 0);
 
-				if ( result != -1 )
+				if (result != -1)
 				{
 					this->SendSkill(result, this->GetSkill(result)->GetSkill(), this->GetSkill(result)->GetLevel());
 				}
@@ -12232,10 +12507,10 @@ bool Player::IsWearingPet(uint16 pet)
 {
 	Item const* pItem = this->GetInventory()->GetItem(GUARDIAN);
 
-	if ( !pItem->IsItem() || !pItem->IsValid() )
+	if (!pItem->IsItem() || !pItem->IsValid())
 		return false;
 
-	if ( pItem->GetItem() != pet )
+	if (pItem->GetItem() != pet)
 		return false;
 
 	return true;
@@ -12243,13 +12518,13 @@ bool Player::IsWearingPet(uint16 pet)
 
 void Player::UpdateGoblinPoints(Monster* pMonster)
 {
-	if ( !sGameServer->IsGoblinPointEnabled() )
+	if (!sGameServer->IsGoblinPointEnabled())
 		return;
 
-	if ( this->IsInSafeZone() )
+	if (this->IsInSafeZone())
 		return;
 
-	if ( sGameServer->IsGoblinPointLevelAllowed(this, pMonster) )
+	if (sGameServer->IsGoblinPointLevelAllowed(this, pMonster))
 	{
 		this->GetTimer(PLAYER_TIMER_GOBLIN_POINT)->Start();
 	}
@@ -12257,37 +12532,37 @@ void Player::UpdateGoblinPoints(Monster* pMonster)
 
 void Player::UpdateGoblinPoints()
 {
-	if ( !sGameServer->IsGoblinPointEnabled() )
+	if (!sGameServer->IsGoblinPointEnabled())
 		return;
 
-	if ( this->IsInSafeZone() )
+	if (this->IsInSafeZone())
 		return;
 
-	if ( this->GetTimer(PLAYER_TIMER_GOBLIN_POINT)->GetElapsed() > (sGameServer->GetGoblinPointKillTime() * IN_MILLISECONDS) )
+	if (this->GetTimer(PLAYER_TIMER_GOBLIN_POINT)->GetElapsed() > (sGameServer->GetGoblinPointKillTime() * IN_MILLISECONDS))
 		return;
 
-	if ( this->GetHelper()->IsOffline() && !sGameServer->IsOfflineAttackGoblinPointsGain() )
+	if (this->GetHelper()->IsOffline() && !sGameServer->IsOfflineAttackGoblinPointsGain())
 	{
 		return;
 	}
 
 	this->IncreaseGoblinPointCount(1);
 
-	if ( this->GetHelper()->IsOffline() )
+	if (this->GetHelper()->IsOffline())
 	{
-		if ( this->GetGoblinPointCount() < sGameServer->GetGoblinPointRequiredTimeOffline() )
+		if (this->GetGoblinPointCount() < sGameServer->GetGoblinPointRequiredTimeOffline())
 		{
 			return;
 		}
 	}
 	else
 	{
-		if ( this->GetGoblinPointCount() < sGameServer->GetGoblinPointRequiredTime() )
+		if (this->GetGoblinPointCount() < sGameServer->GetGoblinPointRequiredTime())
 		{
 			return;
 		}
 	}
-	
+
 	this->SetGoblinPointCount(0);
 	this->IncreaseGoblinPoints(1);
 }
@@ -12298,28 +12573,28 @@ void Player::EquipmentAutochange(uint8 target_slot, uint16 item, uint8 level)
 
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 			continue;
 
-		if ( !this->GetInventory()->GetItem(i)->IsItem() )
+		if (!this->GetInventory()->GetItem(i)->IsItem())
 			continue;
 
-		if ( this->GetInventory()->GetItem(i)->GetItem() != item )
+		if (this->GetInventory()->GetItem(i)->GetItem() != item)
 			continue;
 
-		if ( level == uint8(-1) || this->GetInventory()->GetItem(i)->GetLevel() == level )
+		if (level == uint8(-1) || this->GetInventory()->GetItem(i)->GetLevel() == level)
 		{
 			slot = i;
 			break;
 		}
 	}
 
-	if ( slot != uint8(-1) )
+	if (slot != uint8(-1))
 	{
 		uint8 item_info[MAX_ITEM_INFO];
 		this->GetInventory()->GetItem(slot)->ConvertToBuffer(item_info);
 		uint8 result = this->MoveItemToInventoryFromInventory(move_item_inventory, slot, move_item_inventory, target_slot, item_info);
-					
+
 		this->ItemMoveResult(result, target_slot, item_info);
 		this->CashShopSendExpireItem(target_slot);
 		this->ClearItem(slot, 0);
@@ -12327,13 +12602,13 @@ void Player::EquipmentAutochange(uint8 target_slot, uint16 item, uint8 level)
 	}
 }
 
-void Player::AccumulateDamage(int32 & damage)
+void Player::AccumulateDamage(int32& damage)
 {
-	if ( this->HasBuff(BUFF_POTION_OF_BLESS) )
+	if (this->HasBuff(BUFF_POTION_OF_BLESS))
 	{
 		damage += damage * 20 / 100;
 	}
-	else if ( this->HasBuff(BUFF_POTION_OF_SOUL) )
+	else if (this->HasBuff(BUFF_POTION_OF_SOUL))
 	{
 		damage = damage;
 	}
@@ -12341,7 +12616,7 @@ void Player::AccumulateDamage(int32 & damage)
 	{
 		this->IncreaseAccumulatedDamage(damage);
 
-		if ( this->GetAccumulatedDamage() > 100 )
+		if (this->GetAccumulatedDamage() > 100)
 		{
 			this->DecreaseWeaponDurabilityInCastle();
 			this->SetAccumulatedDamage(0);
@@ -12351,21 +12626,21 @@ void Player::AccumulateDamage(int32 & damage)
 	}
 }
 
-void Player::PVPDamageReduction(int32 & damage, Player* pPlayer)
+void Player::PVPDamageReduction(int32& damage, Player* pPlayer)
 {
-	if ( this->IsOnDuel(pPlayer) )
+	if (this->IsOnDuel(pPlayer))
 	{
 		damage = damage * sGameServer->GetDuelingDamage() / 100;
 	}
-	else if ( CC_MAP_RANGE(this->GetWorldId()) )
+	else if (CC_MAP_RANGE(this->GetWorldId()))
 	{
 		damage = damage * 50 / 100;
 	}
-	else if ( this->GetWorldId() == WORLD_CASTLE_SIEGE )
+	else if (this->GetWorldId() == WORLD_CASTLE_SIEGE)
 	{
-		if ( sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START )
+		if (sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START)
 		{
-			if ( this->GetCastleSiegeJoinSide() == pPlayer->GetCastleSiegeJoinSide() )
+			if (this->GetCastleSiegeJoinSide() == pPlayer->GetCastleSiegeJoinSide())
 			{
 				damage = damage * sGameServer->GetCastleSiegeReduceDamageSameSide() / 100;
 			}
@@ -12375,15 +12650,15 @@ void Player::PVPDamageReduction(int32 & damage, Player* pPlayer)
 			}
 		}
 	}
-	else if ( AW_MAP_RANGE(this->GetWorldId()) )
+	else if (AW_MAP_RANGE(this->GetWorldId()))
 	{
-		if ( sArkaWar->GetState() == ARKA_WAR_STATE_STANDBY ||
-			 sArkaWar->GetState() == ARKA_WAR_STATE_PLAYING ||
-			 sArkaWar->GetState() == ARKA_WAR_STATE_RESULT ||
-			 sArkaWar->GetState() == ARKA_WAR_STATE_CLOSE ||
-			 sArkaWar->GetState() == ARKA_WAR_STATE_END )
+		if (sArkaWar->GetState() == ARKA_WAR_STATE_STANDBY ||
+			sArkaWar->GetState() == ARKA_WAR_STATE_PLAYING ||
+			sArkaWar->GetState() == ARKA_WAR_STATE_RESULT ||
+			sArkaWar->GetState() == ARKA_WAR_STATE_CLOSE ||
+			sArkaWar->GetState() == ARKA_WAR_STATE_END)
 		{
-			if ( this->GetGuildID() == pPlayer->GetGuildID() )
+			if (this->GetGuildID() == pPlayer->GetGuildID())
 			{
 				damage = damage * sGameServer->GetArkaWarDamageReductionAlly() / 100;
 			}
@@ -12393,7 +12668,7 @@ void Player::PVPDamageReduction(int32 & damage, Player* pPlayer)
 			}
 		}
 	}
-	else if ( this->GetWorldId() == WORLD_LAST_MAN_STANDING )
+	else if (this->GetWorldId() == WORLD_LAST_MAN_STANDING)
 	{
 		damage = damage * sGameServer->GetLastManStandingDamageReduction() / 100;
 	}
@@ -12411,9 +12686,9 @@ void Player::SendWorldAttribute(uint8 type, uint8 attribute, uint8 count, bool a
 	head->type = type;
 	head->count = count;
 	head->attr = attribute;
-	head->map_set_type = apply ? 0: 1;
+	head->map_set_type = apply ? 0 : 1;
 
-	for ( int32 i = 0; i < count; ++i )
+	for (int32 i = 0; i < count; ++i)
 	{
 		body[i * 2].x = data[i * 4 + 0];
 		body[i * 2].y = data[i * 4 + 1];
@@ -12469,25 +12744,25 @@ ViewportData* Player::GetViewportItemByID(uint16 id)
 	ViewportData* data = nullptr;
 	Object* pObject = nullptr;
 
-	for ( ViewportDataList::iterator it = this->viewport_data.begin(); it != this->viewport_data.end(); ++it )
+	for (ViewportDataList::iterator it = this->viewport_data.begin(); it != this->viewport_data.end(); ++it)
 	{
 		data = it->second;
 
-		if ( !data )
+		if (!data)
 			continue;
 
-		if ( data->GetStatus() == Viewport::STATUS_NONE )
+		if (data->GetStatus() == Viewport::STATUS_NONE)
 			continue;
 
 		pObject = data->GetObjectData();
 
-		if ( !pObject )
+		if (!pObject)
 			continue;
 
-		if ( pObject->GetType() != OBJECT_TYPE_WORLD_ITEM )
+		if (pObject->GetType() != OBJECT_TYPE_WORLD_ITEM)
 			continue;
 
-		if ( pObject->GetEntry() == id )
+		if (pObject->GetEntry() == id)
 			return data;
 	}
 
@@ -12498,14 +12773,14 @@ bool Player::CanEnterWorld(uint16 world, int16 x1, int16 y1, int16 x2, int16 y2,
 {
 	World* pWorld = sWorldMgr->GetWorld(world);
 
-	if ( !pWorld )
+	if (!pWorld)
 		return false;
 
-	if ( !this->IsAdministrator() )
+	if (!this->IsAdministrator())
 	{
-		if ( pWorld->flagHas(WORLD_FLAG_BATTLE_ZONE) && !this->GetGen()->IsFamily() )
+		if (pWorld->flagHas(WORLD_FLAG_BATTLE_ZONE) && !this->GetGen()->IsFamily())
 		{
-			if ( send_message )
+			if (send_message)
 				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "This zone is only available for Gen Members.");
 			return false;
 		}
@@ -12514,97 +12789,97 @@ bool Player::CanEnterWorld(uint16 world, int16 x1, int16 y1, int16 x2, int16 y2,
 		Item* pRing02 = this->GetInventory()->GetItem(RING_02);
 		Item* pGuardian = this->GetInventory()->GetItem(GUARDIAN);
 
-		switch ( pWorld->GetEntry() )
+		switch (pWorld->GetEntry())
 		{
 		case WORLD_ICARUS:
 		case WORLD_SCARLET_ICARUS:
+		{
+			if (!this->GetInventory()->GetItem(WINGS)->IsItem() && !this->HasMount())
 			{
-				if (!this->GetInventory()->GetItem(WINGS)->IsItem() && !this->HasMount())
-				{
-					if ( send_message )
-						this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't warp to Icarus without wearing Wings, Dinorant or Fenrir.");
-					return false;
-				}
+				if (send_message)
+					this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't warp to Icarus without wearing Wings, Dinorant or Fenrir.");
+				return false;
+			}
 
-				if ( (pRing01->IsItem() && pRing01->IsTransformationRing(false)) ||
-					 (pRing02->IsItem() && pRing02->IsTransformationRing(false)) )
-				{
-					if ( send_message )
-						this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't warp to Icarus while wearing a Transformation Ring.");
-					return false;
-				}
-			} break;
+			if ((pRing01->IsItem() && pRing01->IsTransformationRing(false)) ||
+				(pRing02->IsItem() && pRing02->IsTransformationRing(false)))
+			{
+				if (send_message)
+					this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You can't warp to Icarus while wearing a Transformation Ring.");
+				return false;
+			}
+		} break;
 
 		case WORLD_RAKLION_BOSS:
+		{
+			if (!sRaklion->EnterAllowed(this))
 			{
-				if ( !sRaklion->EnterAllowed(this) )
-				{
-					if ( send_message )
-						this->SendNotice(CUSTOM_MESSAGE_ID_RED, "The Hatchery Gate is closed, you can not enter.");
-					return false;
-				}
-			} break;
+				if (send_message)
+					this->SendNotice(CUSTOM_MESSAGE_ID_RED, "The Hatchery Gate is closed, you can not enter.");
+				return false;
+			}
+		} break;
 
 		case WORLD_CASTLE_SIEGE:
+		{
+			if (IsInDragonTower(x1, y1, x2, y2))
 			{
-				if ( IsInDragonTower(x1, y1, x2, y2) )
+				if (sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START)
 				{
-					if ( sCastleSiege->GetState() == CASTLE_SIEGE_STATE_START )
+					if (!this->GetCastleSiegeJoinSide())
 					{
-						if ( !this->GetCastleSiegeJoinSide() )
-						{
-							if ( send_message )
-								this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not allowed to enter here.");
-							return false;
-						}
-
-						if ( sCastleSiege->GuardianStatueExist() && this->GetCastleSiegeJoinSide() != CASTLE_SIEGE_JOIN_SIDE_DEFENSE )
-						{
-							if ( send_message )
-								this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not allowed to enter here.");
-							return false;
-						}
+						if (send_message)
+							this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not allowed to enter here.");
+						return false;
 					}
-					else if ( !sCastleSiege->CastleOwnerMember(this) && !sCastleSiege->CastleOwnerUnionMember(this) )
+
+					if (sCastleSiege->GuardianStatueExist() && this->GetCastleSiegeJoinSide() != CASTLE_SIEGE_JOIN_SIDE_DEFENSE)
 					{
+						if (send_message)
+							this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not allowed to enter here.");
 						return false;
 					}
 				}
-			} break;
+				else if (!sCastleSiege->CastleOwnerMember(this) && !sCastleSiege->CastleOwnerUnionMember(this))
+				{
+					return false;
+				}
+			}
+		} break;
 
 		case WORLD_NIXIES_LAKE:
+		{
+			if (sNixiesLake->IsInSanctuary(world, x1, y1, x2, y2) && !sNixiesLake->IsPlayerAllowed(this))
 			{
-				if (sNixiesLake->IsInSanctuary(world, x1, y1, x2, y2) && !sNixiesLake->IsPlayerAllowed(this))
+				if (send_message)
+				{
+
+				}
+			}
+		} break;
+
+		case WORLD_SWAMP_OF_DARKNESS:
+		{
+			if (sSwampOfDarkness->IsBossZone(world, x1, y1, x2, y2))
+			{
+				if (sSwampOfDarkness->GetState() == SWAMP_OF_DARKNESS_STATE_NONE)
+				{
+					return false;
+				}
+
+				if (!sSwampOfDarkness->IsAllowedToEnter(this))
 				{
 					if (send_message)
 					{
-
+						SWAMP_OF_DARKNESS_BOSS_ENTER_RESULT pMsg;
+						pMsg.result = 2;
+						this->SEND_PCT(pMsg);
 					}
+
+					return false;
 				}
-			} break;
-
-		case WORLD_SWAMP_OF_DARKNESS:
-			{
-				if (sSwampOfDarkness->IsBossZone(world, x1, y1, x2, y2))
-				{
-					if (sSwampOfDarkness->GetState() == SWAMP_OF_DARKNESS_STATE_NONE)
-					{
-						return false;
-					}
-
-					if (!sSwampOfDarkness->IsAllowedToEnter(this))
-					{
-						if (send_message)
-						{
-							SWAMP_OF_DARKNESS_BOSS_ENTER_RESULT pMsg;
-							pMsg.result = 2;
-							this->SEND_PCT(pMsg);
-						}
-
-						return false;
-					}
-				}
-			} break;
+			}
+		} break;
 		}
 	}
 
@@ -12633,36 +12908,36 @@ void Player::OpenSealedBoxAttempt(uint8 slot)
 {
 	Item const* pItem = this->GetInventory()->GetItem(slot);
 
-	if ( !pItem )
+	if (!pItem)
 	{
 		//this->ItemUseResult();
 		return;
 	}
 
-	uint8 type = pItem->GetItem() == ITEMGET(14, 121) ? 0: 1;
+	uint8 type = pItem->GetItem() == ITEMGET(14, 121) ? 0 : 1;
 	uint8 key_slot = -1;
 	uint16 key = type == 0 ? ITEMGET(14, 113) : ITEMGET(14, 112);
 
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 		{
 			continue;
 		}
 
 		pItem = this->GetInventory()->GetItem(i);
 
-		if ( !pItem || !pItem->IsItem() )
+		if (!pItem || !pItem->IsItem())
 			continue;
 
-		if ( pItem->GetItem() != key )
+		if (pItem->GetItem() != key)
 			continue;
 
 		key_slot = i;
 		break;
 	}
 
-	if ( key_slot == uint8(-1) )
+	if (key_slot == uint8(-1))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "%s key required to open this box.", type == 0 ? "Golden" : "Silver");
 		//this->ItemUseResult();
@@ -12671,13 +12946,13 @@ void Player::OpenSealedBoxAttempt(uint8 slot)
 
 	item_template const* item_info = sItemMgr->GetItem(type == 0 ? ITEMGET(14, 123) : ITEMGET(14, 124));
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		//this->ItemUseResult();
 		return;
 	}
 
-	if ( !this->GetInventory()->IsEmptySpace(item_info->GetX(), item_info->GetY()) )
+	if (!this->GetInventory()->IsEmptySpace(item_info->GetX(), item_info->GetY()))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "There are no free slots to unlock box.");
 		//this->ItemUseResult();
@@ -12694,12 +12969,12 @@ void Player::OpenSealedBoxAttempt(uint8 slot)
 
 void Player::UpdateRestriction()
 {
-	for ( int32 i = 0; i < PlayerAction::PLAYER_ACTION_MAX; ++i )
+	for (int32 i = 0; i < PlayerAction::PLAYER_ACTION_MAX; ++i)
 	{
-		if ( !this->GetRestriction(i)->IsActive() )
+		if (!this->GetRestriction(i)->IsActive())
 			continue;
 
-		if ( this->GetRestriction(i)->GetTime() < time(nullptr) )
+		if (this->GetRestriction(i)->GetTime() < time(nullptr))
 		{
 			this->GetRestriction(i)->Reset();
 		}
@@ -12715,15 +12990,15 @@ bool Player::CanInteract(Unit* pTarget, bool target)
 		return false;
 	}
 
-	if ( target )
+	if (target)
 	{
-		if ( !pTarget || !pTarget->IsPlaying() || !pTarget->IsLive() )
+		if (!pTarget || !pTarget->IsPlaying() || !pTarget->IsLive())
 			return false;
 
-		if ( this == pTarget)
+		if (this == pTarget)
 			return false;
 
-		if ( !this->SameDimension(pTarget) )
+		if (!this->SameDimension(pTarget))
 			return false;
 	}
 
@@ -12732,16 +13007,16 @@ bool Player::CanInteract(Unit* pTarget, bool target)
 
 void Player::ProcessAttackSafe()
 {
-	if ( !sGameServer->IsAttackSafeEnabled() )
+	if (!sGameServer->IsAttackSafeEnabled())
 		return;
 
 	this->IncreaseCounter(PLAYER_COUNTER_ATTACK_SAFE, 1);
 
-	if ( this->GetCounter(PLAYER_COUNTER_ATTACK_SAFE) >= sGameServer->GetAttackSafeCount() )
+	if (this->GetCounter(PLAYER_COUNTER_ATTACK_SAFE) >= sGameServer->GetAttackSafeCount())
 	{
 		sLog->outInfo("antihack", "%s - %s", __FUNCTION__, this->BuildLog().c_str());
 
-		if ( sGameServer->IsAttackSafeKick() )
+		if (sGameServer->IsAttackSafeKick())
 		{
 			KICK_PLAYER(this, "Attack Safe");
 
@@ -12754,19 +13029,19 @@ void Player::UpdateAleTime()
 {
 	bool update = false;
 
-	for ( int32 i = 0; i < ALE_MAX; ++i )
+	for (int32 i = 0; i < ALE_MAX; ++i)
 	{
-		if ( this->GetAleEffect(i) <= 0 )
+		if (this->GetAleEffect(i) <= 0)
 			continue;
 
-		if ( GetTickCount() > this->GetAleTime(i) )
+		if (GetTickCount() > this->GetAleTime(i))
 		{
 			this->SetAleEffect(i, 0);
 			update = true;
 		}
 	}
 
-	if ( update )
+	if (update)
 	{
 		this->CalculateCharacter();
 	}
@@ -12774,11 +13049,11 @@ void Player::UpdateAleTime()
 
 void Player::LogoutEventRemove()
 {
-	if ( BC_MAP_RANGE(this->GetWorldId()) && this->GetEventId() == EVENT_BLOOD_CASTLE )
+	if (BC_MAP_RANGE(this->GetWorldId()) && this->GetEventId() == EVENT_BLOOD_CASTLE)
 	{
-		BloodCastle * Ground = sBloodCastleMgr->GetGround(this->GetEventGround());
+		BloodCastle* Ground = sBloodCastleMgr->GetGround(this->GetEventGround());
 
-		if ( Ground )
+		if (Ground)
 		{
 			Ground->RemovePlayer(this);
 		}
@@ -12786,11 +13061,11 @@ void Player::LogoutEventRemove()
 		return;
 	}
 
-	if ( DS_MAP_RANGE(this->GetWorldId()) && this->GetEventId() == EVENT_DEVIL_SQUARE )
+	if (DS_MAP_RANGE(this->GetWorldId()) && this->GetEventId() == EVENT_DEVIL_SQUARE)
 	{
-		DevilSquare * Ground = sDevilSquareMgr->GetGround(this->GetEventGround());
+		DevilSquare* Ground = sDevilSquareMgr->GetGround(this->GetEventGround());
 
-		if ( Ground )
+		if (Ground)
 		{
 			Ground->RemovePlayer(this);
 		}
@@ -12798,18 +13073,18 @@ void Player::LogoutEventRemove()
 		return;
 	}
 
-	if ( CC_MAP_RANGE(this->GetWorldId()) )
+	if (CC_MAP_RANGE(this->GetWorldId()))
 	{
-		if ( this->GetEventId() == EVENT_CHAOS_CASTLE && CHAOS_CASTLE_GROUND_RANGE(this->GetEventGround()) )
+		if (this->GetEventId() == EVENT_CHAOS_CASTLE && CHAOS_CASTLE_GROUND_RANGE(this->GetEventGround()))
 		{
-			ChaosCastle * Ground = sChaosCastleMgr->GetGround(this->GetEventGround());
+			ChaosCastle* Ground = sChaosCastleMgr->GetGround(this->GetEventGround());
 
-			if ( Ground )
+			if (Ground)
 			{
 				Ground->RemovePlayer(this);
 			}
 		}
-		else if ( this->GetEventId() == EVENT_CHAOS_CASTLE_SURVIVAL )
+		else if (this->GetEventId() == EVENT_CHAOS_CASTLE_SURVIVAL)
 		{
 			sChaosCastleSurvivalMgr->GetGround()->RemovePlayer(this);
 		}
@@ -12817,14 +13092,14 @@ void Player::LogoutEventRemove()
 		return;
 	}
 
-	if ( DG_MAP_RANGE(this->GetWorldId()) )
+	if (DG_MAP_RANGE(this->GetWorldId()))
 	{
 		sDoppelganger->RemovePlayer(this->GetGUID());
 	}
 
 	sTormentedSquareSurvival->RemovePlayer(this);
 
-	if ( TS_MAP_RANGE(this->GetWorldId()) )
+	if (TS_MAP_RANGE(this->GetWorldId()))
 	{
 		sTormentedSquare->RemovePlayer(this);
 	}
@@ -12832,67 +13107,67 @@ void Player::LogoutEventRemove()
 
 bool Player::HasSkillRequiredStat(skill_template const* skill_info)
 {
-	if ( !skill_info )
+	if (!skill_info)
 	{
 		return false;
 	}
 
-	if ( skill_info->GetLearnItem() != uint16(-1) )
+	if (skill_info->GetLearnItem() != uint16(-1))
 	{
 		Item item = Item(skill_info->GetLearnItem(), skill_info->GetLearnItemLevel());
 		item.Convert();
-	
-		for ( uint8 i = 0; i < MAX_STAT_TYPE; ++i )
+
+		for (uint8 i = 0; i < MAX_STAT_TYPE; ++i)
 		{
-			if ( this->GetTotalStat(i) < item.GetRequiredStat(i) )
+			if (this->GetTotalStat(i) < item.GetRequiredStat(i))
 			{
 				this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required %d %s.", item.GetRequiredStat(i), StatName[i]);
 				return false;
 			}
 		}
-		
-		if ( this->GetTotalLevel() < item.GetRequiredLevel() )
+
+		if (this->GetTotalLevel() < item.GetRequiredLevel())
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required level %d.", item.GetRequiredLevel());
 			return false;
 		}
 
-		if ( !item.IsRequiredClass(this->GetClass(), this->GetChangeUP(0), this->GetChangeUP(1), this->GetChangeUP(2)) )
+		if (!item.IsRequiredClass(this->GetClass(), this->GetChangeUP(0), this->GetChangeUP(1), this->GetChangeUP(2)))
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Wrong character class.");
 			return false;
 		}
 	}
 
-	if ( sGameServer->IsSkillEnergyCheck() )
+	if (sGameServer->IsSkillEnergyCheck())
 	{
 		int32 required_energy = skill_info->GetRequiredStat(ENERGY);
 
-		if ( this->GetTotalStat(ENERGY) < required_energy )
+		if (this->GetTotalStat(ENERGY) < required_energy)
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required energy check %d.", required_energy);
 			return false;
 		}
 	}
 
-	if ( sGameServer->IsSkillLeadershipCheck() )
+	if (sGameServer->IsSkillLeadershipCheck())
 	{
 		int32 required_leadership = skill_info->GetRequiredStat(LEADERSHIP);
 
-		if ( this->GetTotalStat(LEADERSHIP) < required_leadership )
+		if (this->GetTotalStat(LEADERSHIP) < required_leadership)
 		{
 			this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required leadership check %d.", required_leadership);
 			return false;
 		}
 	}
 
-	if ( this->GetTotalLevel() < skill_info->GetRequiredLevel() )
+	if (this->GetTotalLevel() < skill_info->GetRequiredLevel())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "Required level check %d.", skill_info->GetRequiredLevel());
 		return false;
 	}
 
-	if ( !sSkillMgr->IsSkillRequire(this, skill_info->GetID()) )
+	if (!sSkillMgr->IsSkillRequire(this, skill_info->GetID()))
 	{
 		return false;
 	}
@@ -12901,9 +13176,9 @@ bool Player::HasSkillRequiredStat(skill_template const* skill_info)
 }
 
 
-void Player::ChangeSkinOption(uint8 * Packet)
+void Player::ChangeSkinOption(uint8* Packet)
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 		return;
 
 	POINTER_PCT(OPTION_CHANGE_SKIN, lpMsg, Packet, 0);
@@ -12917,54 +13192,54 @@ void Player::MuunUpdate()
 {
 	bool calculate_character = false;
 
-	for( int32 n = 0; n < MUUN_INVENTORY_SIZE; ++n )
+	for (int32 n = 0; n < MUUN_INVENTORY_SIZE; ++n)
 	{
-		if ( !this->GetMuunInventory()->GetItem(n)->IsItem() )
+		if (!this->GetMuunInventory()->GetItem(n)->IsItem())
 		{
 			continue;
 		}
 
-		if ( !this->GetMuunInventory()->GetItem(n)->GetExpireDate() )
+		if (!this->GetMuunInventory()->GetItem(n)->GetExpireDate())
 		{
 			continue;
 		}
 
-		if ( this->GetMuunInventory()->GetItem(n)->IsExpired() && !this->GetMuunInventory()->GetItem(n)->IsExpiredStatus() )
+		if (this->GetMuunInventory()->GetItem(n)->IsExpired() && !this->GetMuunInventory()->GetItem(n)->IsExpiredStatus())
 		{
 			this->GetMuunInventory()->GetItem(n)->SetExpiredStatus(true);
 
 			sMuunSystem->GCMuunItemExpireUpdate(this, n);
 
-			if ( MUUN_INVENTORY_WEAR_RANGE(n) )
+			if (MUUN_INVENTORY_WEAR_RANGE(n))
 			{
 				calculate_character = true;
 			}
 		}
 	}
 
-	for( int32 n = 0; n < MUUN_INVENTORY_WEAR_SIZE; ++n )
+	for (int32 n = 0; n < MUUN_INVENTORY_WEAR_SIZE; ++n)
 	{
-		if ( !this->GetMuunInventory()->GetItem(n)->IsItem() ||
-			 !this->GetMuunInventory()->GetItem(n)->IsMuunItem() )
+		if (!this->GetMuunInventory()->GetItem(n)->IsItem() ||
+			!this->GetMuunInventory()->GetItem(n)->IsMuunItem())
 		{
 			continue;
 		}
 
 		bool muun_active = true;
 
-		if ( this->GetMuunInventory()->GetItem(n)->GetDurability() <= 0.0f )
+		if (this->GetMuunInventory()->GetItem(n)->GetDurability() <= 0.0f)
 		{
 			muun_active = false;
 		}
 
-		if ( !sMuunSystem->CheckSpecialOption(this, sMuunSystem->GetMuunSystemInfo(this->GetMuunInventory()->GetItem(n)->GetItem())) )
+		if (!sMuunSystem->CheckSpecialOption(this, sMuunSystem->GetMuunSystemInfo(this->GetMuunInventory()->GetItem(n)->GetItem())))
 		{
 			muun_active = false;
 		}
 
-		if ( !muun_active )
+		if (!muun_active)
 		{
-			if( this->IsMuunItemStatus(n) )
+			if (this->IsMuunItemStatus(n))
 			{
 				sMuunSystem->GCMuunItemStatusSend(this, n, 0);
 				this->SetMuunItemStatus(n, false);
@@ -12973,7 +13248,7 @@ void Player::MuunUpdate()
 		}
 		else
 		{
-			if( !this->IsMuunItemStatus(n) )
+			if (!this->IsMuunItemStatus(n))
 			{
 				sMuunSystem->GCMuunItemStatusSend(this, n, 1);
 				this->SetMuunItemStatus(n, true);
@@ -12982,7 +13257,7 @@ void Player::MuunUpdate()
 		}
 	}
 
-	if ( calculate_character )
+	if (calculate_character)
 	{
 		this->CalculateCharacter();
 	}
@@ -12996,12 +13271,12 @@ uint8 Player::GetFreeInventorySlots() const
 
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 		{
 			continue;
 		}
 
-		if ( this->GetInventory()->item_map[i - PLAYER_MAX_EQUIPMENT] == 0 )
+		if (this->GetInventory()->item_map[i - PLAYER_MAX_EQUIPMENT] == 0)
 		{
 			++count;
 		}
@@ -13012,22 +13287,22 @@ uint8 Player::GetFreeInventorySlots() const
 
 bool Player::CheckItemMoveToInventory(Item const* pItem, uint8 slot)
 {
-	if ( !pItem->IsItem() )
+	if (!pItem->IsItem())
 	{
 		return false;
 	}
 
-	if ( sItemMgr->GetItemInventoryType(pItem->GetItem()) != ITEM_INVENTORY_TYPE_NORMAL )
+	if (sItemMgr->GetItemInventoryType(pItem->GetItem()) != ITEM_INVENTORY_TYPE_NORMAL)
 	{
 		return false;
 	}
 
-	if( !INVENTORY_WEAR_RANGE(slot) && slot != PENTAGRAM_SLOT ) // TEST
+	if (!INVENTORY_WEAR_RANGE(slot) && slot != PENTAGRAM_SLOT) // TEST
 	{
 		return true;
 	}
 
-	if ( !this->WearItem(pItem, slot) )
+	if (!this->WearItem(pItem, slot))
 	{
 		return false;
 	}
@@ -13037,22 +13312,22 @@ bool Player::CheckItemMoveToInventory(Item const* pItem, uint8 slot)
 
 bool Player::CheckItemMoveToTrade(Item const* pItem)
 {
-	if( !pItem->IsItem() )
+	if (!pItem->IsItem())
 	{
 		return false;
 	}
 
-	if ( !sItemMgr->IsItemFlag(pItem->GetItem(), pItem->GetLevel(), ITEM_FLAG_ALLOW_EXCHANGE) )
+	if (!sItemMgr->IsItemFlag(pItem->GetItem(), pItem->GetLevel(), ITEM_FLAG_ALLOW_EXCHANGE))
 	{
 		return false;
 	}
 
-	if ( pItem->GetExpireDate() > 0 )
+	if (pItem->GetExpireDate() > 0)
 	{
 		return false;
 	}
 
-	if ( pItem->IsDBFlag(ITEM_DB_FLAG_EXCHANGE) )
+	if (pItem->IsDBFlag(ITEM_DB_FLAG_EXCHANGE))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "This item can't be traded.");
 		return false;
@@ -13069,27 +13344,27 @@ bool Player::CheckItemMoveToTrade(Item const* pItem)
 
 bool Player::CheckItemMoveToVault(Item const* pItem)
 {
-	if( !pItem->IsItem() )
+	if (!pItem->IsItem())
 	{
 		return false;
 	}
 
-	if ( !sItemMgr->IsItemFlag(pItem->GetItem(), pItem->GetLevel(), ITEM_FLAG_ALLOW_WAREHOUSE) )
+	if (!sItemMgr->IsItemFlag(pItem->GetItem(), pItem->GetLevel(), ITEM_FLAG_ALLOW_WAREHOUSE))
 	{
 		return false;
 	}
 
-	if ( sItemMgr->GetItemInventoryType(pItem->GetItem()) != ITEM_INVENTORY_TYPE_NORMAL )
+	if (sItemMgr->GetItemInventoryType(pItem->GetItem()) != ITEM_INVENTORY_TYPE_NORMAL)
 	{
 		return false;
 	}
 
-	if ( pItem->GetExpireDate() > 0 )
+	if (pItem->GetExpireDate() > 0)
 	{
 		return false;
 	}
 
-	if ( pItem->IsDBFlag(ITEM_DB_FLAG_WAREHOUSE) )
+	if (pItem->IsDBFlag(ITEM_DB_FLAG_WAREHOUSE))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "This item can't be stored.");
 		return false;
@@ -13100,17 +13375,17 @@ bool Player::CheckItemMoveToVault(Item const* pItem)
 
 bool Player::CheckItemMoveToChaos(Item const* pItem, uint8 target)
 {
-	if( !pItem->IsItem() )
+	if (!pItem->IsItem())
 	{
 		return false;
 	}
 
-	if ( pItem->GetExpireDate() > 0 )
+	if (pItem->GetExpireDate() > 0)
 	{
 		return false;
 	}
 
-	if ( this->IsMixCompleted() )
+	if (this->IsMixCompleted())
 	{
 		return false;
 	}
@@ -13134,44 +13409,44 @@ bool Player::CheckItemMoveToChaos(Item const* pItem, uint8 target)
 
 uint8 Player::MoveItem(Inventory, Inventory)
 {
-	if ( !inventory_range(source_slot) )
+	if (!inventory_range(source_slot))
 	{
 		return uint8(-1);
 	}
 
-	if ( !inventory_range(target_slot) )
+	if (!inventory_range(target_slot))
 	{
 		return uint8(-1);
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(source_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(source_slot))
 	{
 		return uint8(-1);
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(target_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(target_slot))
 	{
 		return uint8(-1);
 	}
 
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM INVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM INVENTORY"))
 	{
 		return uint8(-1);
 	}
 
-	if ( pSourceItem->IsInventoryActive() )
+	if (pSourceItem->IsInventoryActive())
 	{
 		return uint8(-1);
 	}
 
-	if ( !this->CheckItemMoveToInventory(pSourceItem, target_slot) )
+	if (!this->CheckItemMoveToInventory(pSourceItem, target_slot))
 	{
 		return uint8(-1);
 	}
 
-	if( this->InventoryAddItemStack(source_slot, target_slot) )
+	if (this->InventoryAddItemStack(source_slot, target_slot))
 	{
 		return uint8(-1);
 	}
@@ -13179,7 +13454,7 @@ uint8 Player::MoveItem(Inventory, Inventory)
 	this->GetInventory()->StartTmp();
 	this->GetInventory()->ItemSet(source_slot, 0);
 
-	if( this->GetInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		this->GetInventory()->EndTmp();
 		return uint8(-1);
@@ -13200,19 +13475,19 @@ uint8 Player::MoveItem(Inventory, Inventory)
 
 uint8 Player::MoveItem(Trade, Trade)
 {
-	if( !trade_range(source_slot) )
+	if (!trade_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !trade_range(target_slot) )
+	if (!trade_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetTradeInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetTradeInventory()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO TRADE FROM TRADE") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO TRADE FROM TRADE"))
 	{
 		return uint8(-1);
 	}
@@ -13222,7 +13497,7 @@ uint8 Player::MoveItem(Trade, Trade)
 
 	sLog->outInfo(LOG_TRADE, "[ ITEM MOVE ][ TRADE -> TRADE ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetTradeInventory()->AddItem(this->GetTradeInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetTradeInventory()->AddItem(this->GetTradeInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		this->GetTradeInventory()->EndTmp();
 		return 0xFF;
@@ -13231,7 +13506,7 @@ uint8 Player::MoveItem(Trade, Trade)
 	MoveItemSuccess(TradeInventory, TradeInventory);
 
 	this->GetInterfaceState()->GetTarget()->ToPlayer()->TradeItemDelete(source_slot);
-	
+
 	this->GetInterfaceState()->GetTarget()->ToPlayer()->TradeItemAdd(target_slot, item_info);
 
 	return 1;
@@ -13239,41 +13514,41 @@ uint8 Player::MoveItem(Trade, Trade)
 
 uint8 Player::MoveItem(Trade, Inventory)
 {
-	if ( !inventory_range(source_slot) )
+	if (!inventory_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !trade_range(target_slot) )
+	if (!trade_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(source_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(source_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
 
-	if( !this->CheckItemMoveToTrade(pSourceItem) )
+	if (!this->CheckItemMoveToTrade(pSourceItem))
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO TRADE FROM INVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO TRADE FROM INVENTORY"))
 	{
 		return uint8(-1);
 	}
 
-	if ( pSourceItem->IsInventoryActive() )
+	if (pSourceItem->IsInventoryActive())
 	{
 		return uint8(-1);
 	}
 
 	sLog->outInfo(LOG_TRADE, "[ ITEM MOVE ][ INVENTORY -> TRADE ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetTradeInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetTradeInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13291,43 +13566,43 @@ uint8 Player::MoveItem(Trade, Inventory)
 
 uint8 Player::MoveItem(Inventory, Trade)
 {
-	if( !trade_range(source_slot) )
+	if (!trade_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !inventory_range(target_slot) )
+	if (!inventory_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(target_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetTradeInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetTradeInventory()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM TRADE") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM TRADE"))
 	{
 		return 0xFF;
 	}
 
-	if ( !this->CheckItemMoveToInventory(pSourceItem, target_slot) )
+	if (!this->CheckItemMoveToInventory(pSourceItem, target_slot))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_TRADE, "[ ITEM MOVE ][ TRADE -> INVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetInventory()->AddItem(this->GetTradeInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetInventory()->AddItem(this->GetTradeInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
 
 	MoveItemSuccess(Inventory, TradeInventory);
 
-	if ( Player* pPlayer = this->GetInterfaceState()->GetTarget()->ToPlayer() )
+	if (Player* pPlayer = this->GetInterfaceState()->GetTarget()->ToPlayer())
 	{
 		this->GetTradeInventory()->SetButtonEnabled(false);
 		//this->TradeOkTime = GetTickCount();
@@ -13345,24 +13620,24 @@ uint8 Player::MoveItem(Inventory, Trade)
 
 uint8 Player::MoveItem(ChaosBox, ChaosBox)
 {
-	if ( !chaos_box_range(source_slot) )
+	if (!chaos_box_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !chaos_box_range(target_slot) )
+	if (!chaos_box_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( this->IsMixCompleted() )
+	if (this->IsMixCompleted())
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetMixInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetMixInventory()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO CHAOSBOX FROM CHAOSBOX") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO CHAOSBOX FROM CHAOSBOX"))
 	{
 		return 0xFF;
 	}
@@ -13372,7 +13647,7 @@ uint8 Player::MoveItem(ChaosBox, ChaosBox)
 
 	sLog->outInfo(LOG_CHAOS_MIX, "[ ITEM MOVE ][ CHAOSBOX -> CHAOSBOX ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetMixInventory()->AddItem(this->GetMixInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetMixInventory()->AddItem(this->GetMixInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		this->GetMixInventory()->EndTmp();
 		return 0xFF;
@@ -13385,43 +13660,43 @@ uint8 Player::MoveItem(ChaosBox, ChaosBox)
 
 uint8 Player::MoveItem(ChaosBox, Inventory)
 {
-	if( !inventory_range(source_slot) )
+	if (!inventory_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !chaos_box_range(target_slot) )
+	if (!chaos_box_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(source_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(source_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
 
-	if( !this->CheckItemMoveToChaos(pSourceItem, target) )
+	if (!this->CheckItemMoveToChaos(pSourceItem, target))
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO CHAOSBOX FROM INVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO CHAOSBOX FROM INVENTORY"))
 	{
 		return 0xFF;
 	}
 
-	if ( pSourceItem->IsInventoryActive() )
+	if (pSourceItem->IsInventoryActive())
 	{
 		return uint8(-1);
 	}
 
-	if ( this->GetInterfaceState()->GetID() == InterfaceData::Lucky )
+	if (this->GetInterfaceState()->GetID() == InterfaceData::Lucky)
 	{
 		chaos_box_loop(i)
 		{
-			if ( this->GetMixInventory()->GetItem(i)->IsItem() )
+			if (this->GetMixInventory()->GetItem(i)->IsItem())
 			{
 				return uint8(-1);
 			}
@@ -13430,7 +13705,7 @@ uint8 Player::MoveItem(ChaosBox, Inventory)
 
 	sLog->outInfo(LOG_CHAOS_MIX, "[ ITEM MOVE ][ INVENTORY -> CHAOSBOX ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetMixInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetMixInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13444,36 +13719,36 @@ uint8 Player::MoveItem(ChaosBox, Inventory)
 
 uint8 Player::MoveItem(Inventory, ChaosBox)
 {
-	if ( !chaos_box_range(source_slot) )
+	if (!chaos_box_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !inventory_range(target_slot) )
+	if (!inventory_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(target_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetMixInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetMixInventory()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM CHAOSBOX") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM CHAOSBOX"))
 	{
 		return 0xFF;
 	}
 
-	if( !this->CheckItemMoveToInventory(pSourceItem, target_slot) )
+	if (!this->CheckItemMoveToInventory(pSourceItem, target_slot))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_CHAOS_MIX, "[ ITEM MOVE ][ CHAOSBOX -> INVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetInventory()->AddItem(this->GetMixInventory()->item[source_slot], target_slot) == 0xFF)
+	if (this->GetInventory()->AddItem(this->GetMixInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13487,29 +13762,29 @@ uint8 Player::MoveItem(Inventory, ChaosBox)
 
 uint8 Player::MoveItem(Warehouse, Warehouse)
 {
-	if( !warehouse_range(source_slot) )
+	if (!warehouse_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !warehouse_range(target_slot) )
+	if (!warehouse_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if( WAREHOUSE_EXT1_RANGE(source_slot) && this->GetWarehouse()->GetExpanded() < 1 )
+	if (WAREHOUSE_EXT1_RANGE(source_slot) && this->GetWarehouse()->GetExpanded() < 1)
 	{
 		return 0xFF;
 	}
 
-	if( WAREHOUSE_EXT1_RANGE(target_slot) && this->GetWarehouse()->GetExpanded() < 1 )
+	if (WAREHOUSE_EXT1_RANGE(target_slot) && this->GetWarehouse()->GetExpanded() < 1)
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetWarehouse()->GetItem(source_slot);
+	Item* pSourceItem = this->GetWarehouse()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO WAREHOUSE FROM WAREHOUSE") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO WAREHOUSE FROM WAREHOUSE"))
 	{
 		return 0xFF;
 	}
@@ -13519,7 +13794,7 @@ uint8 Player::MoveItem(Warehouse, Warehouse)
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ WAREHOUSE -> WAREHOUSE ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetWarehouse()->AddItem(this->GetWarehouse()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetWarehouse()->AddItem(this->GetWarehouse()->item[source_slot], target_slot) == 0xFF)
 	{
 		this->GetWarehouse()->EndTmp();
 		return 0xFF;
@@ -13532,46 +13807,46 @@ uint8 Player::MoveItem(Warehouse, Warehouse)
 
 uint8 Player::MoveItem(Warehouse, Inventory)
 {
-	if( !inventory_range(source_slot) )
+	if (!inventory_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !warehouse_range(target_slot) )
+	if (!warehouse_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(source_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( WAREHOUSE_EXT1_RANGE(target_slot) && this->GetWarehouse()->GetExpanded() < 1 )
+	if (WAREHOUSE_EXT1_RANGE(target_slot) && this->GetWarehouse()->GetExpanded() < 1)
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
 
-	if( !this->CheckItemMoveToVault(pSourceItem) )
+	if (!this->CheckItemMoveToVault(pSourceItem))
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO WAREHOUSE FROM INVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO WAREHOUSE FROM INVENTORY"))
 	{
 		return 0xFF;
 	}
 
-	if ( pSourceItem->IsInventoryActive() )
+	if (pSourceItem->IsInventoryActive())
 	{
 		return uint8(-1);
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ INVENTORY -> WAREHOUSE ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
-	
-	if( this->GetWarehouse()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF )
+
+	if (this->GetWarehouse()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13587,56 +13862,56 @@ uint8 Player::MoveItem(Warehouse, Inventory)
 
 uint8 Player::MoveItem(Inventory, Warehouse)
 {
-	if ( !warehouse_range(source_slot) )
+	if (!warehouse_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if ( !inventory_range(target_slot) )
+	if (!inventory_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if( WAREHOUSE_EXT1_RANGE(source_slot) && this->GetWarehouse()->GetExpanded() < 1 )
+	if (WAREHOUSE_EXT1_RANGE(source_slot) && this->GetWarehouse()->GetExpanded() < 1)
 	{
 		return 0xFF;
 	}
 
-	if ( !this->GetInventory()->CanUseExpandedSlot(target_slot) )
+	if (!this->GetInventory()->CanUseExpandedSlot(target_slot))
 	{
 		return 0xFF;
 	}
 
 	uint32 take_price = this->WarehouseGetUsedHowMuch();
 
-	if ( !this->MoneyHave(take_price) && !this->GetWarehouse()->MoneyHave(take_price) )
+	if (!this->MoneyHave(take_price) && !this->GetWarehouse()->MoneyHave(take_price))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You need %u Zen to use your vault.", take_price);
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetWarehouse()->GetItem(source_slot);
-	
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM WAREHOUSE") )
+	Item* pSourceItem = this->GetWarehouse()->GetItem(source_slot);
+
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO INVENTORY FROM WAREHOUSE"))
 	{
 		return 0xFF;
 	}
 
-	if( !this->CheckItemMoveToInventory(pSourceItem, target_slot) )
+	if (!this->CheckItemMoveToInventory(pSourceItem, target_slot))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ WAREHOUSE -> INVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetInventory()->AddItem(this->GetWarehouse()->item[source_slot], target_slot) == 0xFF)
+	if (this->GetInventory()->AddItem(this->GetWarehouse()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
 
 	MoveItemSuccess(Inventory, Warehouse);
 
-	if ( this->MoneyHave(take_price) )
+	if (this->MoneyHave(take_price))
 	{
 		this->MoneyReduce(take_price, true);
 	}
@@ -13655,31 +13930,31 @@ uint8 Player::MoveItem(Inventory, Warehouse)
 
 uint8 Player::MoveItem(Trade, EventInventory)
 {
-	if( !EVENT_INVENTORY_RANGE(source_slot) )
+	if (!EVENT_INVENTORY_RANGE(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !trade_range(target_slot) )
+	if (!trade_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetEventInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetEventInventory()->GetItem(source_slot);
 
-	if( !this->CheckItemMoveToTrade(pSourceItem) )
+	if (!this->CheckItemMoveToTrade(pSourceItem))
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO TRADE FROM EVENTINVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO TRADE FROM EVENTINVENTORY"))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ EVENTINVENTORY -> TRADE ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetTradeInventory()->AddItem(*pSourceItem, target_slot) == 0xFF )
+	if (this->GetTradeInventory()->AddItem(*pSourceItem, target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13693,38 +13968,38 @@ uint8 Player::MoveItem(Trade, EventInventory)
 
 uint8 Player::MoveItem(EventInventory, Trade)
 {
-	if( !trade_range(source_slot) )
+	if (!trade_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !EVENT_INVENTORY_RANGE(target_slot) )
+	if (!EVENT_INVENTORY_RANGE(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetTradeInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetTradeInventory()->GetItem(source_slot);
 
-	if ( sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT )
+	if (sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT)
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM TRADE") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM TRADE"))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ TRADE -> EVENTINVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetEventInventory()->AddItem(this->GetTradeInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetEventInventory()->AddItem(this->GetTradeInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
 
 	MoveItemSuccess(EventInventory, TradeInventory);
 
-	if ( Player* pPlayer = this->GetInterfaceState()->GetTarget()->ToPlayer() )
+	if (Player* pPlayer = this->GetInterfaceState()->GetTarget()->ToPlayer())
 	{
 		this->GetTradeInventory()->SetButtonEnabled(false);
 		//this->TradeOkTime = GetTickCount();
@@ -13740,24 +14015,24 @@ uint8 Player::MoveItem(EventInventory, Trade)
 
 uint8 Player::MoveItem(EventInventory, EventInventory)
 {
-	if( !EVENT_INVENTORY_RANGE(source_slot) )
+	if (!EVENT_INVENTORY_RANGE(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !EVENT_INVENTORY_RANGE(target_slot) )
+	if (!EVENT_INVENTORY_RANGE(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetEventInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetEventInventory()->GetItem(source_slot);
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM EVENTINVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM EVENTINVENTORY"))
 	{
 		return 0xFF;
 	}
 
-	if( sEventInventory->EventInventoryAddItemStack(this, source_slot, target_slot) )
+	if (sEventInventory->EventInventoryAddItemStack(this, source_slot, target_slot))
 	{
 		return 0xFF;
 	}
@@ -13765,7 +14040,7 @@ uint8 Player::MoveItem(EventInventory, EventInventory)
 	this->GetEventInventory()->StartTmp();
 	this->GetEventInventory()->ItemSet(source_slot, 0);
 
-	if( this->GetEventInventory()->AddItem(this->GetEventInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetEventInventory()->AddItem(this->GetEventInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		this->GetEventInventory()->EndTmp();
 		return 0xFF;
@@ -13778,36 +14053,36 @@ uint8 Player::MoveItem(EventInventory, EventInventory)
 
 uint8 Player::MoveItem(ChaosBox, EventInventory)
 {
-	if( !EVENT_INVENTORY_RANGE(source_slot) )
+	if (!EVENT_INVENTORY_RANGE(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !chaos_box_range(target_slot) )
+	if (!chaos_box_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetEventInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetEventInventory()->GetItem(source_slot);
 
-	if( !this->CheckItemMoveToChaos(pSourceItem, target) )
+	if (!this->CheckItemMoveToChaos(pSourceItem, target))
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO CHAOSBOX FROM EVENTINVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO CHAOSBOX FROM EVENTINVENTORY"))
 	{
 		return 0xFF;
 	}
 
-	if ( pSourceItem->IsInventoryActive() )
+	if (pSourceItem->IsInventoryActive())
 	{
 		return uint8(-1);
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ EVENTINVENTORY -> CHAOSBOX ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetMixInventory()->AddItem(*pSourceItem, target_slot) == 0xFF )
+	if (this->GetMixInventory()->AddItem(*pSourceItem, target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13819,31 +14094,31 @@ uint8 Player::MoveItem(ChaosBox, EventInventory)
 
 uint8 Player::MoveItem(EventInventory, ChaosBox)
 {
-	if( !chaos_box_range(source_slot) )
+	if (!chaos_box_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !EVENT_INVENTORY_RANGE(target_slot) )
+	if (!EVENT_INVENTORY_RANGE(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetMixInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetMixInventory()->GetItem(source_slot);
 
-	if ( sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT )
+	if (sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT)
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM CHAOSBOX") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM CHAOSBOX"))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ CHAOSBOX -> EVENTINVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetEventInventory()->AddItem(this->GetMixInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetEventInventory()->AddItem(this->GetMixInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13855,31 +14130,31 @@ uint8 Player::MoveItem(EventInventory, ChaosBox)
 
 uint8 Player::MoveItem(EventInventory, Inventory)
 {
-	if( !inventory_range(source_slot) )
+	if (!inventory_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !EVENT_INVENTORY_RANGE(target_slot) )
+	if (!EVENT_INVENTORY_RANGE(target_slot))
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
 
-	if ( sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT )
+	if (sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT)
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM INVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM INVENTORY"))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ INVENTORY -> EVENTINVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetEventInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetEventInventory()->AddItem(this->GetInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13893,36 +14168,36 @@ uint8 Player::MoveItem(EventInventory, Inventory)
 
 uint8 Player::MoveItem(Warehouse, EventInventory)
 {
-	if( !EVENT_INVENTORY_RANGE(source_slot) )
+	if (!EVENT_INVENTORY_RANGE(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !warehouse_range(target_slot) )
+	if (!warehouse_range(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if( WAREHOUSE_EXT1_RANGE(target_slot) && this->GetWarehouse()->GetExpanded() < 1 )
+	if (WAREHOUSE_EXT1_RANGE(target_slot) && this->GetWarehouse()->GetExpanded() < 1)
 	{
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetEventInventory()->GetItem(source_slot);
+	Item* pSourceItem = this->GetEventInventory()->GetItem(source_slot);
 
-	if( !this->CheckItemMoveToVault(pSourceItem) )
+	if (!this->CheckItemMoveToVault(pSourceItem))
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO WAREHOUSE FROM EVENTINVENTORY") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO WAREHOUSE FROM EVENTINVENTORY"))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ EVENTINVENTORY -> WAREHOUSE ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
-	
-	if( this->GetWarehouse()->AddItem(this->GetEventInventory()->item[source_slot], target_slot) == 0xFF )
+
+	if (this->GetWarehouse()->AddItem(this->GetEventInventory()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
@@ -13931,54 +14206,54 @@ uint8 Player::MoveItem(Warehouse, EventInventory)
 
 	return target;
 }
-	
+
 uint8 Player::MoveItem(EventInventory, Warehouse)
 {
-	if( !warehouse_range(source_slot) )
+	if (!warehouse_range(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !EVENT_INVENTORY_RANGE(target_slot) )
+	if (!EVENT_INVENTORY_RANGE(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if( WAREHOUSE_EXT1_RANGE(source_slot) && this->GetWarehouse()->GetExpanded() < 1 )
+	if (WAREHOUSE_EXT1_RANGE(source_slot) && this->GetWarehouse()->GetExpanded() < 1)
 	{
 		return 0xFF;
 	}
 
 	uint32 take_price = this->WarehouseGetUsedHowMuch();
 
-	if ( !this->MoneyHave(take_price) && !this->GetWarehouse()->MoneyHave(take_price) )
+	if (!this->MoneyHave(take_price) && !this->GetWarehouse()->MoneyHave(take_price))
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You need %u Zen to use your vault.", take_price);
 		return 0xFF;
 	}
 
-	Item * pSourceItem = this->GetWarehouse()->GetItem(source_slot);
+	Item* pSourceItem = this->GetWarehouse()->GetItem(source_slot);
 
-	if ( sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT )
+	if (sItemMgr->GetItemInventoryType(pSourceItem->GetItem()) != ITEM_INVENTORY_TYPE_EVENT)
 	{
 		return 0xFF;
 	}
 
-	if ( Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM WAREHOUSE") )
+	if (Player::TransactionSerialFind(this, pSourceItem->GetSerialServer(), pSourceItem->GetSerial(), "MOVE TO EVENTINVENTORY FROM WAREHOUSE"))
 	{
 		return 0xFF;
 	}
 
 	sLog->outInfo(LOG_PLAYER, "[ ITEM MOVE ][ WAREHOUSE -> EVENTINVENTORY ]: %s - ItemData: %s - To :%u", this->BuildLog().c_str(), pSourceItem->BuildLog(source_slot).c_str(), target_slot);
 
-	if( this->GetEventInventory()->AddItem(this->GetWarehouse()->item[source_slot], target_slot) == 0xFF )
+	if (this->GetEventInventory()->AddItem(this->GetWarehouse()->item[source_slot], target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
 
 	MoveItemSuccess(EventInventory, Warehouse);
 
-	if ( this->MoneyHave(take_price) )
+	if (this->MoneyHave(take_price))
 	{
 		this->MoneyReduce(take_price, true);
 	}
@@ -13993,29 +14268,29 @@ uint8 Player::MoveItem(EventInventory, Warehouse)
 
 uint8 Player::MoveItem(MuunInventory, MuunInventory)
 {
-	if( !MUUN_INVENTORY_RANGE(source_slot) )
+	if (!MUUN_INVENTORY_RANGE(source_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !MUUN_INVENTORY_RANGE(target_slot) )
+	if (!MUUN_INVENTORY_RANGE(target_slot))
 	{
 		return 0xFF;
 	}
 
-	if( !sMuunSystem->CheckItemMoveToMuunInventory(this, this->GetMuunInventory()->GetItem(source_slot), target_slot) )
+	if (!sMuunSystem->CheckItemMoveToMuunInventory(this, this->GetMuunInventory()->GetItem(source_slot), target_slot))
 	{
 		return 0xFF;
 	}
 
-	if( this->GetMuunInventory()->AddItem(*this->GetMuunInventory()->GetItem(source_slot), target_slot) == 0xFF )
+	if (this->GetMuunInventory()->AddItem(*this->GetMuunInventory()->GetItem(source_slot), target_slot) == 0xFF)
 	{
 		return 0xFF;
 	}
 
 	this->GetMuunInventory()->DeleteItem(source_slot);
 
-	if( MUUN_INVENTORY_WEAR_RANGE(source_slot) )
+	if (MUUN_INVENTORY_WEAR_RANGE(source_slot))
 	{
 		this->PreviewMake();
 		sMuunSystem->GCMuunItemChangeSend(this, source_slot, true);
@@ -14023,13 +14298,13 @@ uint8 Player::MoveItem(MuunInventory, MuunInventory)
 		this->SetMuunItemStatus(source_slot, 0);
 	}
 
-	if( MUUN_INVENTORY_WEAR_RANGE(target_slot) )
+	if (MUUN_INVENTORY_WEAR_RANGE(target_slot))
 	{
 		this->PreviewMake();
 		sMuunSystem->GCMuunItemChangeSend(this, target_slot, true);
 	}
 
-	if ( MUUN_INVENTORY_WEAR_RANGE(source_slot) || MUUN_INVENTORY_WEAR_RANGE(target_slot) )
+	if (MUUN_INVENTORY_WEAR_RANGE(source_slot) || MUUN_INVENTORY_WEAR_RANGE(target_slot))
 	{
 		this->CalculateCharacter();
 	}
@@ -14037,7 +14312,7 @@ uint8 Player::MoveItem(MuunInventory, MuunInventory)
 	return target;
 }
 
-void Player::GetPreviewElementalDamage(int32 & damage_min, int32 & damage_max, int32 & pvp_damage_min, int32 & pvp_damage_max)
+void Player::GetPreviewElementalDamage(int32& damage_min, int32& damage_max, int32& pvp_damage_min, int32& pvp_damage_max)
 {
 	damage_min = this->GetIntData(UNIT_INT_ELEMENTAL_DAMAGE_MIN);
 	damage_max = this->GetIntData(UNIT_INT_ELEMENTAL_DAMAGE_MAX);
@@ -14066,7 +14341,7 @@ void Player::GetPreviewElementalDamage(int32 & damage_min, int32 & damage_max, i
 	damage_max += (damage_max * this->GetPentagramJewelOption()->GetMulElementalDamagePvM()) / 100;
 }
 
-void Player::GetPreviewElementalDefense(int32 & defense, int32 & pvp_defense)
+void Player::GetPreviewElementalDefense(int32& defense, int32& pvp_defense)
 {
 	defense = this->GetIntData(UNIT_INT_ELEMENTAL_DEFENSE);
 
@@ -14084,8 +14359,8 @@ void Player::GetPreviewElementalDefense(int32 & defense, int32 & pvp_defense)
 
 	defense += this->GetPentagramJewelOption()->GetAddElementalDefensePvM();
 }
-	
-void Player::GetPreviewElementalAttackSuccessRate(int32 & attack_success_rate, int32 & pvp_attack_success_rate)
+
+void Player::GetPreviewElementalAttackSuccessRate(int32& attack_success_rate, int32& pvp_attack_success_rate)
 {
 	attack_success_rate = this->GetIntData(UNIT_INT_ELEMENTAL_ATTACK_SUCCESS_RATE);
 
@@ -14109,8 +14384,8 @@ void Player::GetPreviewElementalAttackSuccessRate(int32 & attack_success_rate, i
 		pvp_attack_success_rate = 0;
 	}
 }
-	
-void Player::GetPreviewElementalDefenseSuccessRate(int32 & defense_success_rate, int32 & pvp_defense_success_rate)
+
+void Player::GetPreviewElementalDefenseSuccessRate(int32& defense_success_rate, int32& pvp_defense_success_rate)
 {
 	defense_success_rate = this->GetIntData(UNIT_INT_ELEMENTAL_DEFENSE_SUCCESS_RATE);
 
@@ -14126,36 +14401,36 @@ void Player::GetPreviewElementalDefenseSuccessRate(int32 & defense_success_rate,
 
 bool Player::InventoryAddItemStack(uint8 source_slot, uint8 target_slot)
 {
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
-	Item * pTargetItem = this->GetInventory()->GetItem(target_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pTargetItem = this->GetInventory()->GetItem(target_slot);
 
-	if ( !pSourceItem->IsItem() ||
-		 !pTargetItem->IsItem() )
+	if (!pSourceItem->IsItem() ||
+		!pTargetItem->IsItem())
 	{
 		return false;
 	}
 
-	if ( pSourceItem->GetItem() != pTargetItem->GetItem() ||
-		 pSourceItem->GetLevel() != pTargetItem->GetLevel() ||
-		 pSourceItem->GetSocketBonus() != pTargetItem->GetSocketBonus() )
+	if (pSourceItem->GetItem() != pTargetItem->GetItem() ||
+		pSourceItem->GetLevel() != pTargetItem->GetLevel() ||
+		pSourceItem->GetSocketBonus() != pTargetItem->GetSocketBonus())
 	{
 		return false;
 	}
 
 	item_template const* item_info = sItemMgr->GetItem(pSourceItem->GetItem());
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		return false;
 	}
 
 	int32 MaxStack = item_info->GetStackData()->GetMaxStack();
 
-	if ( MaxStack <= 0 )
+	if (MaxStack <= 0)
 	{
-		if ( sGameServer->IsJoinItemsWithExpireTime() )
+		if (sGameServer->IsJoinItemsWithExpireTime())
 		{
-			if ( pSourceItem->GetExpireDate() > 0 && pTargetItem->GetExpireDate() > 0 )
+			if (pSourceItem->GetExpireDate() > 0 && pTargetItem->GetExpireDate() > 0)
 			{
 				time_t source_time = pSourceItem->GetRemainTime();
 				time_t target_time = pTargetItem->GetRemainTime();
@@ -14174,20 +14449,20 @@ bool Player::InventoryAddItemStack(uint8 source_slot, uint8 target_slot)
 		return false;
 	}
 
-	if ( pTargetItem->GetDurability() >= MaxStack )
+	if (pTargetItem->GetDurability() >= MaxStack)
 	{
 		return false;
 	}
 
 	int32 AddDur = (int32)(MaxStack - pTargetItem->GetDurability());
-	AddDur = ((AddDur > pSourceItem->GetDurability())?(int32)pSourceItem->GetDurability():AddDur);
+	AddDur = ((AddDur > pSourceItem->GetDurability()) ? (int32)pSourceItem->GetDurability() : AddDur);
 
 	pSourceItem->AlterDurability(0, AddDur);
 	pTargetItem->AlterDurability(1, AddDur);
 
 	this->ItemMoveResult(-1);
 
-	if ( pTargetItem->GetDurability() == MaxStack && item_info->GetStackData()->GetConvertedItem() )
+	if (pTargetItem->GetDurability() == MaxStack && item_info->GetStackData()->GetConvertedItem())
 	{
 		this->ClearItem(target_slot, 1);
 
@@ -14198,7 +14473,7 @@ bool Player::InventoryAddItemStack(uint8 source_slot, uint8 target_slot)
 		this->SendItemDurability(target_slot, 0);
 	}
 
-	if ( pSourceItem->GetDurability() < 1.0f )
+	if (pSourceItem->GetDurability() < 1.0f)
 	{
 		this->ClearItem(source_slot, 0);
 	}
@@ -14210,89 +14485,89 @@ bool Player::InventoryAddItemStack(uint8 source_slot, uint8 target_slot)
 	return true;
 }
 
-bool Player::InventoryAddItemStackOnBuy(Item & item)
+bool Player::InventoryAddItemStackOnBuy(Item& item)
 {
-	if ( !item.IsItem() || item.GetDurability() <= 0.0f )
+	if (!item.IsItem() || item.GetDurability() <= 0.0f)
 	{
 		return false;
 	}
 
 	item_template const* item_info = sItemMgr->GetItem(item.GetItem());
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		return false;
 	}
 
-	if ( !item_info->GetStackData()->IsStackOnLoot() )
+	if (!item_info->GetStackData()->IsStackOnLoot())
 	{
 		return false;
 	}
 
 	int32 MaxStack = item_info->GetStackData()->GetMaxStack();
 
-	if ( MaxStack <= 0 )
+	if (MaxStack <= 0)
 	{
 		return false;
 	}
 
-	switch ( item_info->GetInventoryType() )
+	switch (item_info->GetInventoryType())
 	{
 	case ITEM_INVENTORY_TYPE_NORMAL:
+	{
+		use_inventory_loop(i)
 		{
-			use_inventory_loop(i)
+			if (!this->GetInventory()->CanUseExpandedSlot(i))
 			{
-				if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+				continue;
+			}
+
+			if (!this->GetInventory()->GetItem(i)->IsItem())
+			{
+				continue;
+			}
+
+			if (this->GetInventory()->GetItem(i)->GetItem() != item.GetItem() ||
+				this->GetInventory()->GetItem(i)->GetLevel() != item.GetLevel() ||
+				this->GetInventory()->GetItem(i)->GetSocketBonus() != item.GetSocketBonus())
+			{
+				continue;
+			}
+
+			if (this->GetInventory()->GetItem(i)->GetDurability() < MaxStack)
+			{
+				int32 AddDur = (int32)(MaxStack - this->GetInventory()->GetItem(i)->GetDurability());
+
+				AddDur = ((AddDur > item.GetDurability()) ? (int32)item.GetDurability() : AddDur);
+
+				item.AlterDurability(0, AddDur);
+				this->GetInventory()->GetItem(i)->AlterDurability(1, AddDur);
+
+				this->QuestMUObjectiveItemGet(item);
+
+				if (this->GetInventory()->GetItem(i)->GetDurability() == MaxStack && item_info->GetStackData()->GetConvertedItem())
 				{
-					continue;
-				}
+					this->ClearItem(i, 1);
 
-				if ( !this->GetInventory()->GetItem(i)->IsItem() )
-				{
-					continue;
-				}
+					sItemMgr->ItemSerialCreateItem(this, serial_create_inventory, Item(item_info->GetStackData()->GetConvertedItem()->GetItem(), item.GetLevel(), 1, 0, 0, 0, 0, 0, nullptr, item.GetSocketBonus()));
 
-				if ( this->GetInventory()->GetItem(i)->GetItem() != item.GetItem() ||
-					 this->GetInventory()->GetItem(i)->GetLevel() != item.GetLevel() ||
-					 this->GetInventory()->GetItem(i)->GetSocketBonus() != item.GetSocketBonus() )
-				{
-					continue;
-				}
-
-				if ( this->GetInventory()->GetItem(i)->GetDurability() < MaxStack )
-				{
-					int32 AddDur = (int32)(MaxStack - this->GetInventory()->GetItem(i)->GetDurability());
-
-					AddDur = ((AddDur>item.GetDurability())?(int32)item.GetDurability():AddDur);
-
-					item.AlterDurability(0, AddDur);
-					this->GetInventory()->GetItem(i)->AlterDurability(1, AddDur);
-
-					this->QuestMUObjectiveItemGet(item);
-			
-					if ( this->GetInventory()->GetItem(i)->GetDurability() == MaxStack && item_info->GetStackData()->GetConvertedItem() )
+					if (item.GetDurability() < 1.0f)
 					{
-						this->ClearItem(i, 1);
-
-						sItemMgr->ItemSerialCreateItem(this, serial_create_inventory, Item(item_info->GetStackData()->GetConvertedItem()->GetItem(), item.GetLevel(), 1, 0, 0, 0, 0, 0, nullptr, item.GetSocketBonus()));
-
-						if( item.GetDurability() < 1.0f )
-						{
-							return true;
-						}
+						return true;
 					}
-					else
-					{
-						this->SendItemDurability(i, 0);
+				}
+				else
+				{
+					this->SendItemDurability(i, 0);
 
-						if( item.GetDurability() < 1.0f )
-						{
-							return true;
-						}
+					if (item.GetDurability() < 1.0f)
+					{
+						return true;
 					}
 				}
 			}
-		} break;
+		}
+	} break;
 	}
 
 	return false;
@@ -14329,127 +14604,127 @@ bool Player::PotionUse(uint16 item, uint8 level, uint16 value)
 	int32 add_stamina = 0;
 	//uint32 statistic_id = STATISTIC_LIFE_POTIONS;
 
-	switch ( item )
+	switch (item)
 	{
 	case ITEMGET(14, 0):
-		{
-			add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
-			if ( add_life < 0 ) { add_life = 0; }
-			add_life += this->PowerGetTotal(POWER_LIFE) * (10 + (level * 5)) / 100;
-		} break;
+	{
+		add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
+		if (add_life < 0) { add_life = 0; }
+		add_life += this->PowerGetTotal(POWER_LIFE) * (10 + (level * 5)) / 100;
+	} break;
 
 	case ITEMGET(14, 1):
-		{
-			add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
-			if ( add_life < 0 ) { add_life = 0; }
-			add_life += this->PowerGetTotal(POWER_LIFE) * (20 + (level * 5)) / 100;
-		} break;
+	{
+		add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
+		if (add_life < 0) { add_life = 0; }
+		add_life += this->PowerGetTotal(POWER_LIFE) * (20 + (level * 5)) / 100;
+	} break;
 
 	case ITEMGET(14, 2):
-		{
-			add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
-			if ( add_life < 0 ) { add_life = 0; }
-			add_life += this->PowerGetTotal(POWER_LIFE) * (30 + (level * 5)) / 100;
-		} break;
+	{
+		add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
+		if (add_life < 0) { add_life = 0; }
+		add_life += this->PowerGetTotal(POWER_LIFE) * (30 + (level * 5)) / 100;
+	} break;
 
 	case ITEMGET(14, 3):
-		{
-			add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
-			if ( add_life < 0 ) { add_life = 0; }
-			add_life += this->PowerGetTotal(POWER_LIFE) * (40 + (level * 5)) / 100;
-		} break;
-		
+	{
+		add_life = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel() * 2);
+		if (add_life < 0) { add_life = 0; }
+		add_life += this->PowerGetTotal(POWER_LIFE) * (40 + (level * 5)) / 100;
+	} break;
+
 	case ITEMGET(14, 4):
-		{
-			add_mana = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel());
-			if ( add_mana < 0 ) { add_mana = 0; }
-			add_mana += this->PowerGetTotal(POWER_MANA) * (20 + (level * 5)) / 100;
-			//statistic_id = STATISTIC_MANA_POTIONS;
-		} break;
+	{
+		add_mana = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel());
+		if (add_mana < 0) { add_mana = 0; }
+		add_mana += this->PowerGetTotal(POWER_MANA) * (20 + (level * 5)) / 100;
+		//statistic_id = STATISTIC_MANA_POTIONS;
+	} break;
 
 	case ITEMGET(14, 5):
-		{
-			add_mana = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel());
-			if ( add_mana < 0 ) { add_mana = 0; }
-			add_mana += this->PowerGetTotal(POWER_MANA) * (30 + (level * 5)) / 100;
-			//statistic_id = STATISTIC_MANA_POTIONS;
-		} break;
+	{
+		add_mana = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel());
+		if (add_mana < 0) { add_mana = 0; }
+		add_mana += this->PowerGetTotal(POWER_MANA) * (30 + (level * 5)) / 100;
+		//statistic_id = STATISTIC_MANA_POTIONS;
+	} break;
 
 	case ITEMGET(14, 6):
-		{
-			add_mana = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel());
-			if ( add_mana < 0 ) { add_mana = 0; }
-			add_mana += this->PowerGetTotal(POWER_MANA) * (40 + (level * 5)) / 100;
-			//statistic_id = STATISTIC_MANA_POTIONS;
-		} break;
+	{
+		add_mana = (value * 10) - (this->GetLevelData(LEVEL_DATA_NORMAL)->GetLevel());
+		if (add_mana < 0) { add_mana = 0; }
+		add_mana += this->PowerGetTotal(POWER_MANA) * (40 + (level * 5)) / 100;
+		//statistic_id = STATISTIC_MANA_POTIONS;
+	} break;
 
 	case ITEMGET(14, 38):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 5 / 100;
-			add_life = this->PowerGetTotal(POWER_LIFE) * 10 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 5 / 100;
+		add_life = this->PowerGetTotal(POWER_LIFE) * 10 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 39):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 10 / 100;
-			add_life = this->PowerGetTotal(POWER_LIFE) * 25 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 10 / 100;
+		add_life = this->PowerGetTotal(POWER_LIFE) * 25 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 40):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 20 / 100;
-			add_life = this->PowerGetTotal(POWER_LIFE) * 45 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 20 / 100;
+		add_life = this->PowerGetTotal(POWER_LIFE) * 45 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 35):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 25 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 25 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 36):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 35 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 35 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 37):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 45 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 45 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 133):
-		{
-			add_shield = this->PowerGetTotal(POWER_SHIELD) * 65 / 100;
-			//statistic_id = STATISTIC_SHIELD_POTIONS;
-		} break;
+	{
+		add_shield = this->PowerGetTotal(POWER_SHIELD) * 65 / 100;
+		//statistic_id = STATISTIC_SHIELD_POTIONS;
+	} break;
 
 	case ITEMGET(14, 70):
-		{
-			add_life = this->PowerGetTotal(POWER_LIFE) * 100 / 100;
-		} break;
+	{
+		add_life = this->PowerGetTotal(POWER_LIFE) * 100 / 100;
+	} break;
 
 	case ITEMGET(14, 71):
-		{
-			add_mana = this->PowerGetTotal(POWER_MANA) * 100 / 100;
-		} break;
+	{
+		add_mana = this->PowerGetTotal(POWER_MANA) * 100 / 100;
+	} break;
 
 	case ITEMGET(14, 94):
-		{
-			add_life = this->PowerGetTotal(POWER_LIFE) * 65 / 100;
-		} break;
+	{
+		add_life = this->PowerGetTotal(POWER_LIFE) * 65 / 100;
+	} break;
 
 	default:
-		{
-			return false;
-		} break;
+	{
+		return false;
+	} break;
 	}
 
-	if ( this->HasBuff(BUFF_PARALYSIS) )
+	if (this->HasBuff(BUFF_PARALYSIS))
 	{
 		add_life -= add_life * sGameServer->GetRadianceParalysisEffect() / 100;
 		add_mana -= add_mana * sGameServer->GetRadianceParalysisEffect() / 100;
@@ -14457,11 +14732,11 @@ bool Player::PotionUse(uint16 item, uint8 level, uint16 value)
 		add_stamina -= add_stamina * sGameServer->GetRadianceParalysisEffect() / 100;
 	}
 
-	if ( add_life > 0 )
+	if (add_life > 0)
 	{
-		int32 heal_value = (this->PowerGet(POWER_LIFE) + add_life) > this->PowerGetTotal(POWER_LIFE) ? this->PowerGetTotal(POWER_LIFE) - this->PowerGet(POWER_LIFE): add_life;
+		int32 heal_value = (this->PowerGet(POWER_LIFE) + add_life) > this->PowerGetTotal(POWER_LIFE) ? this->PowerGetTotal(POWER_LIFE) - this->PowerGet(POWER_LIFE) : add_life;
 
-		if ( heal_value < 0 )
+		if (heal_value < 0)
 		{
 			heal_value = 0;
 		}
@@ -14473,19 +14748,19 @@ bool Player::PotionUse(uint16 item, uint8 level, uint16 value)
 		this->PowerIncrease(POWER_LIFE, add_life);
 	}
 
-	if ( add_mana > 0 )
+	if (add_mana > 0)
 	{
 		this->PowerIncrease(POWER_MANA, add_mana);
 
 		sLabyrinthDimensions->UpdateMission(this, LABYRINTH_OF_DIMENSIONS_MISSION_TYPE_KILL_MONSTERS_NOT_MP, 0, true);
 	}
 
-	if ( add_shield > 0 )
+	if (add_shield > 0)
 	{
 		this->PowerIncrease(POWER_SHIELD, add_shield);
 	}
 
-	if ( add_stamina > 0 )
+	if (add_stamina > 0)
 	{
 		this->PowerIncrease(POWER_STAMINA, add_stamina);
 	}
@@ -14500,7 +14775,7 @@ bool Player::PotionUse(uint16 item, uint8 level, uint16 value)
 		this->ManaSend();
 	}
 
-	if ( add_shield > 0 )
+	if (add_shield > 0)
 	{
 		this->EffectSend(3);
 	}
@@ -14515,103 +14790,103 @@ bool Player::ExperiencePotionUse(uint16 item, uint8 level)
 	int64 experience = 0;
 	uint8 type = LEVEL_DATA_NORMAL;
 
-	switch ( item )
+	switch (item)
 	{
 	case ITEMGET(14, 269): // Normal 3.000.000
-		{
-			experience = 3000000;
-		} break;
+	{
+		experience = 3000000;
+	} break;
 
 	case ITEMGET(14, 270): // Normal 5.000.000
-		{
-			experience = 5000000;
-		} break;
+	{
+		experience = 5000000;
+	} break;
 
 	case ITEMGET(14, 271): // Normal 8.000.000
-		{
-			experience = 8000000;
-		} break;
+	{
+		experience = 8000000;
+	} break;
 
 	case ITEMGET(14, 272): // Normal 10.000.000
-		{
-			experience = 10000000;
-		} break;
+	{
+		experience = 10000000;
+	} break;
 
 	case ITEMGET(14, 273): // Master 
-		{
-			type = LEVEL_DATA_MASTER;
-			experience = 10000000;
-		} break;
+	{
+		type = LEVEL_DATA_MASTER;
+		experience = 10000000;
+	} break;
 
 	case ITEMGET(14, 274): // Master 
-		{
-			type = LEVEL_DATA_MASTER;
-			experience = 20000000;
-		} break;
+	{
+		type = LEVEL_DATA_MASTER;
+		experience = 20000000;
+	} break;
 
 	case ITEMGET(14, 275): // Master 
-		{
-			type = LEVEL_DATA_MASTER;
-			experience = 30000000;
-		} break;
+	{
+		type = LEVEL_DATA_MASTER;
+		experience = 30000000;
+	} break;
 
 	case ITEMGET(14, 276): // Master 
-		{
-			type = LEVEL_DATA_MASTER;
-			experience = 40000000;
-		} break;
+	{
+		type = LEVEL_DATA_MASTER;
+		experience = 40000000;
+	} break;
 
 	case ITEMGET(14, 279): // Master 
-		{
-			type = LEVEL_DATA_MASTER;
-			experience = 50000000;
-		} break;
+	{
+		type = LEVEL_DATA_MASTER;
+		experience = 50000000;
+	} break;
 
 	case ITEMGET(14, 280): // Master 
-		{
-			type = LEVEL_DATA_MASTER;
-			experience = 100000000;
-		} break;
+	{
+		type = LEVEL_DATA_MASTER;
+		experience = 100000000;
+	} break;
 	}
 
-	if ( experience <= 0 )
+	if (experience <= 0)
 	{
 		return false;
 	}
 
-	if ( type == LEVEL_DATA_MASTER && this->IsMajestic() )
+	if (type == LEVEL_DATA_MASTER && this->IsMajestic())
 	{
 		type = LEVEL_DATA_MAJESTIC;
 	}
 
-	if ( type == LEVEL_DATA_MAJESTIC && !this->IsMajestic() )
+	if (type == LEVEL_DATA_MAJESTIC && !this->IsMajestic())
 	{
 		return false;
 	}
 
-	if ( type == LEVEL_DATA_MASTER && !this->IsMaster() )
+	if (type == LEVEL_DATA_MASTER && !this->IsMaster())
 	{
 		return false;
 	}
 
-	if ( type == LEVEL_DATA_NORMAL && this->IsMaster() )
+	if (type == LEVEL_DATA_NORMAL && this->IsMaster())
 	{
 		return false;
 	}
 
-	if ( this->GetLevelData(type)->GetLevel() >= sGameServer->GetMaxLevel(type) )
+	if (this->GetLevelData(type)->GetLevel() >= sGameServer->GetMaxLevel(type))
 	{
 		return false;
 	}
 
 	int64 diff = this->GetLevelData(type)->GetNextExperience() - this->GetLevelData(type)->GetExperience();
 
-	if ( diff < experience )
+	if (diff < experience)
 	{
 		experience = diff;
 	}
 
-	if ( experience <= 0 )
+	if (experience <= 0)
 	{
 		experience = 1;
 	}
@@ -14621,33 +14896,33 @@ bool Player::ExperiencePotionUse(uint16 item, uint8 level)
 	return true;
 }
 
-void Player::OpenBoxRequest(uint8 * Packet)
+void Player::OpenBoxRequest(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( this->GetPersonalStore()->IsBusy() )
+	if (this->GetPersonalStore()->IsBusy())
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( this->GetInterfaceState()->GetID() != InterfaceData::None )
+	if (this->GetInterfaceState()->GetID() != InterfaceData::None)
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( this->GetTransaction() == TRANSACTION_TYPE_BEGIN )
+	if (this->GetTransaction() == TRANSACTION_TYPE_BEGIN)
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( !this->IsAuthorizationEnabled() )
+	if (!this->IsAuthorizationEnabled())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
 		this->OpenBoxResult(0xFF);
@@ -14664,12 +14939,12 @@ void Player::OpenBoxRequest(uint8 * Packet)
 	result 0xFF -> Unable to use
 	*/
 
-	Item * pItem = nullptr;
+	Item* pItem = nullptr;
 	uint8 type = lpMsg->type;
 
-	if ( lpMsg->type == 0x00 )
+	if (lpMsg->type == 0x00)
 	{
-		if ( !inventory_range(lpMsg->inventory_slot) )
+		if (!inventory_range(lpMsg->inventory_slot))
 		{
 			this->OpenBoxResult(0xFF);
 			return;
@@ -14677,9 +14952,9 @@ void Player::OpenBoxRequest(uint8 * Packet)
 
 		pItem = this->GetInventory()->GetItem(lpMsg->inventory_slot);
 	}
-	else if ( lpMsg->type == 0x15 )
+	else if (lpMsg->type == 0x15)
 	{
-		if ( !EVENT_INVENTORY_RANGE(lpMsg->inventory_slot) )
+		if (!EVENT_INVENTORY_RANGE(lpMsg->inventory_slot))
 		{
 			this->OpenBoxResult(0xFF);
 			return;
@@ -14692,38 +14967,38 @@ void Player::OpenBoxRequest(uint8 * Packet)
 		type = -1;
 	}
 
-	if ( type == uint8(-1) )
+	if (type == uint8(-1))
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( !pItem )
+	if (!pItem)
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( !pItem->IsItem() )
+	if (!pItem->IsItem())
 	{
 		this->OpenBoxResult(0xFF);
 		return;
 	}
 
-	if ( pItem->GetItem() == ITEMGET(13, 66) )
+	if (pItem->GetItem() == ITEMGET(13, 66))
 	{
 		if (sGameServer->IsSantaVillageEnabled() && (sEventMgr->IsSeasonEventOn(sGameServer->GetSantaVillageSeason()) || !sGameServer->IsSantaVillageCheckSeason()))
 		{
 			this->TeleportToLocation(WORLD_SANTA_VILLAGE, 220, 20, this->GetDirection(), this->GetInstance());
 			pItem->AlterDurability(0, 1.0f);
 
-			if ( pItem->GetDurability() <= 0.0f )
+			if (pItem->GetDurability() <= 0.0f)
 			{
-				if ( type == 0x00 )
+				if (type == 0x00)
 				{
 					this->ClearItem(lpMsg->inventory_slot);
 				}
-				else if ( type == 0x15 )
+				else if (type == 0x15)
 				{
 					this->GetEventInventory()->DeleteItem(lpMsg->inventory_slot);
 					sEventInventory->GCEventItemDeleteSend(this, lpMsg->inventory_slot);
@@ -14731,11 +15006,11 @@ void Player::OpenBoxRequest(uint8 * Packet)
 			}
 			else
 			{
-				if ( type == 0x00 )
+				if (type == 0x00)
 				{
 					this->SendItemDurability(lpMsg->inventory_slot, 1);
 				}
-				else if ( type == 0x15 )
+				else if (type == 0x15)
 				{
 					sEventInventory->GCEventItemDurSend(this, lpMsg->inventory_slot, pItem->GetDurability());
 				}
@@ -14750,7 +15025,7 @@ void Player::OpenBoxRequest(uint8 * Packet)
 		return;
 	}
 
-	if ( !this->GetInventory()->IsEmptySpace(4, 4) )
+	if (!this->GetInventory()->IsEmptySpace(4, 4))
 	{
 		this->OpenBoxResult(0xFE);
 		return;
@@ -14758,13 +15033,13 @@ void Player::OpenBoxRequest(uint8 * Packet)
 
 	uint8 result = sItemBagMgr->ExecuteItemBag(ITEM_BAG_INVENTORY_ITEM, this, "", pItem->GetItem(), pItem->GetLevel(), 0, 0, pItem->GetSerialServer(), pItem->GetSerial(), pItem->GetName());
 
-	if ( result == ITEM_BAG_RESULT_SUCCESS )
+	if (result == ITEM_BAG_RESULT_SUCCESS)
 	{
-		if ( type == 0x00 )
+		if (type == 0x00)
 		{
 			this->ClearItem(lpMsg->inventory_slot);
 		}
-		else if ( type == 0x15 )
+		else if (type == 0x15)
 		{
 			this->GetEventInventory()->DeleteItem(lpMsg->inventory_slot);
 			sEventInventory->GCEventItemDeleteSend(this, lpMsg->inventory_slot);
@@ -14783,14 +15058,14 @@ void Player::OpenBoxResult(uint8 result, uint16 item)
 	this->SEND_PCT(pMsg);
 }
 
-void Player::ChatBlockAdd(uint8 * Packet)
+void Player::ChatBlockAdd(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !this->IsAuthorizationEnabled() )
+	if (!this->IsAuthorizationEnabled())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
 		return;
@@ -14802,7 +15077,7 @@ void Player::ChatBlockAdd(uint8 * Packet)
 	STRING_SAFE(name_safe, MAX_CHARACTER_LENGTH + 1);
 	strcpy(name_safe, name);
 
-	if ( !this->ChatBlockAdd(name_safe) )
+	if (!this->ChatBlockAdd(name_safe))
 	{
 		this->ChatBlockList(2, 3);
 		return;
@@ -14811,19 +15086,19 @@ void Player::ChatBlockAdd(uint8 * Packet)
 	this->ChatBlockList(2, 1);
 }
 
-bool Player::ChatBlockAdd(const char * name)
+bool Player::ChatBlockAdd(const char* name)
 {
 	std::string name_safe = name;
 
 	strToLower(name_safe);
 
-	for ( PlayerChatBlockList::const_iterator it = this->chat_block_list.begin(); it != this->chat_block_list.end(); ++it )
+	for (PlayerChatBlockList::const_iterator it = this->chat_block_list.begin(); it != this->chat_block_list.end(); ++it)
 	{
 		std::string list_name = (*it);
 
 		strToLower(list_name);
 
-		if ( name_safe == list_name )
+		if (name_safe == list_name)
 		{
 			return false;
 		}
@@ -14832,15 +15107,15 @@ bool Player::ChatBlockAdd(const char * name)
 	this->chat_block_list.insert(name);
 	return true;
 }
-	
-void Player::ChatBlockDelete(uint8 * Packet)
+
+void Player::ChatBlockDelete(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !this->IsAuthorizationEnabled() )
+	if (!this->IsAuthorizationEnabled())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
 		return;
@@ -14854,7 +15129,7 @@ void Player::ChatBlockDelete(uint8 * Packet)
 
 	PlayerChatBlockList::const_iterator it = this->chat_block_list.find(name_safe);
 
-	if ( it != this->chat_block_list.end() )
+	if (it != this->chat_block_list.end())
 	{
 		this->chat_block_list.erase(it);
 		this->ChatBlockList(3, 1);
@@ -14864,7 +15139,7 @@ void Player::ChatBlockDelete(uint8 * Packet)
 		this->ChatBlockList(3, 2);
 	}
 }
-	
+
 void Player::ChatBlockList(uint8 type, uint8 result)
 {
 	uint8 buffer[8092];
@@ -14875,9 +15150,9 @@ void Player::ChatBlockList(uint8 type, uint8 result)
 	head->result = result;
 	head->action = 0;
 
-	if ( result == 1 || type == 1 )
+	if (result == 1 || type == 1)
 	{
-		for ( PlayerChatBlockList::const_iterator it = this->chat_block_list.begin(); it != this->chat_block_list.end(); ++it )
+		for (PlayerChatBlockList::const_iterator it = this->chat_block_list.begin(); it != this->chat_block_list.end(); ++it)
 		{
 			body[head->count].position = head->count;
 			memset(body[head->count].name, 0, MAX_CHARACTER_LENGTH + 1);
@@ -14888,7 +15163,7 @@ void Player::ChatBlockList(uint8 type, uint8 result)
 		}
 	}
 
-	if ( head->count > 0 )
+	if (head->count > 0)
 	{
 		body[head->count - 1].next = 0;
 		head->action = 1;
@@ -14899,17 +15174,17 @@ void Player::ChatBlockList(uint8 type, uint8 result)
 	this->sendPacket(buffer, head->h.get_size());
 }
 
-bool Player::ChatBlockFind(const char * name) const
+bool Player::ChatBlockFind(const char* name) const
 {
 	std::string lower_name = name;
 	strToLower(lower_name);
 
-	for ( PlayerChatBlockList::const_iterator it = this->chat_block_list.begin(); it != this->chat_block_list.end(); ++it )
+	for (PlayerChatBlockList::const_iterator it = this->chat_block_list.begin(); it != this->chat_block_list.end(); ++it)
 	{
 		std::string cur_name = *it;
 		strToLower(cur_name);
 
-		if ( lower_name == cur_name )
+		if (lower_name == cur_name)
 		{
 			return true;
 		}
@@ -14918,24 +15193,24 @@ bool Player::ChatBlockFind(const char * name) const
 	return false;
 }
 
-void Player::ItemDisassemble(uint8 * Packet)
+void Player::ItemDisassemble(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( this->GetPersonalStore()->IsBusy() )
+	if (this->GetPersonalStore()->IsBusy())
 	{
 		return;
 	}
 
-	if ( this->GetInterfaceState()->GetID() != InterfaceData::None )
+	if (this->GetInterfaceState()->GetID() != InterfaceData::None)
 	{
 		return;
 	}
 
-	if ( !this->IsAuthorizationEnabled() )
+	if (!this->IsAuthorizationEnabled())
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_RED, "You are not authorized for this action.");
 		return;
@@ -14943,7 +15218,7 @@ void Player::ItemDisassemble(uint8 * Packet)
 
 	POINTER_PCT_LOG(ITEM_DISASSEMBLE, lpMsg, Packet, 0);
 
-	if ( !use_inventory_range(lpMsg->slot) )
+	if (!use_inventory_range(lpMsg->slot))
 	{
 		this->ItemDisassembleResult(0);
 		return;
@@ -14951,21 +15226,21 @@ void Player::ItemDisassemble(uint8 * Packet)
 
 	Item const* pItem = this->GetInventory()->GetItem(lpMsg->slot);
 
-	if ( !pItem )
+	if (!pItem)
 	{
 		this->ItemDisassembleResult(0);
 		return;
 	}
 
-	if ( !pItem->IsItem() )
+	if (!pItem->IsItem())
 	{
 		this->ItemDisassembleResult(0);
 		return;
 	}
 
-	if ( pItem->IsAncient() )
+	if (pItem->IsAncient())
 	{
-		if ( sItemMgr->IsLuckyItem(pItem->GetItem()) )
+		if (sItemMgr->IsLuckyItem(pItem->GetItem()))
 		{
 			this->ItemDisassembleResult(0);
 			return;
@@ -14973,7 +15248,7 @@ void Player::ItemDisassemble(uint8 * Packet)
 
 		item_set_type const* pItemSetType = sItemMgr->GetItemSetType(pItem->GetItem());
 
-		if ( !pItemSetType )
+		if (!pItemSetType)
 		{
 			this->ItemDisassembleResult(0);
 			return;
@@ -14981,7 +15256,7 @@ void Player::ItemDisassemble(uint8 * Packet)
 
 		uint8 ancient_id = pItem->GetAncientType();
 
-		if ( ancient_id == 0 )
+		if (ancient_id == 0)
 		{
 			this->ItemDisassembleResult(0);
 			return;
@@ -14989,19 +15264,19 @@ void Player::ItemDisassemble(uint8 * Packet)
 
 		item_set_option const* pItemSetOption = sItemMgr->GetItemSetOption(pItemSetType->GetAncientID(ancient_id - 1));
 
-		if ( !pItemSetOption )
+		if (!pItemSetOption)
 		{
 			this->ItemDisassembleResult(0);
 			return;
 		}
 
-		if ( !pItemSetOption->IsDisassemble() )
+		if (!pItemSetOption->IsDisassemble())
 		{
 			this->ItemDisassembleResult(0);
 			return;
 		}
 	}
-	else 
+	else
 	{
 		if (pItem->GetKind2() == ItemKind::GUARDIAN_MOUNT)
 		{
@@ -15036,7 +15311,7 @@ void Player::ItemDisassemble(uint8 * Packet)
 
 	this->ItemDisassembleResult(1, ITEMGET(14, 290), 1);
 }
-	
+
 void Player::ItemDisassembleResult(uint8 result, uint32 item, uint32 count)
 {
 	DISSASEMBLE_RESULT pMsg;
@@ -15054,12 +15329,12 @@ void Player::SendEventNotification(uint8 event_id, uint8 open)
 
 void Player::AcheronWarp()
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 	{
 		return;
 	}
 
-	if ( this->GetInterfaceState()->GetID() != InterfaceData::AcheronEntrance )
+	if (this->GetInterfaceState()->GetID() != InterfaceData::AcheronEntrance)
 	{
 		return;
 	}
@@ -15068,13 +15343,13 @@ void Player::AcheronWarp()
 
 	use_inventory_loop(i)
 	{
-		if ( !this->GetInventory()->CanUseExpandedSlot(i) )
+		if (!this->GetInventory()->CanUseExpandedSlot(i))
 		{
 			continue;
 		}
 
-		if ( this->GetInventory()->GetItem(i)->IsItem() &&
-			 this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(13, 146) )
+		if (this->GetInventory()->GetItem(i)->IsItem() &&
+			this->GetInventory()->GetItem(i)->GetItem() == ITEMGET(13, 146))
 		{
 			this->ClearItem(i);
 			this->MoveToGate(417);
@@ -15151,7 +15426,7 @@ Item* Player::GetActiveInventoryItem(uint16 item)
 {
 	for (int32 i = 0; i < use_inventory_size; ++i)
 	{
-		Item * pItem = this->GetInventory()->GetItem(i);
+		Item* pItem = this->GetInventory()->GetItem(i);
 
 		if (!pItem || !pItem->IsItem() || pItem->GetItem() != item)
 		{
@@ -15294,81 +15569,81 @@ void Player::AssignMount()
 	}
 }
 
-uint8 Player::AddItem(Item const& item, uint8 & inventory, uint8 slot, AddItemSend send)
+uint8 Player::AddItem(Item const& item, uint8& inventory, uint8 slot, AddItemSend send)
 {
-	switch ( sItemMgr->GetItemInventoryType(item.GetItem()) )
+	switch (sItemMgr->GetItemInventoryType(item.GetItem()))
 	{
 	case ITEM_INVENTORY_TYPE_NORMAL:
+	{
+		inventory = ITEM_INVENTORY_TYPE_NORMAL;
+
+		if (slot == uint8(-1))
 		{
-			inventory = ITEM_INVENTORY_TYPE_NORMAL;
+			slot = this->GetInventory()->AddItem(item);
+		}
+		else
+		{
+			slot = this->GetInventory()->AddItem(item, slot);
+		}
 
-			if ( slot == uint8(-1) )
-			{
-				slot = this->GetInventory()->AddItem(item);
-			}
-			else
-			{
-				slot = this->GetInventory()->AddItem(item, slot);
-			}
+		if (slot != uint8(-1))
+		{
+			this->GetInventory()->GetItem(slot)->Convert();
 
-			if ( slot != uint8(-1) )
+			if (!this->IsFirstTime() && (send == ADD_ITEM_SEND_OK))
 			{
-				this->GetInventory()->GetItem(slot)->Convert();
-
-				if ( !this->IsFirstTime() && (send == ADD_ITEM_SEND_OK) )
-				{
-					this->SendInventory(slot);
-				}
+				this->SendInventory(slot);
 			}
-		} break;
+		}
+	} break;
 
 	case ITEM_INVENTORY_TYPE_EVENT:
+	{
+		inventory = ITEM_INVENTORY_TYPE_EVENT;
+
+		if (slot == uint8(-1))
 		{
-			inventory = ITEM_INVENTORY_TYPE_EVENT;
+			slot = this->GetEventInventory()->AddItem(item);
+		}
+		else
+		{
+			slot = this->GetEventInventory()->AddItem(item, slot);
+		}
 
-			if ( slot == uint8(-1) )
-			{
-				slot = this->GetEventInventory()->AddItem(item);
-			}
-			else
-			{
-				slot = this->GetEventInventory()->AddItem(item, slot);
-			}
+		if (slot != uint8(-1))
+		{
+			this->GetEventInventory()->GetItem(slot)->Convert();
 
-			if ( slot != uint8(-1) )
+			if (!this->IsFirstTime() && (send == ADD_ITEM_SEND_OK))
 			{
-				this->GetEventInventory()->GetItem(slot)->Convert();
-
-				if ( !this->IsFirstTime() && (send == ADD_ITEM_SEND_OK) )
-				{
-					sEventInventory->GCEventItemModifySend(this, slot);
-				}
+				sEventInventory->GCEventItemModifySend(this, slot);
 			}
-		} break;
+		}
+	} break;
 
 	case ITEM_INVENTORY_TYPE_MUUN:
+	{
+		inventory = ITEM_INVENTORY_TYPE_MUUN;
+
+		if (slot == uint8(-1))
 		{
-			inventory = ITEM_INVENTORY_TYPE_MUUN;
+			slot = this->GetMuunInventory()->AddItem(item);
+		}
+		else
+		{
+			slot = this->GetMuunInventory()->AddItem(item, slot);
+		}
 
-			if ( slot == uint8(-1) )
-			{
-				slot = this->GetMuunInventory()->AddItem(item);
-			}
-			else
-			{
-				slot = this->GetMuunInventory()->AddItem(item, slot);
-			}
+		if (slot != uint8(-1))
+		{
+			this->GetMuunInventory()->GetItem(slot)->Convert();
 
-			if ( slot != uint8(-1) )
+			if (!this->IsFirstTime() && (send == ADD_ITEM_SEND_OK))
 			{
-				this->GetMuunInventory()->GetItem(slot)->Convert();
-
-				if ( !this->IsFirstTime() && (send == ADD_ITEM_SEND_OK) )
-				{
-					sMuunSystem->GCMuunItemModifySend(this, slot);
-				}
+				sMuunSystem->GCMuunItemModifySend(this, slot);
 			}
-		} break;
+		}
+	} break;
 	}
 
 	return slot;
@@ -15382,12 +15657,12 @@ uint8 Player::AddItem(Item const& item, uint8 slot, AddItemSend send)
 
 bool Player::IsOffline() const
 {
-	if ( this->GetPersonalStore()->IsOff() )
+	if (this->GetPersonalStore()->IsOff())
 	{
 		return true;
 	}
 
-	if ( this->GetHelper()->IsOffline() )
+	if (this->GetHelper()->IsOffline())
 	{
 		return true;
 	}
@@ -15397,7 +15672,7 @@ bool Player::IsOffline() const
 
 bool Player::IsBuffAllowed(uint16 id) const
 {
-	return true;	
+	return true;
 }
 
 void Player::UpdateBuffID()
@@ -15414,20 +15689,20 @@ void Player::UpdateBuffID()
 	this->UpdateBuffID(90, 203); // Strength
 	this->UpdateBuffID(121, 201); // Healing
 }
-	
+
 void Player::UpdateBuffID(uint16 normal_id, uint16 master_id)
 {
 	BuffData const* pBuffData = this->GetBuff(master_id);
 
-	if ( pBuffData )
+	if (pBuffData)
 	{
 		buff_template const* buff_data = sSkillMgr->GetBuff(normal_id);
 
-		if ( buff_data )
+		if (buff_data)
 		{
-			this->AddBuff(normal_id, 
-				BuffEffect(buff_data->GetEffect(0), buff_data->GetValue(0)), 
-				BuffEffect(buff_data->GetEffect(1), buff_data->GetValue(1)), 
+			this->AddBuff(normal_id,
+				BuffEffect(buff_data->GetEffect(0), buff_data->GetValue(0)),
+				BuffEffect(buff_data->GetEffect(1), buff_data->GetValue(1)),
 				pBuffData->GetDuration(), pBuffData->GetFlag(), this);
 		}
 	}
@@ -15435,33 +15710,33 @@ void Player::UpdateBuffID(uint16 normal_id, uint16 master_id)
 
 void Player::UpdateCoordinateAttribute()
 {
-	if ( !sGameServer->IsAntiHackCoordinateVerify() )
+	if (!sGameServer->IsAntiHackCoordinateVerify())
 	{
 		return;
 	}
 
-	if ( !Player::IsPlayerBasicState(this, false) )
+	if (!Player::IsPlayerBasicState(this, false))
 	{
 		return;
 	}
 
-	if ( this->GetRegenStatus() != REGEN_NONE )
+	if (this->GetRegenStatus() != REGEN_NONE)
 	{
 		return;
 	}
 
 	WorldGrid const& attr = this->GetGrid();
 
-	if ( attr.attribute != this->GetCoordinateAttribute() )
+	if (attr.attribute != this->GetCoordinateAttribute())
 	{
 		this->SetCoordinateAttribute(attr.attribute);
 		this->GetTimer(PLAYER_TIMER_COORDINATE_ATTRIBUTE)->Start();
 	}
 	else
 	{
-		if ( (this->GetCoordinateAttribute() & 4) == 4 || (this->GetCoordinateAttribute() & 8) == 8 )
+		if ((this->GetCoordinateAttribute() & 4) == 4 || (this->GetCoordinateAttribute() & 8) == 8)
 		{
-			if ( this->GetTimer(PLAYER_TIMER_COORDINATE_ATTRIBUTE)->Elapsed(sGameServer->GetAntiHackCoordinateVerifyTime()) )
+			if (this->GetTimer(PLAYER_TIMER_COORDINATE_ATTRIBUTE)->Elapsed(sGameServer->GetAntiHackCoordinateVerifyTime()))
 			{
 				this->TeleportToLocation(sGameServer->GetDefaultWorld(), sGameServer->GetDefaultX(), sGameServer->GetDefaultY(), -1, this->GetInstance());
 			}
@@ -15471,7 +15746,7 @@ void Player::UpdateCoordinateAttribute()
 
 void Player::AddItemToSoldList(Item const& item, uint32 price)
 {
-	if ( item.GetExpireDate() > 0 )
+	if (item.GetExpireDate() > 0)
 	{
 		return;
 	}
@@ -15481,7 +15756,7 @@ void Player::AddItemToSoldList(Item const& item, uint32 price)
 
 void Player::ItemSoldListView()
 {
-	if ( !Player::IsPlayerBasicState(this, false) )
+	if (!Player::IsPlayerBasicState(this, false))
 	{
 		return;
 	}
@@ -15492,7 +15767,7 @@ void Player::ItemSoldListView()
 		return;
 	}
 
-	if ( !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) )
+	if (!sShopMgr->IsShop(this->GetInterfaceState()->GetID()))
 	{
 		return;
 	}
@@ -15506,14 +15781,14 @@ void Player::ItemSoldListView()
 
 	time_t cur_time = time(nullptr);
 
-	for ( int32 i = 0; i < MAX_ITEM_SOLD; ++i )
+	for (int32 i = 0; i < MAX_ITEM_SOLD; ++i)
 	{
-		if ( !this->GetNpcSell()->GetItem(i)->IsItem() )
+		if (!this->GetNpcSell()->GetItem(i)->IsItem())
 		{
 			continue;
 		}
 
-		if ( this->GetNpcSell()->GetItem(i)->IsExpired() )
+		if (this->GetNpcSell()->GetItem(i)->IsExpired())
 		{
 			continue;
 		}
@@ -15538,7 +15813,7 @@ void Player::ItemSoldListClose()
 
 }
 
-void Player::ItemSoldRecover(uint8 * Packet)
+void Player::ItemSoldRecover(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -15559,28 +15834,28 @@ void Player::ItemSoldRecover(uint8 * Packet)
 		return;
 	}
 
-	if ( !sShopMgr->IsShop(this->GetInterfaceState()->GetID()) )
+	if (!sShopMgr->IsShop(this->GetInterfaceState()->GetID()))
 	{
 		return;
 	}
 
 	uint8 cur_slot = MAX_ITEM_SOLD;
 
-	for ( int32 i = 0; i < MAX_ITEM_SOLD; ++i )
+	for (int32 i = 0; i < MAX_ITEM_SOLD; ++i)
 	{
-		if ( !this->GetNpcSell()->GetItem(i)->IsItem() )
+		if (!this->GetNpcSell()->GetItem(i)->IsItem())
 		{
 			continue;
 		}
 
-		if ( this->GetNpcSell()->GetItem(i)->GetSerial() == lpMsg->serial )
+		if (this->GetNpcSell()->GetItem(i)->GetSerial() == lpMsg->serial)
 		{
 			cur_slot = i;
 			break;
 		}
 	}
 
-	if ( cur_slot >= MAX_ITEM_SOLD )
+	if (cur_slot >= MAX_ITEM_SOLD)
 	{
 		return;
 	}
@@ -15588,7 +15863,7 @@ void Player::ItemSoldRecover(uint8 * Packet)
 	SOLD_ITEM_RECOVER_RESULT pMsg;
 	pMsg.result = 0;
 
-	if ( !this->MoneyHave(this->GetNpcSell()->GetItem(cur_slot)->GetPersonalStorePrice()) )
+	if (!this->MoneyHave(this->GetNpcSell()->GetItem(cur_slot)->GetPersonalStorePrice()))
 	{
 		pMsg.result = 2;
 		this->SEND_PCT(pMsg);
@@ -15601,7 +15876,7 @@ void Player::ItemSoldRecover(uint8 * Packet)
 
 	uint8 result = this->AddItem(add_item, -1, ADD_ITEM_SEND_OK);
 
-	if ( result == uint8(-1) )
+	if (result == uint8(-1))
 	{
 		pMsg.result = 1;
 		this->SEND_PCT(pMsg);
@@ -15617,11 +15892,11 @@ void Player::ItemSoldRecover(uint8 * Packet)
 	this->ItemSoldListView();
 
 	/*
-	C2 00 07 6F 00 01 00 
-	
+	C2 00 07 6F 00 01 00
+
 	C3 13 BD 9E 09 BD BF 08 EF E2 DE D5 31 EB 3E 64 3B EE 01
-	
-	C1 05 6F 02 00 
+
+	C1 05 6F 02 00
 	*/
 }
 
@@ -15754,14 +16029,14 @@ float Player::GetPetAbsorb() const
 	switch (pItem->GetItem())
 	{
 	case PET_GUARDIAN_ANGEL:
-		{
-			value = 20;
-		} break;
+	{
+		value = 20;
+	} break;
 
 	case PET_SPIRIT_OF_GUARDIAN:
-		{
-			value = 30;
-		} break;
+	{
+		value = 30;
+	} break;
 	}
 
 	if (value < 0)
@@ -15779,24 +16054,24 @@ float Player::GetPetAbsorb() const
 
 void Player::AddEventScore(uint8 type, int32 level, int32 score)
 {
-	if ( score <= 0 )
+	if (score <= 0)
 	{
 		return;
 	}
 
-	switch ( type )
+	switch (type)
 	{
 	case 0:
-		{
-			this->UpdateStatistic(STATISTIC_PVE_SCORE, score);
-			this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added +%d PVE Points", score);
-		} break;
+	{
+		this->UpdateStatistic(STATISTIC_PVE_SCORE, score);
+		this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added +%d PVE Points", score);
+	} break;
 
 	case 1:
-		{
-			this->UpdateStatistic(STATISTIC_PVP_SCORE, score);
-			this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added +%d PVP Points", score);
-		} break;
+	{
+		this->UpdateStatistic(STATISTIC_PVP_SCORE, score);
+		this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Added +%d PVP Points", score);
+	} break;
 	}
 
 	SQLTransaction trans = MuDatabase.BeginTransaction();
@@ -15818,9 +16093,9 @@ void Player::AttackSpeedSend()
 	this->SEND_PCT(pMsg6);
 }
 
-void Player::AttackSpeedRecv(uint8 * Packet)
+void Player::AttackSpeedRecv(uint8* Packet)
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 	{
 		return;
 	}
@@ -15846,7 +16121,7 @@ void Player::AttackSpeedRecv(uint8 * Packet)
 	uint32 a_speed = MAKE_NUMBERDW(MAKE_NUMBERW(attack_speed[0], attack_speed[1]), MAKE_NUMBERW(attack_speed[2], attack_speed[3]));
 	uint32 m_speed = MAKE_NUMBERDW(MAKE_NUMBERW(magic_speed[0], magic_speed[1]), MAKE_NUMBERW(magic_speed[2], magic_speed[3]));
 
-	if ( this->GetIntData(UNIT_INT_ATTACK_SPEED) != a_speed || this->GetIntData(UNIT_INT_MAGIC_SPEED) != m_speed )
+	if (this->GetIntData(UNIT_INT_ATTACK_SPEED) != a_speed || this->GetIntData(UNIT_INT_MAGIC_SPEED) != m_speed)
 	{
 		sLog->outError("antihack", "%s -- %s -- [%u / %u] [%u / %u]", __FUNCTION__, this->BuildLog().c_str(),
 			this->GetIntData(UNIT_INT_ATTACK_SPEED), a_speed,
@@ -15854,93 +16129,93 @@ void Player::AttackSpeedRecv(uint8 * Packet)
 	}
 }
 
-void Player::HackCheckVerify(uint8 * Packet, uint8 id)
+void Player::HackCheckVerify(uint8* Packet, uint8 id)
 {
-	if ( !this->IsPlaying() )
+	if (!this->IsPlaying())
 	{
 		return;
 	}
 
-	switch ( id )
+	switch (id)
 	{
 	case 0:
-		{
-		} break;
+	{
+	} break;
 
 	case 1:
-		{
-			POINTER_PCT(HACK_CHECK_MODIFIED_BYTE_OFFSET, lpMsg, Packet, 0);
+	{
+		POINTER_PCT(HACK_CHECK_MODIFIED_BYTE_OFFSET, lpMsg, Packet, 0);
 
-			sLog->outError("antihack", "HACK_CHECK_MODIFIED_BYTE_OFFSET(%x + %02X / %02X) -- %s", lpMsg->offset, lpMsg->move, lpMsg->value, this->BuildLog().c_str());
+		sLog->outError("antihack", "HACK_CHECK_MODIFIED_BYTE_OFFSET(%x + %02X / %02X) -- %s", lpMsg->offset, lpMsg->move, lpMsg->value, this->BuildLog().c_str());
 
-			this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
+		this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
 
-			sGameServer->LogAntiHack(this, ANTIHACK_ID_BYTE_OFFSET, "HACK_CHECK_MODIFIED_BYTE_OFFSET(%x + %02X / %02X) -- Count: %d", lpMsg->offset, lpMsg->move, lpMsg->value, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
-		} break;
+		sGameServer->LogAntiHack(this, ANTIHACK_ID_BYTE_OFFSET, "HACK_CHECK_MODIFIED_BYTE_OFFSET(%x + %02X / %02X) -- Count: %d", lpMsg->offset, lpMsg->move, lpMsg->value, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
+	} break;
 
 	case 2:
-		{
-			POINTER_PCT(HACK_CHECK_MODIFIED_DOUBLE_OFFSET, lpMsg, Packet, 0);
+	{
+		POINTER_PCT(HACK_CHECK_MODIFIED_DOUBLE_OFFSET, lpMsg, Packet, 0);
 
-			sLog->outError("antihack", "HACK_CHECK_MODIFIED_DOUBLE_OFFSET(%x / %f) -- %s", lpMsg->offset, lpMsg->value, this->BuildLog().c_str());
+		sLog->outError("antihack", "HACK_CHECK_MODIFIED_DOUBLE_OFFSET(%x / %f) -- %s", lpMsg->offset, lpMsg->value, this->BuildLog().c_str());
 
-			this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
+		this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
 
-			sGameServer->LogAntiHack(this, ANTIHACK_ID_DOUBLE_OFFSET, "HACK_CHECK_MODIFIED_DOUBLE_OFFSET(%x / %f) -- Count: %d", lpMsg->offset, lpMsg->value, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
-		} break;
+		sGameServer->LogAntiHack(this, ANTIHACK_ID_DOUBLE_OFFSET, "HACK_CHECK_MODIFIED_DOUBLE_OFFSET(%x / %f) -- Count: %d", lpMsg->offset, lpMsg->value, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
+	} break;
 
 	case 3:
-		{
-			POINTER_PCT(HACK_CHECK_HOOKED_FUNCTION, lpMsg, Packet, 0);
+	{
+		POINTER_PCT(HACK_CHECK_HOOKED_FUNCTION, lpMsg, Packet, 0);
 
-			sLog->outError("antihack", "HACK_CHECK_HOOKED_FUNCTION(%u / %02X) -- %s", lpMsg->id, lpMsg->data, this->BuildLog().c_str());
+		sLog->outError("antihack", "HACK_CHECK_HOOKED_FUNCTION(%u / %02X) -- %s", lpMsg->id, lpMsg->data, this->BuildLog().c_str());
+
+		this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
+
+		//if ( !this->IsWhiteList() )
+		//{
+		sGameServer->LogAntiHack(this, ANTIHACK_ID_HOOKED_FUNCTION, "HACK_CHECK_HOOKED_FUNCTION(%u / %02X) -- Count: %d", lpMsg->id, lpMsg->data, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
+		//}
+	} break;
+
+	case 4:
+	{
+		POINTER_PCT(HACK_CHECK_FRAME_COUNT, lpMsg, Packet, 0);
+
+		if (lpMsg->count >= sGameServer->GetHackCheckFrameCount())
+		{
+			sLog->outError("antihack", "HACK_CHECK_FRAME_COUNT(%d) -- %s", lpMsg->count, this->BuildLog().c_str());
 
 			this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
 
-			//if ( !this->IsWhiteList() )
-			//{
-				sGameServer->LogAntiHack(this, ANTIHACK_ID_HOOKED_FUNCTION, "HACK_CHECK_HOOKED_FUNCTION(%u / %02X) -- Count: %d", lpMsg->id, lpMsg->data, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
-			//}
-		} break;
-
-	case 4:
-		{
-			POINTER_PCT(HACK_CHECK_FRAME_COUNT, lpMsg, Packet, 0);
-
-			if ( lpMsg->count >= sGameServer->GetHackCheckFrameCount() )
-			{
-				sLog->outError("antihack", "HACK_CHECK_FRAME_COUNT(%d) -- %s", lpMsg->count, this->BuildLog().c_str());
-
-				this->IncreaseCounter(PLAYER_COUNTER_HACK_CHECK, 1);
-
-				sGameServer->LogAntiHack(this, ANTIHACK_ID_FRAME_COUNT, "HACK_CHECK_FRAME_COUNT(%d) -- Count: %d", lpMsg->count, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
-			}
-		} break;
+			sGameServer->LogAntiHack(this, ANTIHACK_ID_FRAME_COUNT, "HACK_CHECK_FRAME_COUNT(%d) -- Count: %d", lpMsg->count, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
+		}
+	} break;
 
 	case 5:
-		{
-		} break;
+	{
+	} break;
 	}
 }
 
 void Player::HackCheckVerify()
 {
-	if ( !sGameServer->IsHackCheckEnabled() )
+	if (!sGameServer->IsHackCheckEnabled())
 	{
 		return;
 	}
 
-	if ( this->GetHelper()->IsStarted() && this->GetHelper()->IsOffline() )
+	if (this->GetHelper()->IsStarted() && this->GetHelper()->IsOffline())
 	{
 		return;
 	}
 
-	if ( this->GetPersonalStore()->IsOpen() && this->GetPersonalStore()->IsOff() )
+	if (this->GetPersonalStore()->IsOpen() && this->GetPersonalStore()->IsOff())
 	{
 		return;
 	}
 
-	if ( sGameServer->GetHackCheckResetTime() > 0 && this->GetTimer(PLAYER_TIMER_HACK_CHECK_INIT)->Elapsed(sGameServer->GetHackCheckResetTime()) )
+	if (sGameServer->GetHackCheckResetTime() > 0 && this->GetTimer(PLAYER_TIMER_HACK_CHECK_INIT)->Elapsed(sGameServer->GetHackCheckResetTime()))
 	{
 		this->SetCounter(PLAYER_COUNTER_HACK_CHECK, 0);
 	}
@@ -15950,19 +16225,19 @@ void Player::HackCheckVerify()
 		return;
 	}*/
 
-	if ( (sGameServer->GetHackCheckCount() > 0) && (this->GetCounter(PLAYER_COUNTER_HACK_CHECK) > sGameServer->GetHackCheckCount()) )
+	if ((sGameServer->GetHackCheckCount() > 0) && (this->GetCounter(PLAYER_COUNTER_HACK_CHECK) > sGameServer->GetHackCheckCount()))
 	{
-		if ( sGameServer->IsHackCheckBan() )
+		if (sGameServer->IsHackCheckBan())
 		{
 			this->SetAuthority(1);
 		}
 
-		if ( sGameServer->IsHackCheckFullBan() )
+		if (sGameServer->IsHackCheckFullBan())
 		{
 			sAuthServer->AccountCompleteBan(this->GetAccountData()->GetIP(), this->GetAccountData()->GetMac(), this->GetAccountData()->GetDiskSerial(), 7);
 		}
 
-		if ( sGameServer->IsHackCheckKick() )
+		if (sGameServer->IsHackCheckKick())
 		{
 			KICK_PLAYER(this, "Hack Check Verify");
 
@@ -16075,18 +16350,18 @@ void Player::SendExperienceEvent()
 {
 	EXPERIENCE_EVENT pMsg;
 	pMsg.experience = 0;
-	
-	if ( sHappyHour->GetState() == HAPPY_HOUR_STATE_START )
+
+	if (sHappyHour->GetState() == HAPPY_HOUR_STATE_START)
 	{
 		pMsg.experience += sGameServer->happy_hour_experience_add.get();
 	}
 
 	pMsg.experience += sCharacterBase->GetBonus(this);
-	
+
 	this->SEND_PCT(pMsg);
 }
 
-void Player::SendMessageBox(uint8 type, const char * caption, const char * message, ...)
+void Player::SendMessageBox(uint8 type, const char* caption, const char* message, ...)
 {
 	ARG(buffer, message);
 
@@ -16100,7 +16375,7 @@ void Player::SendMessageBox(uint8 type, const char * caption, const char * messa
 
 bool Player::InmuneToRadiance() const
 {
-	if ( this->IsDebuffInmune(true) )
+	if (this->IsDebuffInmune(true))
 	{
 		return true;
 	}
@@ -16113,7 +16388,7 @@ bool Player::InmuneToPunish(Player* pPlayer)
 	return false;
 }
 
-void Player::ApplyRadianceDebuff(Unit* pTarget, uint16 effect, int32 & punish_damage, int32 count)
+void Player::ApplyRadianceDebuff(Unit* pTarget, uint16 effect, int32& punish_damage, int32 count)
 {
 	if (!pTarget)
 	{
@@ -16173,7 +16448,7 @@ void Player::ApplyRadianceDebuff(Unit* pTarget, uint16 effect, int32 & punish_da
 	}
 }
 
-void Player::CreateDarkAncientItem(uint8 * Packet)
+void Player::CreateDarkAncientItem(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -16257,16 +16532,16 @@ void Player::CreateDarkAncientItem(uint8 * Packet)
 uint8 Player::GetMatchingClass() const
 {
 	uint8 db_class = this->GetClass();
-	if ( this->GetChangeUP(0) )
+	if (this->GetChangeUP(0))
 	{
 		db_class |= 16;
 	}
-	if ( this->GetChangeUP(1) )
+	if (this->GetChangeUP(1))
 	{
 		db_class |= 32;
 	}
 
-	if ( this->GetChangeUP(2) )
+	if (this->GetChangeUP(2))
 	{
 		db_class |= 64;
 	}
@@ -16278,85 +16553,85 @@ uint8 Player::ItemFind(uint16 item, uint8 level, bool consume)
 {
 	item_template const* item_info = sItemMgr->GetItem(item);
 
-	if ( !item_info )
+	if (!item_info)
 	{
 		return uint8(-1);
 	}
 
-	switch ( item_info->GetInventoryType() )
+	switch (item_info->GetInventoryType())
 	{
 	case ITEM_INVENTORY_TYPE_NORMAL:
+	{
+		use_inventory_loop(i)
 		{
-			use_inventory_loop(i)
+			Item const* pItem = this->GetInventory()->GetItem(i);
+
+			if (!pItem)
 			{
-				Item const* pItem = this->GetInventory()->GetItem(i);
-
-				if ( !pItem )
-				{
-					continue;
-				}
-
-				if ( !pItem->IsItem() )
-				{
-					continue;
-				}
-
-				if ( pItem->GetItem() == item && pItem->GetLevel() == level )
-				{
-					if ( consume )
-					{
-						if ( item_info->GetStackData()->GetMaxStack() > 0 )
-						{
-							this->DecreaseItemDurabilityByUse(i, 1.0f);
-						}
-						else
-						{
-							this->ClearItem(i);
-						}
-					}
-
-					return i;
-				}
+				continue;
 			}
-		} break;
+
+			if (!pItem->IsItem())
+			{
+				continue;
+			}
+
+			if (pItem->GetItem() == item && pItem->GetLevel() == level)
+			{
+				if (consume)
+				{
+					if (item_info->GetStackData()->GetMaxStack() > 0)
+					{
+						this->DecreaseItemDurabilityByUse(i, 1.0f);
+					}
+					else
+					{
+						this->ClearItem(i);
+					}
+				}
+
+				return i;
+			}
+		}
+	} break;
 
 	case ITEM_INVENTORY_TYPE_EVENT:
+	{
+		EVENT_INVENTORY_LOOP(i)
 		{
-			EVENT_INVENTORY_LOOP(i)
+			Item const* pItem = this->GetEventInventory()->GetItem(i);
+
+			if (!pItem)
 			{
-				Item const* pItem = this->GetEventInventory()->GetItem(i);
-
-				if ( !pItem )
-				{
-					continue;
-				}
-
-				if ( !pItem->IsItem() )
-				{
-					continue;
-				}
-
-				if ( pItem->GetItem() == item && pItem->GetLevel() == level )
-				{
-					if ( consume )
-					{
-						if ( item_info->GetStackData()->GetMaxStack() > 0 )
-						{
-							sEventInventory->DecreaseItemDurabilityByUse(this, i, 1.0f);
-						}
-						else
-						{
-							this->GetEventInventory()->DeleteItem(i);
-							sEventInventory->GCEventItemDeleteSend(this, i);
-						}
-					}
-
-					return i;
-				}
+				continue;
 			}
-		} break;
+
+			if (!pItem->IsItem())
+			{
+				continue;
+			}
+
+			if (pItem->GetItem() == item && pItem->GetLevel() == level)
+			{
+				if (consume)
+				{
+					if (item_info->GetStackData()->GetMaxStack() > 0)
+					{
+						sEventInventory->DecreaseItemDurabilityByUse(this, i, 1.0f);
+					}
+					else
+					{
+						this->GetEventInventory()->DeleteItem(i);
+						sEventInventory->GCEventItemDeleteSend(this, i);
+					}
+				}
+
+				return i;
+			}
+		}
+	} break;
 	}
-	
+
 	return uint8(-1);
 }
 
@@ -16372,61 +16647,61 @@ uint8 Player::FindExpirableItem(uint16 item, uint8 level) const
 	switch (item_info->GetInventoryType())
 	{
 	case ITEM_INVENTORY_TYPE_NORMAL:
+	{
+		wear_inventory_loop(i)
 		{
-			wear_inventory_loop(i)
+			if (this->GetInventory()->IsExpirableItem(i, item, level))
 			{
-				if (this->GetInventory()->IsExpirableItem(i, item, level))
-				{
-					return i;
-				}
+				return i;
 			}
+		}
 
-			if (this->GetInventory()->IsExpirableItem(EARRING_01, item, level))
-			{
-				return EARRING_01;
-			}
+		if (this->GetInventory()->IsExpirableItem(EARRING_01, item, level))
+		{
+			return EARRING_01;
+		}
 
-			if (this->GetInventory()->IsExpirableItem(EARRING_02, item, level))
-			{
-				return EARRING_02;
-			}
+		if (this->GetInventory()->IsExpirableItem(EARRING_02, item, level))
+		{
+			return EARRING_02;
+		}
 
-			use_inventory_loop(i)
+		use_inventory_loop(i)
+		{
+			if (this->GetInventory()->IsExpirableItem(i, item, level))
 			{
-				if (this->GetInventory()->IsExpirableItem(i, item, level))
-				{
-					return i;
-				}
+				return i;
 			}
-		} break;
+		}
+	} break;
 
 	case ITEM_INVENTORY_TYPE_EVENT:
+	{
+		EVENT_INVENTORY_LOOP(i)
 		{
-			EVENT_INVENTORY_LOOP(i)
+			Item const* pItem = this->GetEventInventory()->GetItem(i);
+
+			if (!pItem)
 			{
-				Item const* pItem = this->GetEventInventory()->GetItem(i);
-
-				if (!pItem)
-				{
-					continue;
-				}
-
-				if (!pItem->IsItem())
-				{
-					continue;
-				}
-
-				if (!pItem->GetExpireDate())
-				{
-					continue;
-				}
-
-				if (pItem->GetItem() == item && pItem->GetLevel() == level)
-				{
-					return i;
-				}
+				continue;
 			}
-		} break;
+
+			if (!pItem->IsItem())
+			{
+				continue;
+			}
+
+			if (!pItem->GetExpireDate())
+			{
+				continue;
+			}
+
+			if (pItem->GetItem() == item && pItem->GetLevel() == level)
+			{
+				return i;
+			}
+		}
+	} break;
 	}
 
 	return uint8(-1);
@@ -16436,7 +16711,7 @@ uint8 Player::GetEventEnterCount(uint8 event_id) const
 {
 	PlayerEventEnterCountMap::const_iterator itr = this->event_enter_count_map.find(event_id);
 
-	if ( itr != this->event_enter_count_map.end() )
+	if (itr != this->event_enter_count_map.end())
 	{
 		return itr->second->GetCount();
 	}
@@ -16451,18 +16726,18 @@ void Player::UpdateEventEnterCount()
 	Custom::SystemTimer m_system_time = Custom::SystemTimer();
 	bool update = false;
 
-	for ( PlayerEventEnterCountMap::iterator itr = this->event_enter_count_map.begin(); itr != this->event_enter_count_map.end(); )
+	for (PlayerEventEnterCountMap::iterator itr = this->event_enter_count_map.begin(); itr != this->event_enter_count_map.end(); )
 	{
-		PlayerEventEnterCount * pData = itr->second;
+		PlayerEventEnterCount* pData = itr->second;
 
-		if ( !pData )
+		if (!pData)
 		{
 			update = true;
 			this->event_enter_count_map.erase(itr++);
 			continue;
 		}
 
-		if ( pData->GetDay() != m_system_time.GetDay() )
+		if (pData->GetDay() != m_system_time.GetDay())
 		{
 			update = true;
 			delete itr->second;
@@ -16474,7 +16749,7 @@ void Player::UpdateEventEnterCount()
 		}
 	}
 
-	if ( update )
+	if (update)
 	{
 		this->SendEventEnterCount();
 
@@ -16499,32 +16774,32 @@ int32 Player::GetDarkHorseAbsorb() const
 	return ((pItem->pet_dark.level + 30) / 2);
 }
 
-void Player::WarpFavoriteListSave(uint8 * Packet)
+void Player::WarpFavoriteListSave(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this, false, false) )
+	if (!Player::IsPlayerBasicState(this, false, false))
 	{
 		return;
 	}
 
 	POINTER_PCT_LOG(WARP_FAVORITE_LIST, lpMsg, Packet, 0);
 
-	for ( int32 i = 0; i < WARP_FAVORITE_COUNT; ++i )
+	for (int32 i = 0; i < WARP_FAVORITE_COUNT; ++i)
 	{
 		this->GetWarpFavoriteList(i)->SetData(lpMsg->data[i].data);
 		this->GetWarpFavoriteList(i)->SetWarpID(lpMsg->data[i].warp_id);
 	}
 }
-	
+
 void Player::WarpFavoriteListSend()
 {
 	WARP_FAVORITE_LIST pMsg;
 
-	for ( int32 i = 0; i < WARP_FAVORITE_COUNT; ++i )
+	for (int32 i = 0; i < WARP_FAVORITE_COUNT; ++i)
 	{
 		pMsg.data[i].data = this->GetWarpFavoriteList(i)->GetData();
 		pMsg.data[i].warp_id = this->GetWarpFavoriteList(i)->GetWarpID();
 
-		if ( this->GetWarpFavoriteList(i)->GetData() != uint16(-1) )
+		if (this->GetWarpFavoriteList(i)->GetData() != uint16(-1))
 		{
 			pMsg.count++;
 		}
@@ -16533,24 +16808,24 @@ void Player::WarpFavoriteListSend()
 	this->SEND_PCT(pMsg);
 }
 
-void Player::CentQuestStartRequest(uint8 * Packet)
+void Player::CentQuestStartRequest(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !Player::IsPlayerTransactionFree(this) )
+	if (!Player::IsPlayerTransactionFree(this))
 	{
 		return;
 	}
 
-	if ( this->GetWorldId() != WORLD_LABYRINTH_OF_DIMENSIONS_SAFE )
+	if (this->GetWorldId() != WORLD_LABYRINTH_OF_DIMENSIONS_SAFE)
 	{
 		return;
 	}
 
-	if ( this->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE )
+	if (this->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE)
 	{
 		return;
 	}
@@ -16559,23 +16834,23 @@ void Player::CentQuestStartRequest(uint8 * Packet)
 
 	int32 instance = this->QuestEvolutionGetInstance();
 
-	if ( instance != -1 )
+	if (instance != -1)
 	{
-		Quest4thInstanceData * pData = sQuestMgr->GetQuest4thInstanceData(instance);
+		Quest4thInstanceData* pData = sQuestMgr->GetQuest4thInstanceData(instance);
 
-		if ( !pData )
+		if (!pData)
 		{
 			return;
 		}
 
-		if ( !this->MoveToGate(540) )
+		if (!this->MoveToGate(540))
 		{
 			return;
 		}
 
 		this->SetInstance(instance);
 
-		if ( pData->GetQuestID() == 8 &&  pData->GetState() == 3 )
+		if (pData->GetQuestID() == 8 && pData->GetState() == 3)
 		{
 			QUEST_SURVIVAL_TIMER pMsg;
 			pMsg.time = pData->GetTime()->GetRemain();
@@ -16587,51 +16862,51 @@ void Player::CentQuestStartRequest(uint8 * Packet)
 	}
 	else
 	{
-		Quest4thInstanceData * pData = sQuestMgr->Get4thQuestInstance();
+		Quest4thInstanceData* pData = sQuestMgr->Get4thQuestInstance();
 
-		if ( !pData )
+		if (!pData)
 		{
 			return;
 		}
 
 		pData->SetPartyID(this->GetPartyID());
 		sQuestMgr->Change4thQuestInstanceState(pData->GetInstance(), 0, 0);
-		
+
 		Unit* pMember[MAX_PARTY_MEMBERS];
 		uint8 count = 0;
 
 		this->GetPartyMembers(pMember, count, 15);
 
-		if ( count > MAX_PARTY_MEMBERS )
+		if (count > MAX_PARTY_MEMBERS)
 		{
 			count = 1;
 		}
 
-		for ( uint8 i = 0; i < count; ++i )
+		for (uint8 i = 0; i < count; ++i)
 		{
-			if ( !pMember[i] )
+			if (!pMember[i])
 			{
 				continue;
 			}
 
 			Player* pPlayer = pMember[i]->ToPlayer();
 
-			if ( !pPlayer )
+			if (!pPlayer)
 			{
 				continue;
 			}
 
-			if ( pPlayer->GetWorldId() != WORLD_LABYRINTH_OF_DIMENSIONS_SAFE )
+			if (pPlayer->GetWorldId() != WORLD_LABYRINTH_OF_DIMENSIONS_SAFE)
 			{
 				return;
 			}
 
-			if ( pPlayer->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE )
+			if (pPlayer->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE)
 			{
 				continue;
 			}
 
-			if ( pPlayer->MoveToGate(540) )
+			if (pPlayer->MoveToGate(540))
 			{
 				pPlayer->SetInstance(pData->GetInstance());
 			}
@@ -16639,19 +16914,19 @@ void Player::CentQuestStartRequest(uint8 * Packet)
 	}
 }
 
-void Player::CentQuestMoveRequest(uint8 * Packet)
+void Player::CentQuestMoveRequest(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( !Player::IsPlayerTransactionFree(this) )
+	if (!Player::IsPlayerTransactionFree(this))
 	{
 		return;
 	}
 
-	if ( this->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE )
+	if (this->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE)
 	{
 		return;
 	}
@@ -16659,41 +16934,41 @@ void Player::CentQuestMoveRequest(uint8 * Packet)
 	this->MoveToGate(537);
 }
 
-void Player::CentQuestSpawnMonster(uint8 * Packet)
+void Player::CentQuestSpawnMonster(uint8* Packet)
 {
-	if ( !Player::IsPlayerBasicState(this) )
+	if (!Player::IsPlayerBasicState(this))
 	{
 		return;
 	}
 
-	if ( this->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE )
+	if (this->QuestEvolutionGetState(6) != QUEST_EVOLUTION_STATE_COMPLETE)
 	{
 		return;
 	}
 
-	if ( this->GetWorldId() != WORLD_PLACE_OF_QUALIFICATION )
+	if (this->GetWorldId() != WORLD_PLACE_OF_QUALIFICATION)
 	{
 		return;
 	}
 
 	Quest4thInstanceData const* pData = sQuestMgr->GetQuest4thInstanceData(this->GetInstance());
 
-	if ( !pData )
+	if (!pData)
 	{
 		return;
 	}
 
-	if ( pData->GetState() != 1 )
+	if (pData->GetState() != 1)
 	{
 		return;
 	}
-	
+
 	uint8 quest_id = this->QuestEvolutionGetState(7) == QUEST_EVOLUTION_STATE_ACCEPTED ? 7 :
-					 this->QuestEvolutionGetState(8) == QUEST_EVOLUTION_STATE_ACCEPTED ? 8 :
-					 this->QuestEvolutionGetState(9) == QUEST_EVOLUTION_STATE_ACCEPTED ? 9 :
-					 0;
+		this->QuestEvolutionGetState(8) == QUEST_EVOLUTION_STATE_ACCEPTED ? 8 :
+		this->QuestEvolutionGetState(9) == QUEST_EVOLUTION_STATE_ACCEPTED ? 9 :
+		0;
 
-	if ( quest_id == 0 )
+	if (quest_id == 0)
 	{
 		return;
 	}
@@ -16703,29 +16978,29 @@ void Player::CentQuestSpawnMonster(uint8 * Packet)
 
 void Player::TrackingUpdate()
 {
-	if ( !this->IsAdministrator() )
+	if (!this->IsAdministrator())
 	{
 		return;
 	}
 
-	if ( !this->IsAuthorizationEnabled() )
+	if (!this->IsAuthorizationEnabled())
 	{
 		return;
 	}
 
-	if ( !this->GetTrackingID() )
+	if (!this->GetTrackingID())
 	{
 		return;
 	}
 
-	if ( this->GetRegenStatus() == REGEN_STANDBY )
+	if (this->GetRegenStatus() == REGEN_STANDBY)
 	{
 		return;
 	}
 
 	Player* pPlayer = sObjectMgr->FindPlayerByGUID(this->GetTrackingID());
 
-	if ( !pPlayer )
+	if (!pPlayer)
 	{
 		this->SetTrackingID(0);
 
@@ -16733,7 +17008,7 @@ void Player::TrackingUpdate()
 		return;
 	}
 
-	if ( pPlayer->IsServerQuit() )
+	if (pPlayer->IsServerQuit())
 	{
 		this->SetTrackingID(0);
 
@@ -16741,11 +17016,11 @@ void Player::TrackingUpdate()
 		return;
 	}
 
-	if ( this->GetWorldId() != pPlayer->GetWorldId() )
+	if (this->GetWorldId() != pPlayer->GetWorldId())
 	{
 		this->TeleportToObject(pPlayer);
 	}
-	else if ( this->GetX() != pPlayer->GetX() || this->GetY() != pPlayer->GetY() )
+	else if (this->GetX() != pPlayer->GetX() || this->GetY() != pPlayer->GetY())
 	{
 		this->PositionSend(pPlayer->GetX(), pPlayer->GetY());
 	}
@@ -16753,37 +17028,37 @@ void Player::TrackingUpdate()
 
 void Player::UpdateMapState()
 {
-	if ( this->GetRegenStatus() != REGEN_NONE )
+	if (this->GetRegenStatus() != REGEN_NONE)
 	{
 		return;
 	}
 
-	if ( this->IsSentMapState() )
+	if (this->IsSentMapState())
 	{
 		return;
 	}
 
 	World const* pWorld = this->GetWorld();
 
-	if ( pWorld )
+	if (pWorld)
 	{
-		for ( WorldAreaAttributeList::const_iterator itr = pWorld->m_attribute.begin(); itr != pWorld->m_attribute.end(); ++itr )
+		for (WorldAreaAttributeList::const_iterator itr = pWorld->m_attribute.begin(); itr != pWorld->m_attribute.end(); ++itr)
 		{
 			WorldAreaAttribute const* pData = *itr;
 
-			if ( !pData )
+			if (!pData)
 			{
 				continue;
 			}
 
-			if ( pData->IsSend() )
+			if (pData->IsSend())
 			{
 				int16 coord[4] = { pData->GetX1(), pData->GetY1(), pData->GetX2(), pData->GetY2() };
 				this->SendWorldAttribute(0, pData->GetAttribute(), 1, pData->IsApply(), coord);
 			}
 		}
 	}
-	
+
 	this->SetSentMapState(true);
 }
 
@@ -16796,7 +17071,7 @@ void Player::CancelMovement()
 	this->sendPacket((uint8*)&pAction, pAction.h.size);
 }
 
-void Player::ItemSplit(uint8 * Packet)
+void Player::ItemSplit(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this))
 	{
@@ -16824,37 +17099,37 @@ void Player::ItemSplit(uint8 * Packet)
 		return;
 	}
 
-	Item * pItem = nullptr;
+	Item* pItem = nullptr;
 
 	switch (lpMsg->type)
 	{
 	case 0:
-		{
-			if (!use_inventory_range(lpMsg->slot))
-			{
-				this->SEND_PCT(pMsg);
-				return;
-			}
-
-			pItem = this->GetInventory()->GetItem(lpMsg->slot);
-		} break;
-
-	case 1:
-		{
-			if (!EVENT_INVENTORY_RANGE(lpMsg->slot))
-			{
-				this->SEND_PCT(pMsg);
-				return;
-			}
-
-			pItem = this->GetEventInventory()->GetItem(lpMsg->slot);
-		} break;
-
-	default:
+	{
+		if (!use_inventory_range(lpMsg->slot))
 		{
 			this->SEND_PCT(pMsg);
 			return;
-		} break;
+		}
+
+		pItem = this->GetInventory()->GetItem(lpMsg->slot);
+	} break;
+
+	case 1:
+	{
+		if (!EVENT_INVENTORY_RANGE(lpMsg->slot))
+		{
+			this->SEND_PCT(pMsg);
+			return;
+		}
+
+		pItem = this->GetEventInventory()->GetItem(lpMsg->slot);
+	} break;
+
+	default:
+	{
+		this->SEND_PCT(pMsg);
+		return;
+	} break;
 	}
 
 	if (!pItem)
@@ -16892,36 +17167,36 @@ void Player::ItemSplit(uint8 * Packet)
 	switch (lpMsg->type)
 	{
 	case 0:
+	{
+		if (!this->GetInventory()->IsEmptySpace(item_info->GetX(), item_info->GetY()))
 		{
-			if (!this->GetInventory()->IsEmptySpace(item_info->GetX(), item_info->GetY()))
-			{
-				pMsg.result = 6;
-				this->SEND_PCT(pMsg);
-				return;
-			}
+			pMsg.result = 6;
+			this->SEND_PCT(pMsg);
+			return;
+		}
 
-			//this->SEND_PCT(pMsg);
+		//this->SEND_PCT(pMsg);
 
-			pItem->AlterDurability(0, lpMsg->amount);
-			this->SendItemDurability(lpMsg->slot, 0);
-		} break;
+		pItem->AlterDurability(0, lpMsg->amount);
+		this->SendItemDurability(lpMsg->slot, 0);
+	} break;
 
 	case 1:
+	{
+		if (!this->GetEventInventory()->IsEmptySpace(item_info->GetX(), item_info->GetY()))
 		{
-			if (!this->GetEventInventory()->IsEmptySpace(item_info->GetX(), item_info->GetY()))
-			{
-				pMsg.result = 6;
-				this->SEND_PCT(pMsg);
-				return;
-			}
+			pMsg.result = 6;
+			this->SEND_PCT(pMsg);
+			return;
+		}
 
-			//this->SEND_PCT(pMsg);
+		//this->SEND_PCT(pMsg);
 
-			pItem->AlterDurability(0, lpMsg->amount);
-			sEventInventory->GCEventItemDurSend(this, lpMsg->slot, static_cast<uint8>(pItem->GetDurability()));
-		} break;
+		pItem->AlterDurability(0, lpMsg->amount);
+		sEventInventory->GCEventItemDurSend(this, lpMsg->slot, static_cast<uint8>(pItem->GetDurability()));
+	} break;
 	}
-		
+
 	sItemMgr->ItemSerialCreateItem(this, serial_create_inventory, Item(pItem->GetItem(), pItem->GetLevel(), lpMsg->amount), -1, 3);
 }
 
@@ -16932,8 +17207,8 @@ bool Player::FillMagicSolution(uint8 source_slot, uint8 target_slot)
 		return false;
 	}
 
-	Item * pSourceItem = this->GetInventory()->GetItem(source_slot);
-	Item * pTargetItem = this->GetInventory()->GetItem(target_slot);
+	Item* pSourceItem = this->GetInventory()->GetItem(source_slot);
+	Item* pTargetItem = this->GetInventory()->GetItem(target_slot);
 
 	if (!pSourceItem || !pSourceItem->IsItem())
 	{
@@ -16950,34 +17225,34 @@ bool Player::FillMagicSolution(uint8 source_slot, uint8 target_slot)
 	switch (pSourceItem->GetItem())
 	{
 	case ITEMGET(12, 446):
+	{
+		if (pTargetItem->GetItem() != ITEMGET(12, 407))
 		{
-			if (pTargetItem->GetItem() != ITEMGET(12, 407))
-			{
-				return false;
-			}
+			return false;
+		}
 
-			create_item = ITEMGET(12, 408);
-		} break;
+		create_item = ITEMGET(12, 408);
+	} break;
 
 	case ITEMGET(12, 447):
+	{
+		if (pTargetItem->GetItem() != ITEMGET(12, 409))
 		{
-			if (pTargetItem->GetItem() != ITEMGET(12, 409))
-			{
-				return false;
-			}
+			return false;
+		}
 
-			create_item = ITEMGET(12, 410);
-		} break;
+		create_item = ITEMGET(12, 410);
+	} break;
 
 	case ITEMGET(12, 448):
+	{
+		if (pTargetItem->GetItem() != ITEMGET(12, 411))
 		{
-			if (pTargetItem->GetItem() != ITEMGET(12, 411))
-			{
-				return false;
-			}
+			return false;
+		}
 
-			create_item = ITEMGET(12, 412);
-		} break;
+		create_item = ITEMGET(12, 412);
+	} break;
 	}
 
 	if (create_item == uint16(-1))
@@ -17020,11 +17295,11 @@ bool Player::FillMagicSolution(uint8 source_slot, uint8 target_slot)
 		this->SendItemDurability(source_slot, 1);
 		this->SendInventory(source_slot);
 	}
-	
+
 	return false;
 }
 
-void Player::PlayerRightClick(uint8 * Packet)
+void Player::PlayerRightClick(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false, false))
 	{
@@ -17055,7 +17330,7 @@ void Player::PlayerRightClick(uint8 * Packet)
 	this->SendPacket(&pMsg);
 }
 
-void Player::ClientMinimize(uint8 * Packet)
+void Player::ClientMinimize(uint8* Packet)
 {
 	if (!this->IsPlaying())
 	{
@@ -17067,7 +17342,7 @@ void Player::ClientMinimize(uint8 * Packet)
 	this->SetClientMinimized(lpMsg->minimize ? true : false);
 }
 
-void Player::WingSocketOptionAdd(uint8 * Packet)
+void Player::WingSocketOptionAdd(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -17101,7 +17376,7 @@ void Player::WingSocketOptionAddResult(uint8 result)
 	this->SEND_PCT(pMsg);
 }
 
-void Player::WingSocketOptionUpgrade(uint8 * Packet)
+void Player::WingSocketOptionUpgrade(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -17273,34 +17548,34 @@ void Player::ReduceAttackHP(uint16 skill)
 			case Character::DARK_WIZARD:
 			case Character::FAIRY_ELF:
 			case Character::SUMMONER:
-				{
-					this->PowerReduce(POWER_LIFE, 1, true);
-				} break;
+			{
+				this->PowerReduce(POWER_LIFE, 1, true);
+			} break;
 
 			case Character::RAGE_FIGHTER:
+			{
+				if (skill == 260 || skill == 261 || skill == 270 || skill == 264)
 				{
-					if (skill == 260 || skill == 261 || skill == 270 || skill == 264)
-					{
-						this->PowerReduce(POWER_LIFE, 2, true);
-					}
-					else if (skill == 262 || skill == 269 || skill == 263)
-					{
-						this->PowerReduce(POWER_LIFE, 4, true);
-					}
-					else if (skill == 265)
-					{
-						this->PowerReduce(POWER_LIFE, 100, true);
-					}
-					else
-					{
-						this->PowerReduce(POWER_LIFE, 3, true);
-					}
-				} break;
-
-			default:
+					this->PowerReduce(POWER_LIFE, 2, true);
+				}
+				else if (skill == 262 || skill == 269 || skill == 263)
+				{
+					this->PowerReduce(POWER_LIFE, 4, true);
+				}
+				else if (skill == 265)
+				{
+					this->PowerReduce(POWER_LIFE, 100, true);
+				}
+				else
 				{
 					this->PowerReduce(POWER_LIFE, 3, true);
-				} break;
+				}
+			} break;
+
+			default:
+			{
+				this->PowerReduce(POWER_LIFE, 3, true);
+			} break;
 			}
 		}
 	}
@@ -17317,9 +17592,9 @@ void Player::ReduceAttackHP(uint16 skill)
 		switch (pHelper->GetItem())
 		{
 		case PET_SATAN:
-			{
-				this->PowerReduce(POWER_LIFE, 3, true);
-			} break;
+		{
+			this->PowerReduce(POWER_LIFE, 3, true);
+		} break;
 		}
 	}
 }
@@ -17363,7 +17638,7 @@ void Player::SendPCRoom()
 	this->SEND_PCT(pMsg);
 }
 
-void Player::EarringUpgrade(uint8 * Packet)
+void Player::EarringUpgrade(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -17399,20 +17674,44 @@ void Player::EarringUpgradeResult(uint8 result)
 	this->SendPacket(&pMsg);
 }
 
-void Player::SendServerList()
+#define TEMP_FIX_SERVERNUM_CHANNEL_SWITCH 0// MAX_SERVER_PER_GROUP
+void Player::SendServerList(uint8* Packet)
 {
-	/*if (!Player::IsPlayerBasicState(this, false, false))
-	{
-		sLog->outInfo("root", "SendServerList(2)");
-		return;
-	}*/
+	POINTER_PCT(PACKET_CHANNEL_REQUEST, pReq, Packet, 0);
 
-	uint8 buffer[4092];
+	//sLog->outInfo("root", "SendServerList(2)");
+
+	uint8 buffer[4096];
 	POINTER_PCT(PACKET_CHANNEL_HEAD, head, buffer, 0);
 	POINTER_PCT(PACKET_CHANNEL_BODY, body, buffer, sizeof(PACKET_CHANNEL_HEAD));
+
 	head->count = 0;
 	head->data = 0;
 
+	//if (!Player::IsPlayerBasicState(this, false, false))
+	//{
+	//	body[head->count].server = sGameServer->GetServerCode();
+	//	body[head->count].data1 = sGameServer->GetServerType() == SERVER_TYPE_NORMAL && sGameServer->IsFlag(SERVER_FLAG_DISPLAY) ? 32 : 0;
+	//	body[head->count].data2 = 0;
+	//	body[head->count].type = sGameServer->GetServerType();
+	//	body[head->count].gold = sGameServer->GetServerGroup();
+
+	//	++head->count;
+
+	//	//sLog->outInfo("root", "SendServerList(2)");
+	//	return;
+	//}
+	//if (strcmp(pReq->character, this->GetName()) == 0)
+	//{
+	//	body[head->count].server = sGameServer->GetServerCode();
+	//	body[head->count].data1 = sGameServer->GetServerType() == SERVER_TYPE_NORMAL && sGameServer->IsFlag(SERVER_FLAG_DISPLAY) ? 32 : 0;
+	//	body[head->count].data2 = 0;
+	//	body[head->count].type = sGameServer->GetServerType();
+	//	body[head->count].gold = sGameServer->GetServerGroup();
+	//	++head->count;
+	//}
+	//else
+	//{
 	if (/*sGameServer->GetServerType() == SERVER_TYPE_NORMAL && sGameServer->IsFlag(SERVER_FLAG_DISPLAY) && */sGameServer->IsChannelChangeEnabled())
 	{
 		for (ChannelDataMap::const_iterator itr = sConnectServer->m_ChannelDataMap.begin(); itr != sConnectServer->m_ChannelDataMap.end(); ++itr)
@@ -17424,20 +17723,22 @@ void Player::SendServerList()
 				continue;
 			}
 
-			body[head->count].server = pData->GetServer() + MAX_SERVER_PER_GROUP;
-			body[head->count].data1 = sGameServer->GetServerType() == SERVER_TYPE_NORMAL && sGameServer->IsFlag(SERVER_FLAG_DISPLAY) ? 32 : 0;
-			body[head->count].data2 = 0;
+			body[head->count].server = pData->GetServer() + TEMP_FIX_SERVERNUM_CHANNEL_SWITCH;//pData->GetServer() + MAX_SERVER_PER_GROUP;
+			body[head->count].data1 = pData->GetData1();//sGameServer->GetServerType() == SERVER_TYPE_NORMAL && sGameServer->IsFlag(SERVER_FLAG_DISPLAY) ? 32 : 0;
+			body[head->count].data2 = pData->GetData2();// 0;
 			body[head->count].type = pData->GetType();
 			body[head->count].gold = pData->GetGold();
+
 			++head->count;
 		}
 	}
+	//}
 
 	head->Set(0xEC, 0x57, sizeof(PACKET_CHANNEL_HEAD) + (head->count * sizeof(PACKET_CHANNEL_BODY)));
 	this->sendPacket(buffer, head->GetSize());
 }
 
-void Player::ServerWarp(uint8 * Packet)
+void Player::ServerWarp(uint8* Packet)
 {
 	if (sGameServer->GetServerType() != SERVER_TYPE_NORMAL)
 	{
@@ -17467,7 +17768,7 @@ void Player::ServerWarp(uint8 * Packet)
 		return;
 	}
 
-	uint16 server = lpMsg->server - MAX_SERVER_PER_GROUP;
+	uint16 server = lpMsg->server - TEMP_FIX_SERVERNUM_CHANNEL_SWITCH; //-MAX_SERVER_PER_GROUP;
 
 	if (!sConnectServer->IsServerAvailable(server))
 	{
@@ -17480,7 +17781,7 @@ void Player::ServerWarp(uint8 * Packet)
 		this->SendPacket(&pMsg);
 		return;
 	}
-	
+
 	sAuthServer->PlayerServerMoveRequest(this, server, this->GetWorldId(), this->GetX(), this->GetY(), true);
 }
 
@@ -17495,7 +17796,7 @@ void Player::SendAntiMacro()
 	this->SendPacket(&pMsg);
 }
 
-void Player::AntiMacroDetect(uint8 * Packet)
+void Player::AntiMacroDetect(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false, false))
 	{
@@ -17507,18 +17808,18 @@ void Player::AntiMacroDetect(uint8 * Packet)
 	switch (lpMsg->type)
 	{
 	case 0:
-		{
-			sLog->outInfo("antihack", "[Type: 0 - ANTI_MACRO_POTION] [%s] [%s]", this->BuildLog().c_str(), this->BuildLocationLog().c_str());
-			//sGameServer->LogAntiHack(this, ANTIHACK_ID_MACRO_POTION, "ANTI_MACRO_POTION(%d) -- Count: %d", lpMsg->count, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
-		} break;
+	{
+		sLog->outInfo("antihack", "[Type: 0 - ANTI_MACRO_POTION] [%s] [%s]", this->BuildLog().c_str(), this->BuildLocationLog().c_str());
+		//sGameServer->LogAntiHack(this, ANTIHACK_ID_MACRO_POTION, "ANTI_MACRO_POTION(%d) -- Count: %d", lpMsg->count, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
+	} break;
 
 	case 1:
-		{
-			sLog->outInfo("antihack", "[Type: 1 - ANTI_MACRO_SKILL] [%s] [%s]", this->BuildLog().c_str(), this->BuildLocationLog().c_str());
-			//sGameServer->LogAntiHack(this, ANTIHACK_ID_MACRO_SKILL, "ANTI_MACRO_SKILL(%d) -- Count: %d", lpMsg->count, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
-		} break;
+	{
+		sLog->outInfo("antihack", "[Type: 1 - ANTI_MACRO_SKILL] [%s] [%s]", this->BuildLog().c_str(), this->BuildLocationLog().c_str());
+		//sGameServer->LogAntiHack(this, ANTIHACK_ID_MACRO_SKILL, "ANTI_MACRO_SKILL(%d) -- Count: %d", lpMsg->count, this->GetCounter(PLAYER_COUNTER_HACK_CHECK));
+	} break;
 	}
-	
+
 }
 
 void Player::AddRecoveryMixItem(Item const* pItem)
@@ -17529,7 +17830,7 @@ void Player::AddRecoveryMixItem(Item const* pItem)
 
 	item.SetState(ITEM_CHANGED);
 	item.SetExpireDate(time(nullptr) + sGameServer->GetMixRecoveryTime());
-	
+
 	if (item.common.time > current_time)
 	{
 		item.common.time = current_time - item.common.time;
@@ -17860,7 +18161,7 @@ int32 Player::GetSkillCPSCount(uint16 skill) const
 	return 0;
 }
 
-void Player::KuberaMineCart(uint8 * Packet)
+void Player::KuberaMineCart(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false, false))
 	{
@@ -17881,7 +18182,7 @@ void Player::KuberaMineCart(uint8 * Packet)
 	this->SetVehiculeType(lpMsg->type);
 }
 
-void Player::PetTrainerMix1(uint8 * Packet)
+void Player::PetTrainerMix1(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false, false))
 	{
@@ -17901,7 +18202,7 @@ void Player::PetTrainerMix1(uint8 * Packet)
 	MixHandler(this, 7).PetTrainerMix(lpMsg->type, lpMsg->id, lpMsg->main_material, lpMsg->materials, MAX_PET_TRAINER_MIX_SLOTS);
 }
 
-void Player::PetTrainerMix2(uint8 * Packet)
+void Player::PetTrainerMix2(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false, false))
 	{
@@ -17966,7 +18267,7 @@ void Player::PetTrainerMix2(uint8 * Packet)
 
 		m_RandomValue.AddValue(pData->GetGroup(), 0);
 	}
-	
+
 	pGuardian->SetSocket(4, m_RandomValue.GetRandomValue(RANDOM_POOL_RANDOM));
 	pGuardian->Convert(true);
 
@@ -18034,7 +18335,7 @@ uint8 Player::GetMagicTreeLevel(uint16 skill) const
 	return 0;
 }
 
-void Player::SwitchModeTurnOn(uint8 * Packet)
+void Player::SwitchModeTurnOn(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this))
 	{
@@ -18053,7 +18354,7 @@ void Player::SwitchModeTurnOn(uint8 * Packet)
 	this->SendPacket(&pMsg);
 }
 
-void Player::ItemEnhancementRequest(uint8 * Packet)
+void Player::ItemEnhancementRequest(uint8* Packet)
 {
 	if (!Player::IsPlayerBasicState(this, false))
 	{
@@ -18288,7 +18589,7 @@ void Player::ItemEnhancementRequest(uint8 * Packet)
 	}
 
 	uint8 talisman = 0;
-	
+
 	if (pTalismanChaos)
 	{
 		talisman |= 1;
@@ -18457,7 +18758,7 @@ void Player::PrintItemData(Item const* pItem)
 		this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Defense Success Rate: %u", pItem->GetDefenseSuccessRate());
 	}
 
-	for (auto & itr : pItem->m_OptionData)
+	for (auto& itr : pItem->m_OptionData)
 	{
 		this->SendNotice(CUSTOM_MESSAGE_ID_BLUE, "Option %u - %u", itr.first, itr.second);
 	}

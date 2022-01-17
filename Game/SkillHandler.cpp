@@ -1306,6 +1306,8 @@ void SkillHandler::SkillBuffDarkness()
 	{
 		value_decrease = 0;
 	}
+	
+	//TODO: Verificar se o valor fica negativo value_decrease
 
 	this->GetCaster()->AddBuff(this->GetSkillInfo()->GetBuffIcon(), BuffEffect(BUFF_OPTION_DARKNESS_DECREASE, value_decrease), duration, 0, this->GetCaster(), true);
 	this->GetCaster()->MagicAttackSend(ENTRY(this->GetCaster()), this->GetSkill()->GetSkill(), true);
@@ -6952,6 +6954,18 @@ void SpecialSkillHandler::RunTarget()
 			{
 
 			}
+			else if (this->GetSkillInfo()->scope_type == SKILL_SCOPE_TYPE_ANGLE)
+			{
+				float scope_angle = this->GetSkillInfo()->scope_angle.get() / 2.0;
+				float tx = tan((scope_angle * Q_PI / 180.0) * this->GetSkillInfo()->scope_value.get());
+
+				this->GetCaster()->SkillAngleCalculate(angle, tx, this->GetSkillInfo()->scope_value.get(), 0, 0, false);
+
+				if (this->GetCaster()->SkillInAngle(mTargetSec->GetX(), mTargetSec->GetY(), true))
+				{
+					enable_attack = true;
+				}
+			}
 
 			if ( enable_attack )
 			{
@@ -7012,6 +7026,18 @@ void SpecialSkillHandler::RunEnemyGroup()
 			else if ( this->GetSkillInfo()->scope_type == SKILL_SCOPE_TARGET_CHAIN )
 			{
 
+			}
+			else if (this->GetSkillInfo()->scope_type == SKILL_SCOPE_TYPE_ANGLE)
+			{
+				float scope_angle = this->GetSkillInfo()->scope_angle.get() / 2.0;
+				float tx = tan((scope_angle * Q_PI / 180.0) * this->GetSkillInfo()->scope_value.get());
+
+				this->GetCaster()->SkillAngleCalculate(angle, tx, this->GetSkillInfo()->scope_value.get(), 0, 0, false);
+
+				if (this->GetCaster()->SkillInAngle(pObject->GetX(), pObject->GetY(), true))
+				{
+					enable_attack = true;
+				}
 			}
 
 			if ( enable_attack )

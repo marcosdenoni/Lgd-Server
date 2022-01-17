@@ -418,8 +418,8 @@ struct GameOption
 
 	void Reset()
 	{
-		this->SetOption(0);
-		this->SetChatWindow(0);
+		this->SetOption(31);
+		this->SetChatWindow(50);
 		this->SetKeyQ(0);
 		this->SetKeyW(0);
 		this->SetKeyE(0);
@@ -429,7 +429,7 @@ struct GameOption
 		this->ResetSkillKey(-1);
 		this->SetChangeSkin(1);
 		this->SetExtraFlag(0);
-		this->SetAdditionalOptions(0);
+		this->SetAdditionalOptions(778);
 		this->ResetButtonLink(0);
 	}
 };
@@ -1150,6 +1150,9 @@ struct PentagramJewelOption
 	DECLARE_PROPERTY(int32, ElementalBindingRate);
 	DECLARE_PROPERTY(int32, ElementalPunishRate);
 	DECLARE_PROPERTY(int32, ElementalBlindness);
+	DECLARE_PROPERTY(int32, ElementalSkillImmuneI);
+	DECLARE_PROPERTY(int32, ElementalSkillImmuneII);
+	DECLARE_PROPERTY(int32, ElementalSkillBerserkerI);
 
 	void Reset()
 	{
@@ -1182,6 +1185,9 @@ struct PentagramJewelOption
 		this->SetElementalBindingRate(0);
 		this->SetElementalPunishRate(0);
 		this->SetElementalBlindness(0);
+		this->SetElementalSkillImmuneI(0);
+		this->SetElementalSkillImmuneII(0);
+		this->SetElementalSkillBerserkerI(0);
 	}
 };
 

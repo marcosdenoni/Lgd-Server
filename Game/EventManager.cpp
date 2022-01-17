@@ -224,6 +224,7 @@ void CEventMgr::Update()
 				continue;
 
 			TimeSecRemain = 0;
+			auto duration = (*it)->GetDuration();
 
 			if ((*it)->ConvertToMinutes() > time.getInMinutes())
 			{
@@ -231,7 +232,23 @@ void CEventMgr::Update()
 			}
 			else if ((*it)->ConvertToMinutes() < time.getInMinutes())
 			{
-				TimeSecRemain = ((24 * MINUTE + (*it)->ConvertToMinutes()) - time.getInMinutes()) * MINUTE;
+				//TimeSecRemain = ((24 * MINUTE + (*it)->ConvertToMinutes()) - time.getInMinutes()) * MINUTE;
+				//TODO: verificar "Past Active Events now starts if GS restarts"
+				if ((*it)->ConvertToMinutes() > time.getInMinutes() - duration)
+				{
+					if (this->IsEventOn((*it)->GetEventID(), (*it)->GetInvasion()))
+						continue;
+					duration -= (time.getInMinutes()) - ((*it)->ConvertToMinutes());
+					TimeSecRemain = 0;
+					sLog->outInfo(LOG_DEFAULT,
+						"Started past event (id:%d ,Invasion:%d ,Remaining time:%d)",
+						static_cast<int>((*it)->GetEventID()),
+						static_cast<int>((*it)->GetInvasion()),
+						static_cast<int>(duration));
+				}
+				else {
+					TimeSecRemain = ((24 * MINUTE + (*it)->ConvertToMinutes()) - time.getInMinutes()) * MINUTE;
+				}
 			}
 
 			if (TimeSecRemain > (*it)->GetNotifyTime())
